@@ -19,6 +19,15 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	GameObjectManager::CreateInstance();
 	PhysicsWorld::CreateInstance();
 	
+	//3Dモデルをロードするための情報を設定
+	ModelInitData initData;
+	initData.m_tkmFilePath = "Assets/modelData/unityChan.tkm";
+	initData.m_fxFilePath = "Assets/shader/model.fx";
+
+	//初期化情報を使ってモデル表示処理を初期化
+	Model charaModel;
+	charaModel.Init(initData);
+
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
 	//////////////////////////////////////
@@ -35,6 +44,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
 		
+		charaModel.Draw(renderContext);
+
 		GameObjectManager::GetInstance()->ExecuteUpdate();
 		GameObjectManager::GetInstance()->ExecuteRender(renderContext);
 		
