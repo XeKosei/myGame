@@ -48,6 +48,12 @@
     <Filter Include="ExEngine\level2D">
       <UniqueIdentifier>{80abc458-e4b9-4836-89c7-3eb842072871}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\prefab">
+      <UniqueIdentifier>{ebc84c24-fe9d-49a6-84de-90f6c75c78dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\prefab">
+      <UniqueIdentifier>{b70854ba-9382-406c-8572-5ed10ded5a6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -208,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\level2D\MapChip2D.cpp">
       <Filter>ExEngine\level2D</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionLight.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -393,6 +402,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\level2D\MapChip2D.h">
       <Filter>ExEngine\level2D</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionLight.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
