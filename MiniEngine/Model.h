@@ -47,6 +47,9 @@ public:
 	/// <param name="scale">拡大率</param>
 	void UpdateWorldMatrix(Vector3 pos, Quaternion rot, Vector3 scale);
 
+	/// @brief ワールド行列の更新
+	/// @param world ワールド行列
+	void UpdateWorldMatrix(Matrix world);
 	/// <summary>
 	/// 描画
 	/// </summary>

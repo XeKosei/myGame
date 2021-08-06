@@ -10,6 +10,27 @@ void SkinModelRender::Update()
 
 }
 
+void SkinModelRender::Init(const char* modelPath, const char* skeletonPath, AnimationClip* animClips, int animClipNum)
+{
+}
+
+void SkinModelRender::Init(const char* modelPath, const char skeletonPath)
+{
+
+}
+
+void SkinModelRender::Init(const char* modelPath)
+{
+
+}
+
+Matrix SkinModelRender::GetWorldMatrixFromBoneName(const wchar_t* boneName)
+{
+	int boneNo = m_skeleton.FindBoneID(boneName);
+	return m_skeleton.GetBone(boneNo)->GetWorldMatrix();
+}
+
+
 void SkinModelRender::Render(RenderContext& rc, Camera* camera)
 {
 	//レンダーコンテキストの描画先で分岐
@@ -36,4 +57,20 @@ void SkinModelRender::UpdateModel()
 		model.UpdateWorldMatrix(m_position, m_qRot, m_scale);
 		m_skeleton.Update(model.GetWorldMatrix());
 	}
+}
+
+void SkinModelRender::PreLoadModel(const char* tkmFilePath)
+{
+	//プリロードはまだできない。
+
+	/*TkmFile* tkmFile = ResourceBankManager::GetInstance()->GetTkmFileFromBank(tkmFilePath);
+
+	if (tkmFile == nullptr)
+	{
+		//未登録
+		tkmFile = new TkmFile;
+		tkmFile->Load(tkmFilePath);
+		ResourceBankManager::GetInstance()->RegistTkmFileToBank(tkmFilePath, tkmFile);
+
+	}*/
 }
