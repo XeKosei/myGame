@@ -8,6 +8,11 @@
 #include <string>
 class RenderContext;
 
+//これどうしたらいいんだろう。
+//どこかでインクルードの代わりみたいなことをやってるんだろうけど。
+//とりあえずこうしとく。
+class Camera;
+
 /*!
 	*@brief	ゲームオブジェクト。
 	*/
@@ -39,11 +44,16 @@ public:
 	/*!
 	 *@brief	描画
 	*/
-	virtual void Render(RenderContext& renderContext)
+	virtual void Render(RenderContext& renderContext, Camera* camera)
 	{
 		(void)renderContext;
 	}
 	
+	virtual void PostRender(RenderContext& renderContext)
+	{
+		(void)renderContext;
+	}
+
 public:
 	/*!
 	*@brief Start関数が完了した？
@@ -113,10 +123,17 @@ public:
 	}
 public:
 
-	void RenderWrapper(RenderContext& renderContext)
+	void RenderWrapper(RenderContext& renderContext, Camera* camera)
 	{
 		if (m_isActive && m_isStart && !m_isDead ) {
-			Render(renderContext);
+			Render(renderContext, camera);
+		}
+	}
+
+	void PostRenderWrapper(RenderContext& renderContext)
+	{
+		if (m_isActive && m_isStart && !m_isDead) {
+			PostRender(renderContext);
 		}
 	}
 	

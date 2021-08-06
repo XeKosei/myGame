@@ -218,6 +218,9 @@
     <ClCompile Include="DirectionLight.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="SkinModelRender.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -404,6 +407,9 @@
       <Filter>ExEngine\level2D</Filter>
     </ClInclude>
     <ClInclude Include="DirectionLight.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinModelRender.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>
