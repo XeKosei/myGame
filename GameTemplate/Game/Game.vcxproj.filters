@@ -221,6 +221,9 @@
     <ClCompile Include="SkinModelRender.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="LightManager.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -410,6 +413,9 @@
       <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
     <ClInclude Include="SkinModelRender.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="LightManager.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>

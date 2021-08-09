@@ -30,7 +30,7 @@ public:
 	/// @brief モデルの初期化関数
 	/// @param modelPath モデルファイルのパス(.tkm)
 	/// @param skeletonPath スケルトンファイルパス(.tks)
-	void Init(const char* modelPath, const char skeletonPath);
+	void Init(const char* modelPath, const char* skeletonPath);
 
 	/// @brief モデルの初期化関数　モデルパスだけ版
 	/// @param modelPath モデルファイルのパス(.tkm)
