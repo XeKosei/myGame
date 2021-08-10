@@ -53,10 +53,10 @@ void SkinModelRender::Init(const char* modelPath, const char* skeletonPath, Anim
 	//modelInitData.m_expandShaderResoruceView = &PostEffectManager::GetInstance()->GetBlurShadowMap();
 
 	//定数バッファをモデルに紐づける
-	modelInitData.m_expandConstantBufferSize = LightManager::GetInstance()->GetLigDataSize();
-	shadowModelInitData.m_expandConstantBufferSize = LightManager::GetInstance()->GetLigCameraDataSize();
-	modelInitData.m_expandConstantBuffer = LightManager::GetInstance()->GetLigDatas();
-	shadowModelInitData.m_expandConstantBuffer = LightManager::GetInstance()->GetLigCameraDatas();
+	modelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigDataSize();
+	shadowModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigCameraDataSize();
+	modelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigDatas();
+	shadowModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigCameraDatas();
 
 	//modelInitData.m_expandConstantBufferSize[1] = LightManager::GetInstance()->GetLigCameraDataSize();
 	//modelInitData.m_expandConstantBuffer[1] = LightManager::GetInstance()->GetLigCameraDatas();
