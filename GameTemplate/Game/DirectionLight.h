@@ -16,7 +16,6 @@ class DirectionLight : public IGameObject
 public:
 	//ディレクションライトのデータを取得
 	DirLigData* GetLigData() { return &m_dirLigData; };
-
 	//ディレクションライトのデータのサイズを取得
 	int GetLigDataSize() { return sizeof(m_dirLigData); };
 
@@ -37,9 +36,6 @@ public:
 	int GetDirLigNum() { return m_dirLigNum; };
 	//ディレクションライトの番号をマイナスする。
 	void DirLigNumMinus() { m_dirLigNum--; };
-
-	//m_dirLigDataが指すLightManagerの配列の位置を設定。
-	//void SetDirLigData(DirLigData* dirLigData) { m_dirLigData = dirLigData; };
 
 private:
 	DirLigData m_dirLigData;	//ディレクションライトのデータ

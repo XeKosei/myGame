@@ -2,6 +2,7 @@
 #include <array>
 #include "stdafx.h"
 #include "DirectionLight.h"
+#include "PointLight.h"
 
 namespace
 {
@@ -22,7 +23,7 @@ private:
 	struct LigDatas
 	{
 		DirLigData directionLight[DIRECTIONLIGHT_NUMBER_MAX];	//ディレクションライトのデータの配列	
-		//PointLigData pointLight[POINTLIGHT_NUMBER_MAX];		//ポイントライトのデータの配列
+		PointLigData pointLight[POINTLIGHT_NUMBER_MAX];		//ポイントライトのデータの配列
 		//SpotLigData spotLight[SPOTLIGHT_NUMBER_MAX];			//スポットライトのデータの配列
 		Vector3 eyePos;					//カメラの位置
 		int createdDirLigTotal = 0;		//ディレクションライトが作られた総数
@@ -147,11 +148,60 @@ public:
 		//ライトの数が0以下になる時はおかしくなっているのでthrowする(起こり得ないと信じたい)
 		if (m_ligData.createdDirLigTotal < 0)
 		{
-			MessageBoxA(nullptr, "ポイントライトの数がマイナスになっています。\n", "エラー", MB_OK);
+			MessageBoxA(nullptr, "ディレクションライトの数がマイナスになっています。\n", "エラー", MB_OK);
 		}
 	}
 
+	//ポイントライト用/////////////////////////////////////////////////////////////////////////////////
 
+	/// @brief 新しくディレクションライトが作られた際の処理
+	/// @param newDirLig 新しく作られたディレクションライト
+	void AddNewPointLight(PointLigData* newPointLigData)
+	{
+		//ライトの数が最初に決めた数以上ならthrowする(いっぱい作るとふつうに起こる)
+		if (m_ligData.createdPointLigTotal >= POINTLIGHT_NUMBER_MAX)
+		{
+			MessageBoxA(nullptr, "ポイントライトの数が最大数を超えています。\n", "エラー", MB_OK);
+		}
+
+		//新しく作られたポイントライトのデータを配列の空きの先頭に格納する。
+		m_ligData.pointLight[m_ligData.createdPointLigTotal] = *newPointLigData;
+	}
+
+	/// @brief ディレクションライトの情報を更新する。
+	/// @param dirLigNum 更新したいライトの番号
+	/// @param dirLigData 更新したいライトの新しいライトデータ
+	void UpdatePointLight(int pointLigNum, PointLigData* pointLigData)
+	{
+		m_ligData.pointLight[pointLigNum] = *pointLigData;
+	}
+
+	/// @brief ライトを削除する時に行う処理
+	/// @param num 削除するライトの番号
+	void RemovePointLight(int num)
+	{
+		PointLightNumMinus();
+
+		//ライトの配列を、消すライトの位置から一つずつ詰めていく。
+		for (int i = num; i < m_ligData.createdPointLigTotal - 1; i++)
+		{
+			m_ligData.pointLight[i] = m_ligData.pointLight[i + 1];
+
+			//ライトの番号も一つずつ詰めていく。
+			*m_pointLigNum[num + 1]--;
+		}
+	}
+
+	/// @brief ライトが削除されたとき、作られたライトの数を減らすための関数
+	void PointLightNumMinus()
+	{
+		m_ligData.createdPointLigTotal--;
+		//ライトの数が0以下になる時はおかしくなっているのでthrowする(起こり得ないと信じたい)
+		if (m_ligData.createdPointLigTotal < 0)
+		{
+			MessageBoxA(nullptr, "ポイントライトの数がマイナスになっています。\n", "エラー", MB_OK);
+		}
+	}
 
 	//影用//////////////////////////////////////////////////////////////////////////////////////////////////
 	

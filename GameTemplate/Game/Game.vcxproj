@@ -291,6 +291,7 @@
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -365,6 +366,7 @@
     <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="LightManager.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />

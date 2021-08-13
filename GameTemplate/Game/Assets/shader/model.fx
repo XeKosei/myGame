@@ -44,11 +44,18 @@ struct DirLigData
 	float3 ligColor;	//ライトのカラー
 };
 
+struct PointLigData
+{
+	float3 ligPos;		//ライトの位置
+	float3 ligColor;	//ライトのカラー
+	float ligRange;		//ライトの影響範囲の半径
+};
+
 cbuffer LightDataCb : register(b1)
 {
 	//各配列数はCLightManager.hのMaxLightNumと同じにすること
 	DirLigData dirLigData[5];	//ディレクションライトのデータの配列	
-	//PointLigData pointLight[POINTLIGHT_NUMBER_MAX];		//ポイントライトのデータの配列
+	PointLigData pointLigData[20];		//ポイントライトのデータの配列
 	//SpotLigData spotLight[SPOTLIGHT_NUMBER_MAX];			//スポットライトのデータの配列
 	float3 eyePos;					//カメラの位置
 	int createdDirLigTotal;		//ディレクションライトが作られた総数
@@ -69,7 +76,7 @@ sampler g_sampler : register(s0);	//サンプラステート。
 float3 CalcLambertDiffuse(float3 ligDir, float3 ligColor, float3 normal);
 float3 CalcPhongSpecular(float3 ligDir, float3 ligColor, float3 worldPos, float3 normal);
 float3 CalcDirectionLight(SPSIn psIn);
-
+float3 CalcPointLight(SPSIn psIn);
 
 /// <summary>
 //スキン行列を計算する。
@@ -145,6 +152,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	//ディレクションライトを計算
 	finalColor.xyz += CalcDirectionLight(psIn);
 
+	//ポイントライトを計算
+	finalColor.xyz += CalcPointLight(psIn);
 
 
 
@@ -210,7 +219,7 @@ float3 CalcDirectionLight(SPSIn psIn)
 	{
 		//Lambert拡散反射光を計算
 		float3 diffLig = CalcLambertDiffuse(dirLigData[i].ligDir, dirLigData[i].ligColor, psIn.normal);
-
+		//Specular鏡面反射光を計算
 		float3 specLig = CalcPhongSpecular(dirLigData[i].ligDir, dirLigData[i].ligColor, psIn.worldPos, psIn.normal);
 
 		dirLig += diffLig;
@@ -218,4 +227,46 @@ float3 CalcDirectionLight(SPSIn psIn)
 	}
 
 	return dirLig;
+}
+
+float3 CalcPointLight(SPSIn psIn)
+{
+	float3 pointLig = { 0.0f, 0.0f, 0.0f };
+
+	for (int i = 0; i < createdPointLigTotal; i++)
+	{
+		//サーフェイスに入射しているポイントライトの光の向きを計算する。
+		float3 ligDir = psIn.worldPos - pointLigData[i].ligPos;
+		ligDir = normalize(ligDir);
+
+		//減衰なしのLambert拡散反射光を計算する。
+		float3 diffLig = CalcLambertDiffuse(ligDir, pointLigData[i].ligColor, psIn.normal);
+
+		//減衰なしの鏡面反射光を計算する。
+		float3 specLig = CalcPhongSpecular(ligDir, pointLigData[i].ligColor, psIn.worldPos, psIn.normal);
+
+		//ポイントライトとの距離を計算する。
+		float3 dis = length(psIn.worldPos - pointLigData[i].ligPos);
+
+		//影響率は距離に比例して小さくなっていく。
+		float affect = 1.0f - 1.0f / pointLigData[i].ligRange * dis;
+
+		//影響力がマイナスにならないようにする。
+		if (affect < 0.0f)
+		{
+			affect = 0.0f;
+		}
+
+		//影響の仕方を指数関数的にする。
+		affect = pow(affect, 5.0f);
+
+		//拡散反射光と鏡面反射光に減衰率を乗算して影響を弱める。
+		diffLig *= affect;
+		specLig *= affect;
+
+		pointLig += diffLig;
+		pointLig += specLig;
+	}
+
+	return pointLig;
 }
