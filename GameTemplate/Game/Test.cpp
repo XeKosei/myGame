@@ -84,6 +84,11 @@ void Test::TestPointLig()
 			m_pointLigPos.y += g_pad[0]->GetLStickYF();
 			m_pointLig[m_pointLigNum - 1]->SetPosition(m_pointLigPos);
 		}
+		if (g_pad[0]->GetRStickYF() != 0.0f)
+		{
+			m_pointLigPos.z += g_pad[0]->GetRStickYF();
+			m_pointLig[m_pointLigNum - 1]->SetPosition(m_pointLigPos);
+		}
 	}
 
 
