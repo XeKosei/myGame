@@ -1,7 +1,7 @@
 
 #include "stdafx.h"
 #include "system/system.h" 
-
+#include "Test.h"
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -18,15 +18,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームオブジェクトマネージャーのインスタンスを作成する。
 	GameObjectManager::CreateInstance();
 	PhysicsWorld::CreateInstance();
-	
-	//3Dモデルをロードするための情報を設定
-	ModelInitData initData;
-	initData.m_tkmFilePath = "Assets/modelData/unityChan.tkm";
-	initData.m_fxFilePath = "Assets/shader/model.fx";
 
-	//初期化情報を使ってモデル表示処理を初期化
-	Model charaModel;
-	charaModel.Init(initData);
+	//ライトマネージャーのインスタンスを作成
+	LightManager::CreateInstance();
+	//LightManager::GetInstance()->SetLightCameraPosition(LIGHTCAMERA_POSITION);
+	//LightManager::GetInstance()->SetLightCameraTarget(LIGHTCAMERA_TARGET);
+	//LightManager::GetInstance()->SetLightCameraUp(LIGHTCAMERA_UP);
+	//LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective); //enUpdateProjMatrixFunc_Ortho
+   /* LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
+	LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);*/
+	
+	Test* testScene = NewGO<Test>(0, "testScene");
 
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
@@ -44,7 +46,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
 		
-		
+
 
 		GameObjectManager::GetInstance()->ExecuteUpdate();
 		GameObjectManager::GetInstance()->ExecuteRender(renderContext);

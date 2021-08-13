@@ -21,21 +21,16 @@ private:
 
 	struct LigDatas
 	{
-		DirLigData directionLight[DIRECTIONLIGHT_NUMBER_MAX];	//ディレクションライトのデータの配列
+		DirLigData directionLight[DIRECTIONLIGHT_NUMBER_MAX];	//ディレクションライトのデータの配列	
 		//PointLigData pointLight[POINTLIGHT_NUMBER_MAX];		//ポイントライトのデータの配列
 		//SpotLigData spotLight[SPOTLIGHT_NUMBER_MAX];			//スポットライトのデータの配列
 		Vector3 eyePos;					//カメラの位置
-		int directionLightNum = 0;		//ディレクションライトの数
-		int pointLightNum = 0;			//ポイントライトの数
-		int spotLightNum = 0;			//スポットライトの数
+		int createdDirLigTotal = 0;		//ディレクションライトが作られた総数
+		int createdPointLigTotal = 0;	//ポイントライトが作られた総数
+		int createdSpotLigTotal = 0;	//スポットライトが作られた総数
 	};
 	LigDatas m_ligData;					//ライトのデータ
 	int m_size = sizeof(m_ligData);		//ライトのデータのサイズ
-
-	//何番目に作ったか記録
-	int m_directionLigCreateNum = 0;
-	int m_pointLigCreateNum = 0;
-	int m_spotLigCreateNum = 0;
 
 	struct LigCameraDatas
 	{
@@ -48,6 +43,18 @@ private:
 	int m_ligCameraDataSize = sizeof(m_ligCameraData);
 
 	Camera m_lightCamera;	//シャドウマップ用のライトの位置のカメラ。テスト用
+
+	//ライトの番号を管理するポインタ
+	int* m_dirLigNum[DIRECTIONLIGHT_NUMBER_MAX] = {nullptr,nullptr, nullptr, nullptr, nullptr};
+	int* m_pointLigNum[POINTLIGHT_NUMBER_MAX] = {
+		nullptr,nullptr, nullptr, nullptr, nullptr,nullptr,nullptr, nullptr, nullptr, nullptr,
+		nullptr,nullptr, nullptr, nullptr, nullptr,nullptr,nullptr, nullptr, nullptr, nullptr
+	};
+	int* m_spotLigNum[SPOTLIGHT_NUMBER_MAX] = {
+		nullptr,nullptr, nullptr, nullptr, nullptr,nullptr,nullptr, nullptr, nullptr, nullptr,
+		nullptr,nullptr, nullptr, nullptr, nullptr,nullptr,nullptr, nullptr, nullptr, nullptr
+	};
+
 
 public:
 
@@ -81,12 +88,70 @@ public:
 	/// @brief カメラのポジションを更新する。
 	void UpdateEyePos() { m_ligData.eyePos = g_camera3D->GetPosition(); };
 
-	//ライトの数を教える。
-	int GetDirectionLigNum() { return m_ligData.directionLightNum; };
-	int GetPointLigNum() { return m_ligData.pointLightNum; };
-	int GetSpotLigNum() { return m_ligData.spotLightNum; };
+	//新しく作られるライトに番号を与えるための関数。
+	//与えたら番号を次に作られるライトに与える番号にする。
+	int GetNewDirLigNum() { return m_ligData.createdDirLigTotal++; };
+	int GetNewPointLigNum() { return m_ligData.createdPointLigTotal++; };
+	int GetNewSpotLigNum() { return m_ligData.createdSpotLigTotal++; };
 
-	
+	/// @brief ライトの番号に参照できるように、アドレスを格納する処理。
+	/// @param num 
+	void SetDirLigNum(int* num) { m_dirLigNum[*num] = num; };
+	void SetPointLigNum(int* num) { m_pointLigNum[*num] = num; };
+	void SetSpotLigNum(int* num) { m_spotLigNum[*num] = num; };
+
+	//ディレクションライト用/////////////////////////////////////////////////////////////////////////////////
+
+	/// @brief 新しくディレクションライトが作られた際の処理
+	/// @param newDirLig 新しく作られたディレクションライト
+	void AddNewDirectionLight(DirLigData* newDirLigData)
+	{
+		//ライトの数が最初に決めた数以上ならthrowする(いっぱい作るとふつうに起こる)
+		if (m_ligData.createdDirLigTotal >= DIRECTIONLIGHT_NUMBER_MAX)
+		{
+			MessageBoxA(nullptr, "ディレクションライトの数が最大数を超えています。\n", "エラー", MB_OK);
+		}
+		
+		//新しく作られたディレクションライトのデータを配列の空きの先頭に格納する。
+		m_ligData.directionLight[m_ligData.createdDirLigTotal] = *newDirLigData;
+	}
+
+	/// @brief ディレクションライトの情報を更新する。
+	/// @param dirLigNum 更新したいライトの番号
+	/// @param dirLigData 更新したいライトの新しいライトデータ
+	void UpdateDirectionLight(int dirLigNum, DirLigData* dirLigData)
+	{
+		m_ligData.directionLight[dirLigNum] = *dirLigData;
+	}
+
+	/// @brief ライトを削除する時に行う処理
+	/// @param num 削除するライトの番号
+	void RemoveDirectionLight(int num)
+	{
+		DirectionLightNumMinus();
+
+		//ライトの配列を、消すライトの位置から一つずつ詰めていく。
+		for (int i = num; i < m_ligData.createdDirLigTotal - 1; i++)
+		{
+			m_ligData.directionLight[i] = m_ligData.directionLight[i + 1];
+
+			//ライトの番号も一つずつ詰めていく。
+			*m_dirLigNum[num + 1]--;
+		}
+	}
+
+	/// @brief ライトが削除されたとき、作られたライトの数を減らすための関数
+	void DirectionLightNumMinus()
+	{
+		m_ligData.createdDirLigTotal--;
+		//ライトの数が0以下になる時はおかしくなっているのでthrowする(起こり得ないと信じたい)
+		if (m_ligData.createdDirLigTotal < 0)
+		{
+			MessageBoxA(nullptr, "ポイントライトの数がマイナスになっています。\n", "エラー", MB_OK);
+		}
+	}
+
+
 
 	//影用//////////////////////////////////////////////////////////////////////////////////////////////////
 	

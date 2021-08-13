@@ -33,8 +33,16 @@ public:
 	//ディレクションライトの色を取得
 	Vector3 GetColor() { return m_dirLigData.ligColor; };
 
+	//ディレクションライトの番号を取得する。
+	int GetDirLigNum() { return m_dirLigNum; };
+	//ディレクションライトの番号をマイナスする。
+	void DirLigNumMinus() { m_dirLigNum--; };
+
+	//m_dirLigDataが指すLightManagerの配列の位置を設定。
+	//void SetDirLigData(DirLigData* dirLigData) { m_dirLigData = dirLigData; };
+
 private:
 	DirLigData m_dirLigData;	//ディレクションライトのデータ
-	int m_dirLigTag;		//ディレクションライトの番号(作られた順)
+	int m_dirLigNum = 0;		//ディレクションライトの番号(作られた順)
 };
 

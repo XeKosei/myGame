@@ -9,3 +9,8 @@
 #include <xaudio2fx.h>
 
 #include "LightManager.h"
+#include "SkinModelRender.h"
+
+
+#include "time/Stopwatch.h"
+#include "time/GameTime.h"

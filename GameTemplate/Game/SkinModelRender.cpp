@@ -22,16 +22,16 @@ void SkinModelRender::Init(const char* modelPath, const char* skeletonPath, Anim
 	shadowModelInitData.m_tkmFilePath = modelPath;
 
 	//シェーダーパスの指定
-	//modelInitData.m_fxFilePath = "Assets/shader/shadowReceiver.fx";
-	//shadowModelInitData.m_fxFilePath = "Assets/shader/shadow.fx";
+	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
+	shadowModelInitData.m_fxFilePath = "Assets/shader/model.fx";
 
 	//シェーダーの頂点シェーダーのエントリー関数名の指定
 	modelInitData.m_vsEntryPointFunc = "VSMain";
 	shadowModelInitData.m_vsEntryPointFunc = "VSMain";
 
 	//シェーダーのピクセルシェーダーのエントリー関数名の指定
-	modelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
-	shadowModelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
+	//modelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
+	//shadowModelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
 
 	//スケルトンが存在しているときはスケルトンを初期化
 	if (skeletonPath != nullptr)
@@ -42,8 +42,8 @@ void SkinModelRender::Init(const char* modelPath, const char* skeletonPath, Anim
 	}
 
 	//カラーバッファのフォーマットを指定。
-	//modelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	//shadowModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	modelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	shadowModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
 	//モデルデータの上方向の軸を指定
 	modelInitData.m_modelUpAxis = enModelUpAxisZ;
@@ -58,13 +58,13 @@ void SkinModelRender::Init(const char* modelPath, const char* skeletonPath, Anim
 	modelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigDatas();
 	shadowModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigCameraDatas();
 
-	//modelInitData.m_expandConstantBufferSize[1] = LightManager::GetInstance()->GetLigCameraDataSize();
-	//modelInitData.m_expandConstantBuffer[1] = LightManager::GetInstance()->GetLigCameraDatas();
+	modelInitData.m_expandConstantBufferSize[1] = LightManager::GetInstance()->GetLigCameraDataSize();
+	modelInitData.m_expandConstantBuffer[1] = LightManager::GetInstance()->GetLigCameraDatas();
 
 	//モデルの初期化
 	m_model[eModel].Init(modelInitData);
 
-	//影病がモデルの初期化
+	//影描画モデルの初期化
 	m_model[eModel_Shadow].Init(shadowModelInitData);
 
 	//アニメーション関連の初期化
