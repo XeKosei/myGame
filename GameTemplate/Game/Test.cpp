@@ -18,8 +18,8 @@ bool Test::Start()
 void Test::Update()
 {
 	//TestDirLig();
-	TestPointLig();
-
+	//TestPointLig();
+	TestSpotLig();
 
 }
 
@@ -55,7 +55,7 @@ void Test::TestPointLig()
 		if (m_pointLigNum < 20)
 		{
 			m_pointLig[m_pointLigNum] = NewGO<PointLight>(0);
-			m_pointLig[m_pointLigNum]->SetPosition(m_pointLigPos);
+			m_pointLig[m_pointLigNum]->SetPosition(m_ligPos);
 			m_pointLig[m_pointLigNum]->SetColor({ 1.0f,1.0f,1.0f });
 			m_pointLig[m_pointLigNum]->SetRange(1000.0f);
 			m_pointLigNum++;
@@ -76,20 +76,65 @@ void Test::TestPointLig()
 	{
 		if (g_pad[0]->GetLStickXF() != 0.0f)
 		{
-			m_pointLigPos.x += g_pad[0]->GetLStickXF();
-			m_pointLig[m_pointLigNum - 1]->SetPosition(m_pointLigPos);
+			m_ligPos.x += g_pad[0]->GetLStickXF();
+			m_pointLig[m_pointLigNum - 1]->SetPosition(m_ligPos);
 		}
 		if (g_pad[0]->GetLStickYF())
 		{
-			m_pointLigPos.y += g_pad[0]->GetLStickYF();
-			m_pointLig[m_pointLigNum - 1]->SetPosition(m_pointLigPos);
+			m_ligPos.y += g_pad[0]->GetLStickYF();
+			m_pointLig[m_pointLigNum - 1]->SetPosition(m_ligPos);
 		}
 		if (g_pad[0]->GetRStickYF() != 0.0f)
 		{
-			m_pointLigPos.z += g_pad[0]->GetRStickYF();
-			m_pointLig[m_pointLigNum - 1]->SetPosition(m_pointLigPos);
+			m_ligPos.z += g_pad[0]->GetRStickYF();
+			m_pointLig[m_pointLigNum - 1]->SetPosition(m_ligPos);
+		}
+	}
+}
+
+void Test::TestSpotLig()
+{
+	if (g_pad[0]->IsTrigger(enButtonA))
+	{
+		if (m_spotLigNum < 20)
+		{
+			m_spotLig[m_spotLigNum] = NewGO<SpotLight>(0);
+			m_spotLig[m_spotLigNum]->SetPosition(m_ligPos);
+			m_spotLig[m_spotLigNum]->SetColor({ 1.0f,1.0f,1.0f });
+			m_spotLig[m_spotLigNum]->SetRange(1000.0f);
+			m_spotLig[m_spotLigNum]->SetDirection({1.0f,0.0f,0.0f});
+			m_spotLig[m_spotLigNum]->SetAngleDeg(90.0f);
+
+			m_spotLigNum++;
 		}
 	}
 
+	if (g_pad[0]->IsTrigger(enButtonB) != 0.0f)
+	{
+		if (m_spotLigNum > 0)
+		{
+			DeleteGO(m_spotLig[m_spotLigNum - 1]);
 
+			m_spotLigNum--;
+		}
+	}
+
+	if (m_spotLigNum > 0)
+	{
+		if (g_pad[0]->GetLStickXF() != 0.0f)
+		{
+			m_ligPos.x += g_pad[0]->GetLStickXF();
+			m_spotLig[m_spotLigNum - 1]->SetPosition(m_ligPos);
+		}
+		if (g_pad[0]->GetLStickYF())
+		{
+			m_ligPos.y += g_pad[0]->GetLStickYF();
+			m_spotLig[m_spotLigNum - 1]->SetPosition(m_ligPos);
+		}
+		if (g_pad[0]->GetRStickYF() != 0.0f)
+		{
+			m_ligPos.z += g_pad[0]->GetRStickYF();
+			m_spotLig[m_spotLigNum - 1]->SetPosition(m_ligPos);
+		}
+	}
 }

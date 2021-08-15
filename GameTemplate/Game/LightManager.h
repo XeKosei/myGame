@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "DirectionLight.h"
 #include "PointLight.h"
+#include "SpotLight.h"
 
 namespace
 {
@@ -24,7 +25,7 @@ private:
 	{
 		DirLigData directionLight[DIRECTIONLIGHT_NUMBER_MAX];	//ディレクションライトのデータの配列	
 		PointLigData pointLight[POINTLIGHT_NUMBER_MAX];		//ポイントライトのデータの配列
-		//SpotLigData spotLight[SPOTLIGHT_NUMBER_MAX];			//スポットライトのデータの配列
+		SpotLigData spotLight[SPOTLIGHT_NUMBER_MAX];			//スポットライトのデータの配列
 		Vector3 eyePos;					//カメラの位置
 		int createdDirLigTotal = 0;		//ディレクションライトが作られた総数
 		int createdPointLigTotal = 0;	//ポイントライトが作られた総数
@@ -154,7 +155,7 @@ public:
 
 	//ポイントライト用/////////////////////////////////////////////////////////////////////////////////
 
-	/// @brief 新しくディレクションライトが作られた際の処理
+	/// @brief 新しくポイントライトが作られた際の処理
 	/// @param newDirLig 新しく作られたディレクションライト
 	void AddNewPointLight(PointLigData* newPointLigData)
 	{
@@ -168,7 +169,7 @@ public:
 		m_ligData.pointLight[m_ligData.createdPointLigTotal] = *newPointLigData;
 	}
 
-	/// @brief ディレクションライトの情報を更新する。
+	/// @brief ポイントライトの情報を更新する。
 	/// @param dirLigNum 更新したいライトの番号
 	/// @param dirLigData 更新したいライトの新しいライトデータ
 	void UpdatePointLight(int pointLigNum, PointLigData* pointLigData)
@@ -200,6 +201,57 @@ public:
 		if (m_ligData.createdPointLigTotal < 0)
 		{
 			MessageBoxA(nullptr, "ポイントライトの数がマイナスになっています。\n", "エラー", MB_OK);
+		}
+	}
+
+	//スポットライト用/////////////////////////////////////////////////////////////////////////////////
+
+	/// @brief 新しくスポットライが作られた際の処理
+	/// @param newDirLig 新しく作られたディレクションライト
+	void AddNewSpotLight(SpotLigData* newSpotLigData)
+	{
+		//ライトの数が最初に決めた数以上ならthrowする(いっぱい作るとふつうに起こる)
+		if (m_ligData.createdSpotLigTotal >= SPOTLIGHT_NUMBER_MAX)
+		{
+			MessageBoxA(nullptr, "スポットライトの数が最大数を超えています。\n", "エラー", MB_OK);
+		}
+
+		//新しく作られたポイントライトのデータを配列の空きの先頭に格納する。
+		m_ligData.spotLight[m_ligData.createdSpotLigTotal] = *newSpotLigData;
+	}
+
+	/// @brief スポットライトの情報を更新する。
+	/// @param dirLigNum 更新したいライトの番号
+	/// @param dirLigData 更新したいライトの新しいライトデータ
+	void UpdateSpotLight(int spotLigNum, SpotLigData* spotLigData)
+	{
+		m_ligData.spotLight[spotLigNum] = *spotLigData;
+	}
+
+	/// @brief ライトを削除する時に行う処理
+	/// @param num 削除するライトの番号
+	void RemoveSpotLight(int num)
+	{
+		SpotLightNumMinus();
+
+		//ライトの配列を、消すライトの位置から一つずつ詰めていく。
+		for (int i = num; i < m_ligData.createdSpotLigTotal - 1; i++)
+		{
+			m_ligData.spotLight[i] = m_ligData.spotLight[i + 1];
+
+			//ライトの番号も一つずつ詰めていく。
+			*m_spotLigNum[num + 1]--;
+		}
+	}
+
+	/// @brief ライトが削除されたとき、作られたライトの数を減らすための関数
+	void SpotLightNumMinus()
+	{
+		m_ligData.createdSpotLigTotal--;
+		//ライトの数が0以下になる時はおかしくなっているのでthrowする(起こり得ないと信じたい)
+		if (m_ligData.createdSpotLigTotal < 0)
+		{
+			MessageBoxA(nullptr, "スポットライトの数がマイナスになっています。\n", "エラー", MB_OK);
 		}
 	}
 

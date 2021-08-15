@@ -1,10 +1,10 @@
 #pragma once
 
 struct DirLigData {
-	Vector3 ligDir;	//ライトの方向
-	float pad0;	//パディング
-	Vector3 ligColor;	//ライトのカラー
-	float pad1;
+	Vector3 ligDir = {Vector3::Zero};		//ライトの方向
+	float pad0 = 0.0f;			//パディング
+	Vector3 ligColor = { Vector3::Zero };	//ライトのカラー
+	float pad1 = 0.0f;			//パディング
 };
 
 class DirectionLight : public IGameObject
@@ -34,8 +34,6 @@ public:
 
 	//ディレクションライトの番号を取得する。
 	int GetDirLigNum() { return m_dirLigNum; };
-	//ディレクションライトの番号をマイナスする。
-	void DirLigNumMinus() { m_dirLigNum--; };
 
 private:
 	DirLigData m_dirLigData;	//ディレクションライトのデータ

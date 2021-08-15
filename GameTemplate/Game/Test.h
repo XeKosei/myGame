@@ -8,6 +8,7 @@ public:
 
 	void TestDirLig();
 	void TestPointLig();
+	void TestSpotLig();
 
 private:
 	SkinModelRender* m_skin = nullptr;
@@ -16,9 +17,15 @@ private:
 		nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, 
 		nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, 
 	};
+	SpotLight* m_spotLig[20] = {
+		nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,
+		nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,
+	};
 	int m_dirLigNum = 0;
 	int m_pointLigNum = 0;
-	Vector3 m_pointLigPos = {Vector3::Zero};
+	int m_spotLigNum = 0;
+	Vector3 m_ligPos = {Vector3::Zero};
+
 
 	enum {
 		enAnimationClip_Idle,

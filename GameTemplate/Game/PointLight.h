@@ -1,10 +1,10 @@
 #pragma once
 
 struct PointLigData {
-	Vector3 ligPos;	//ライトの位置
-	float pad0;	//パディング
-	Vector3 ligColor;	//ライトのカラー
-	float ligRange;	//ライトの範囲の半径
+	Vector3 ligPos = {Vector3::Zero};		//ライトの位置
+	float pad0 = 0.0f;			//パディング
+	Vector3 ligColor = {Vector3::Zero};	//ライトのカラー
+	float ligRange = 0.0f;		//ライトの範囲の半径
 };
 
 class PointLight : public IGameObject
@@ -36,8 +36,6 @@ public:
 
 	//ポイントライトの番号を取得する。
 	int GetPointLigNum() { return m_pointLigNum; };
-	//ポイントライトの番号をマイナスする。
-	void PointLigNumMinus() { m_pointLigNum--; };
 
 private:
 	PointLigData m_pointLigData;	//ポイントライトのデータ
