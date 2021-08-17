@@ -292,6 +292,7 @@
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="PostEffectManager.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -368,6 +369,7 @@
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="PointLight.h" />
+    <ClInclude Include="PostEffectManager.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="stdafx.h" />

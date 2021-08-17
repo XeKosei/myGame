@@ -233,6 +233,9 @@
     <ClCompile Include="SpotLight.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="PostEffectManager.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -434,6 +437,9 @@
       <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
     <ClInclude Include="SpotLight.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="PostEffectManager.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>
