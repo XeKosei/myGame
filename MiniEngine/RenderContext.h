@@ -26,6 +26,7 @@ public:
 		m_commandList = commandList;
 	}
 
+
 	/// @brief Set current render step
 	/// @param step show EnStep
 	void SetStep(EnStep step)
@@ -33,13 +34,13 @@ public:
 		m_step = step;
 	}
 
+
 	/// @brief Get current render step.
 	/// @return 
 	EnStep GetRenderStep() const
 	{
 		return m_step;
 	}
-
 	/// <summary>
 	/// 頂点バッファを設定。
 	/// </summary>
@@ -82,6 +83,11 @@ public:
 	void SetViewport(D3D12_VIEWPORT& viewport)
 	{
 		m_commandList->RSSetViewports(1, &viewport);
+		m_currentViewPort = viewport;
+	}
+	D3D12_VIEWPORT GetViewport() const
+	{
+		return m_currentViewPort;
 	}
 	/// <summary>
 	/// シザリング矩形を設定
@@ -192,7 +198,8 @@ public:
 
 	/// <summary>
 	/// レンダリングターゲットをスロット0に設定する。
-	/// </summary>/// <remarks>
+	/// </summary>
+	/// /// <remarks>
 	/// 本関数はビューポートの設定を行いません。
 	/// ユーザー側で適切なビューポートを指定する必要があります。
 	/// </remarks>
@@ -203,6 +210,7 @@ public:
 		SetRenderTargets(1, rtArray);
 	}
 	void SetRenderTargetAndViewport(RenderTarget& renderTarget);
+
 	/// <summary>
 	/// レンダリングターゲットとビューポートを同時に設定する。
 	/// </summary>

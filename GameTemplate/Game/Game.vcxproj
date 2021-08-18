@@ -289,6 +289,7 @@
     <ClCompile Include="..\..\MiniEngine\tkFile\TksFile.cpp" />
     <ClCompile Include="..\..\MiniEngine\VertexBuffer.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
+    <ClCompile Include="GaussianBlur.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PointLight.cpp" />
@@ -367,6 +368,7 @@
     <ClInclude Include="..\..\MiniEngine\tkFile\TksFile.h" />
     <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
     <ClInclude Include="DirectionLight.h" />
+    <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PostEffectManager.h" />

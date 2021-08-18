@@ -51,6 +51,19 @@ public:
 	{
 		return m_texture;
 	}
+
+	/// @brief テクスチャの幅を取得
+	/// @return 
+	int GetWidth() const
+	{
+		return static_cast<int>(m_textureDesc.Width);
+	}
+
+	int GetHeight() const
+	{
+		return static_cast<int>(m_textureDesc.Height);
+	}
+
 private:
 	/// <summary>
 	/// DDSファイルからテクスチャをロード。
@@ -69,4 +82,5 @@ private:
 private:
 	ID3D12Resource*	m_texture = nullptr;	//テクスチャ。
 	D3D12_RESOURCE_DESC m_textureDesc;	//テクスチャ情報
+	bool m_isCubemap = false;			//キューブマップにするか？
 };
