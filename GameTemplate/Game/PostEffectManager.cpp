@@ -9,26 +9,26 @@ void PostEffectManager::Init(bool bloomMode, bool shadowMode)
 	m_shadowMode = shadowMode;
 
 	//最終的に画面に出力する用のレンダーターゲット
-	/*m_mainRenderTarget.Create(
+	m_mainRenderTarget.Create(
 		1280,
 		720,
 		1,
 		1,
 		DXGI_FORMAT_R32G32B32A32_FLOAT,
 		DXGI_FORMAT_D32_FLOAT
-	);*/
+	);
 
 	if (m_bloomMode == true)
 	{
-		//	//輝度を抽出したものが格納されるレンダリングターゲット
-		//	m_luminanceRenderTarget.Create(
-		//		1280,
-		//		720,
-		//		1,
-		//		1,
-		//		DXGI_FORMAT_R32G32B32A32_FLOAT,
-		//		DXGI_FORMAT_D32_FLOAT
-		//	);
+		//輝度を抽出したものが格納されるレンダリングターゲット
+		m_luminanceRenderTarget.Create(
+			1280,
+			720,
+			1,
+			1,
+			DXGI_FORMAT_R32G32B32A32_FLOAT,
+			DXGI_FORMAT_D32_FLOAT
+		);
 
 		//ピクセルシェーダーPSSamplingLuminanceで、メインレンダーターゲットから輝度を抽出するためのスプライト
 		SpriteInitData luminanceSpriteInitData;
@@ -42,33 +42,33 @@ void PostEffectManager::Init(bool bloomMode, bool shadowMode)
 
 		m_luminanceSprite.Init(luminanceSpriteInitData);
 
-		////輝度抽出したスプライトをもとにブラーをかけさせるようにセット。
-		//m_gaussianBlur[0].Init(&m_luminanceRenderTarget.GetRenderTargetTexture());
-		//m_gaussianBlur[1].Init(&m_gaussianBlur[0].GetBokeTexture());
-		//m_gaussianBlur[2].Init(&m_gaussianBlur[1].GetBokeTexture());
-		//m_gaussianBlur[3].Init(&m_gaussianBlur[2].GetBokeTexture());
+		//輝度抽出したスプライトをもとにブラーをかけさせるようにセット。
+		m_gaussianBlur[0].Init(&m_luminanceRenderTarget.GetRenderTargetTexture());
+		m_gaussianBlur[1].Init(&m_gaussianBlur[0].GetBokeTexture());
+		m_gaussianBlur[2].Init(&m_gaussianBlur[1].GetBokeTexture());
+		m_gaussianBlur[3].Init(&m_gaussianBlur[2].GetBokeTexture());
 
-		////輝度抽出されたものにブラーをかけたスプライト
-		////ピクセルシェーダーPSSamplingLuminanceで、メインレンダーターゲットから輝度を抽出するためのスプライト
-		//SpriteInitData bokeLuminanceSpriteInitData;
-		//bokeLuminanceSpriteInitData.m_fxFilePath = "Assets/shader/postEffect.fx";
-		//bokeLuminanceSpriteInitData.m_vsEntryPointFunc = "VSMain";
-		//bokeLuminanceSpriteInitData.m_psEntryPoinFunc = "PSBloomFinal";
-		//bokeLuminanceSpriteInitData.m_width = 1280;
-		//bokeLuminanceSpriteInitData.m_height = 720;
-		//bokeLuminanceSpriteInitData.m_textures[0] = &m_gaussianBlur[0].GetBokeTexture();
-		//bokeLuminanceSpriteInitData.m_textures[1] = &m_gaussianBlur[1].GetBokeTexture();
-		//bokeLuminanceSpriteInitData.m_textures[2] = &m_gaussianBlur[2].GetBokeTexture();
-		//bokeLuminanceSpriteInitData.m_textures[3] = &m_gaussianBlur[3].GetBokeTexture();
-		//bokeLuminanceSpriteInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		//輝度抽出されたものにブラーをかけたスプライト
+		//ピクセルシェーダーPSSamplingLuminanceで、メインレンダーターゲットから輝度を抽出するためのスプライト
+		SpriteInitData bokeLuminanceSpriteInitData;
+		bokeLuminanceSpriteInitData.m_fxFilePath = "Assets/shader/postEffect.fx";
+		bokeLuminanceSpriteInitData.m_vsEntryPointFunc = "VSMain";
+		bokeLuminanceSpriteInitData.m_psEntryPoinFunc = "PSBloomFinal";
+		bokeLuminanceSpriteInitData.m_width = 1280;
+		bokeLuminanceSpriteInitData.m_height = 720;
+		bokeLuminanceSpriteInitData.m_textures[0] = &m_gaussianBlur[0].GetBokeTexture();
+		bokeLuminanceSpriteInitData.m_textures[1] = &m_gaussianBlur[1].GetBokeTexture();
+		bokeLuminanceSpriteInitData.m_textures[2] = &m_gaussianBlur[2].GetBokeTexture();
+		bokeLuminanceSpriteInitData.m_textures[3] = &m_gaussianBlur[3].GetBokeTexture();
+		bokeLuminanceSpriteInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
-		//m_bokeLuminanceSprite.Init(bokeLuminanceSpriteInitData);
+		m_bokeLuminanceSprite.Init(bokeLuminanceSpriteInitData);
 	}
 
 	if (m_shadowMode)
 	{
 		//シャドウマップの作成
-		/*float clearColor[4] = { 1.0f,1.0f,1.0f,1.0f };
+		float clearColor[4] = { 1.0f,1.0f,1.0f,1.0f };
 		m_shadowMap.Create(
 			1024,
 			1024,
@@ -77,7 +77,7 @@ void PostEffectManager::Init(bool bloomMode, bool shadowMode)
 			DXGI_FORMAT_R32_FLOAT,
 			DXGI_FORMAT_D32_FLOAT,
 			clearColor
-		);*/
+		);
 	}
 
 	//最終的な画面に出力されるスプライト
@@ -92,7 +92,7 @@ void PostEffectManager::Init(bool bloomMode, bool shadowMode)
 
 void PostEffectManager::ShadowRender(RenderContext& rc)
 {
-	/*if (m_shadowMode)
+	if (m_shadowMode)
 	{
 		rc.WaitUntilToPossibleSetRenderTarget(m_shadowMap);
 		rc.SetRenderTargetAndViewport(m_shadowMap);
@@ -105,23 +105,23 @@ void PostEffectManager::ShadowRender(RenderContext& rc)
 		shadowRect.right = 1024;
 		shadowRect.bottom = 1024;
 		rc.SetScissorRect(shadowRect);
-	}*/
+	}
 }
 void PostEffectManager::EndShadowRender(RenderContext& rc)
 {
-	//if (m_shadowMode)
-	//{
-	//	rc.WaitUntilFinishDrawingToRenderTarget(m_shadowMap);
+	if (m_shadowMode)
+	{
+		rc.WaitUntilFinishDrawingToRenderTarget(m_shadowMap);
 
-	//	//m_shadowBlur.ExecuteOnGPU(rc, 2.0f);
+		//m_shadowBlur.ExecuteOnGPU(rc, 2.0f);
 
-	//	D3D12_RECT normalRect;
-	//	normalRect.left = 0;
-	//	normalRect.top = 0;
-	//	normalRect.right = 1280;
-	//	normalRect.bottom = 720;
-	//	rc.SetScissorRect(normalRect);
-	//}
+		D3D12_RECT normalRect;
+		normalRect.left = 0;
+		normalRect.top = 0;
+		normalRect.right = 1280;
+		normalRect.bottom = 720;
+		rc.SetScissorRect(normalRect);
+	}
 }
 
 //レンダリング前の処理
@@ -152,10 +152,10 @@ void PostEffectManager::AfterRender(RenderContext& rc)
 		rc.WaitUntilFinishDrawingToRenderTarget(m_luminanceRenderTarget);
 	
 		//ガウシアンブラーを実行する。
-		/*m_gaussianBlur[0].ExecuteOnGPU(rc, 10);
+		m_gaussianBlur[0].ExecuteOnGPU(rc, 10);
 		m_gaussianBlur[1].ExecuteOnGPU(rc, 10);
 		m_gaussianBlur[2].ExecuteOnGPU(rc, 10);
-		m_gaussianBlur[3].ExecuteOnGPU(rc, 10);*/
+		m_gaussianBlur[3].ExecuteOnGPU(rc, 10);
 
 		//メインレンダーターゲットが使えるようになるまで待つ。
 		rc.WaitUntilToPossibleSetRenderTarget(m_mainRenderTarget);

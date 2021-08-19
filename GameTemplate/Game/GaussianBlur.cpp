@@ -44,23 +44,23 @@ void GaussianBlur::ExecuteOnGPU(RenderContext& rc, float blurPower)
 void GaussianBlur::InitRenderTargets()
 {
 	//Xブラー用のレンダリングターゲットを作成する。
-	/*m_xBlurRenderTarget.Create(
+	m_xBlurRenderTarget.Create(
 		m_originalTexture->GetWidth()/2,
 		m_originalTexture->GetHeight(),
 		1,
 		1,
 		DXGI_FORMAT_R32G32B32A32_FLOAT,
 		DXGI_FORMAT_D32_FLOAT
-	);*/
+	);
 	//Yブラー用のレンダリングターゲットを作成する。
-	/*m_yBlurRenderTarget.Create(
+	m_yBlurRenderTarget.Create(
 		m_originalTexture->GetWidth() / 2,
 		m_originalTexture->GetHeight() / 2,
 		1,
 		1,
 		DXGI_FORMAT_R32G32B32A32_FLOAT,
 		DXGI_FORMAT_D32_FLOAT
-	);*/
+	);
 }
 
 void GaussianBlur::InitSprites()

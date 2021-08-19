@@ -1,4 +1,5 @@
 #pragma once
+#include "GaussianBlur.h"
 class PostEffectManager
 {
 private:
@@ -54,10 +55,10 @@ private:
 	RenderTarget m_luminanceRenderTarget;
 	Sprite m_luminanceSprite;	//輝度抽出したスプライト
 	Sprite m_bokeLuminanceSprite;//輝度抽出したものにブラーをかけたスプライト
-	//GaussianBlur m_gaussianBlur[4];//ブラー
+	GaussianBlur m_gaussianBlur[4];//ブラー
 
 	bool m_shadowMode = true;	//シャドウが有効かどうか
 	RenderTarget m_shadowMap;
-	//GaussianBlur m_shadowBlur;
+	GaussianBlur m_shadowBlur;
 };
 
