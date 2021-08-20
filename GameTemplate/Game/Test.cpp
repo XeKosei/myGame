@@ -22,8 +22,8 @@ bool Test::Start()
 
 void Test::Update()
 {
-	//TestDirLig();
-	//TestPointLig();
+	TestDirLig();
+	TestPointLig();
 	TestSpotLig();
 
 }

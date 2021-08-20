@@ -56,6 +56,7 @@ void PostEffectManager::Init(bool bloomMode, bool shadowMode)
 		bokeLuminanceSpriteInitData.m_psEntryPoinFunc = "PSBloomFinal";
 		bokeLuminanceSpriteInitData.m_width = 1280;
 		bokeLuminanceSpriteInitData.m_height = 720;
+		bokeLuminanceSpriteInitData.m_alphaBlendMode = AlphaBlendMode_Add;
 		bokeLuminanceSpriteInitData.m_textures[0] = &m_gaussianBlur[0].GetBokeTexture();
 		bokeLuminanceSpriteInitData.m_textures[1] = &m_gaussianBlur[1].GetBokeTexture();
 		bokeLuminanceSpriteInitData.m_textures[2] = &m_gaussianBlur[2].GetBokeTexture();

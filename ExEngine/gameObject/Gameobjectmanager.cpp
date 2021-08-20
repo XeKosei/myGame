@@ -87,7 +87,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	//Level2D用　
 	//レベル2Dは全部スプライトなのでExecuteRenderにはいらないのでは?
 	//だがviewportをセットしないと画面が半分のままなのでセットはしてみる。
-	/*{
+	{
 		g_camera2D->SetWidth(g_graphicsEngine->GetFrameBufferWidth());
 
 		rc.SetStep(RenderContext::eStep_Render);
@@ -97,7 +97,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 				go->RenderWrapper(rc, g_camera3D);
 			}
 		}
-	}*/
+	}
 
 	//ポストエフェクト用。Render後の処理
 	PostEffectManager::GetInstance()->AfterRender(rc);
@@ -118,7 +118,7 @@ void GameObjectManager::ExecutePostRender(RenderContext& rc)
 		}
 	}
 	//Level2D用
-	/*{
+	{
 		g_camera2D->SetWidth(g_graphicsEngine->GetFrameBufferWidth());
 
 		rc.SetStep(RenderContext::eStep_Render);
@@ -128,5 +128,5 @@ void GameObjectManager::ExecutePostRender(RenderContext& rc)
 				go->PostRenderWrapper(rc);
 			}
 		}
-	}*/
+	}
 }
