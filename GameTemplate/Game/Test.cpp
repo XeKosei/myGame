@@ -17,14 +17,19 @@ bool Test::Start()
 	m_dirLig[0]->SetColor({ 1.0f,1.0f,1.0f });
 	m_dirLigNum++;
 
+	SkinModelRender* bigSkin = NewGO<SkinModelRender>(0);
+	bigSkin->Init("Assets/modelData/unityChan.tkm", "Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
+	bigSkin->SetPosition({0.0f,-200.0f, -100.0f});
+	bigSkin->SetScale({ 10.0f,10.0f,10.0f });
+
 	return true;
 }
 
 void Test::Update()
 {
-	TestDirLig();
+	//TestDirLig();
 	TestPointLig();
-	TestSpotLig();
+	//TestSpotLig();
 
 }
 
@@ -61,8 +66,8 @@ void Test::TestPointLig()
 		{
 			m_pointLig[m_pointLigNum] = NewGO<PointLight>(0);
 			m_pointLig[m_pointLigNum]->SetPosition(m_ligPos);
-			m_pointLig[m_pointLigNum]->SetColor({ 1.0f,1.0f,1.0f });
-			m_pointLig[m_pointLigNum]->SetRange(1000.0f);
+			m_pointLig[m_pointLigNum]->SetColor({ 100.0f,100.0f,100.0f });
+			m_pointLig[m_pointLigNum]->SetRange(50.0f);
 			m_pointLigNum++;
 		}
 	}
