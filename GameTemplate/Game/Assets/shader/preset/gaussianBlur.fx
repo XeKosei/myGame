@@ -15,6 +15,9 @@ struct PSInput{
 	float2 uv  : TEXCOORD0;
 };
 
+/*!
+ * @brief	頂点シェーダー。
+ */
 PSInput VSMain(VSInput In)
 {
 	PSInput psIn;
@@ -22,8 +25,8 @@ PSInput VSMain(VSInput In)
 	psIn.uv = In.uv;
 	return psIn;
 }
-texture2D<float4> mainRenderTargetTexture : register(t0);	//メインレンダリングターゲットのテクスチャ
-samplet Sampler : register(s0);
+Texture2D<float4> mainRenderTargetTexture : register(t0);	//メインレンダリングターゲットのテクスチャ
+sampler Sampler : register(s0);
 
 //////////////////////////////////////////////
 //ブラー

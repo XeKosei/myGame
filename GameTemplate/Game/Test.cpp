@@ -12,6 +12,11 @@ bool Test::Start()
 	m_skin->SetAnimationSpeed(1.0f);
 	m_skin->PlayAnimation(enAnimationClip_Idle);
 
+	m_dirLig[0] = NewGO<DirectionLight>(0);
+	m_dirLig[0]->SetDirection({ -1.0f, -1.0f, -1.0f });
+	m_dirLig[0]->SetColor({ 1.0f,1.0f,1.0f });
+	m_dirLigNum++;
+
 	return true;
 }
 

@@ -27,7 +27,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective); //enUpdateProjMatrixFunc_Ortho
    /* LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
 	LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);*/
-	
+
+	PostEffectManager::CreateInstance();
+	//ブルームフラグ、シャドウフラグの順番
+	PostEffectManager::GetInstance()->Init(true, true);
+
 	Test* testScene = NewGO<Test>(0, "testScene");
 
 	//////////////////////////////////////
@@ -41,16 +45,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//レンダリング開始。
 		g_engine->BeginFrame();
 		
+		GameObjectManager::GetInstance()->ExecuteUpdate();
+		GameObjectManager::GetInstance()->ExecuteRender(renderContext);
+		//PostRenderはスプライト、フォント等、エフェクトを受けないものを描画する
+		GameObjectManager::GetInstance()->ExecutePostRender(renderContext);
 
 		//////////////////////////////////////
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
 		
+		LightManager::GetInstance()->UpdateEyePos();
 
-
-		GameObjectManager::GetInstance()->ExecuteUpdate();
-		GameObjectManager::GetInstance()->ExecuteRender(renderContext);
-		
 		//////////////////////////////////////
 		//絵を描くコードを書くのはここまで！！！
 		//////////////////////////////////////

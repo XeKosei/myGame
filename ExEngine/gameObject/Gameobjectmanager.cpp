@@ -51,9 +51,82 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 {
 	//レンダラーを変更するならここを改造していくと良い。
 
+	//TODO:暫定処理、フラグ含め別の形にしたい(らしい)
+	//影を先に描いてからモデルに描いた影を描き足すので先にシャドウマップを作る。
+	//PostEffectManager::GetInstance()->ShadowRender(rc);
+
+	//shadow
+	//if (PostEffectManager::GetInstance()->GetShadowFlag())
+	//{
+	//	rc.SetStep(RenderContext::eStep_RenderShadowMap);
+	//	//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+	//	for (auto& goList : m_gameObjectListArray) {
+	//		for (auto& go : goList) {
+	//			go->RenderWrapper(rc, LightManager::GetInstance()->GetLightCamera());
+	//		}
+	//	}
+	//}
+	//PostEffectManager::GetInstance()->EndShadowRender(rc);
+
+	////ポストエフェクト用。Render前の処理
+	PostEffectManager::GetInstance()->BeforeRender(rc);
+
+	LightManager::GetInstance()->UpdateEyePos();
+
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
 			go->RenderWrapper(rc, g_camera3D);
 		}
 	}
+
+	// 1画面オンリーのエフェクト更新
+	//EffectEngine::GetInstance()->Update(GameTime::GetInstance().GetFrameDeltaTime());
+	//1画面オンリーのエフェクト描画
+	//EffectEngine::GetInstance()->Draw();
+
+	//Level2D用　
+	//レベル2Dは全部スプライトなのでExecuteRenderにはいらないのでは?
+	//だがviewportをセットしないと画面が半分のままなのでセットはしてみる。
+	/*{
+		g_camera2D->SetWidth(g_graphicsEngine->GetFrameBufferWidth());
+
+		rc.SetStep(RenderContext::eStep_Render);
+
+		for (auto& goList : m_gameObjectListArray) {
+			for (auto& go : goList) {
+				go->RenderWrapper(rc, g_camera3D);
+			}
+		}
+	}*/
+
+	//ポストエフェクト用。Render後の処理
+	PostEffectManager::GetInstance()->AfterRender(rc);
+
+}
+
+void GameObjectManager::ExecutePostRender(RenderContext& rc)
+{
+	if (m_rc == nullptr) {
+		m_rc = &rc;
+	}
+
+	rc.SetStep(RenderContext::eStep_Render);
+
+	for (auto& goList : m_gameObjectListArray) {
+		for (auto& go : goList) {
+			go->PostRenderWrapper(rc);
+		}
+	}
+	//Level2D用
+	/*{
+		g_camera2D->SetWidth(g_graphicsEngine->GetFrameBufferWidth());
+
+		rc.SetStep(RenderContext::eStep_Render);
+
+		for (auto& goList : m_gameObjectListArray) {
+			for (auto& go : goList) {
+				go->PostRenderWrapper(rc);
+			}
+		}
+	}*/
 }

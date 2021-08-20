@@ -9,7 +9,11 @@
 #include <xaudio2fx.h>
 
 #include "LightManager.h"
+//#include "ResourceBankManager.h"
+#include "PostEffectManager.h"
+
 #include "SkinModelRender.h"
+
 
 
 #include "time/Stopwatch.h"

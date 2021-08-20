@@ -25,7 +25,7 @@ public:
 		m_instance = nullptr;
 	}
 
-	static PostEffectManager* Getinstance() { return m_instance; };
+	static PostEffectManager* GetInstance() { return m_instance; };
 
 	/// @brief 各種設定をオンにするかどうかを入力。
 	/// @param bloomMode ブルームをオンにするか?

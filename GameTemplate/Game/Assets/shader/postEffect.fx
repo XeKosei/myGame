@@ -8,7 +8,7 @@ cbuffer cb : register(b0) {
 };
 struct VSInput {
 	float4 pos : POSITION;
-	float2 uv  : TEXCOORD0
+	float2 uv  : TEXCOORD0;
 };
 struct PSInput {
 	float4 pos : SV_POSITION;
