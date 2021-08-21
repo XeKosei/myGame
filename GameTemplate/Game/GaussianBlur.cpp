@@ -20,24 +20,24 @@ void GaussianBlur::ExecuteOnGPU(RenderContext& rc, float blurPower)
 	//レンダリングターゲットとして利用できるようになるまでwaitを入れる。
 	rc.WaitUntilToPossibleSetRenderTarget(m_xBlurRenderTarget);
 	//レンダリングターゲットを設定。
-	rc.SetRenderTarget(m_xBlurRenderTarget);
-	//レンダリングターゲットをクリア
+	rc.SetRenderTargetAndViewport(m_xBlurRenderTarget);
+	//レンダリングターゲットをクリア。
 	rc.ClearRenderTargetView(m_xBlurRenderTarget.GetRTVCpuDescriptorHandle(), m_xBlurRenderTarget.GetRTVClearColor());
-	//ドロー
+	//ドロー。
 	m_xBlurSprite.Draw(rc);
-	//レンダリングターゲットへの書き込み終了待ち
+	//レンダリングターゲットへの書き込み終了待ち。
 	rc.WaitUntilFinishDrawingToRenderTarget(m_xBlurRenderTarget);
 
 	//縦ブラーを実行。
 	//レンダリングターゲットとして利用できるようになるまでwaitを入れる。
 	rc.WaitUntilToPossibleSetRenderTarget(m_yBlurRenderTarget);
 	//レンダリングターゲットを設定。
-	rc.SetRenderTarget(m_yBlurRenderTarget);
-	//レンダリングターゲットをクリア
+	rc.SetRenderTargetAndViewport(m_yBlurRenderTarget);
+	//レンダリングターゲットをクリア。
 	rc.ClearRenderTargetView(m_yBlurRenderTarget.GetRTVCpuDescriptorHandle(), m_yBlurRenderTarget.GetRTVClearColor());
-	//ドロー
+	//ドロー。
 	m_yBlurSprite.Draw(rc);
-	//レンダリングターゲットへの書き込み終了待ち
+	//レンダリングターゲットへの書き込み終了待ち。
 	rc.WaitUntilFinishDrawingToRenderTarget(m_yBlurRenderTarget);
 }
 
@@ -45,13 +45,14 @@ void GaussianBlur::InitRenderTargets()
 {
 	//Xブラー用のレンダリングターゲットを作成する。
 	m_xBlurRenderTarget.Create(
-		m_originalTexture->GetWidth()/2,
+		m_originalTexture->GetWidth() / 2,
 		m_originalTexture->GetHeight(),
 		1,
 		1,
 		DXGI_FORMAT_R32G32B32A32_FLOAT,
 		DXGI_FORMAT_D32_FLOAT
 	);
+
 	//Yブラー用のレンダリングターゲットを作成する。
 	m_yBlurRenderTarget.Create(
 		m_originalTexture->GetWidth() / 2,
@@ -95,7 +96,7 @@ void GaussianBlur::InitSprites()
 		yBlurSpriteInitData.m_width = m_yBlurRenderTarget.GetWidth();
 		yBlurSpriteInitData.m_height = m_yBlurRenderTarget.GetHeight();
 		//テクスチャは横ブラーをかけたもの。
-		yBlurSpriteInitData.m_textures[0] = &m_yBlurRenderTarget.GetRenderTargetTexture();
+		yBlurSpriteInitData.m_textures[0] = &m_xBlurRenderTarget.GetRenderTargetTexture();
 		//書き込むレンダリングターゲットのフォーマットを指定する。
 		yBlurSpriteInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		//ユーザー拡張の定数バッファにブラー用のパラメーターを設定する。

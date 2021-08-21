@@ -234,12 +234,18 @@
 	}
 	void Sprite::Draw(RenderContext& renderContext)
 	{
+		//現在のビューポートから平行投影行列を計算する。
+		D3D12_VIEWPORT viewport = renderContext.GetViewport();
+
+
 		if (m_isInited == false) {
 			//未初期化。
 			return;
 		}
 		Matrix viewMatrix = g_camera2D->GetViewMatrix();
 		Matrix projMatrix = g_camera2D->GetProjectionMatrix();
+
+		projMatrix.MakeOrthoProjectionMatrix(viewport.Width, viewport.Height, 0.1f, 1.0f);
 
 		m_constantBufferCPU.mvp = m_world * viewMatrix * projMatrix;
 		m_constantBufferCPU.mulColor.x = 1.0f;

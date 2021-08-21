@@ -14,7 +14,7 @@ bool Test::Start()
 
 	m_dirLig[0] = NewGO<DirectionLight>(0);
 	m_dirLig[0]->SetDirection({ -1.0f, -1.0f, -1.0f });
-	m_dirLig[0]->SetColor({ 1.0f,1.0f,1.0f });
+	m_dirLig[0]->SetColor({ 5.0f,5.0f,5.0f });
 	m_dirLigNum++;
 
 	SkinModelRender* bigSkin = NewGO<SkinModelRender>(0);
@@ -28,9 +28,12 @@ bool Test::Start()
 void Test::Update()
 {
 	//TestDirLig();
-	TestPointLig();
+	//TestPointLig();
 	//TestSpotLig();
 
+	m_skinPos.x += g_pad[0]->GetLStickXF();
+	m_skinPos.y += g_pad[0]->GetLStickYF();
+	m_skin->SetPosition(m_skinPos);
 }
 
 void Test::TestDirLig()

@@ -153,10 +153,10 @@ void PostEffectManager::AfterRender(RenderContext& rc)
 		rc.WaitUntilFinishDrawingToRenderTarget(m_luminanceRenderTarget);
 	
 		//ガウシアンブラーを実行する。
-		m_gaussianBlur[0].ExecuteOnGPU(rc, 1000);
-		m_gaussianBlur[1].ExecuteOnGPU(rc, 1000);
-		m_gaussianBlur[2].ExecuteOnGPU(rc, 1000);
-		m_gaussianBlur[3].ExecuteOnGPU(rc, 1000);
+		m_gaussianBlur[0].ExecuteOnGPU(rc, 10);
+		m_gaussianBlur[1].ExecuteOnGPU(rc, 10);
+		m_gaussianBlur[2].ExecuteOnGPU(rc, 10);
+		m_gaussianBlur[3].ExecuteOnGPU(rc, 10);
 
 		//メインレンダーターゲットが使えるようになるまで待つ。
 		rc.WaitUntilToPossibleSetRenderTarget(m_mainRenderTarget);

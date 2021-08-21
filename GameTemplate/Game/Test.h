@@ -12,6 +12,7 @@ public:
 
 private:
 	SkinModelRender* m_skin = nullptr;
+	Vector3 m_skinPos = {0.0f,0.0f,0.0f};
 	DirectionLight* m_dirLig[5] = {nullptr,nullptr,nullptr,nullptr,nullptr};
 	PointLight* m_pointLig[20] = { 
 		nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, 
