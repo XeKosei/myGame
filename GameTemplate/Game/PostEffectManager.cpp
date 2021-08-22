@@ -79,6 +79,8 @@ void PostEffectManager::Init(bool bloomMode, bool shadowMode)
 			DXGI_FORMAT_D32_FLOAT,
 			clearColor
 		);
+		//VSM用にテクスチャをぼかす。
+		m_shadowBlur.Init(&m_shadowMap.GetRenderTargetTexture());
 	}
 
 	//最終的な画面に出力されるスプライト
@@ -114,7 +116,7 @@ void PostEffectManager::EndShadowRender(RenderContext& rc)
 	{
 		rc.WaitUntilFinishDrawingToRenderTarget(m_shadowMap);
 
-		//m_shadowBlur.ExecuteOnGPU(rc, 2.0f);
+		m_shadowBlur.ExecuteOnGPU(rc, 2.0f);
 
 		D3D12_RECT normalRect;
 		normalRect.left = 0;

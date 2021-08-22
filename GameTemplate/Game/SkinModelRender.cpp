@@ -22,16 +22,16 @@ void SkinModelRender::Init(const char* modelPath, const char* skeletonPath, Anim
 	shadowModelInitData.m_tkmFilePath = modelPath;
 
 	//シェーダーパスの指定
-	modelInitData.m_fxFilePath = "Assets/shader/model.fx";
-	shadowModelInitData.m_fxFilePath = "Assets/shader/model.fx";
+	modelInitData.m_fxFilePath = "Assets/shader/shadowReceiver.fx";
+	shadowModelInitData.m_fxFilePath = "Assets/shader/shadow.fx";
 
 	//シェーダーの頂点シェーダーのエントリー関数名の指定
 	modelInitData.m_vsEntryPointFunc = "VSMain";
 	shadowModelInitData.m_vsEntryPointFunc = "VSMain";
 
 	//シェーダーのピクセルシェーダーのエントリー関数名の指定
-	//modelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
-	//shadowModelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
+	modelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
+	shadowModelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
 
 	//スケルトンが存在しているときはスケルトンを初期化
 	if (skeletonPath != nullptr)
@@ -50,7 +50,7 @@ void SkinModelRender::Init(const char* modelPath, const char* skeletonPath, Anim
 	shadowModelInitData.m_modelUpAxis = enModelUpAxisZ;
 
 	//モデルの影を落とすために影のテクスチャを紐づける。
-	//modelInitData.m_expandShaderResoruceView = &PostEffectManager::GetInstance()->GetBlurShadowMap();
+	modelInitData.m_expandShaderResoruceView = &PostEffectManager::GetInstance()->GetBlurShadowMap();
 
 	//定数バッファをモデルに紐づける
 	modelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigDataSize();

@@ -3,6 +3,16 @@
 #include "system/system.h" 
 #include "Test.h"
 
+namespace
+{
+	const Vector3 LIGHTCAMERA_POSITION = { 0.0f, 2000.0f,0.0f };
+	const Vector3 LIGHTCAMERA_TARGET = { 0,0,0 };
+	const Vector3 LIGHTCAMERA_UP = { 1.0f,0.0f,0.0f };
+	const float LIGHTCAMERA_WIDTH = 2000.0f;
+	const float LIGHTCAMERA_HEIGHT = 2000.0f;
+	const int CAMERA_FAR = 100000;
+}
+
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
 ///////////////////////////////////////////////////////////////////
@@ -21,16 +31,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	//ライトマネージャーのインスタンスを作成
 	LightManager::CreateInstance();
-	//LightManager::GetInstance()->SetLightCameraPosition(LIGHTCAMERA_POSITION);
-	//LightManager::GetInstance()->SetLightCameraTarget(LIGHTCAMERA_TARGET);
-	//LightManager::GetInstance()->SetLightCameraUp(LIGHTCAMERA_UP);
-	//LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective); //enUpdateProjMatrixFunc_Ortho
-   /* LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
-	LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);*/
+	LightManager::GetInstance()->SetLightCameraPosition(LIGHTCAMERA_POSITION);
+	LightManager::GetInstance()->SetLightCameraTarget(LIGHTCAMERA_TARGET);
+	LightManager::GetInstance()->SetLightCameraUp(LIGHTCAMERA_UP);
+	LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective); //enUpdateProjMatrixFunc_Ortho
+    LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
+	LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);
 
 	PostEffectManager::CreateInstance();
 	//ブルームフラグ、シャドウフラグの順番
-	PostEffectManager::GetInstance()->Init(true, false);
+	PostEffectManager::GetInstance()->Init(true, true);
 
 	Test* testScene = NewGO<Test>(0, "testScene");
 

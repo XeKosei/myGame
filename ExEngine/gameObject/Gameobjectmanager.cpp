@@ -53,22 +53,22 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 
 	//TODO:暫定処理、フラグ含め別の形にしたい(らしい)
 	//影を先に描いてからモデルに描いた影を描き足すので先にシャドウマップを作る。
-	//PostEffectManager::GetInstance()->ShadowRender(rc);
+	PostEffectManager::GetInstance()->ShadowRender(rc);
 
 	//shadow
-	//if (PostEffectManager::GetInstance()->GetShadowFlag())
-	//{
-	//	rc.SetStep(RenderContext::eStep_RenderShadowMap);
-	//	//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
-	//	for (auto& goList : m_gameObjectListArray) {
-	//		for (auto& go : goList) {
-	//			go->RenderWrapper(rc, LightManager::GetInstance()->GetLightCamera());
-	//		}
-	//	}
-	//}
-	//PostEffectManager::GetInstance()->EndShadowRender(rc);
+	if (PostEffectManager::GetInstance()->GetShadowFlag())
+	{
+		rc.SetStep(RenderContext::eStep_RenderShadowMap);
+		//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+		for (auto& goList : m_gameObjectListArray) {
+			for (auto& go : goList) {
+				go->RenderWrapper(rc, LightManager::GetInstance()->GetLightCamera());
+			}
+		}
+	}
+	PostEffectManager::GetInstance()->EndShadowRender(rc);
 
-	////ポストエフェクト用。Render前の処理
+	//ポストエフェクト用。Render前の処理
 	PostEffectManager::GetInstance()->BeforeRender(rc);
 
 	LightManager::GetInstance()->UpdateEyePos();

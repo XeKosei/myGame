@@ -36,7 +36,7 @@ public:
 
 	Texture& GetShadowMap() { return m_shadowMap.GetRenderTargetTexture(); };
 
-	//Texture& GetBlurShadowMap() { return m_shadowBlur.GetBokeTexture(); };
+	Texture& GetBlurShadowMap() { return m_shadowBlur.GetBokeTexture(); };
 
 	//レンダリング前の処理
 	void BeforeRender(RenderContext& rc);
@@ -57,7 +57,7 @@ private:
 	Sprite m_bokeLuminanceSprite;//輝度抽出したものにブラーをかけたスプライト
 	GaussianBlur m_gaussianBlur[4];//ブラー
 
-	bool m_shadowMode = true;	//シャドウが有効かどうか
+	bool m_shadowMode = false;	//シャドウが有効かどうか
 	RenderTarget m_shadowMap;
 	GaussianBlur m_shadowBlur;
 };

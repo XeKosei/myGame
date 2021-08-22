@@ -8,26 +8,28 @@ bool Test::Start()
 
 	m_skin = NewGO<SkinModelRender>(0);
 	m_skin->Init("Assets/modelData/unityChan.tkm","Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
+	m_skin->SetPosition(m_skinPos);
+	m_skin->SetScale({ 1.0f,1.0f,1.0f });
 
-	m_skin->SetAnimationSpeed(1.0f);
-	m_skin->PlayAnimation(enAnimationClip_Idle);
+	//m_skin->SetAnimationSpeed(1.0f);
+	//m_skin->PlayAnimation(enAnimationClip_Idle);
 
 	m_dirLig[0] = NewGO<DirectionLight>(0);
 	m_dirLig[0]->SetDirection({ -1.0f, -1.0f, -1.0f });
-	m_dirLig[0]->SetColor({ 5.0f,5.0f,5.0f });
+	m_dirLig[0]->SetColor({ 0.5f,0.5f,0.5f });
 	m_dirLigNum++;
 
-	SkinModelRender* bigSkin = NewGO<SkinModelRender>(0);
-	bigSkin->Init("Assets/modelData/unityChan.tkm", "Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
-	bigSkin->SetPosition({0.0f,-200.0f, -100.0f});
-	bigSkin->SetScale({ 10.0f,10.0f,10.0f });
+	SkinModelRender* stage = NewGO<SkinModelRender>(0);
+	stage->Init("Assets/modelData/BuildingStage.tkm");
+	stage->SetPosition({0.0f,10.0f, 0.0f});
+	stage->SetScale({ 1.0f,1.0f,1.0f });
 
 	return true;
 }
 
 void Test::Update()
 {
-	//TestDirLig();
+	TestDirLig();
 	//TestPointLig();
 	//TestSpotLig();
 

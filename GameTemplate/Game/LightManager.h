@@ -139,6 +139,7 @@ public:
 
 			//ライトの番号も一つずつ詰めていく。
 			*m_dirLigNum[num + 1]--;
+			m_dirLigNum[num + 1] = nullptr;
 		}
 	}
 
@@ -190,6 +191,7 @@ public:
 
 			//ライトの番号も一つずつ詰めていく。
 			*m_pointLigNum[num + 1]--;
+			m_pointLigNum[num + 1] = nullptr;
 		}
 	}
 
@@ -241,6 +243,7 @@ public:
 
 			//ライトの番号も一つずつ詰めていく。
 			*m_spotLigNum[num + 1]--;
+			m_spotLigNum[num + 1] = nullptr;
 		}
 	}
 
@@ -308,7 +311,7 @@ public:
 
 	/// @brief 影の描画に使用するライトカメラの射影行列の更新方法を設定する。
 	/// @param func 射影行列の更新方法
-	void SetLightCameraUpdateProjectionMatixFunc(Camera::EnUpdateProjMatrixFunc func)
+	void SetLightCameraUpdateProjMatrixFunc(Camera::EnUpdateProjMatrixFunc func)
 	{
 		m_lightCamera.SetUpdateProjMatrixFunc(func);
 		m_lightCamera.Update();
