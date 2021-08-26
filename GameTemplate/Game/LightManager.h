@@ -331,7 +331,7 @@ public:
 	/// @param height ƒ‰ƒCƒgƒJƒƒ‰‚Ì‚‚³
 	void SetLightCameraHeight(const float& height)
 	{
-		m_lightCamera.SetWidth(height);
+		m_lightCamera.SetHeight(height);
 		m_lightCamera.Update();
 		m_ligCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
 	}

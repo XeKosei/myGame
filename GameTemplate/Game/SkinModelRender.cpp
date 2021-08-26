@@ -43,7 +43,7 @@ void SkinModelRender::Init(const char* modelPath, const char* skeletonPath, Anim
 
 	//カラーバッファのフォーマットを指定。
 	modelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	shadowModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	shadowModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32_FLOAT;
 
 	//モデルデータの上方向の軸を指定
 	modelInitData.m_modelUpAxis = enModelUpAxisZ;

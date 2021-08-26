@@ -11,7 +11,7 @@ class RenderContext;
 //これどうしたらいいんだろう。
 //どこかでインクルードの代わりみたいなことをやってるんだろうけど。
 //とりあえずこうしとく。
-class Camera;
+//class Camera;
 
 /*!
 	*@brief	ゲームオブジェクト。

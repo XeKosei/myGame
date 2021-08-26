@@ -21,6 +21,7 @@ bool Test::Start()
 
 	SkinModelRender* stage = NewGO<SkinModelRender>(0);
 	stage->Init("Assets/modelData/BuildingStage.tkm");
+	//stage->SetShadowCasterFlag(false);
 	stage->SetPosition({0.0f,10.0f, 0.0f});
 	stage->SetScale({ 1.0f,1.0f,1.0f });
 
