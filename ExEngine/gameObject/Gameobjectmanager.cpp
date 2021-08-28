@@ -73,6 +73,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 
 	LightManager::GetInstance()->UpdateEyePos();
 
+	rc.SetStep(RenderContext::eStep_Render);
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
 			go->RenderWrapper(rc, g_camera3D);
@@ -87,7 +88,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	//Level2D用　
 	//レベル2Dは全部スプライトなのでExecuteRenderにはいらないのでは?
 	//だがviewportをセットしないと画面が半分のままなのでセットはしてみる。
-	{
+	/*{
 		g_camera2D->SetWidth(g_graphicsEngine->GetFrameBufferWidth());
 
 		rc.SetStep(RenderContext::eStep_Render);
@@ -97,7 +98,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 				go->RenderWrapper(rc, g_camera3D);
 			}
 		}
-	}
+	}*/
 
 	//ポストエフェクト用。Render後の処理
 	PostEffectManager::GetInstance()->AfterRender(rc);
