@@ -35,7 +35,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	LightManager::GetInstance()->SetLightCameraTarget(LIGHTCAMERA_TARGET);
 	LightManager::GetInstance()->SetLightCameraUp(LIGHTCAMERA_UP);
 	LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Ortho);//enUpdateProjMatrixFunc_Perspective);
-   // LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
+    //LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
 	//LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);
 
 	PostEffectManager::CreateInstance();
@@ -54,7 +54,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	Sprite sprite;
 	sprite.Init(spriteInitData);
 
-	g_camera3D->SetPosition({0.0f, 300.0f, 1500.0f});
+	g_camera3D->SetPosition({0.0f, 300.0f, -1500.0f});
 
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！

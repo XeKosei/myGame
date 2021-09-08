@@ -34,8 +34,8 @@ void Test::Update()
 	//TestPointLig();
 	//TestSpotLig();
 
-	m_skinPos.x += g_pad[0]->GetLStickXF();
-	m_skinPos.y += g_pad[0]->GetLStickYF();
+	m_skinPos.x += g_pad[0]->GetLStickXF() * 10.0f;
+	m_skinPos.z += g_pad[0]->GetLStickYF() * 10.0f;
 	m_skin->SetPosition(m_skinPos);
 }
 
