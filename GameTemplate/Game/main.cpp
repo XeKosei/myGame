@@ -53,7 +53,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	Sprite sprite;
 	sprite.Init(spriteInitData);
-
+	
 	g_camera3D->SetPosition({0.0f, 300.0f, -1500.0f});
 
 	//////////////////////////////////////

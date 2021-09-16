@@ -171,5 +171,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	////ここまで平行光源の深度チェックのテスト用。
 	//return float4(depth,depth*depth,0.0f,1.0f);
 
-	return float4(0.5f,0.5f,0.5f,1.0f);
+	//return float4(0.5f,0.5f,0.5f,1.0f);
+
+	return float4(psIn.pos.z, psIn.pos.z, psIn.pos.z, 1.0f);
 }

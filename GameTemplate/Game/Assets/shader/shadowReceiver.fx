@@ -384,8 +384,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	shadowMapUV *= float2(0.5f, -0.5f);
 	shadowMapUV += 0.5f;
 
-	float zInLVP = psIn.posInLVP.z;
-	float3 shadowMap = 1.0f;
+	//float zInLVP = psIn.posInLVP.z;
+	float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
 
 	if( shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
 	{
@@ -417,8 +417,10 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		//	finalColor.xyz = lerp(shadowColor,finalColor.xyz,lit_factor);
 		//}
 
-		shadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV);
+		float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
+		if (zInLVP > zInShadowMap) {
+			finalColor.xyz *= 0.5f;
+		}
 	}
-	finalColor.xyz *= shadowMap;
 	return finalColor;
 }
