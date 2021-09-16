@@ -10,6 +10,7 @@ bool Test::Start()
 	m_skin->Init("Assets/modelData/unityChan.tkm","Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
 	m_skin->SetPosition(m_skinPos);
 	m_skin->SetScale({ 1.0f,1.0f,1.0f });
+	//m_skin->SetShadowCasterFlag(false);
 
 	//m_skin->SetAnimationSpeed(1.0f);
 	//m_skin->PlayAnimation(enAnimationClip_Idle);
@@ -21,7 +22,7 @@ bool Test::Start()
 
 	SkinModelRender* stage = NewGO<SkinModelRender>(0);
 	stage->Init("Assets/modelData/BuildingStage.tkm");
-	//stage->SetShadowCasterFlag(false);
+	stage->SetShadowCasterFlag(false);
 	stage->SetPosition({0.0f,10.0f, 0.0f});
 	stage->SetScale({ 1.0f,1.0f,1.0f });
 

@@ -130,46 +130,46 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 	//ここから平行光源の深度チェックのテスト用。
 
-	//ライトの向きを取得。
-	float3 cameraDir = lightCameraDir;
-	//正規化されてるはずだけど、念の為。
-	cameraDir = normalize(cameraDir);
+	////ライトの向きを取得。
+	//float3 cameraDir = lightCameraDir;
+	////正規化されてるはずだけど、念の為。
+	//cameraDir = normalize(cameraDir);
 
-	float3 axisX = {1.0f,0.0f,0.0f};
+	//float3 axisX = {1.0f,0.0f,0.0f};
 
-	float3 lightCameraAnotherAxis = cross(axisX,cameraDir);
+	//float3 lightCameraAnotherAxis = cross(axisX,cameraDir);
 
-	//axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
+	////axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
 
-	float3 start = psIn.worldPos;
+	//float3 start = psIn.worldPos;
 
-	//スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
-	float3 end = psIn.worldPos + -100 * cameraDir;
+	////スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
+	//float3 end = psIn.worldPos + -100 * cameraDir;
 
-	//ポリゴンと線分の交差判定を参考に、
-	//仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
-	//3点でできる平面との交点を求めていく。
+	////ポリゴンと線分の交差判定を参考に、
+	////仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
+	////3点でできる平面との交点を求めていく。
 
-	float3 toStart = start - lightCameraPos;
+	//float3 toStart = start - lightCameraPos;
 
-	float3 toEnd = end - lightCameraPos;
+	//float3 toEnd = end - lightCameraPos;
 
-	float a = dot(cameraDir,toStart);
+	//float a = dot(cameraDir,toStart);
 
-	float3 cameraDirRev = -cameraDir;
+	//float3 cameraDirRev = -cameraDir;
 
-	float b = dot(cameraDirRev,toEnd);
+	//float b = dot(cameraDirRev,toEnd);
 
-	//crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
-	float3 crossPoint = toStart - toEnd;
-	crossPoint *= b / (a+b);
-	crossPoint += end;
+	////crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
+	//float3 crossPoint = toStart - toEnd;
+	//crossPoint *= b / (a+b);
+	//crossPoint += end;
 
-	//crossからの長さで平行光源でもしっかり深度がわかる(はず)
-	float depth = length(psIn.worldPos - crossPoint)/2000.0f;
+	////crossからの長さで平行光源でもしっかり深度がわかる(はず)
+	//float depth = length(psIn.worldPos - crossPoint)/2000.0f;
 
-	//ここまで平行光源の深度チェックのテスト用。
-	return float4(depth,depth*depth,0.0f,1.0f);
+	////ここまで平行光源の深度チェックのテスト用。
+	//return float4(depth,depth*depth,0.0f,1.0f);
 
-	//return float4(0.5f,0.5f,0.5f,1.0f);
+	return float4(0.5f,0.5f,0.5f,1.0f);
 }

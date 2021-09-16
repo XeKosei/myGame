@@ -139,47 +139,47 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 
 	psIn.posInLVP = mul(mLVP,float4(psIn.worldPos, 1.0f));
 
-	//本来の比較用の距離はこっち
-	//psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
+	////本来の比較用の距離はこっち
+	////psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
 
-	//ここから平行光源の深度チェックのテスト用。
+	////ここから平行光源の深度チェックのテスト用。
 
-	//ライトの向きを取得。
-	float3 cameraDir = lightCameraDir;
-	//正規化されてるはずだけど、念の為。
-	cameraDir = normalize(cameraDir);
+	////ライトの向きを取得。
+	//float3 cameraDir = lightCameraDir;
+	////正規化されてるはずだけど、念の為。
+	//cameraDir = normalize(cameraDir);
 
-	float3 axisX = {1.0f,0.0f,0.0f};
+	//float3 axisX = {1.0f,0.0f,0.0f};
 
-	float3 lightCameraAnotherAxis = cross(axisX,cameraDir);
+	//float3 lightCameraAnotherAxis = cross(axisX,cameraDir);
 
-	//axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
+	////axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
 
-	float3 start = psIn.worldPos;
+	//float3 start = psIn.worldPos;
 
-	//スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
-	float3 end = psIn.worldPos + -100 * cameraDir;
+	////スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
+	//float3 end = psIn.worldPos + -100 * cameraDir;
 
-	//ポリゴンと線分の交差判定を参考に、
-	//仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
-	//3点でできる平面との交点を求めていく。
+	////ポリゴンと線分の交差判定を参考に、
+	////仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
+	////3点でできる平面との交点を求めていく。
 
-	float3 toStart = start - lightCameraPos;
+	//float3 toStart = start - lightCameraPos;
 
-	float3 toEnd = end - lightCameraPos;
+	//float3 toEnd = end - lightCameraPos;
 
-	float a = dot(cameraDir,toStart);
+	//float a = dot(cameraDir,toStart);
 
-	float3 cameraDirRev = -cameraDir;
+	//float3 cameraDirRev = -cameraDir;
 
-	float b = dot(cameraDirRev,toEnd);
+	//float b = dot(cameraDirRev,toEnd);
 
-	//crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
-	float3 crossPoint = toStart - toEnd;
-	crossPoint *= b / (a+b);
-	crossPoint += end;
+	////crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
+	//float3 crossPoint = toStart - toEnd;
+	//crossPoint *= b / (a+b);
+	//crossPoint += end;
 
-	psIn.posInLVP.z = length(psIn.worldPos - crossPoint)/2000.0f;
+	//psIn.posInLVP.z = length(psIn.worldPos - crossPoint)/2000.0f;
 	//ここまで平行光源の深度チェックのテスト用。
 	return psIn;
 }
@@ -385,41 +385,40 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	shadowMapUV += 0.5f;
 
 	float zInLVP = psIn.posInLVP.z;
-	//float3 shadowMap = 1.0f;
+	float3 shadowMap = 1.0f;
 
 	if( shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
 	{
-		//シャドウマップからライトからの距離、距離の2乗をサンプリング
-		float2 shadowValue = g_shadowMap.Sample(g_sampler,shadowMapUV).xy;
+		////シャドウマップからライトからの距離、距離の2乗をサンプリング
+		//float2 shadowValue = g_shadowMap.Sample(g_sampler,shadowMapUV).xy;
 
-		//まずこのピクセルが遮蔽されているか調べる
-		//zInLVPはライトから影が描かれるモデルへの距離、shadowValue.rはライトから影を落とすモデルへの距離
-		//影が描かれるモデルへの距離より影を落とすモデルへの距離が短いなら影が描かれるモデルは遮蔽されている。
-		if(zInLVP > shadowValue.r)
-		{
-			//チェビシェフの不等式を使う
-			float depth_sq = shadowValue.x * shadowValue.x;
+		////まずこのピクセルが遮蔽されているか調べる
+		////zInLVPはライトから影が描かれるモデルへの距離、shadowValue.rはライトから影を落とすモデルへの距離
+		////影が描かれるモデルへの距離より影を落とすモデルへの距離が短いなら影が描かれるモデルは遮蔽されている。
+		//if(zInLVP > shadowValue.r)
+		//{
+		//	//チェビシェフの不等式を使う
+		//	float depth_sq = shadowValue.x * shadowValue.x;
 
-			//このグループの分散具合を求める
-			//分散が大きいほど、varianceの値は大きくなる。
-			float variance = min(max(shadowValue.y - depth_sq,0.0001f),1.0f);
+		//	//このグループの分散具合を求める
+		//	//分散が大きいほど、varianceの値は大きくなる。
+		//	float variance = min(max(shadowValue.y - depth_sq,0.0001f),1.0f);
 
-			//このピクセルのライトから見た深度値とシャドウマップの平均の深度値の差を求める。
-			float md = zInLVP - shadowValue.x;
+		//	//このピクセルのライトから見た深度値とシャドウマップの平均の深度値の差を求める。
+		//	float md = zInLVP - shadowValue.x;
 
-			//光が届く確率を求める
-			float lit_factor = variance / (variance + md * md);
+		//	//光が届く確率を求める
+		//	float lit_factor = variance / (variance + md * md);
 
-			//影の色を求める
-			float3 shadowColor = finalColor.xyz * 0.3f;
-			
-			//光が当たる確率を使って通常カラーとシャドウカラーを線形補間
-			finalColor.xyz = lerp(shadowColor,finalColor.xyz,lit_factor);
-		}
+		//	//影の色を求める
+		//	float3 shadowColor = finalColor.xyz * 0.3f;
+		//	
+		//	//光が当たる確率を使って通常カラーとシャドウカラーを線形補間
+		//	finalColor.xyz = lerp(shadowColor,finalColor.xyz,lit_factor);
+		//}
 
-		
-		//shadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV);
+		shadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV);
 	}
-	//finalColor.xyz *= shadowMap;
+	finalColor.xyz *= shadowMap;
 	return finalColor;
 }
