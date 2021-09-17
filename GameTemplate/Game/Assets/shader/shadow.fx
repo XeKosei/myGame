@@ -126,7 +126,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 {
 	//ライトからの距離
 	//本来の比較用の距離はこっち
-	//float depth = length(psIn.worldPos - lightCameraPos)/1000.0f;//深度値を1000で割って0.0～1.0にする
+	float depth = length(psIn.worldPos - lightCameraPos)/1000.0f;//深度値を1000で割って0.0～1.0にする
 
 	//ここから平行光源の深度チェックのテスト用。
 
@@ -169,9 +169,9 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	//float depth = length(psIn.worldPos - crossPoint)/2000.0f;
 
 	////ここまで平行光源の深度チェックのテスト用。
-	//return float4(depth,depth*depth,0.0f,1.0f);
+	return float4(depth,depth*depth,0.0f,1.0f);
 
 	//return float4(0.5f,0.5f,0.5f,1.0f);
 
-	return float4(psIn.pos.z, psIn.pos.z, psIn.pos.z, 1.0f);
+	//return float4(psIn.pos.z, psIn.pos.z, psIn.pos.z, 1.0f);
 }

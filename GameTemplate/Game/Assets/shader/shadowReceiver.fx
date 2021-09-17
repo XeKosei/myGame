@@ -140,7 +140,7 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 	psIn.posInLVP = mul(mLVP,float4(psIn.worldPos, 1.0f));
 
 	////本来の比較用の距離はこっち
-	////psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
+	psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
 
 	////ここから平行光源の深度チェックのテスト用。
 
@@ -379,48 +379,47 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	finalColor *= albedoColor;
 
 	//影
-
 	float2 shadowMapUV = psIn.posInLVP.xy / psIn.posInLVP.w;
 	shadowMapUV *= float2(0.5f, -0.5f);
 	shadowMapUV += 0.5f;
 
-	//float zInLVP = psIn.posInLVP.z;
-	float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
+	float zInLVP = psIn.posInLVP.z;
+	//float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
 
 	if( shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
 	{
 		////シャドウマップからライトからの距離、距離の2乗をサンプリング
-		//float2 shadowValue = g_shadowMap.Sample(g_sampler,shadowMapUV).xy;
+		float2 shadowValue = g_shadowMap.Sample(g_sampler,shadowMapUV).xy;
 
-		////まずこのピクセルが遮蔽されているか調べる
-		////zInLVPはライトから影が描かれるモデルへの距離、shadowValue.rはライトから影を落とすモデルへの距離
-		////影が描かれるモデルへの距離より影を落とすモデルへの距離が短いなら影が描かれるモデルは遮蔽されている。
-		//if(zInLVP > shadowValue.r)
-		//{
-		//	//チェビシェフの不等式を使う
-		//	float depth_sq = shadowValue.x * shadowValue.x;
+		//まずこのピクセルが遮蔽されているか調べる
+		//zInLVPはライトから影が描かれるモデルへの距離、shadowValue.rはライトから影を落とすモデルへの距離
+		//影が描かれるモデルへの距離より影を落とすモデルへの距離が短いなら影が描かれるモデルは遮蔽されている。
+		if(zInLVP > shadowValue.r && zInLVP <= 1.0f)
+		{
+			//チェビシェフの不等式を使う
+			float depth_sq = shadowValue.x * shadowValue.x;
 
-		//	//このグループの分散具合を求める
-		//	//分散が大きいほど、varianceの値は大きくなる。
-		//	float variance = min(max(shadowValue.y - depth_sq,0.0001f),1.0f);
+			//このグループの分散具合を求める
+			//分散が大きいほど、varianceの値は大きくなる。
+			float variance = min(max(shadowValue.y - depth_sq,0.0001f),1.0f);
 
-		//	//このピクセルのライトから見た深度値とシャドウマップの平均の深度値の差を求める。
-		//	float md = zInLVP - shadowValue.x;
+			//このピクセルのライトから見た深度値とシャドウマップの平均の深度値の差を求める。
+			float md = zInLVP - shadowValue.x;
 
-		//	//光が届く確率を求める
-		//	float lit_factor = variance / (variance + md * md);
+			//光が届く確率を求める
+			float lit_factor = variance / (variance + md * md);
 
-		//	//影の色を求める
-		//	float3 shadowColor = finalColor.xyz * 0.3f;
-		//	
-		//	//光が当たる確率を使って通常カラーとシャドウカラーを線形補間
-		//	finalColor.xyz = lerp(shadowColor,finalColor.xyz,lit_factor);
-		//}
+			//影の色を求める
+			float3 shadowColor = finalColor.xyz * 0.3f;
+			
+			//光が当たる確率を使って通常カラーとシャドウカラーを線形補間
+			finalColor.xyz = lerp(shadowColor,finalColor.xyz,lit_factor);
+		}
 
-		float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
+		/*float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
 		if (zInLVP > zInShadowMap) {
 			finalColor.xyz *= 0.5f;
-		}
+		}*/
 	}
 	return finalColor;
 }

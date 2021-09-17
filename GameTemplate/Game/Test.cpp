@@ -38,6 +38,10 @@ void Test::Update()
 	m_skinPos.x += g_pad[0]->GetLStickXF() * 10.0f;
 	m_skinPos.z += g_pad[0]->GetLStickYF() * 10.0f;
 	m_skin->SetPosition(m_skinPos);
+
+	m_cameraPos.x += g_pad[0]->GetRStickXF() * 10.0f;
+	m_cameraPos.z += g_pad[0]->GetRStickYF() * 10.0f;
+	g_camera3D->SetPosition(m_cameraPos);
 }
 
 void Test::TestDirLig()
