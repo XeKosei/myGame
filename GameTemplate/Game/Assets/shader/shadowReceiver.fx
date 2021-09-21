@@ -140,46 +140,32 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 	psIn.posInLVP = mul(mLVP,float4(psIn.worldPos, 1.0f));
 
 	////本来の比較用の距離はこっち
-	psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
+	//psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
+	//ここから平行光源の深度チェックのテスト用。
+	//ライトの向きを取得。
+	float3 cameraDir = lightCameraDir;
+	//正規化されてるはずだけど、念の為。
+	cameraDir = normalize(cameraDir);
+	float3 axisX = {1.0f,0.0f,0.0f};
+	float3 lightCameraAnotherAxis = cross(axisX,cameraDir);
+	//axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
+	float3 start = psIn.worldPos;
+	//スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
+	float3 end = psIn.worldPos + -100 * cameraDir;
+	//ポリゴンと線分の交差判定を参考に、
+	//仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
+	//3点でできる平面との交点を求めていく。
+	float3 toStart = start - lightCameraPos;
+	float3 toEnd = end - lightCameraPos;
+	float a = dot(cameraDir,toStart);
+	float3 cameraDirRev = -cameraDir;
+	float b = dot(cameraDirRev,toEnd);
+	//crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
+	float3 crossPoint = toStart - toEnd;
+	crossPoint *= b / (a+b);
+	crossPoint += end;
 
-	////ここから平行光源の深度チェックのテスト用。
-
-	////ライトの向きを取得。
-	//float3 cameraDir = lightCameraDir;
-	////正規化されてるはずだけど、念の為。
-	//cameraDir = normalize(cameraDir);
-
-	//float3 axisX = {1.0f,0.0f,0.0f};
-
-	//float3 lightCameraAnotherAxis = cross(axisX,cameraDir);
-
-	////axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
-
-	//float3 start = psIn.worldPos;
-
-	////スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
-	//float3 end = psIn.worldPos + -100 * cameraDir;
-
-	////ポリゴンと線分の交差判定を参考に、
-	////仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
-	////3点でできる平面との交点を求めていく。
-
-	//float3 toStart = start - lightCameraPos;
-
-	//float3 toEnd = end - lightCameraPos;
-
-	//float a = dot(cameraDir,toStart);
-
-	//float3 cameraDirRev = -cameraDir;
-
-	//float b = dot(cameraDirRev,toEnd);
-
-	////crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
-	//float3 crossPoint = toStart - toEnd;
-	//crossPoint *= b / (a+b);
-	//crossPoint += end;
-
-	//psIn.posInLVP.z = length(psIn.worldPos - crossPoint)/2000.0f;
+	psIn.posInLVP.z = length(psIn.worldPos - crossPoint)/2000.0f;
 	//ここまで平行光源の深度チェックのテスト用。
 	return psIn;
 }
@@ -383,12 +369,12 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	shadowMapUV *= float2(0.5f, -0.5f);
 	shadowMapUV += 0.5f;
 
-	float zInLVP = psIn.posInLVP.z;
-	//float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
+	//float zInLVP = psIn.posInLVP.z;
+	float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
 
 	if( shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
 	{
-		////シャドウマップからライトからの距離、距離の2乗をサンプリング
+		//シャドウマップからライトからの距離、距離の2乗をサンプリング
 		float2 shadowValue = g_shadowMap.Sample(g_sampler,shadowMapUV).xy;
 
 		//まずこのピクセルが遮蔽されているか調べる
@@ -398,17 +384,13 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		{
 			//チェビシェフの不等式を使う
 			float depth_sq = shadowValue.x * shadowValue.x;
-
 			//このグループの分散具合を求める
 			//分散が大きいほど、varianceの値は大きくなる。
 			float variance = min(max(shadowValue.y - depth_sq,0.0001f),1.0f);
-
 			//このピクセルのライトから見た深度値とシャドウマップの平均の深度値の差を求める。
 			float md = zInLVP - shadowValue.x;
-
 			//光が届く確率を求める
 			float lit_factor = variance / (variance + md * md);
-
 			//影の色を求める
 			float3 shadowColor = finalColor.xyz * 0.3f;
 			
@@ -416,7 +398,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 			finalColor.xyz = lerp(shadowColor,finalColor.xyz,lit_factor);
 		}
 
-		/*float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
+		/*
+		float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
 		if (zInLVP > zInShadowMap) {
 			finalColor.xyz *= 0.5f;
 		}*/

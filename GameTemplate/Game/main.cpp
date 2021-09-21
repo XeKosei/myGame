@@ -8,8 +8,8 @@ namespace
 	const Vector3 LIGHTCAMERA_POSITION = { 0.0f, 300.0f,0.0f };
 	const Vector3 LIGHTCAMERA_TARGET = { 0,0,0 };
 	const Vector3 LIGHTCAMERA_UP = { 1.0f,0.0f,0.0f };
-	const float LIGHTCAMERA_WIDTH = 10000.0f;
-	const float LIGHTCAMERA_HEIGHT = 10000.0f;
+	const float LIGHTCAMERA_WIDTH = 1000.0f;
+	const float LIGHTCAMERA_HEIGHT = 1000.0f;
 	const int CAMERA_FAR = 100000;
 }
 
@@ -35,8 +35,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	LightManager::GetInstance()->SetLightCameraTarget(LIGHTCAMERA_TARGET);
 	LightManager::GetInstance()->SetLightCameraUp(LIGHTCAMERA_UP);
 	LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Ortho);//enUpdateProjMatrixFunc_Perspective);
-    //LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
-	//LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);
+    LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
+	LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);
 
 	PostEffectManager::CreateInstance();
 	//ブルームフラグ、シャドウフラグの順番
