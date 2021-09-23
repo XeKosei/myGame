@@ -31,6 +31,7 @@ private:
 
 	enum {
 		enAnimationClip_Idle,
+		enAnimationClip_walk,
 		enAnimationClip_num,  //列挙内で使う要素の数を表すダミー
 	};
 

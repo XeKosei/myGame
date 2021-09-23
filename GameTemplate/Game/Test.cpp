@@ -5,6 +5,8 @@ bool Test::Start()
 {
 	animationClips[enAnimationClip_Idle].Load("Assets/animData/Idle.tka");
 	animationClips[enAnimationClip_Idle].SetLoopFlag(true);	//ループモーションにする。
+	animationClips[enAnimationClip_walk].Load("Assets/animData/walk.tka");
+	animationClips[enAnimationClip_walk].SetLoopFlag(true);	//ループモーションにする。
 
 	m_skin = NewGO<SkinModelRender>(0);
 	m_skin->Init("Assets/modelData/unityChan.tkm","Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
@@ -13,7 +15,7 @@ bool Test::Start()
 	//m_skin->SetShadowCasterFlag(false);
 
 	//m_skin->SetAnimationSpeed(1.0f);
-	//m_skin->PlayAnimation(enAnimationClip_Idle);
+
 
 	m_dirLig[0] = NewGO<DirectionLight>(0);
 	m_dirLig[0]->SetDirection({ -1.0f, -1.0f, -1.0f });
@@ -42,6 +44,8 @@ void Test::Update()
 	m_cameraPos.x += g_pad[0]->GetRStickXF() * 10.0f;
 	m_cameraPos.z += g_pad[0]->GetRStickYF() * 10.0f;
 	g_camera3D->SetPosition(m_cameraPos);
+
+	m_skin->PlayAnimation(enAnimationClip_walk);
 }
 
 void Test::TestDirLig()
