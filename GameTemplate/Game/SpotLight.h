@@ -22,7 +22,9 @@ public:
 	int GetLigDataSize() { return sizeof(m_spotLigData); };
 
 	//スポットライトの位置を設定
-	void SetPosition(Vector3 pos) { m_spotLigData.ligPos = pos; };
+	void SetPosition(Vector3 pos) { 
+		m_spotLigData.ligPos = pos; 
+	};
 	//スポットライトの位置を取得
 	Vector3 GetPosition() { return m_spotLigData.ligPos; };
 

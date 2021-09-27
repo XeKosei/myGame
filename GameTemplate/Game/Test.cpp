@@ -22,6 +22,14 @@ bool Test::Start()
 	m_dirLig[0]->SetColor({ 0.5f,0.5f,0.5f });
 	m_dirLigNum++;
 
+	m_spotLig[0] = NewGO<SpotLight>(0);
+	m_spotLig[0]->SetPosition(m_skinPos);
+	m_spotLig[0]->SetDirection({ -1.0f, 0.0f,0.0f});
+	m_spotLig[0]->SetColor({ 10.0f,10.0f,10.0f });
+	m_spotLig[m_spotLigNum]->SetRange(1000.0f);
+	m_spotLig[m_spotLigNum]->SetAngleDeg(90.0f);
+	m_spotLigNum++;
+
 	SkinModelRender* stage = NewGO<SkinModelRender>(0);
 	stage->Init("Assets/modelData/BuildingStage.tkm");
 	stage->SetShadowCasterFlag(false);
@@ -45,7 +53,8 @@ void Test::Update()
 	m_cameraPos.z += g_pad[0]->GetRStickYF() * 10.0f;
 	g_camera3D->SetPosition(m_cameraPos);
 
-	m_skin->PlayAnimation(enAnimationClip_walk);
+	m_spotLig[0]->SetPosition({ m_skinPos.x + 30.0f, m_skinPos.y, m_skinPos.z });
+	//m_skin->PlayAnimation(enAnimationClip_walk);
 }
 
 void Test::TestDirLig()
@@ -81,8 +90,8 @@ void Test::TestPointLig()
 		{
 			m_pointLig[m_pointLigNum] = NewGO<PointLight>(0);
 			m_pointLig[m_pointLigNum]->SetPosition(m_ligPos);
-			m_pointLig[m_pointLigNum]->SetColor({ 100.0f,100.0f,100.0f });
-			m_pointLig[m_pointLigNum]->SetRange(50.0f);
+			m_pointLig[m_pointLigNum]->SetColor({ 1.0f,1.0f,1.0f });
+			m_pointLig[m_pointLigNum]->SetRange(5000.0f);
 			m_pointLigNum++;
 		}
 	}

@@ -2,7 +2,7 @@
 #include "Model.h"
 #include "Material.h"
 
-void Model::Init(const ModelInitData& initData)
+void Model::Init(ModelInitData& initData)
 {
 	MY_ASSERT(
 		initData.m_fxFilePath, 

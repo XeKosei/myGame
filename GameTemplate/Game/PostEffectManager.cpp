@@ -82,6 +82,15 @@ void PostEffectManager::Init(bool bloomMode, bool shadowMode)
 		//VSM用にテクスチャをぼかす。
 		m_shadowBlur.Init(&m_shadowMap.GetRenderTargetTexture());
 	}
+	//スポットライト用のマップの作成
+	m_spotLightMap.Create(
+		1280,
+		720,
+		1,
+		1,
+		DXGI_FORMAT_R32G32_FLOAT,
+		DXGI_FORMAT_D32_FLOAT
+	);
 
 	//最終的な画面に出力されるスプライト
 	SpriteInitData copyToBufferSpriteInitData;
@@ -125,6 +134,18 @@ void PostEffectManager::EndShadowRender(RenderContext& rc)
 		normalRect.bottom = 720;
 		rc.SetScissorRect(normalRect);
 	}
+}
+
+void PostEffectManager::SpotLightRender(RenderContext& rc)
+{
+	rc.WaitUntilToPossibleSetRenderTarget(m_spotLightMap);
+	rc.SetRenderTargetAndViewport(m_spotLightMap);
+	rc.ClearRenderTargetView(m_spotLightMap.GetRTVCpuDescriptorHandle(), m_spotLightMap.GetRTVClearColor());
+	rc.ClearDepthStencilView(m_spotLightMap.GetDSVCpuDescriptorHandle(), m_spotLightMap.GetDSVClearValue());
+}
+void PostEffectManager::EndSpotLightRender(RenderContext& rc)
+{
+	rc.WaitUntilFinishDrawingToRenderTarget(m_spotLightMap);
 }
 
 //レンダリング前の処理

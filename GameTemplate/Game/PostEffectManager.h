@@ -46,6 +46,9 @@ public:
 	void ShadowRender(RenderContext& rc);
 	void EndShadowRender(RenderContext& rc);
 
+	void SpotLightRender(RenderContext& rc);
+	void EndSpotLightRender(RenderContext& rc);
+
 private:
 	RenderTarget m_mainRenderTarget;
 	Sprite m_copyToFrameBufferSprite;//画面に表示する最終結果のスプライト
@@ -59,6 +62,7 @@ private:
 
 	bool m_shadowMode = false;	//シャドウが有効かどうか
 	RenderTarget m_shadowMap;
+	RenderTarget m_spotLightMap;
 	GaussianBlur m_shadowBlur;
 };
 

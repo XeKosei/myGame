@@ -68,6 +68,17 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	}
 	PostEffectManager::GetInstance()->EndShadowRender(rc);
 
+	//スポットライト用のモデルを描く。
+	PostEffectManager::GetInstance()->SpotLightRender(rc);
+	rc.SetStep(RenderContext::eStep_RenderSpotLightMap);
+		//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+	for (auto& goList : m_gameObjectListArray) {
+		for (auto& go : goList) {
+			go->RenderWrapper(rc, LightManager::GetInstance()->GetSpotLightCamera());
+		}
+	}
+	PostEffectManager::GetInstance()->EndSpotLightRender(rc);
+
 	//ポストエフェクト用。Render前の処理
 	PostEffectManager::GetInstance()->BeforeRender(rc);
 

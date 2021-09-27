@@ -46,8 +46,12 @@ private:
 
 	Camera m_lightCamera;	//シャドウマップ用のライトの位置のカメラ。テスト用
 
+	LigCameraDatas m_spotLigCameraData;
+	int m_spotLigCameraDataSize = sizeof(m_spotLigCameraData);
+	Camera m_spotLightCamera;	//スポットライトの光を描画する用のスポットライトの位置のカメラ
+
 	//ライトの番号を管理するポインタ
-	int* m_dirLigNum[DIRECTIONLIGHT_NUMBER_MAX] = {nullptr,nullptr, nullptr, nullptr, nullptr};
+	int* m_dirLigNum[DIRECTIONLIGHT_NUMBER_MAX] = { nullptr,nullptr, nullptr, nullptr, nullptr };
 	int* m_pointLigNum[POINTLIGHT_NUMBER_MAX] = {
 		nullptr,nullptr, nullptr, nullptr, nullptr,nullptr,nullptr, nullptr, nullptr, nullptr,
 		nullptr,nullptr, nullptr, nullptr, nullptr,nullptr,nullptr, nullptr, nullptr, nullptr
@@ -78,7 +82,7 @@ public:
 
 	/// @brief ライトマネージャーのインスタンスを取得する。
 	static LightManager* GetInstance() { return m_instance; };
-	
+
 	/// @brief ライトのデータの塊を取得する(定数バッファに渡す用)
 	/// @return 全ライトのデータ
 	LigDatas* GetLigDatas() { return &m_ligData; };
@@ -113,7 +117,7 @@ public:
 		{
 			MessageBoxA(nullptr, "ディレクションライトの数が最大数を超えています。\n", "エラー", MB_OK);
 		}
-		
+
 		//新しく作られたディレクションライトのデータを配列の空きの先頭に格納する。
 		m_ligData.directionLight[m_ligData.createdDirLigTotal] = *newDirLigData;
 	}
@@ -259,7 +263,7 @@ public:
 	}
 
 	//影用//////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
 	/// @brief 影の描画に使用するライトカメラのデータの塊を取得する(定数バッファに渡す用)
 	/// @return ライトカメラのデータ
 	LigCameraDatas* GetLigCameraDatas() { return &m_ligCameraData; };
@@ -267,7 +271,7 @@ public:
 	/// @brief 影の描画に使用するライトカメラのデータの塊のサイズを取得する(定数バッファに渡す用)
 	/// @return 
 	int GetLigCameraDataSize() { return m_ligCameraDataSize; };
-	
+
 	/// @brief 影の描画に使用するライトカメラを取得
 	/// @return ライトカメラ
 	Camera* GetLightCamera()
@@ -335,5 +339,83 @@ public:
 		m_lightCamera.Update();
 		m_ligCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
 	}
-};
 
+	//スポットライトのカメラ用//////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/// @brief スポットライトに使用するライトカメラのデータの塊を取得する(定数バッファに渡す用)
+	/// @return ライトカメラのデータ
+	LigCameraDatas* GetSpotLigCameraDatas() { return &m_spotLigCameraData; };
+
+	/// @brief スポットライトに使用するライトカメラのデータの塊のサイズを取得する(定数バッファに渡す用)
+	/// @return 
+	int GetSpotLigCameraDataSize() { return m_spotLigCameraDataSize; };
+
+	/// @brief スポットライトに使用するライトカメラを取得
+	/// @return ライトカメラ
+	Camera* GetSpotLightCamera()
+	{
+		return &m_spotLightCamera;
+	}
+
+	/// @brief スポットライトに使用するライトカメラの座標を指定する。
+	/// @param pos ライトカメラの座標
+	void SetSpotLightCameraPosition(const Vector3& pos)
+	{
+		m_spotLightCamera.SetPosition(pos);
+		m_spotLightCamera.Update();
+		m_spotLigCameraData.lightCameraPosition = pos;
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+
+		m_spotLigCameraData.lightCameraDirection = m_lightCamera.GetTarget() - m_lightCamera.GetPosition();
+		m_spotLigCameraData.lightCameraDirection.Normalize();
+	}
+
+	/// @briefスポットライトに使用するライトカメラのターゲットの座標を指定する。
+	/// @param targetPos ライトカメラのターゲットの座標
+	void SetSpotLightCameraTarget(const Vector3& targetPos)
+	{
+		m_spotLightCamera.SetTarget(targetPos);
+		m_spotLightCamera.Update();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+
+		m_spotLigCameraData.lightCameraDirection = m_lightCamera.GetTarget() - m_lightCamera.GetPosition();
+		m_spotLigCameraData.lightCameraDirection.Normalize();
+	}
+
+	/// @brief スポットライトに使用するライトカメラの上方向を指定する。
+	/// @param up カメラの上方向のベクトル
+	void SetSpotLightCameraUp(const Vector3& up)
+	{
+		m_spotLightCamera.SetUp(up);
+		m_spotLightCamera.Update();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+	}
+
+	/// @brief スポットライトに使用するライトカメラの射影行列の更新方法を設定する。
+	/// @param func 射影行列の更新方法
+	void SetSpotLightCameraUpdateProjMatrixFunc(Camera::EnUpdateProjMatrixFunc func)
+	{
+		m_spotLightCamera.SetUpdateProjMatrixFunc(func);
+		m_spotLightCamera.Update();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+	}
+
+	/// @brief スポットライトに使用するライトカメラの横幅を指定する(並行投影限定)
+	/// @param width ライトカメラの横幅
+	void SetSpotLightCameraWidth(const float& width)
+	{
+		m_spotLightCamera.SetWidth(width);
+		m_spotLightCamera.Update();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+	}
+
+	/// @brief 影の描画に使用するライトカメラの高さを指定する(並行投影限定)
+	/// @param height ライトカメラの高さ
+	void SetSpotLightCameraHeight(const float& height)
+	{
+		m_spotLightCamera.SetHeight(height);
+		m_spotLightCamera.Update();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+	}
+
+};
