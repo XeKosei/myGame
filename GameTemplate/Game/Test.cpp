@@ -27,7 +27,7 @@ bool Test::Start()
 	m_spotLig[0]->SetDirection({ -1.0f, 0.0f,0.0f});
 	m_spotLig[0]->SetColor({ 10.0f,10.0f,10.0f });
 	m_spotLig[m_spotLigNum]->SetRange(1000.0f);
-	m_spotLig[m_spotLigNum]->SetAngleDeg(90.0f);
+	m_spotLig[m_spotLigNum]->SetAngleDeg(20.0f);
 	m_spotLigNum++;
 
 	SkinModelRender* stage = NewGO<SkinModelRender>(0);
@@ -45,16 +45,33 @@ void Test::Update()
 	//TestPointLig();
 	//TestSpotLig();
 
-	m_skinPos.x += g_pad[0]->GetLStickXF() * 10.0f;
-	m_skinPos.z += g_pad[0]->GetLStickYF() * 10.0f;
+	if (g_pad[0]->IsPress(enButtonRight))
+		m_skinPos.x += 10.0f;
+	if (g_pad[0]->IsPress(enButtonLeft))
+		m_skinPos.x -= 10.0f;
+	if (g_pad[0]->IsPress(enButtonUp))
+		m_skinPos.z += 10.0f;
+	if (g_pad[0]->IsPress(enButtonDown))
+		m_skinPos.z -= 10.0f;
+	if (g_pad[0]->IsPress(enButtonLB2))
+		m_skinPos.y += 10.0f;
+	if (g_pad[0]->IsPress(enButtonRB2))
+		m_skinPos.y -= 10.0f;
+
 	m_skin->SetPosition(m_skinPos);
 
-	m_cameraPos.x += g_pad[0]->GetRStickXF() * 10.0f;
-	m_cameraPos.z += g_pad[0]->GetRStickYF() * 10.0f;
+	m_cameraPos.x += g_pad[0]->GetRStickXF() * 30.0f;
+	m_cameraPos.z += g_pad[0]->GetRStickYF() * 30.0f;
+
 	g_camera3D->SetPosition(m_cameraPos);
 
-	m_spotLig[0]->SetPosition({ m_skinPos.x + 30.0f, m_skinPos.y, m_skinPos.z });
+	m_spotLig[0]->SetPosition({ m_skinPos.x - 40.0f, m_skinPos.y, m_skinPos.z });
 	//m_skin->PlayAnimation(enAnimationClip_walk);
+
+	m_spotLigDir.y += g_pad[0]->GetLStickXF() * 10.0f;
+	m_spotLig[0]->SetDirection({ m_skinPos.x - 100.0f, m_skinPos.y + m_spotLigDir.y, m_skinPos.z });
+	LightManager::GetInstance()->SetSpotLightCameraPosition({ m_skinPos.x - 40.0f, m_skinPos.y, m_skinPos.z });
+	LightManager::GetInstance()->SetSpotLightCameraTarget({m_skinPos.x - 100.0f, m_skinPos.y + m_spotLigDir.y, m_skinPos.z});
 }
 
 void Test::TestDirLig()

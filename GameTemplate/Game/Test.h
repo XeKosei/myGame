@@ -28,6 +28,7 @@ private:
 	int m_spotLigNum = 0;
 	Vector3 m_ligPos = {Vector3::Zero};
 
+	Vector3 m_spotLigDir = {1.0f, 0.0f, 0.0};
 
 	enum {
 		enAnimationClip_Idle,

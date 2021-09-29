@@ -60,6 +60,7 @@ void SkinModelRender::Init(const char* modelPath, const char* skeletonPath, Anim
 
 	//モデルの影を落とすために影のテクスチャを紐づける。
 	modelInitData.m_expandShaderResoruceView[0] = &PostEffectManager::GetInstance()->GetBlurShadowMap();
+	modelInitData.m_expandShaderResoruceView[1] = &PostEffectManager::GetInstance()->GetSpotLightMap();
 
 	//定数バッファをモデルに紐づける
 	modelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigDataSize();

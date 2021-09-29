@@ -55,6 +55,13 @@ cbuffer LightCameraCb : register(b2)
 	float3 lightCameraDir;
 };
 
+cbuffer SpotLightCameraCb : register(b3)
+{
+	float4x4 mSpotLVP;
+	float3 spotLightCameraPos;
+	float3 spotLightCameraDir;
+};
+
 ////////////////////////////////////////////////
 // 構造体
 ////////////////////////////////////////////////
@@ -78,6 +85,7 @@ struct SPSIn {
 	float3 worldPos		: TEXCOORD1;
 	float3 normalInView : TEXCOORD2;
 	float4 posInLVP 	: TEXCOORD3;
+	float4 posInSpotLVP : TEXCOORD4;
 };
 
 ////////////////////////////////////////////////
@@ -85,6 +93,7 @@ struct SPSIn {
 ////////////////////////////////////////////////
 Texture2D<float4> g_albedo : register(t0);				//アルベドマップ
 Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
+Texture2D<float4> g_spotLightMap : register(t11);		//スポットライトマップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。
 sampler g_sampler : register(s0);	//サンプラステート。
 
@@ -167,6 +176,34 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 
 	psIn.posInLVP.z = length(psIn.worldPos - crossPoint)/2000.0f;
 	//ここまで平行光源の深度チェックのテスト用。
+
+	//スポットライトビューのスクリーン空間の座標を計算
+	psIn.posInSpotLVP = mul(mSpotLVP, float4(psIn.worldPos, 1.0f));
+
+	//ライトの向きを取得。
+	cameraDir = spotLightCameraDir;
+	//正規化されてるはずだけど、念の為。
+	cameraDir = normalize(cameraDir);
+	lightCameraAnotherAxis = cross(axisX, cameraDir);
+	//axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
+	start = psIn.worldPos;
+	//スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
+	end = psIn.worldPos + -100 * cameraDir;
+	//ポリゴンと線分の交差判定を参考に、
+	//仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
+	//3点でできる平面との交点を求めていく。
+	toStart = start - spotLightCameraPos;
+	toEnd = end - spotLightCameraPos;
+	a = dot(cameraDir, toStart);
+	cameraDirRev = -cameraDir;
+	b = dot(cameraDirRev, toEnd);
+	//crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
+	crossPoint = toStart - toEnd;
+	crossPoint *= b / (a + b);
+	crossPoint += end;
+
+	psIn.posInSpotLVP.z = length(psIn.worldPos - crossPoint) / 2000.0f;
+
 	return psIn;
 }
 
@@ -295,67 +332,80 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	//スポットライト
 	for (int i = 0; i < spotLigNum; i++)
 	{
-		float3 spotLigDir = psIn.worldPos - spotLigData[i].ligPos;
-		spotLigDir = normalize(spotLigDir);
+		float2 spotLightMapUV = psIn.posInSpotLVP.xy / psIn.posInSpotLVP.w;
+		spotLightMapUV *= float2(0.5f, -0.5f);
+		spotLightMapUV += 0.5f;
 
-		//ランバート拡散反射
-		float3 diffuseLig = CalcLambertDiffuse(spotLigDir, spotLigData[i].ligColor, psIn.normal);
-
-		//フォン鏡面反射
-		float3 specularLig = CalcPhongSpecular(spotLigDir, spotLigData[i].ligColor, psIn.worldPos, psIn.normal);
-
-		//リムライト
-		//float3 limLig = CalcLimLight(spotLigDir, spotLigData[i].ligColor, psIn.normalInView, psIn.normal);
-
-		float3 finalLig = diffuseLig + specularLig;
-
-		//距離による減衰
-
-		float3 distance = length(psIn.worldPos - spotLigData[i].ligPos);
-
-		float affect = 1.0f - 1.0f / spotLigData[i].ligRange * distance;
-
-		if (affect < 0)
-			affect = 0;
-
-		affect = pow(affect, 3.0f);
-
-		finalLig *= affect;
-
-		//角度による減衰
-		float3 toGround = psIn.worldPos - spotLigData[i].ligPos;
-		toGround = normalize(toGround);
-
-		float angle = dot(toGround, spotLigData[i].ligDir);
-		
-		//floatの誤差かacos(1)が0に、acos(-1)がπになるはずなのにNanになっていたので臨時変更(錦織)
-		if (-1 < angle && angle < 1)
+		float zInSpotLVP = psIn.posInSpotLVP.z / psIn.posInSpotLVP.w;
+		if (spotLightMapUV.x > 0.0f && spotLightMapUV.x < 1.0f
+			&& spotLightMapUV.y > 0.0f && spotLightMapUV.y < 1.0f)
 		{
-			angle = acos(angle);
-		}
-		else if(angle > 0.9 )
-		{
-			angle = 0;
-		}
-		else
-		{
-			angle = acos(-1.0f);
-		}
+			float zInSpotLightMap = g_spotLightMap.Sample(g_sampler, spotLightMapUV).x;
+			if (zInSpotLVP < zInSpotLightMap + 0.0001f)// && zInSpotLVP <= 1.0f)
+			{
+				float3 spotLigDir = psIn.worldPos - spotLigData[i].ligPos;
+				spotLigDir = normalize(spotLigDir);
 
-		affect = 1.0f - 1.0f / spotLigData[i].ligAngle * angle;
-		if (affect <= 0.0f)
-		{
-			affect = 0.0f;
-		}
-		else
-		{
-			//0より大きい時だけ乗算
-			affect = pow(affect, 0.5f);
-		}
+				//ランバート拡散反射
+				float3 diffuseLig = CalcLambertDiffuse(spotLigDir, spotLigData[i].ligColor, psIn.normal);
 
-		finalLig *= affect;
+				//フォン鏡面反射
+				float3 specularLig = CalcPhongSpecular(spotLigDir, spotLigData[i].ligColor, psIn.worldPos, psIn.normal);
 
-		finalColor.xyz += finalLig;
+				//リムライト
+				//float3 limLig = CalcLimLight(spotLigDir, spotLigData[i].ligColor, psIn.normalInView, psIn.normal);
+
+				float3 finalLig = diffuseLig + specularLig;
+
+				//距離による減衰
+
+				float3 distance = length(psIn.worldPos - spotLigData[i].ligPos);
+
+				float affect = 1.0f - 1.0f / spotLigData[i].ligRange * distance;
+
+				if (affect < 0)
+					affect = 0;
+
+				affect = pow(affect, 3.0f);
+
+				finalLig *= affect;
+
+				//角度による減衰
+				float3 toGround = psIn.worldPos - spotLigData[i].ligPos;
+				toGround = normalize(toGround);
+
+				float angle = dot(toGround, spotLigData[i].ligDir);
+
+				//floatの誤差かacos(1)が0に、acos(-1)がπになるはずなのにNanになっていたので臨時変更(錦織)
+				if (-1 < angle && angle < 1)
+				{
+					angle = acos(angle);
+				}
+				else if (angle > 0.9)
+				{
+					angle = 0;
+				}
+				else
+				{
+					angle = acos(-1.0f);
+				}
+
+				affect = 1.0f - 1.0f / spotLigData[i].ligAngle * angle;
+				if (affect <= 0.0f)
+				{
+					affect = 0.0f;
+				}
+				else
+				{
+					//0より大きい時だけ乗算
+					affect = pow(affect, 0.5f);
+				}
+
+				finalLig *= affect;
+
+				finalColor.xyz += finalLig;
+			}
+		}
 	}
 
 	//環境光

@@ -364,9 +364,9 @@ public:
 		m_spotLightCamera.SetPosition(pos);
 		m_spotLightCamera.Update();
 		m_spotLigCameraData.lightCameraPosition = pos;
-		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 
-		m_spotLigCameraData.lightCameraDirection = m_lightCamera.GetTarget() - m_lightCamera.GetPosition();
+		m_spotLigCameraData.lightCameraDirection = m_spotLightCamera.GetTarget() - m_spotLightCamera.GetPosition();
 		m_spotLigCameraData.lightCameraDirection.Normalize();
 	}
 
@@ -376,9 +376,9 @@ public:
 	{
 		m_spotLightCamera.SetTarget(targetPos);
 		m_spotLightCamera.Update();
-		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 
-		m_spotLigCameraData.lightCameraDirection = m_lightCamera.GetTarget() - m_lightCamera.GetPosition();
+		m_spotLigCameraData.lightCameraDirection = m_spotLightCamera.GetTarget() - m_spotLightCamera.GetPosition();
 		m_spotLigCameraData.lightCameraDirection.Normalize();
 	}
 
@@ -388,7 +388,7 @@ public:
 	{
 		m_spotLightCamera.SetUp(up);
 		m_spotLightCamera.Update();
-		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 	}
 
 	/// @brief スポットライトに使用するライトカメラの射影行列の更新方法を設定する。
@@ -397,7 +397,7 @@ public:
 	{
 		m_spotLightCamera.SetUpdateProjMatrixFunc(func);
 		m_spotLightCamera.Update();
-		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 	}
 
 	/// @brief スポットライトに使用するライトカメラの横幅を指定する(並行投影限定)
@@ -406,7 +406,7 @@ public:
 	{
 		m_spotLightCamera.SetWidth(width);
 		m_spotLightCamera.Update();
-		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 	}
 
 	/// @brief 影の描画に使用するライトカメラの高さを指定する(並行投影限定)
@@ -415,7 +415,7 @@ public:
 	{
 		m_spotLightCamera.SetHeight(height);
 		m_spotLightCamera.Update();
-		m_spotLigCameraData.lightCameraProjectionMatrix = m_lightCamera.GetViewProjectionMatrix();
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 	}
 
 };

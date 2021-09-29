@@ -38,6 +38,8 @@ public:
 
 	Texture& GetBlurShadowMap() { return m_shadowBlur.GetBokeTexture(); };
 
+	Texture& GetSpotLightMap() { return m_spotLightMap.GetRenderTargetTexture(); };
+
 	//レンダリング前の処理
 	void BeforeRender(RenderContext& rc);
 	//レンダリング後の処理

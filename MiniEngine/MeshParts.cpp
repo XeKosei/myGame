@@ -81,7 +81,7 @@ void MeshParts::CreateDescriptorHeaps()
 			descriptorHeap.RegistShaderResource(3, m_boneMatricesStructureBuffer);							//ボーンのストラクチャードバッファ。
 			for (int i = 0; i < 2; i++) {
 				if (m_expandShaderResourceView[i]) {
-					descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO, *m_expandShaderResourceView[i]);
+					descriptorHeap.RegistShaderResource(EXPAND_SRV_REG__START_NO + i, *m_expandShaderResourceView[i]);
 				}
 			}
 			descriptorHeap.RegistConstantBuffer(0, m_commonConstantBuffer);

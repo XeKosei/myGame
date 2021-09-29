@@ -38,6 +38,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
 	LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);
 
+	LightManager::GetInstance()->SetSpotLightCameraPosition({ 0.0f,0.0f,100.0f });
+	LightManager::GetInstance()->SetSpotLightCameraTarget({ 0.0f,0.0f,0.0f });
+	LightManager::GetInstance()->SetSpotLightCameraUp({Vector3::AxisY});
+	LightManager::GetInstance()->SetSpotLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Ortho);//enUpdateProjMatrixFunc_Perspective);
+
 	PostEffectManager::CreateInstance();
 	//ブルームフラグ、シャドウフラグの順番
 	PostEffectManager::GetInstance()->Init(true, true);
@@ -46,7 +51,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	// シャドウマップを表示するためのスプライトを初期化する
 	SpriteInitData spriteInitData;
-	spriteInitData.m_textures[0] = &PostEffectManager::GetInstance()->GetShadowMap();
+	spriteInitData.m_textures[0] = &PostEffectManager::GetInstance()->GetSpotLightMap();
 	spriteInitData.m_fxFilePath = "Assets/shader/sprite.fx";
 	spriteInitData.m_width = 256;
 	spriteInitData.m_height = 256;

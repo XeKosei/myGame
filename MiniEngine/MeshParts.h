@@ -107,6 +107,7 @@ private:
 private:
 	//拡張SRVが設定されるレジスタの開始番号。
 	const int EXPAND_SRV_REG__START_NO = 10;
+	const int EXPAND_SRV_REG__START_NO_2 = 11;
 	/// <summary>
 	/// 定数バッファ。
 	/// </summary>

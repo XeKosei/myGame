@@ -71,7 +71,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	//スポットライト用のモデルを描く。
 	PostEffectManager::GetInstance()->SpotLightRender(rc);
 	rc.SetStep(RenderContext::eStep_RenderSpotLightMap);
-		//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+		//SpotLightRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
 			go->RenderWrapper(rc, LightManager::GetInstance()->GetSpotLightCamera());
