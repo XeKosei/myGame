@@ -111,6 +111,13 @@ public:
 	{
 		m_isShadowCaster = isShadowCaster;
 	}
+	
+	/// @brief モデルがスポットライトの光を受けるかどうか
+	/// @param isSpotLightCaster 受ける:true 受けない:false
+	void SetSpotLightCasterFlag(bool isSpotLightCaster)
+	{
+		m_isSpotLightCaster = isSpotLightCaster;
+	}
 
 	/// @brief モデルの座標を取得
 	/// @return 座標
@@ -172,5 +179,6 @@ private:
 	bool m_isShadowCaster = true;				//このモデルは影を作るか
 	float m_animation_speed = 1.0f;				//アニメーション速度
 	float m_animationSpeed = 1.0f;				//アニメーション速度(何故二つあるんだ?)
+	bool m_isSpotLightCaster = true;			//このモデルはスポットライトの光を受けるかどうか
 };
 

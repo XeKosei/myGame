@@ -180,29 +180,29 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 	//スポットライトビューのスクリーン空間の座標を計算
 	psIn.posInSpotLVP = mul(mSpotLVP, float4(psIn.worldPos, 1.0f));
 
-	//ライトの向きを取得。
-	cameraDir = spotLightCameraDir;
-	//正規化されてるはずだけど、念の為。
-	cameraDir = normalize(cameraDir);
-	lightCameraAnotherAxis = cross(axisX, cameraDir);
-	//axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
-	start = psIn.worldPos;
-	//スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
-	end = psIn.worldPos + -100 * cameraDir;
-	//ポリゴンと線分の交差判定を参考に、
-	//仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
-	//3点でできる平面との交点を求めていく。
-	toStart = start - spotLightCameraPos;
-	toEnd = end - spotLightCameraPos;
-	a = dot(cameraDir, toStart);
-	cameraDirRev = -cameraDir;
-	b = dot(cameraDirRev, toEnd);
-	//crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
-	crossPoint = toStart - toEnd;
-	crossPoint *= b / (a + b);
-	crossPoint += end;
+	////ライトの向きを取得。
+	//cameraDir = spotLightCameraDir;
+	////正規化されてるはずだけど、念の為。
+	//cameraDir = normalize(cameraDir);
+	//lightCameraAnotherAxis = cross(axisX, cameraDir);
+	////axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
+	//start = psIn.worldPos;
+	////スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
+	//end = psIn.worldPos + -100 * cameraDir;
+	////ポリゴンと線分の交差判定を参考に、
+	////仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
+	////3点でできる平面との交点を求めていく。
+	//toStart = start - spotLightCameraPos;
+	//toEnd = end - spotLightCameraPos;
+	//a = dot(cameraDir, toStart);
+	//cameraDirRev = -cameraDir;
+	//b = dot(cameraDirRev, toEnd);
+	////crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
+	//crossPoint = toStart - toEnd;
+	//crossPoint *= b / (a + b);
+	//crossPoint += end;
 
-	psIn.posInSpotLVP.z = length(psIn.worldPos - crossPoint) / 2000.0f;
+	//psIn.posInSpotLVP.z = length(psIn.worldPos - crossPoint) / 2000.0f;
 
 	return psIn;
 }
@@ -409,7 +409,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	}
 
 	//環境光
-	float3 ambientLig = 0.3f;
+	float3 ambientLig = 0.8f;
 	finalColor.xyz += ambientLig;
 
 	finalColor *= albedoColor;

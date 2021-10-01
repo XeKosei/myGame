@@ -12,6 +12,7 @@ bool Test::Start()
 	m_skin->Init("Assets/modelData/unityChan.tkm","Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
 	m_skin->SetPosition(m_skinPos);
 	m_skin->SetScale({ 1.0f,1.0f,1.0f });
+	m_skin->SetSpotLightCasterFlag(false);
 	//m_skin->SetShadowCasterFlag(false);
 
 	//m_skin->SetAnimationSpeed(1.0f);
@@ -27,8 +28,10 @@ bool Test::Start()
 	m_spotLig[0]->SetDirection({ -1.0f, 0.0f,0.0f});
 	m_spotLig[0]->SetColor({ 10.0f,10.0f,10.0f });
 	m_spotLig[m_spotLigNum]->SetRange(1000.0f);
-	m_spotLig[m_spotLigNum]->SetAngleDeg(20.0f);
+	m_spotLig[m_spotLigNum]->SetAngle(Math::DegToRad(20.0f));
 	m_spotLigNum++;
+
+	LightManager::GetInstance()->SetSpotLightCameraAngle(Math::DegToRad(20.0f) * 2.0f);
 
 	SkinModelRender* stage = NewGO<SkinModelRender>(0);
 	stage->Init("Assets/modelData/BuildingStage.tkm");
@@ -44,34 +47,12 @@ void Test::Update()
 	TestDirLig();
 	//TestPointLig();
 	//TestSpotLig();
-
-	if (g_pad[0]->IsPress(enButtonRight))
-		m_skinPos.x += 10.0f;
-	if (g_pad[0]->IsPress(enButtonLeft))
-		m_skinPos.x -= 10.0f;
-	if (g_pad[0]->IsPress(enButtonUp))
-		m_skinPos.z += 10.0f;
-	if (g_pad[0]->IsPress(enButtonDown))
-		m_skinPos.z -= 10.0f;
-	if (g_pad[0]->IsPress(enButtonLB2))
-		m_skinPos.y += 10.0f;
-	if (g_pad[0]->IsPress(enButtonRB2))
-		m_skinPos.y -= 10.0f;
-
-	m_skin->SetPosition(m_skinPos);
-
-	m_cameraPos.x += g_pad[0]->GetRStickXF() * 30.0f;
-	m_cameraPos.z += g_pad[0]->GetRStickYF() * 30.0f;
-
-	g_camera3D->SetPosition(m_cameraPos);
-
-	m_spotLig[0]->SetPosition({ m_skinPos.x - 40.0f, m_skinPos.y, m_skinPos.z });
+	
+	Move();
+	//Turn();
+	CameraMove();
+	SpotLightMove();
 	//m_skin->PlayAnimation(enAnimationClip_walk);
-
-	m_spotLigDir.y += g_pad[0]->GetLStickXF() * 10.0f;
-	m_spotLig[0]->SetDirection({ m_skinPos.x - 100.0f, m_skinPos.y + m_spotLigDir.y, m_skinPos.z });
-	LightManager::GetInstance()->SetSpotLightCameraPosition({ m_skinPos.x - 40.0f, m_skinPos.y, m_skinPos.z });
-	LightManager::GetInstance()->SetSpotLightCameraTarget({m_skinPos.x - 100.0f, m_skinPos.y + m_spotLigDir.y, m_skinPos.z});
 }
 
 void Test::TestDirLig()
@@ -188,4 +169,117 @@ void Test::TestSpotLig()
 			m_spotLig[m_spotLigNum - 1]->SetPosition(m_ligPos);
 		}
 	}
+}
+
+void Test::Move()
+{
+	m_skinMoveSpeed = { Vector3::Zero };
+
+	m_skinMoveSpeed += g_camera3D->GetRight() * g_pad[0]->GetLStickXF() * 15.0f;
+	m_skinMoveSpeed += Cross(g_camera3D->GetRight(), Vector3::AxisY) * g_pad[0]->GetLStickYF() * 15.0f;
+
+	m_skinMoveSpeed.y = 0.0f;
+
+	if (g_pad[0]->IsPress(enButtonRB2))
+		m_skinMoveSpeed.y += 10.0f;
+	if (g_pad[0]->IsPress(enButtonLB2))
+		m_skinMoveSpeed.y -= 10.0f;
+
+	m_skinPos += m_skinMoveSpeed;
+	m_skin->SetPosition(m_skinPos);
+}
+
+void Test::Turn()
+{
+	if (g_pad[0]->IsPress(enButtonLB1) == false)
+	{
+		if (m_skinMoveSpeed.x != 0.0f || m_skinMoveSpeed.z != 0.0f)
+		{
+			//atan2はtanθの値を角度(ラジアン単位)に変換してくれる関数。
+			//m_moveSpeed.x / m_moveSpeed.zの結果はtanθになる。
+			//atan2を使用して、角度を求めている。
+			//これが回転角度になる。
+			float angle = atan2(m_skinMoveSpeed.x, m_skinMoveSpeed.z);
+			//atanが返してくる角度はラジアン単位なので
+			//SetRotationDegではなくSetRotationを使用する。
+			m_skinQRot.SetRotation(Vector3::AxisY, angle);
+			m_skin->SetRotation(m_skinQRot);
+		}
+	}
+}
+
+void Test::CameraMove()
+{
+	float x = g_pad[0]->GetRStickXF();
+	float y = g_pad[0]->GetRStickYF();
+
+	if (g_pad[0]->IsPress(enButtonLB1) == false)
+	{
+		x += g_pad[0]->GetLStickXF() * 0.5f;
+	}
+
+	m_cameraDir += g_camera3D->GetRight() * x * 0.05f;
+	m_cameraDir += g_camera3D->GetUp() * y * 0.05f;
+	m_cameraDir.Normalize();
+
+	//Quaternion cameraQRot;
+	//cameraQRot.SetRotationDeg(Vector3::AxisY, 5.0f * x);
+	//cameraQRot.Apply(m_toCameraPos);
+	////X軸回りの回転
+	//Vector3 axisX = { Vector3::Zero };
+	//axisX.Cross(Vector3::AxisY, m_toCameraPos);
+	//axisX.Normalize();
+	//cameraQRot.SetRotationDeg(axisX, 5.0f * y);
+	//cameraQRot.Apply(m_toCameraPos);
+
+	////カメラリセット1
+	//if (g_pad[0]->IsTrigger(enButtonLB1)) {
+	//	m_toCameraPos = { 0.0f, 200.0f, 0.0f };
+	//	cameraQRot = m_skinQRot;
+	//	cameraQRot.Apply(m_toCameraPos);
+	//}
+
+	///*if (g_pad[0]->IsPress(enButtonRB3))
+	//	m_toCameraPos += g_camera3D->GetForward() * 15.0f;
+	//if (g_pad[0]->IsPress(enButtonLB3))
+	//	m_toCameraPos -= g_camera3D->GetForward() * 15.0f;*/
+
+	//m_cameraPos = m_skinPos + m_toCameraPos;
+
+	m_cameraPos = m_skinPos + Cross(g_camera3D->GetRight(), Vector3::AxisY) * 5.0f;
+	m_cameraPos.y += 200.0f;
+	Vector3 cameraTarget = m_cameraDir * 1000.0f + m_skinPos;
+
+	g_camera3D->SetPosition(m_cameraPos);
+	g_camera3D->SetTarget(cameraTarget);
+}
+
+void Test::SpotLightMove()
+{
+	//位置を設定
+	m_spotLigPos = { m_skinPos.x + 1.0f, m_skinPos.y + 200.0f, m_skinPos.z };
+
+	m_spotLig[0]->SetPosition(m_spotLigPos);
+	LightManager::GetInstance()->SetSpotLightCameraPosition(m_spotLigPos);
+
+	//向きを設定
+	if (g_pad[0]->IsPress(enButtonLB1) == false)
+	{
+		m_spotLigDir = g_camera3D->GetForward();
+		m_spotLigDir.y = 0.0f;
+		m_spotLigDir.Normalize();
+	}
+	else
+	{
+		m_spotLigDir = g_camera3D->GetForward();
+		/*Vector3 dir = m_spotLigDir;
+		dir += Cross(dir, Vector3::AxisY) * g_pad[0]->GetLStickXF() * 0.1f * -1.0f;
+		dir.y +=  g_pad[0]->GetLStickYF() * 0.1f;
+		dir.Normalize();
+		m_spotLigDir = dir;*/
+	}
+
+	Vector3 spotLigTarget = m_spotLigPos + m_spotLigDir * 100.0f;
+	LightManager::GetInstance()->SetSpotLightCameraTarget(spotLigTarget);
+	m_spotLig[0]->SetDirection({ m_spotLigDir });
 }

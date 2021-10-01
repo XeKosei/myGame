@@ -16,10 +16,14 @@ public:
 		enUpdateProjMatrixFunc_Perspective,		//透視射影行列。遠近法が効いた絵を作りたいならこっち。
 		enUpdateProjMatrixFunc_Ortho,			//平行投影。２Ｄ的な表現がしたいならこっち。
 	};
+	
 	/// <summary>
 	/// ビュー行列、プロジェクション行列を更新する。
 	/// </summary>
 	void Update();
+	/// @brief アスペクト比指定版
+	/// @param aspect 
+	void Update(float aspect);
 	/// <summary>
 	/// 注視点を原点としてカメラを回転させる。
 	/// </summary>
@@ -304,6 +308,12 @@ public:
 	const Vector3& GetRight() const
 	{
 		return m_right;
+	}
+	/// @brief アスペクト比を設定。
+	/// @param aspect 
+	void SetAspect(float aspect)
+	{
+		m_aspect = aspect;
 	}
 	/// <summary>
 	/// アスペクト比を取得。

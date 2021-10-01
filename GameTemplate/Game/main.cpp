@@ -41,8 +41,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	LightManager::GetInstance()->SetSpotLightCameraPosition({ 0.0f,0.0f,100.0f });
 	LightManager::GetInstance()->SetSpotLightCameraTarget({ 0.0f,0.0f,0.0f });
 	LightManager::GetInstance()->SetSpotLightCameraUp({Vector3::AxisY});
-	LightManager::GetInstance()->SetSpotLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Ortho);//enUpdateProjMatrixFunc_Perspective);
-
+	LightManager::GetInstance()->SetSpotLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective);//enUpdateProjMatrixFunc_Perspective);
+	
 	PostEffectManager::CreateInstance();
 	//ブルームフラグ、シャドウフラグの順番
 	PostEffectManager::GetInstance()->Init(true, true);

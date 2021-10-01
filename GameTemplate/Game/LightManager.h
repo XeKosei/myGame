@@ -362,7 +362,7 @@ public:
 	void SetSpotLightCameraPosition(const Vector3& pos)
 	{
 		m_spotLightCamera.SetPosition(pos);
-		m_spotLightCamera.Update();
+		m_spotLightCamera.Update(1.0f);
 		m_spotLigCameraData.lightCameraPosition = pos;
 		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 
@@ -375,11 +375,20 @@ public:
 	void SetSpotLightCameraTarget(const Vector3& targetPos)
 	{
 		m_spotLightCamera.SetTarget(targetPos);
-		m_spotLightCamera.Update();
+		m_spotLightCamera.Update(1.0f);
 		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 
 		m_spotLigCameraData.lightCameraDirection = m_spotLightCamera.GetTarget() - m_spotLightCamera.GetPosition();
 		m_spotLigCameraData.lightCameraDirection.Normalize();
+	}
+
+	void SetSpotLightCameraAngle(const float angle)
+	{
+
+		m_spotLightCamera.SetViewAngle(angle);
+
+		m_spotLightCamera.Update(1.0f);
+		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 	}
 
 	/// @brief スポットライトに使用するライトカメラの上方向を指定する。
@@ -387,7 +396,7 @@ public:
 	void SetSpotLightCameraUp(const Vector3& up)
 	{
 		m_spotLightCamera.SetUp(up);
-		m_spotLightCamera.Update();
+		m_spotLightCamera.Update(1.0f);
 		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 	}
 
@@ -396,7 +405,7 @@ public:
 	void SetSpotLightCameraUpdateProjMatrixFunc(Camera::EnUpdateProjMatrixFunc func)
 	{
 		m_spotLightCamera.SetUpdateProjMatrixFunc(func);
-		m_spotLightCamera.Update();
+		m_spotLightCamera.Update(1.0f);
 		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 	}
 
@@ -405,7 +414,7 @@ public:
 	void SetSpotLightCameraWidth(const float& width)
 	{
 		m_spotLightCamera.SetWidth(width);
-		m_spotLightCamera.Update();
+		m_spotLightCamera.Update(1.0f);
 		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 	}
 
@@ -414,7 +423,7 @@ public:
 	void SetSpotLightCameraHeight(const float& height)
 	{
 		m_spotLightCamera.SetHeight(height);
-		m_spotLightCamera.Update();
+		m_spotLightCamera.Update(1.0f);
 		m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 	}
 

@@ -27,7 +27,7 @@ void SkinModelRender::Init(const char* modelPath, const char* skeletonPath, Anim
 	//シェーダーパスの指定
 	modelInitData.m_fxFilePath = "Assets/shader/shadowReceiver.fx";
 	shadowModelInitData.m_fxFilePath = "Assets/shader/shadow.fx";
-	spotLightModelInitData.m_fxFilePath = "Assets/shader/shadow.fx";
+	spotLightModelInitData.m_fxFilePath = "Assets/shader/spotLight.fx";
 
 	//シェーダーの頂点シェーダーのエントリー関数名の指定
 	modelInitData.m_vsEntryPointFunc = "VSMain";
@@ -127,7 +127,10 @@ void SkinModelRender::Render(RenderContext& rc, Camera* camera)
 		break;
 	case RenderContext::eStep_RenderSpotLightMap:
 		//スポットライト用
-		m_model[eModel_SpotLight].Draw(rc, camera);
+		if (m_isSpotLightCaster)
+		{
+			m_model[eModel_SpotLight].Draw(rc, camera);
+		}
 		break;
 	}
 }
