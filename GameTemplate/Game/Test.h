@@ -16,21 +16,21 @@ public:
 	void SpotLightMove();
 
 private:
-	SkinModelRender* m_skin = nullptr;
+	nsHikageri::SkinModelRender* m_skin = nullptr;
 	Vector3 m_skinPos = { 0.0f,0.0f,0.0f};
 	Vector3 m_skinMoveSpeed = { 0.0f,0.0f,1.0f };
 	Quaternion m_skinQRot = { 1.0f,0.0f,0.0f, 0.0f };
 
 	Vector3 m_cameraPos = {0.0f, 200.0f, -1500.0f};
-	Vector3 m_toCameraPos = {0.0f, 200.0f, 100.0f};
+	Vector3 m_toCameraPos = {0.0f, 200.0f, 500.0f};
 	Vector3 m_cameraDir = {0.0f,0.0f,1.0f};
 
-	DirectionLight* m_dirLig[5] = {nullptr,nullptr,nullptr,nullptr,nullptr};
-	PointLight* m_pointLig[20] = { 
+	nsHikageri::DirectionLight* m_dirLig[5] = {nullptr,nullptr,nullptr,nullptr,nullptr};
+	nsHikageri::PointLight* m_pointLig[20] = {
 		nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, 
 		nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, 
 	};
-	SpotLight* m_spotLig[20] = {
+	nsHikageri::SpotLight* m_spotLig[20] = {
 		nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,
 		nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,
 	};

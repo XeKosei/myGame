@@ -54,6 +54,18 @@
     <Filter Include="ヘッダー ファイル\prefab">
       <UniqueIdentifier>{b70854ba-9382-406c-8572-5ed10ded5a6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Player">
+      <UniqueIdentifier>{2e56dd06-3b38-4440-ae5c-b63a9fb64982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Player">
+      <UniqueIdentifier>{35523449-35d0-4428-b466-72169289755b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\FlashLight">
+      <UniqueIdentifier>{47014aad-aab4-41d1-a465-e52652ae9853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\FlashLight">
+      <UniqueIdentifier>{d726b1f7-e226-4f5e-b2aa-e73ac4ea5ee1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -241,6 +253,24 @@
     </ClCompile>
     <ClCompile Include="..\..\MiniEngine\RenderTarget.cpp">
       <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMove.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCamera.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="FlashLight.cpp">
+      <Filter>ソース ファイル\FlashLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -453,6 +483,30 @@
     </ClInclude>
     <ClInclude Include="..\..\MiniEngine\RenderTarget.h">
       <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMove.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerConstant.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCamera.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="FlashLight.h">
+      <Filter>ヘッダー ファイル\FlashLight</Filter>
+    </ClInclude>
+    <ClInclude Include="FlashLightConstant.h">
+      <Filter>ヘッダー ファイル\FlashLight</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

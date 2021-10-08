@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "system/system.h" 
 #include "Test.h"
+#include "GameScene.h"
 
 namespace
 {
@@ -30,28 +31,29 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	PhysicsWorld::CreateInstance();
 
 	//ライトマネージャーのインスタンスを作成
-	LightManager::CreateInstance();
-	LightManager::GetInstance()->SetLightCameraPosition(LIGHTCAMERA_POSITION);
-	LightManager::GetInstance()->SetLightCameraTarget(LIGHTCAMERA_TARGET);
-	LightManager::GetInstance()->SetLightCameraUp(LIGHTCAMERA_UP);
-	LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Ortho);//enUpdateProjMatrixFunc_Perspective);
-    LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
-	LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);
+	nsHikageri::LightManager::CreateInstance();
+	nsHikageri::LightManager::GetInstance()->SetLightCameraPosition(LIGHTCAMERA_POSITION);
+	nsHikageri::LightManager::GetInstance()->SetLightCameraTarget(LIGHTCAMERA_TARGET);
+	nsHikageri::LightManager::GetInstance()->SetLightCameraUp(LIGHTCAMERA_UP);
+	nsHikageri::LightManager::GetInstance()->SetLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Ortho);//enUpdateProjMatrixFunc_Perspective);
+	nsHikageri::LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
+	nsHikageri::LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);
 
-	LightManager::GetInstance()->SetSpotLightCameraPosition({ 0.0f,0.0f,100.0f });
-	LightManager::GetInstance()->SetSpotLightCameraTarget({ 0.0f,0.0f,0.0f });
-	LightManager::GetInstance()->SetSpotLightCameraUp({Vector3::AxisY});
-	LightManager::GetInstance()->SetSpotLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective);//enUpdateProjMatrixFunc_Perspective);
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition({ 0.0f,0.0f,100.0f });
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget({ 0.0f,0.0f,0.0f });
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraUp({Vector3::AxisY});
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective);//enUpdateProjMatrixFunc_Perspective);
 	
-	PostEffectManager::CreateInstance();
+	nsHikageri::PostEffectManager::CreateInstance();
 	//ブルームフラグ、シャドウフラグの順番
-	PostEffectManager::GetInstance()->Init(true, true);
+	nsHikageri::PostEffectManager::GetInstance()->Init(true, true);
 
-	Test* testScene = NewGO<Test>(0, "testScene");
+	//Test* testScene = NewGO<Test>(0, "testScene");
+	nsHikageri::GameScene* gameScene = NewGO<nsHikageri::GameScene>(0, "gameScene");
 
 	// シャドウマップを表示するためのスプライトを初期化する
 	SpriteInitData spriteInitData;
-	spriteInitData.m_textures[0] = &PostEffectManager::GetInstance()->GetSpotLightMap();
+	spriteInitData.m_textures[0] = &nsHikageri::PostEffectManager::GetInstance()->GetSpotLightMap();
 	spriteInitData.m_fxFilePath = "Assets/shader/sprite.fx";
 	spriteInitData.m_width = 256;
 	spriteInitData.m_height = 256;
@@ -84,7 +86,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//ここから絵を描くコードを記述する。
 		//////////////////////////////////////
 		
-		LightManager::GetInstance()->UpdateEyePos();
+		nsHikageri::LightManager::GetInstance()->UpdateEyePos();
 
 		//////////////////////////////////////
 		//絵を描くコードを書くのはここまで！！！

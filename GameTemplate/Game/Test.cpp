@@ -8,7 +8,7 @@ bool Test::Start()
 	animationClips[enAnimationClip_walk].Load("Assets/animData/walk.tka");
 	animationClips[enAnimationClip_walk].SetLoopFlag(true);	//ループモーションにする。
 
-	m_skin = NewGO<SkinModelRender>(0);
+	m_skin = NewGO<nsHikageri::SkinModelRender>(0);
 	m_skin->Init("Assets/modelData/unityChan.tkm","Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
 	m_skin->SetPosition(m_skinPos);
 	m_skin->SetScale({ 1.0f,1.0f,1.0f });
@@ -18,12 +18,12 @@ bool Test::Start()
 	//m_skin->SetAnimationSpeed(1.0f);
 
 
-	m_dirLig[0] = NewGO<DirectionLight>(0);
+	m_dirLig[0] = NewGO<nsHikageri::DirectionLight>(0);
 	m_dirLig[0]->SetDirection({ -1.0f, -1.0f, -1.0f });
 	m_dirLig[0]->SetColor({ 0.5f,0.5f,0.5f });
 	m_dirLigNum++;
 
-	m_spotLig[0] = NewGO<SpotLight>(0);
+	m_spotLig[0] = NewGO<nsHikageri::SpotLight>(0);
 	m_spotLig[0]->SetPosition(m_skinPos);
 	m_spotLig[0]->SetDirection({ -1.0f, 0.0f,0.0f});
 	m_spotLig[0]->SetColor({ 10.0f,10.0f,10.0f });
@@ -31,10 +31,10 @@ bool Test::Start()
 	m_spotLig[m_spotLigNum]->SetAngle(Math::DegToRad(20.0f));
 	m_spotLigNum++;
 
-	LightManager::GetInstance()->SetSpotLightCameraAngle(Math::DegToRad(20.0f) * 2.0f);
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(Math::DegToRad(20.0f) * 2.0f);
 
-	SkinModelRender* stage = NewGO<SkinModelRender>(0);
-	stage->Init("Assets/modelData/BuildingStage.tkm");
+	nsHikageri::SkinModelRender* stage = NewGO<nsHikageri::SkinModelRender>(0);
+	stage->Init("Assets/modelData/Stage.tkm");
 	stage->SetShadowCasterFlag(false);
 	stage->SetPosition({0.0f,10.0f, 0.0f});
 	stage->SetScale({ 1.0f,1.0f,1.0f });
@@ -61,7 +61,7 @@ void Test::TestDirLig()
 	{
 		if (m_dirLigNum < 5)
 		{
-			m_dirLig[m_dirLigNum] = NewGO<DirectionLight>(0);
+			m_dirLig[m_dirLigNum] = NewGO<nsHikageri::DirectionLight>(0);
 			m_dirLig[m_dirLigNum]->SetDirection({ -1.0f, -1.0f, -1.0f });
 			m_dirLig[m_dirLigNum]->SetColor({ 1.0f,1.0f,1.0f });
 
@@ -86,7 +86,7 @@ void Test::TestPointLig()
 	{
 		if (m_pointLigNum < 20)
 		{
-			m_pointLig[m_pointLigNum] = NewGO<PointLight>(0);
+			m_pointLig[m_pointLigNum] = NewGO<nsHikageri::PointLight>(0);
 			m_pointLig[m_pointLigNum]->SetPosition(m_ligPos);
 			m_pointLig[m_pointLigNum]->SetColor({ 1.0f,1.0f,1.0f });
 			m_pointLig[m_pointLigNum]->SetRange(5000.0f);
@@ -130,7 +130,7 @@ void Test::TestSpotLig()
 	{
 		if (m_spotLigNum < 20)
 		{
-			m_spotLig[m_spotLigNum] = NewGO<SpotLight>(0);
+			m_spotLig[m_spotLigNum] = NewGO<nsHikageri::SpotLight>(0);
 			m_spotLig[m_spotLigNum]->SetPosition(m_ligPos);
 			m_spotLig[m_spotLigNum]->SetColor({ 1.0f,1.0f,1.0f });
 			m_spotLig[m_spotLigNum]->SetRange(1000.0f);
@@ -260,7 +260,7 @@ void Test::SpotLightMove()
 	m_spotLigPos = { m_skinPos.x + 1.0f, m_skinPos.y + 200.0f, m_skinPos.z };
 
 	m_spotLig[0]->SetPosition(m_spotLigPos);
-	LightManager::GetInstance()->SetSpotLightCameraPosition(m_spotLigPos);
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_spotLigPos);
 
 	//向きを設定
 	if (g_pad[0]->IsPress(enButtonLB1) == false)
@@ -280,6 +280,6 @@ void Test::SpotLightMove()
 	}
 
 	Vector3 spotLigTarget = m_spotLigPos + m_spotLigDir * 100.0f;
-	LightManager::GetInstance()->SetSpotLightCameraTarget(spotLigTarget);
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget(spotLigTarget);
 	m_spotLig[0]->SetDirection({ m_spotLigDir });
 }

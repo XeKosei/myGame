@@ -289,10 +289,16 @@
     <ClCompile Include="..\..\MiniEngine\tkFile\TkmFile.cpp" />
     <ClCompile Include="..\..\MiniEngine\tkFile\TksFile.cpp" />
     <ClCompile Include="..\..\MiniEngine\VertexBuffer.cpp" />
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
+    <ClCompile Include="FlashLight.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GaussianBlur.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerCamera.cpp" />
+    <ClCompile Include="PlayerMove.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PostEffectManager.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
@@ -369,9 +375,16 @@
     <ClInclude Include="..\..\MiniEngine\tkFile\TkmFile.h" />
     <ClInclude Include="..\..\MiniEngine\tkFile\TksFile.h" />
     <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="DirectionLight.h" />
+    <ClInclude Include="FlashLight.h" />
+    <ClInclude Include="FlashLightConstant.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="LightManager.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerCamera.h" />
+    <ClInclude Include="PlayerMove.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PostEffectManager.h" />
     <ClInclude Include="SkinModelRender.h" />
@@ -379,6 +392,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="Test.h" />
+    <ClInclude Include="PlayerConstant.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
