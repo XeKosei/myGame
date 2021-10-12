@@ -426,11 +426,11 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	{
 		//シャドウマップからライトからの距離、距離の2乗をサンプリング
 		float2 shadowValue = g_shadowMap.Sample(g_sampler,shadowMapUV).xy;
-
+		
 		//まずこのピクセルが遮蔽されているか調べる
 		//zInLVPはライトから影が描かれるモデルへの距離、shadowValue.rはライトから影を落とすモデルへの距離
 		//影が描かれるモデルへの距離より影を落とすモデルへの距離が短いなら影が描かれるモデルは遮蔽されている。
-		if(zInLVP > shadowValue.r && zInLVP <= 1.0f)
+		if(zInLVP > shadowValue.r && zInLVP <= 1.0f)// && zInLVP < shadowValue.r + 0.1f)
 		{
 			//チェビシェフの不等式を使う
 			float depth_sq = shadowValue.x * shadowValue.x;

@@ -1,19 +1,19 @@
 #pragma once
 namespace nsHikageri
 {
-	//BackGroundクラスで利用する定数
-	namespace nsBGConstant
+	namespace nsBackGround
 	{
-		
+		class BackGround : public IGameObject
+		{
+		public:
+			bool Start();
+			void Update();
+
+		private:
+			//ステージのモデル
+			SkinModelRender* m_stageModel = nullptr;
+			//CharaConとの当たり判定に使用する静的物理オブジェクト
+			PhysicsStaticObject m_physicsStaticObject;
+		};
 	}
-
-	class BackGround : public IGameObject
-	{
-	public:
-		bool Start();
-		void Update();
-
-	private:
-		SkinModelRender* m_stageModel = nullptr;
-	};
 }

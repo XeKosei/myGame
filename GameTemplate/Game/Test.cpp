@@ -222,15 +222,15 @@ void Test::CameraMove()
 	m_cameraDir += g_camera3D->GetUp() * y * 0.05f;
 	m_cameraDir.Normalize();
 
-	//Quaternion cameraQRot;
-	//cameraQRot.SetRotationDeg(Vector3::AxisY, 5.0f * x);
-	//cameraQRot.Apply(m_toCameraPos);
-	////X²‰ñ‚è‚Ì‰ñ“]
-	//Vector3 axisX = { Vector3::Zero };
-	//axisX.Cross(Vector3::AxisY, m_toCameraPos);
-	//axisX.Normalize();
-	//cameraQRot.SetRotationDeg(axisX, 5.0f * y);
-	//cameraQRot.Apply(m_toCameraPos);
+	Quaternion cameraQRot;
+	cameraQRot.SetRotationDeg(Vector3::AxisY, 5.0f * x);
+	cameraQRot.Apply(m_toCameraPos);
+	//X²‰ñ‚è‚Ì‰ñ“]
+	Vector3 axisX = { Vector3::Zero };
+	axisX.Cross(Vector3::AxisY, m_toCameraPos);
+	axisX.Normalize();
+	cameraQRot.SetRotationDeg(axisX, 5.0f * y);
+	cameraQRot.Apply(m_toCameraPos);
 
 	////ƒJƒƒ‰ƒŠƒZƒbƒg1
 	//if (g_pad[0]->IsTrigger(enButtonLB1)) {
@@ -244,11 +244,11 @@ void Test::CameraMove()
 	//if (g_pad[0]->IsPress(enButtonLB3))
 	//	m_toCameraPos -= g_camera3D->GetForward() * 15.0f;*/
 
-	//m_cameraPos = m_skinPos + m_toCameraPos;
-
-	m_cameraPos = m_skinPos + Cross(g_camera3D->GetRight(), Vector3::AxisY) * 5.0f;
-	m_cameraPos.y += 200.0f;
-	Vector3 cameraTarget = m_cameraDir * 1000.0f + m_skinPos;
+	m_cameraPos = m_skinPos + m_toCameraPos;
+	Vector3 cameraTarget = m_skinPos;
+	//m_cameraPos = m_skinPos + Cross(g_camera3D->GetRight(), Vector3::AxisY) * 5.0f;
+	//m_cameraPos.y += 200.0f;
+	//Vector3 cameraTarget = m_cameraDir * 1000.0f + m_skinPos;
 
 	g_camera3D->SetPosition(m_cameraPos);
 	g_camera3D->SetTarget(cameraTarget);

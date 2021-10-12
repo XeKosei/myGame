@@ -7,7 +7,7 @@ namespace nsHikageri
 	bool GameScene::Start()
 	{
 		//ステージを作成
-		m_backGround = NewGO<BackGround>(0);
+		m_backGround = NewGO<nsBackGround::BackGround>(0);
 
 		//プレイヤーを作成
 		m_player = NewGO<nsPlayer::Player>(0);

@@ -24,7 +24,7 @@ namespace nsHikageri
 			//向き
 			Vector3 m_direction = { 0.0f, 0.0f, 0.0 };
 			//位置
-			Vector3 m_position = { Vector3::Zero };
+			Vector3 m_position = Vector3::Zero;
 			//プレイヤー
 			nsPlayer::Player* m_player = nullptr;
 		};

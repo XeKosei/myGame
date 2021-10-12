@@ -9,6 +9,8 @@ namespace nsHikageri
 {
 	namespace nsPlayer
 	{
+		using namespace nsPlayerConstant;
+
 		Player::~Player()
 		{
 			DeleteGO(m_playerModel);
@@ -17,11 +19,18 @@ namespace nsHikageri
 		}
 		bool Player::Start()
 		{
-			//プレイヤーのモデルを表示
+			//プレイヤーのモデルを作成
 			m_playerModel = NewGO<SkinModelRender>(0);
 			m_playerModel->Init("Assets/modelData/unityChan.tkm", "Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
 			m_playerModel->SetPosition(Vector3::Zero);
 			m_playerModel->SetSpotLightCasterFlag(false);
+
+			//キャラクターコントローラーを作成
+			m_charaCon.Init(
+				PLAYER_MODEL_WIDTH,	//半径
+				PLAYER_MODEL_HEIGHT,	//高さ
+				m_position//初期位置
+			);
 
 			//アニメーションをロード
 			animationClips[enAnimationClip_Idle].Load("Assets/animData/Idle.tka");
@@ -29,7 +38,7 @@ namespace nsHikageri
 			animationClips[enAnimationClip_walk].Load("Assets/animData/walk.tka");
 			animationClips[enAnimationClip_walk].SetLoopFlag(true);	//ループモーションにする。
 
-			//プレイヤー関係のインスタンスを生成
+			//プレイヤー関係のインスタンスを作成
 			m_playerMove = NewGO<PlayerMove>(0);
 			m_playerMove->SetPlayer(this);
 			m_playerCamera = NewGO<PlayerCamera>(0);
@@ -47,6 +56,5 @@ namespace nsHikageri
 			m_playerMove->ExecuteUpdate();
 			m_playerCamera->ExecuteUpdate();
 		}
-
 	}
 }

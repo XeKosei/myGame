@@ -25,11 +25,17 @@ namespace nsHikageri
 			/// @param qRot 設定する回転
 			void SetRotation(Quaternion qRot) { m_playerModel->SetRotation(qRot); };
 
+			/// @brief プレイヤーのキャラコンを取得する。(PlayerMoveクラスで利用)
+			/// @return プレイヤーのキャラコン
+			CharacterController* GetCharaCon() { return &m_charaCon; };
 		private:
+			//プレイヤーの位置
 			Vector3 m_position = { Vector3::Zero };
 
 			//モデル
 			SkinModelRender* m_playerModel = nullptr;
+			//プレイヤーのキャラコン
+			CharacterController m_charaCon;
 
 			//アニメーション関連
 			enum {

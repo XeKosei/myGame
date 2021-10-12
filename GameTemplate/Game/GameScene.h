@@ -2,8 +2,8 @@
 
 namespace nsHikageri
 {
-	class BackGround;
 	namespace nsPlayer { class Player; }
+	namespace nsBackGround { class BackGround; }
 	class GameScene : public IGameObject
 	{
 	public:
@@ -12,7 +12,7 @@ namespace nsHikageri
 
 	private:
 		//ステージ
-		BackGround* m_backGround = nullptr;
+		nsBackGround::BackGround* m_backGround = nullptr;
 		//プレイヤー
 		nsPlayer::Player* m_player = nullptr;
 		//ディレクションライト

@@ -8,13 +8,11 @@ namespace nsHikageri
 
 		class PlayerMove : public IGameObject
 		{
-			
-
 		public:
 			bool Start();
 			void ExecuteUpdate();
-			void Move();
-			void Turn();
+			void Move();	//移動処理
+			void Turn();	//回転処理
 
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
@@ -23,6 +21,8 @@ namespace nsHikageri
 		private:
 			//位置
 			Vector3 m_position = { Vector3::Zero };
+			//プレイヤーが動く速さ
+			float m_plMoveSpeed = 0.0f;
 			//速度
 			Vector3 m_velocity = { Vector3::Zero };
 			//回転
