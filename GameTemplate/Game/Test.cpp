@@ -52,7 +52,7 @@ void Test::Update()
 	//Turn();
 	CameraMove();
 	SpotLightMove();
-	//m_skin->PlayAnimation(enAnimationClip_walk);
+	m_skin->PlayAnimation(enAnimationClip_walk);
 }
 
 void Test::TestDirLig()

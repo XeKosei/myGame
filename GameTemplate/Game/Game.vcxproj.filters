@@ -272,6 +272,9 @@
     <ClCompile Include="FlashLight.cpp">
       <Filter>ソース ファイル\FlashLight</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -507,6 +510,9 @@
     </ClInclude>
     <ClInclude Include="FlashLightConstant.h">
       <Filter>ヘッダー ファイル\FlashLight</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

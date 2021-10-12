@@ -2,6 +2,8 @@
 #include "GameScene.h"
 #include "BackGround.h"
 #include "Player.h"
+#include "Enemy.h";
+
 namespace nsHikageri
 {
 	bool GameScene::Start()
@@ -11,6 +13,9 @@ namespace nsHikageri
 
 		//プレイヤーを作成
 		m_player = NewGO<nsPlayer::Player>(0);
+
+		//エネミーを作成
+		m_enemy = NewGO<nsEnemy::Enemy>(0);
 
 		//ディレクションライトを作成
 		m_dirLig = NewGO<DirectionLight>(0);
