@@ -1,12 +1,10 @@
 #pragma once
 namespace nsHikageri
 {
-	namespace nsPlayer
+	namespace nsEnemy
 	{
-		class Player;
-		//class PlayerConstant;
-
-		class PlayerMove : public IGameObject
+		class Enemy;
+		class EnemyMove : public IGameObject
 		{
 		public:
 			bool Start();
@@ -16,22 +14,19 @@ namespace nsHikageri
 
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
-
-			void SetCrouchDownFlag(bool crouchDownFlag) { m_crouchDownFlag = crouchDownFlag; };
+			void SetEnemy(Enemy* pl) { m_enemy = pl; };
 		private:
 			//位置
 			Vector3 m_position = { Vector3::Zero };
 			//プレイヤーが動く速さ
-			float m_plMoveSpeed = 0.0f;
+			float m_moveSpeed = 0.0f;
 			//速度
 			Vector3 m_velocity = { Vector3::Zero };
 			//回転
 			Quaternion m_qRot = { 0.0f,0.0f,0.0f,0.0f };
-			//屈んでいるかどうか
-			bool m_crouchDownFlag = false;
 			//プレイヤー
-			Player* m_player = nullptr;
+			Enemy* m_enemy = nullptr;
 		};
 	}
 }
+

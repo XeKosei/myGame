@@ -284,6 +284,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	{
 		//ランバート拡散反射
 		float3 diffuseLig = CalcLambertDiffuse(directionLigData[i].ligDir, directionLigData[i].ligColor,psIn.normal);
+		diffuseLig /= 3.1415926;
 
 		//フォン鏡面反射
 		float3 specularLig = CalcPhongSpecular(directionLigData[i].ligDir, directionLigData[i].ligColor, psIn.worldPos, psIn.normal);
@@ -409,7 +410,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	}
 
 	//環境光
-	float3 ambientLig = 0.8f;
+	float3 ambientLig = 0.1f;
 	finalColor.xyz += ambientLig;
 
 	finalColor *= albedoColor;

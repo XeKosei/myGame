@@ -10,6 +10,7 @@ namespace nsHikageri
 
 		bool PlayerCamera::Start()
 		{
+			m_plEyeHeight = INI_PLAYER_EYE_HEIGHT;
 			return true;
 		}
 
@@ -45,7 +46,7 @@ namespace nsHikageri
 			//カメラの位置を計算する。
 			m_cameraPos = m_player->GetPosition();
 			//カメラの位置を、プレイヤーの目の高さにする。
-			m_cameraPos.y += PLAYER_EYES_HEIGHT;
+			m_cameraPos.y += m_plEyeHeight;
 			//カメラの位置から、カメラの向いている方向に一定以上向かった位置を注視点として設定する。
 			Vector3 cameraTarget = m_cameraPos + m_cameraDir * TO_CAMERA_TARGET_DIS;
 

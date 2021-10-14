@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FlashLight.h"
+#include "FlashLightAction.h"
 #include "FlashLightConstant.h"
 #include "Player.h"
 
@@ -13,7 +14,6 @@ namespace nsHikageri
 		{
 			//DeleteGO(m_flashLightModel);
 			DeleteGO(m_spotLight);
-			
 		}
 
 		bool FlashLight::Start()
@@ -29,17 +29,25 @@ namespace nsHikageri
 			m_spotLight->SetPosition(m_player->GetPosition());
 			m_spotLight->SetDirection(m_direction);
 			m_spotLight->SetColor(FLASHLIGHT_INI_COLOR);
-			m_spotLight->SetRange(FLASHLIGHT_INI_RANGE);
-			m_spotLight->SetAngle(FLASHLIGHT_INI_ANGLE / 2);	//(スポットライトに送るアングルは半径なので、2で割る。
+			m_spotLight->SetRange(0.0f);
+			m_flashLightAngle = FLASHLIGHT_INI_ANGLE;	//スポットライトの射出角度
+			m_spotLight->SetAngle(m_flashLightAngle / 2);//(スポットライトに送るアングルは半径なので、2で割る。
 
 			//スポットライトカメラのアングルを設定
-			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(FLASHLIGHT_INI_ANGLE);
+			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(m_flashLightAngle);
+
+			//懐中電灯関係のインスタンスを作成
+			m_flashLightAction = NewGO<FlashLightAction>(0);
+			m_flashLightAction->SetFlashLight(this);
 
 			return true;
 		}
 
 		void FlashLight::Update()
 		{
+			//懐中電灯関係の処理
+			m_flashLightAction->ExecuteUpdate();
+
 			//まず懐中電灯をカメラと同じ位置に設定
 			m_position = g_camera3D->GetPosition();
 			//懐中電灯の位置を横にずらす。

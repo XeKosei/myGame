@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "PlayerMove.h"
 #include "PlayerCamera.h"
+#include "PlayerAction.h"
 #include "PlayerConstant.h"
 #include "FlashLight.h"
 
@@ -19,10 +20,13 @@ namespace nsHikageri
 		}
 		bool Player::Start()
 		{
+			//プレイヤーの初期位置
+			m_position = INI_PLAYER_POSITION;
+
 			//プレイヤーのモデルを作成
 			m_playerModel = NewGO<SkinModelRender>(0);
 			m_playerModel->Init("Assets/modelData/unityChan.tkm", "Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
-			m_playerModel->SetPosition(Vector3::Zero);
+			m_playerModel->SetPosition(m_position);
 			m_playerModel->SetSpotLightCasterFlag(false);
 
 			//キャラクターコントローラーを作成
@@ -43,6 +47,10 @@ namespace nsHikageri
 			m_playerMove->SetPlayer(this);
 			m_playerCamera = NewGO<PlayerCamera>(0);
 			m_playerCamera->SetPlayer(this);
+			m_playerAction = NewGO<PlayerAction>(0);
+			m_playerAction->SetPlayer(this);
+			m_playerAction->SetPlayerCamera(m_playerCamera);
+			m_playerAction->SetPlayerMove(m_playerMove);
 
 			//懐中電灯を生成
 			m_flashLight = NewGO<nsFlashLight::FlashLight>(0);
@@ -54,6 +62,7 @@ namespace nsHikageri
 		void Player::Update()
 		{
 			m_playerMove->ExecuteUpdate();
+			m_playerAction->ExecuteUpdate();
 			m_playerCamera->ExecuteUpdate();
 		}
 	}

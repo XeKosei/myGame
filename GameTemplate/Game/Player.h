@@ -7,6 +7,7 @@ namespace nsHikageri
 	{
 		class PlayerMove;
 		class PlayerCamera;		
+		class PlayerAction;
 		//class PlayerConstant;
 
 		class Player : public IGameObject
@@ -24,6 +25,8 @@ namespace nsHikageri
 			/// @brief プレイヤーのモデルの回転を設定する。(PlayerMoveクラスで利用)
 			/// @param qRot 設定する回転
 			void SetRotation(Quaternion qRot) { m_playerModel->SetRotation(qRot); };
+
+			void SetScale(Vector3  scale) { m_playerModel->SetScale(scale); };
 
 			/// @brief プレイヤーのキャラコンを取得する。(PlayerMoveクラスで利用)
 			/// @return プレイヤーのキャラコン
@@ -48,6 +51,7 @@ namespace nsHikageri
 			//プレイヤー関係のクラス
 			PlayerMove* m_playerMove = nullptr;
 			PlayerCamera* m_playerCamera = nullptr;
+			PlayerAction* m_playerAction = nullptr;
 
 			//懐中電灯
 			nsFlashLight::FlashLight* m_flashLight = nullptr;
