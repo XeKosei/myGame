@@ -296,6 +296,9 @@
     <ClCompile Include="EnemyMove.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="AbilityStrobeFlash.cpp">
+      <Filter>ソース ファイル\FlashLight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -546,6 +549,9 @@
     </ClInclude>
     <ClInclude Include="EnemyConstant.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityStrobeFlash.h">
+      <Filter>ヘッダー ファイル\FlashLight</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

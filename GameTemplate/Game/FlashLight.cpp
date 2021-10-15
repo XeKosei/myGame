@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "FlashLight.h"
 #include "FlashLightAction.h"
+#include "AbilityStrobeFlash.h"
 #include "FlashLightConstant.h"
 #include "Player.h"
 
@@ -28,9 +29,9 @@ namespace nsHikageri
 			m_spotLight = NewGO<nsHikageri::SpotLight>(0);
 			m_spotLight->SetPosition(m_player->GetPosition());
 			m_spotLight->SetDirection(m_direction);
-			m_spotLight->SetColor(FLASHLIGHT_INI_COLOR);
+			m_spotLight->SetColor(INI_FLASHLIGHT_COLOR);
 			m_spotLight->SetRange(0.0f);
-			m_flashLightAngle = FLASHLIGHT_INI_ANGLE;	//スポットライトの射出角度
+			m_flashLightAngle = INI_FLASHLIGHT_ANGLE;	//スポットライトの射出角度
 			m_spotLight->SetAngle(m_flashLightAngle / 2);//(スポットライトに送るアングルは半径なので、2で割る。
 
 			//スポットライトカメラのアングルを設定
@@ -39,6 +40,8 @@ namespace nsHikageri
 			//懐中電灯関係のインスタンスを作成
 			m_flashLightAction = NewGO<FlashLightAction>(0);
 			m_flashLightAction->SetFlashLight(this);
+			m_abilityStrobeFlash = NewGO<AbilityStrobeFlash>(0);
+			m_abilityStrobeFlash->SetFlashLight(this);
 
 			return true;
 		}
@@ -47,6 +50,7 @@ namespace nsHikageri
 		{
 			//懐中電灯関係の処理
 			m_flashLightAction->ExecuteUpdate();
+			m_abilityStrobeFlash->ExecuteUpdate();
 
 			//まず懐中電灯をカメラと同じ位置に設定
 			m_position = g_camera3D->GetPosition();

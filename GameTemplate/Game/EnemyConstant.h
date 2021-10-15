@@ -5,8 +5,8 @@ namespace nsHikageri
 	{
 		namespace nsEnemyConstant
 		{
-			static const float ENEMY_MODEL_WIDTH = 50.0f;	//プレイヤーのモデルの横幅
-			static const float ENEMY_MODEL_HEIGHT = 300.0f;	//プレイヤーのモデルの高さ
+			static const float ENEMY_MODEL_WIDTH = 20.0f;	//プレイヤーのモデルの横幅
+			static const float ENEMY_MODEL_HEIGHT = 20.0f;	//プレイヤーのモデルの高さ
 		}
 		namespace nsEnemyMoveConstant
 		{

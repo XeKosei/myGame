@@ -232,6 +232,8 @@ float3 CalcLambertDiffuse(float3 ligDir, float3 ligColor,float3 normal )
 		t = 0;
 	}
 
+	t /= 3.1415926;
+
 	return ligColor * t;
 }
 
@@ -284,7 +286,6 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	{
 		//ランバート拡散反射
 		float3 diffuseLig = CalcLambertDiffuse(directionLigData[i].ligDir, directionLigData[i].ligColor,psIn.normal);
-		diffuseLig /= 3.1415926;
 
 		//フォン鏡面反射
 		float3 specularLig = CalcPhongSpecular(directionLigData[i].ligDir, directionLigData[i].ligColor, psIn.worldPos, psIn.normal);

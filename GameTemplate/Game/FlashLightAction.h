@@ -19,18 +19,9 @@ namespace nsHikageri
 			/// @param pl フラッシュライトに参照
 			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
 
-			void ChargeFlashPrepare();
-
-			void ChargeFlash();
 		private:
 			//フラッシュライト
 			FlashLight* m_flashLight = nullptr;
-
-			int m_chargeCount = 0;
-
-			Vector3 m_chargeFlashColor = { 50.0f, 50.0f, 50.0f };
-
-			bool m_chargeFlashFlag = false;
 		};
 	}
 }

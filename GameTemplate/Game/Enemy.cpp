@@ -40,8 +40,6 @@ namespace nsHikageri
 		}
 		void Enemy::Update()
 		{
-			//ターゲット(仮)
-			m_targetPos = m_player->GetPosition();
 			m_enemyModel->PlayAnimation(enAnimationClip_Run);
 			
 			//エネミー関連の処理

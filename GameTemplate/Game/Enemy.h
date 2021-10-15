@@ -34,10 +34,6 @@ namespace nsHikageri
 			/// @return プレイヤー
 			nsPlayer::Player* GetPlayer() { return m_player; }
 
-			/// @brief ターゲットの取得
-			/// @return ターゲットの位置
-			Vector3 GetTargetPos() { return m_targetPos; }
-
 		private:
 			//モデル
 			SkinModelRender* m_enemyModel = nullptr;
