@@ -3,6 +3,7 @@
 #include "PlayerMove.h"
 #include "PlayerCamera.h"
 #include "PlayerAction.h"
+#include "PlayerHP.h"
 #include "PlayerConstant.h"
 #include "FlashLight.h"
 
@@ -51,6 +52,8 @@ namespace nsHikageri
 			m_playerAction->SetPlayer(this);
 			m_playerAction->SetPlayerCamera(m_playerCamera);
 			m_playerAction->SetPlayerMove(m_playerMove);
+			m_playerHP = NewGO<PlayerHP>(0);
+			m_playerHP->SetPlayer(this);
 
 			//‰ù’†“d“”‚ğ¶¬
 			m_flashLight = NewGO<nsFlashLight::FlashLight>(0);
@@ -61,6 +64,10 @@ namespace nsHikageri
 
 		void Player::Update()
 		{
+			//€‚ñ‚¾‚ç‰½‚à‚Å‚«‚È‚¢(‰¼)
+			if (m_deadFlag == true)
+				return;
+
 			m_playerMove->ExecuteUpdate();
 			m_playerAction->ExecuteUpdate();
 			m_playerCamera->ExecuteUpdate();

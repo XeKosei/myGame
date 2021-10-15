@@ -16,5 +16,15 @@ namespace nsHikageri
 			static const float GRAVITY_SPEED = 9.8f * 0.1f;	//落下スピード
 			static const float GRAVITY_INDEX = 1.2f;		//落下スピードにかける指数
 		}
+
+		namespace nsEnemyStateConstant
+		{
+			static const float ENEMY_CAN_ATTACK_DIS = 50.0f;	//エネミーが攻撃に移行できる距離
+		}
+
+		namespace nsEnemyAttackConstant
+		{
+			
+		}
 	}
 }

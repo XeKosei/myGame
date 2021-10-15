@@ -12,9 +12,13 @@ namespace nsHikageri
 			void Move();	//移動処理
 			void Turn();	//回転処理
 
+			/// @brief EnemyMoveのm_positionを取得
+			/// @return エネミーの位置
+			Vector3 GetPosition() { return m_position; };
+
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
-			void SetEnemy(Enemy* pl) { m_enemy = pl; };
+			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };
 
 			/// @brief エネミーが向かう位置を設定
 			/// @param pos エネミーが向かう位置

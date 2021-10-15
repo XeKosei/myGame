@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Enemy.h"
 #include "EnemyMove.h"
+#include "EnemyState.h"
+#include "EnemyAttack.h"
 #include "EnemyConstant.h"
 #include "Player.h"
 
@@ -35,6 +37,10 @@ namespace nsHikageri
 			//エネミー関連のインスタンスを作成
 			m_enemyMove = NewGO<EnemyMove>(0);
 			m_enemyMove->SetEnemy(this);
+			m_enemyState = NewGO<EnemyState>(0);
+			m_enemyState->SetEnemy(this);
+			m_enemyAttack = NewGO<EnemyAttack>(0);
+			m_enemyAttack->SetEnemy(this);
 
 			return true;
 		}
@@ -44,6 +50,8 @@ namespace nsHikageri
 			
 			//エネミー関連の処理
 			m_enemyMove->ExecuteUpdate();
+			m_enemyState->ExecuteUpdate();
+			m_enemyAttack->ExecuteUpdate();
 		}
 	}
 }

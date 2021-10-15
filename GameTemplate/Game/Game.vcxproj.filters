@@ -299,6 +299,15 @@
     <ClCompile Include="AbilityStrobeFlash.cpp">
       <Filter>ソース ファイル\FlashLight</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerHP.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyState.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAttack.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -552,6 +561,15 @@
     </ClInclude>
     <ClInclude Include="AbilityStrobeFlash.h">
       <Filter>ヘッダー ファイル\FlashLight</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHP.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyState.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAttack.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,6 +8,7 @@ namespace nsHikageri
 		class PlayerMove;
 		class PlayerCamera;		
 		class PlayerAction;
+		class PlayerHP;
 		//class PlayerConstant;
 
 		class Player : public IGameObject
@@ -34,7 +35,17 @@ namespace nsHikageri
 			/// @brief プレイヤーのキャラコンを取得する。(PlayerMoveクラスで利用)
 			/// @return プレイヤーのキャラコン
 			CharacterController* GetCharaCon() { return &m_charaCon; };
+
+			//死んだかどうか(仮)
+			void SetDeadFlag(bool isDead) { m_deadFlag = isDead; }
+
+			PlayerMove* GetPlayerMove() { return m_playerMove; };
+			PlayerCamera* GetPlayerCamera() { return m_playerCamera; };
+			PlayerAction* nsPlayerActionConstant() { return m_playerAction; };
+			PlayerHP* GetPlayerHP() { return m_playerHP; };
+
 		private:
+			bool m_deadFlag = false;
 			//プレイヤーの位置
 			Vector3 m_position = { Vector3::Zero };
 
@@ -55,6 +66,7 @@ namespace nsHikageri
 			PlayerMove* m_playerMove = nullptr;
 			PlayerCamera* m_playerCamera = nullptr;
 			PlayerAction* m_playerAction = nullptr;
+			PlayerHP* m_playerHP = nullptr;
 
 			//懐中電灯
 			nsFlashLight::FlashLight* m_flashLight = nullptr;

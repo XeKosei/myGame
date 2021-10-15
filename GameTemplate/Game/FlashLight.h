@@ -47,6 +47,9 @@ namespace nsHikageri
 			/// @return 射出角度
 			float GetFlashLightAngle() { return m_flashLightAngle; }
 
+			FlashLightAction* GetFlashLightAction() { return m_flashLightAction; }
+			AbilityStrobeFlash* GetAbilityStrobeFlash() { return m_abilityStrobeFlash; }
+
 		private:
 			SkinModelRender* m_flashLightModel = nullptr;
 			//スポットライト

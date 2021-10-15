@@ -34,5 +34,10 @@ namespace nsHikageri
 			static const float CROUCHDOWN_PLAYER_EYE_HEIGHT = 100.0f;		//プレイヤーが屈んでいる時の目の高さ
 			static const Vector3 CROUCHDOWN_PLAYER_SCALE = { 1.0f, 0.5f, 1.0f };	//プレイヤーのモデルの大きさの初期値
 		}
+
+		namespace nsPlayerHPConstant
+		{
+			static const float MAX_PLAYER_HP = 100.0f;	//プレイヤーの体力の最大値
+		}
 	}
 }

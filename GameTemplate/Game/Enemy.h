@@ -6,6 +6,8 @@ namespace nsHikageri
 	namespace nsEnemy
 	{
 		class EnemyMove;
+		class EnemyState;
+		class EnemyAttack;
 
 		class Enemy : public IGameObject
 		{
@@ -34,6 +36,9 @@ namespace nsHikageri
 			/// @return プレイヤー
 			nsPlayer::Player* GetPlayer() { return m_player; }
 
+			EnemyMove* GetEnemyMove() { return m_enemyMove; }
+			EnemyAttack* GetEnemyAttack() { return m_enemyAttack; };
+			EnemyState* GetEnemyState() { return m_enemyState; };
 		private:
 			//モデル
 			SkinModelRender* m_enemyModel = nullptr;
@@ -53,6 +58,8 @@ namespace nsHikageri
 
 			//エネミー関連
 			EnemyMove* m_enemyMove = nullptr;
+			EnemyState* m_enemyState = nullptr;
+			EnemyAttack* m_enemyAttack = nullptr;
 		};
 	}
 }

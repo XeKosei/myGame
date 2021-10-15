@@ -21,7 +21,7 @@ namespace nsHikageri
 		{
 			static const int INI_STROBEFLASH_CHARGE_COUNT = 50;	//ストロボフラッシュのチャージ時間の初期値
 			static const Vector3 INI_STROBEFLASH_COLOR = {150.0f,150.0f,150.0f};	//ストロボフラッシュの明るさの初期値
-			static const Vector3 STROBEFLASH_COLOR_DECREASE_SPEED = {1.0f,1.0f,1.0f};	//ストロボフラッシュの明るさが下がる速さ
+			static const Vector3 STROBEFLASH_COLOR_DECREASE_SPEED = {1.5f,1.5f,1.5f};	//ストロボフラッシュの明るさが下がる速さ
 		}
 	}
 }
