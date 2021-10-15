@@ -22,11 +22,13 @@ namespace nsHikageri
 			//プレイヤーを追いかける処理
 			void Chase();
 
-			void SetEnemyState(EnEnemyStates enState) { m_enemyStates = enState; };
-
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
 			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };
+
+			/// @brief エネミーの状態を設定する。
+			/// @param enState エネミーの状態
+			void SetEnemyState(EnEnemyStates enState) { m_enemyStates = enState; };
 
 		private:
 			//エネミー

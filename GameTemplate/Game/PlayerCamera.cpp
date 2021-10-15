@@ -1,7 +1,5 @@
 #include "stdafx.h"
-#include "PlayerCamera.h"
-#include "Player.h"
-#include "PlayerConstant.h"
+#include "PlayerInclude.h"
 namespace nsHikageri
 {
 	namespace nsPlayer
@@ -44,7 +42,7 @@ namespace nsHikageri
 			}
 
 			//カメラの位置を計算する。
-			m_cameraPos = m_player->GetPosition();
+			m_cameraPos = m_player->GetPlayerMove()->GetPosition();
 			//カメラの位置を、プレイヤーの目の高さにする。
 			m_cameraPos.y += m_plEyeHeight;
 			//カメラの位置から、カメラの向いている方向に一定以上向かった位置を注視点として設定する。

@@ -12,15 +12,15 @@ namespace nsHikageri
 			bool Start();
 			void ExecuteUpdate();
 
+			/// @brief フラッシュライトにアクセスできるようにする。
+			/// @param pl フラッシュライトに参照
+			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
+
 			/// @brief ストロボフラッシュを発動する準備の処理
 			void StrobeFlashPrepare();
 
 			/// @brief ストロボフラッシュを発動する処理
 			void StrobeFlash();
-
-			/// @brief フラッシュライトにアクセスできるようにする。
-			/// @param pl フラッシュライトに参照
-			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
 
 		private:
 			//フラッシュライト

@@ -54,28 +54,34 @@
     <Filter Include="ヘッダー ファイル\prefab">
       <UniqueIdentifier>{b70854ba-9382-406c-8572-5ed10ded5a6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Player">
+    <Filter Include="ソース ファイル\Hikageri">
+      <UniqueIdentifier>{a9cd1e6d-63ed-4818-adfd-578ab0056dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Hikageri\Player">
       <UniqueIdentifier>{2e56dd06-3b38-4440-ae5c-b63a9fb64982}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Player">
-      <UniqueIdentifier>{35523449-35d0-4428-b466-72169289755b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\FlashLight">
+    <Filter Include="ソース ファイル\Hikageri\FlashLight">
       <UniqueIdentifier>{47014aad-aab4-41d1-a465-e52652ae9853}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\FlashLight">
-      <UniqueIdentifier>{d726b1f7-e226-4f5e-b2aa-e73ac4ea5ee1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Enemy">
+    <Filter Include="ソース ファイル\Hikageri\Enemy">
       <UniqueIdentifier>{ae938269-e55f-4c65-8440-2ecea838cb04}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Enemy">
-      <UniqueIdentifier>{ecfdcc15-4ac5-4c35-98d1-6f0574259715}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\BackGround">
+    <Filter Include="ソース ファイル\Hikageri\BackGround">
       <UniqueIdentifier>{0d3ffcf1-6692-4acc-ae53-0632e84927f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\BackGround">
+    <Filter Include="ヘッダー ファイル\Hikageri">
+      <UniqueIdentifier>{5faf718b-1b4c-4c3f-b325-36a27264e2fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Hikageri\Player">
+      <UniqueIdentifier>{35523449-35d0-4428-b466-72169289755b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Hikageri\FlashLight">
+      <UniqueIdentifier>{d726b1f7-e226-4f5e-b2aa-e73ac4ea5ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Hikageri\Enemy">
+      <UniqueIdentifier>{ecfdcc15-4ac5-4c35-98d1-6f0574259715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Hikageri\BackGround">
       <UniqueIdentifier>{6cf5905d-7b3f-4d45-b0e1-da27aeeb1557}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -270,43 +276,43 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerMove.cpp">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerCamera.cpp">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
     </ClCompile>
     <ClCompile Include="FlashLight.cpp">
-      <Filter>ソース ファイル\FlashLight</Filter>
+      <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
-      <Filter>ソース ファイル\BackGround</Filter>
+      <Filter>ソース ファイル\Hikageri\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAction.cpp">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
     </ClCompile>
     <ClCompile Include="FlashLightAction.cpp">
-      <Filter>ソース ファイル\FlashLight</Filter>
+      <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
     </ClCompile>
     <ClCompile Include="EnemyMove.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="AbilityStrobeFlash.cpp">
-      <Filter>ソース ファイル\FlashLight</Filter>
+      <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
     </ClCompile>
     <ClCompile Include="PlayerHP.cpp">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
     </ClCompile>
     <ClCompile Include="EnemyState.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyAttack.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -524,52 +530,61 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル\Player</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerMove.h">
-      <Filter>ヘッダー ファイル\Player</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerConstant.h">
-      <Filter>ヘッダー ファイル\Player</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCamera.h">
-      <Filter>ヘッダー ファイル\Player</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
     <ClInclude Include="FlashLight.h">
-      <Filter>ヘッダー ファイル\FlashLight</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
     </ClInclude>
     <ClInclude Include="FlashLightConstant.h">
-      <Filter>ヘッダー ファイル\FlashLight</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル\Enemy</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
-      <Filter>ヘッダー ファイル\BackGround</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="PlayerAction.h">
-      <Filter>ヘッダー ファイル\Player</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
     <ClInclude Include="FlashLightAction.h">
-      <Filter>ヘッダー ファイル\FlashLight</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
     </ClInclude>
     <ClInclude Include="EnemyMove.h">
-      <Filter>ヘッダー ファイル\Enemy</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyConstant.h">
-      <Filter>ヘッダー ファイル\Enemy</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="AbilityStrobeFlash.h">
-      <Filter>ヘッダー ファイル\FlashLight</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
     </ClInclude>
     <ClInclude Include="PlayerHP.h">
-      <Filter>ヘッダー ファイル\Player</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
     <ClInclude Include="EnemyState.h">
-      <Filter>ヘッダー ファイル\Enemy</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAttack.h">
-      <Filter>ヘッダー ファイル\Enemy</Filter>
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInclude.h">
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyInclude.h">
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="FlashLightInclude.h">
+      <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

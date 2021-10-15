@@ -1,10 +1,5 @@
 #include "stdafx.h"
-#include "Player.h"
-#include "PlayerMove.h"
-#include "PlayerCamera.h"
-#include "PlayerAction.h"
-#include "PlayerHP.h"
-#include "PlayerConstant.h"
+#include "PlayerInclude.h"
 #include "FlashLight.h"
 
 namespace nsHikageri
@@ -21,20 +16,17 @@ namespace nsHikageri
 		}
 		bool Player::Start()
 		{
-			//プレイヤーの初期位置
-			m_position = INI_PLAYER_POSITION;
-
 			//プレイヤーのモデルを作成
 			m_playerModel = NewGO<SkinModelRender>(0);
 			m_playerModel->Init("Assets/modelData/unityChan.tkm", "Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
-			m_playerModel->SetPosition(m_position);
+			m_playerModel->SetPosition(INI_PLAYER_POSITION);
 			m_playerModel->SetSpotLightCasterFlag(false);
 
 			//キャラクターコントローラーを作成
 			m_charaCon.Init(
 				PLAYER_MODEL_WIDTH,	//半径
 				PLAYER_MODEL_HEIGHT,	//高さ
-				m_position//初期位置
+				INI_PLAYER_POSITION//初期位置
 			);
 
 			//アニメーションをロード
@@ -50,8 +42,6 @@ namespace nsHikageri
 			m_playerCamera->SetPlayer(this);
 			m_playerAction = NewGO<PlayerAction>(0);
 			m_playerAction->SetPlayer(this);
-			m_playerAction->SetPlayerCamera(m_playerCamera);
-			m_playerAction->SetPlayerMove(m_playerMove);
 			m_playerHP = NewGO<PlayerHP>(0);
 			m_playerHP->SetPlayer(this);
 

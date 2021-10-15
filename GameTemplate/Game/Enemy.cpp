@@ -1,9 +1,5 @@
 #include "stdafx.h"
-#include "Enemy.h"
-#include "EnemyMove.h"
-#include "EnemyState.h"
-#include "EnemyAttack.h"
-#include "EnemyConstant.h"
+#include "EnemyInclude.h"
 #include "Player.h"
 
 namespace nsHikageri

@@ -16,13 +16,7 @@ namespace nsHikageri
 			bool Start();
 			void Update();
 
-			/// @brief エネミーモデルの位置を設定する。EnemyMoveクラスで利用)
-			/// @param pos 設定する位置
-			void SetPosition(Vector3 pos) { m_enemyModel->SetPosition(pos); };
-
-			/// @brief エネミーのモデルの回転を設定する。(EnemyMoveクラスで利用)
-			/// @param qRot 設定する回転
-			void SetRotation(Quaternion qRot) { m_enemyModel->SetRotation(qRot); };
+			SkinModelRender* GetEnemyModel() { return m_enemyModel; }
 
 			/// @brief エネミーのキャラコンを取得する。(EnemyMoveクラスで利用)
 			/// @return エネミーのキャラコン
@@ -36,6 +30,7 @@ namespace nsHikageri
 			/// @return プレイヤー
 			nsPlayer::Player* GetPlayer() { return m_player; }
 
+			//エネミー関係のインスタンスにアクセスする
 			EnemyMove* GetEnemyMove() { return m_enemyMove; }
 			EnemyAttack* GetEnemyAttack() { return m_enemyAttack; };
 			EnemyState* GetEnemyState() { return m_enemyState; };

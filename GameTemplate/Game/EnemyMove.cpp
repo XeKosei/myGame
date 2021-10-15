@@ -1,8 +1,6 @@
 #include "stdafx.h"
-#include "EnemyMove.h"
-#include "Enemy.h"
-#include "EnemyConstant.h"
-#include "Player.h"
+#include "EnemyInclude.h"
+#include "PlayerInclude.h"
 
 namespace nsHikageri
 {
@@ -24,7 +22,7 @@ namespace nsHikageri
 
 		void EnemyMove::Move()
 		{
-			m_targetPos = m_enemy->GetPlayer()->GetPosition();
+			m_targetPos = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition();
 			//スティックの傾きからプレイヤーの速度を計算
 			m_velocity = m_targetPos - m_position;
 			m_velocity.Normalize();
@@ -50,7 +48,7 @@ namespace nsHikageri
 			//位置に速度を加算
 			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, 1.0f);
 			//位置を設定する。
-			m_enemy->SetPosition(m_position);
+			m_enemy->GetEnemyModel()->SetPosition(m_position);
 		}
 
 		void EnemyMove::Turn()
@@ -65,9 +63,8 @@ namespace nsHikageri
 				//atanが返してくる角度はラジアン単位なので
 				//SetRotationDegではなくSetRotationを使用する。
 				m_qRot.SetRotation(Vector3::AxisY, angle);
-				m_enemy->SetRotation(m_qRot);
+				m_enemy->GetEnemyModel()->SetRotation(m_qRot);
 			}
 		}
-
 	}
 }

@@ -1,7 +1,5 @@
 #include "stdafx.h"
-#include "FlashLightAction.h"
-#include "FlashLight.h"
-#include "FlashLightConstant.h"
+#include "FlashLightInclude.h"
 
 namespace nsHikageri
 {
@@ -28,7 +26,7 @@ namespace nsHikageri
 				SwitchOnOff();
 			}
 
-			if (m_flashLight->GetFlashFlag() == true)
+			if (GetFlashFlag() == true)
 			{
 				//十字ボタンの上下で、懐中電灯の射出角度を調節できる。
 				if (g_pad[0]->IsPress(enButtonUp))
@@ -45,10 +43,10 @@ namespace nsHikageri
 		void FlashLightAction::SwitchOnOff()
 		{
 			//懐中電灯の電源のスイッチを切り替える
-			m_flashLight->SetFlashFlag(!m_flashLight->GetFlashFlag());
+			SetFlashFlag(!GetFlashFlag());
 
 			//電源がONならば
-			if (m_flashLight->GetFlashFlag() == true)
+			if (GetFlashFlag() == true)
 			{
 				//ONならば影響範囲を設定
 				m_flashLight->GetSpotLight()->SetRange(nsFlashLightConstant::INI_FLASHLIGHT_RANGE);

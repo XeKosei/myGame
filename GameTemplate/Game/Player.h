@@ -9,7 +9,6 @@ namespace nsHikageri
 		class PlayerCamera;		
 		class PlayerAction;
 		class PlayerHP;
-		//class PlayerConstant;
 
 		class Player : public IGameObject
 		{
@@ -18,19 +17,9 @@ namespace nsHikageri
 			bool Start();
 			void Update();
 
-			/// @brief プレイヤーのモデルの位置を設定する。(PlayerMoveクラスで利用)
-			/// @param pos 設定する位置
-			void SetPosition(Vector3 pos) { m_position = pos; m_playerModel->SetPosition(m_position); };
-	
-			/// @brief プレイヤーのモデルの位置を取得
-			/// @return プレイヤーの位置
-			Vector3 GetPosition() { return m_position; };
-
-			/// @brief プレイヤーのモデルの回転を設定する。(PlayerMoveクラスで利用)
-			/// @param qRot 設定する回転
-			void SetRotation(Quaternion qRot) { m_playerModel->SetRotation(qRot); };
-
-			void SetScale(Vector3  scale) { m_playerModel->SetScale(scale); };
+			/// @brief プレイヤーのモデルのインスタンスを取得する。
+			/// @return プレイヤーのモデルのインスタンス
+			SkinModelRender* GetPlayerModel() { return m_playerModel; }
 
 			/// @brief プレイヤーのキャラコンを取得する。(PlayerMoveクラスで利用)
 			/// @return プレイヤーのキャラコン
@@ -39,6 +28,7 @@ namespace nsHikageri
 			//死んだかどうか(仮)
 			void SetDeadFlag(bool isDead) { m_deadFlag = isDead; }
 
+			//プレイヤー関係のインスタンスにアクセスする
 			PlayerMove* GetPlayerMove() { return m_playerMove; };
 			PlayerCamera* GetPlayerCamera() { return m_playerCamera; };
 			PlayerAction* nsPlayerActionConstant() { return m_playerAction; };
@@ -46,8 +36,6 @@ namespace nsHikageri
 
 		private:
 			bool m_deadFlag = false;
-			//プレイヤーの位置
-			Vector3 m_position = { Vector3::Zero };
 
 			//モデル
 			SkinModelRender* m_playerModel = nullptr;

@@ -18,6 +18,12 @@ namespace nsHikageri
 			/// @param pl プレイヤーの参照
 			void SetPlayer(Player* pl) { m_player = pl; };
 
+			/// @brief プレイヤーのモデルの位置を取得
+			/// @return プレイヤーの位置
+			Vector3 GetPosition() { return m_position; };
+
+			/// @brief　屈んでいるかどうかを設定する。
+			/// @param crouchDownFlag 屈んでいるかどうか
 			void SetCrouchDownFlag(bool crouchDownFlag) { m_crouchDownFlag = crouchDownFlag; };
 		private:
 			//位置

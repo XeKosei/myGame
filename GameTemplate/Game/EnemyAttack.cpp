@@ -1,10 +1,7 @@
 #include "stdafx.h"
-#include "EnemyAttack.h"
-#include "Enemy.h"
-#include "EnemyConstant.h"
+#include "EnemyInclude.h"
 #include "Player.h"
 #include "PlayerHP.h"
-#include "EnemyState.h"
 
 namespace nsHikageri
 {

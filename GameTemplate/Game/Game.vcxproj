@@ -388,11 +388,13 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAttack.h" />
     <ClInclude Include="EnemyConstant.h" />
+    <ClInclude Include="EnemyInclude.h" />
     <ClInclude Include="EnemyMove.h" />
     <ClInclude Include="EnemyState.h" />
     <ClInclude Include="FlashLight.h" />
     <ClInclude Include="FlashLightAction.h" />
     <ClInclude Include="FlashLightConstant.h" />
+    <ClInclude Include="FlashLightInclude.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="LightManager.h" />
@@ -400,6 +402,7 @@
     <ClInclude Include="PlayerAction.h" />
     <ClInclude Include="PlayerCamera.h" />
     <ClInclude Include="PlayerHP.h" />
+    <ClInclude Include="PlayerInclude.h" />
     <ClInclude Include="PlayerMove.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PostEffectManager.h" />

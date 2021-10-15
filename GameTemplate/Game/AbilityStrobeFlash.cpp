@@ -1,7 +1,5 @@
 #include "stdafx.h"
-#include "AbilityStrobeFlash.h"
-#include "FlashLight.h"
-#include "FlashLightConstant.h"
+#include "FlashLightInclude.h"
 
 namespace nsHikageri
 {
@@ -19,7 +17,7 @@ namespace nsHikageri
 		void AbilityStrobeFlash::ExecuteUpdate()
 		{
 			//懐中電灯がついているとき。
-			if (m_flashLight->GetFlashFlag())
+			if (m_flashLight->GetFlashLightAction()->GetFlashFlag())
 			{
 				//ストロボフラッシュのチャージ
 				StrobeFlashPrepare();

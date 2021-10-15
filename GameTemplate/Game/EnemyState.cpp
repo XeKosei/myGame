@@ -1,11 +1,6 @@
 #include "stdafx.h"
-#include "EnemyState.h"
-#include "Enemy.h"
-#include "EnemyConstant.h"
-#include "Player.h"
-#include "EnemyAttack.h"
-#include "EnemyMove.h"
-
+#include "EnemyInclude.h"
+#include "PlayerInclude.h"
 namespace nsHikageri
 {
 	namespace nsEnemy
@@ -40,7 +35,7 @@ namespace nsHikageri
 		void EnemyState::Chase()
 		{
 			//プレイヤーとの距離を計算
-			Vector3 dis = m_enemy->GetPlayer()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition();
+			Vector3 dis = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition();
 			if (dis.Length() <= ENEMY_CAN_ATTACK_DIS)
 			{
 				m_enemyStates = enState_Attack;

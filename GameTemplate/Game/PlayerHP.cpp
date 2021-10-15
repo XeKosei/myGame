@@ -1,7 +1,5 @@
 #include "stdafx.h"
-#include "PlayerHP.h"
-#include "Player.h"
-#include "PlayerConstant.h"
+#include "PlayerInclude.h"
 namespace nsHikageri
 {
 	namespace nsPlayer

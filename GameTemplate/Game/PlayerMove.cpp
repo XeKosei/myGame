@@ -1,7 +1,5 @@
 #include "stdafx.h"
-#include "PlayerMove.h"
-#include "Player.h"
-#include "PlayerConstant.h"
+#include "PlayerInclude.h"
 namespace nsHikageri
 {
 	namespace nsPlayer
@@ -66,7 +64,7 @@ namespace nsHikageri
 			m_position = m_player->GetCharaCon()->Execute(m_velocity, 1.0f);
 			//m_position += m_velocity;
 			//位置を設定する。
-			m_player->SetPosition(m_position);
+			m_player->GetPlayerModel()->SetPosition(m_position);
 		}
 
 		void PlayerMove::Turn()
@@ -83,7 +81,7 @@ namespace nsHikageri
 				//atanが返してくる角度はラジアン単位なので
 				//SetRotationDegではなくSetRotationを使用する。
 				m_qRot.SetRotation(Vector3::AxisY, angle);
-				m_player->SetRotation(m_qRot);
+				m_player->GetPlayerModel()->SetRotation(m_qRot);
 			}
 		}
 	}

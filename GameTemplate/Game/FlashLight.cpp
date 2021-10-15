@@ -1,9 +1,6 @@
 #include "stdafx.h"
-#include "FlashLight.h"
-#include "FlashLightAction.h"
-#include "AbilityStrobeFlash.h"
-#include "FlashLightConstant.h"
-#include "Player.h"
+#include "FlashLightInclude.h"
+#include "PlayerInclude.h"
 
 namespace nsHikageri
 {
@@ -27,7 +24,7 @@ namespace nsHikageri
 
 			//スポットライトを生成
 			m_spotLight = NewGO<nsHikageri::SpotLight>(0);
-			m_spotLight->SetPosition(m_player->GetPosition());
+			m_spotLight->SetPosition(m_player->GetPlayerMove()->GetPosition());
 			m_spotLight->SetDirection(m_direction);
 			m_spotLight->SetColor(INI_FLASHLIGHT_COLOR);
 			m_spotLight->SetRange(0.0f);
