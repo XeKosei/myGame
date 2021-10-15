@@ -2,6 +2,7 @@
 #include "EnemyMove.h"
 #include "Enemy.h"
 #include "EnemyConstant.h"
+#include "Player.h"
 
 namespace nsHikageri
 {
@@ -14,7 +15,7 @@ namespace nsHikageri
 			return true;
 		}
 
-		//Player.cppのUpdate()で呼び出す処理
+		//Enemy.cppのUpdate()で呼び出す処理
 		void EnemyMove::ExecuteUpdate()
 		{
 			Move();
@@ -23,21 +24,15 @@ namespace nsHikageri
 
 		void EnemyMove::Move()
 		{
-			//エネミーの動く速さ
-			m_moveSpeed = ENEMY_WALK_SPEED;	
-
+			m_targetPos = m_enemy->GetPlayer()->GetPosition();
 			//スティックの傾きからプレイヤーの速度を計算
-			Vector3 xSpeed = g_camera3D->GetRight() * g_pad[0]->GetLStickXF();
-			Vector3 ySpeed = Cross(g_camera3D->GetRight(), Vector3::AxisY) * g_pad[0]->GetLStickYF();
-			m_velocity += (xSpeed + ySpeed) * m_moveSpeed;
+			m_velocity = m_targetPos - m_position;
+			m_velocity.Normalize();
+			m_velocity *= ENEMY_WALK_SPEED;
 
 			//減速処理
 			m_velocity.x -= m_velocity.x * ENEMY_MOVE_FRICTION;
 			m_velocity.z -= m_velocity.z * ENEMY_MOVE_FRICTION;
-
-			//プレイヤーを上に動かす(仮)
-			if (g_pad[0]->IsTrigger(enButtonRB2))
-				m_velocity.y += 30.0f;
 
 			//重力
 			if (m_enemy->GetCharaCon()->IsOnGround() == false)
@@ -54,7 +49,6 @@ namespace nsHikageri
 
 			//位置に速度を加算
 			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, 1.0f);
-			//m_position += m_velocity;
 			//位置を設定する。
 			m_enemy->SetPosition(m_position);
 		}

@@ -40,6 +40,13 @@ namespace nsHikageri
 					m_flashLight->SetFlashLightAngle(m_flashLight->GetFlashLightAngle() - FLASHLIGHT_ANGLE_ADJUST_SPEED);
 				}
 			}
+			
+			ChargeFlashPrepare();
+			
+			if (m_chargeFlashFlag == true)
+			{
+				ChargeFlash();
+			}
 		}
 
 		void FlashLightAction::SwitchOnOff()
@@ -62,7 +69,36 @@ namespace nsHikageri
 			}
 		}
 
+		void FlashLightAction::ChargeFlashPrepare()
+		{
+			if (g_pad[0]->IsPress(enButtonRB2))
+			{
+				if (m_chargeCount < 50)
+				{
+					m_chargeCount++;
+				}
+			}
+			else 
+			{
+				if (m_chargeCount >= 50)
+				{
+					m_chargeFlashFlag = true;
+				}
+				m_chargeCount = 0;
+			}
+		}
 
+		void FlashLightAction::ChargeFlash()
+		{
+			m_flashLight->GetSpotLight()->SetColor(m_chargeFlashColor);
 
+			m_chargeFlashColor -= {1.0f, 1.0f, 1.0f};
+
+			if (m_chargeFlashColor.x <= 10.0f)
+			{
+				m_chargeFlashFlag = false;
+				m_chargeFlashColor = { 100.0f, 100.0f, 100.0f };
+			}
+		}
 	}
 }

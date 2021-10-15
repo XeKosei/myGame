@@ -1,6 +1,8 @@
 #pragma once
 namespace nsHikageri
 {
+	namespace nsPlayer { class Player; }
+
 	namespace nsEnemy
 	{
 		class EnemyMove;
@@ -8,6 +10,7 @@ namespace nsHikageri
 		class Enemy : public IGameObject
 		{
 		public:
+			~Enemy();
 			bool Start();
 			void Update();
 
@@ -22,6 +25,19 @@ namespace nsHikageri
 			/// @brief エネミーのキャラコンを取得する。(EnemyMoveクラスで利用)
 			/// @return エネミーのキャラコン
 			CharacterController* GetCharaCon() { return &m_charaCon; };
+
+			/// @brief プレイヤーを設定
+			/// @param pl プレイヤー
+			void SetPlayer(nsPlayer::Player* pl) { m_player = pl; }
+
+			/// @brief プレイヤーを取得
+			/// @return プレイヤー
+			nsPlayer::Player* GetPlayer() { return m_player; }
+
+			/// @brief ターゲットの取得
+			/// @return ターゲットの位置
+			Vector3 GetTargetPos() { return m_targetPos; }
+
 		private:
 			//モデル
 			SkinModelRender* m_enemyModel = nullptr;
@@ -33,6 +49,11 @@ namespace nsHikageri
 				enAnimationClip_num,  //列挙内で使う要素の数を表すダミー
 			};
 			AnimationClip animationClips[enAnimationClip_num];
+
+			//プレイヤー
+			nsPlayer::Player* m_player = nullptr;
+			//ターゲットの位置
+			Vector3 m_targetPos = Vector3::Zero;
 
 			//エネミー関連
 			EnemyMove* m_enemyMove = nullptr;

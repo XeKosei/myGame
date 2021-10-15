@@ -20,8 +20,11 @@ namespace nsHikageri
 			/// @brief プレイヤーのモデルの位置を設定する。(PlayerMoveクラスで利用)
 			/// @param pos 設定する位置
 			void SetPosition(Vector3 pos) { m_position = pos; m_playerModel->SetPosition(m_position); };
-
+	
+			/// @brief プレイヤーのモデルの位置を取得
+			/// @return プレイヤーの位置
 			Vector3 GetPosition() { return m_position; };
+
 			/// @brief プレイヤーのモデルの回転を設定する。(PlayerMoveクラスで利用)
 			/// @param qRot 設定する回転
 			void SetRotation(Quaternion qRot) { m_playerModel->SetRotation(qRot); };
