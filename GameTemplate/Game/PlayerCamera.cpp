@@ -23,8 +23,8 @@ namespace nsHikageri
 			float y = g_pad[0]->GetRStickYF();
 
 			//Rスティックの傾きから、カメラの向きを計算。
-			m_cameraDir += g_camera3D->GetRight() * x * CAMERA_MOVE_SPEED;
-			m_cameraDir += g_camera3D->GetUp() * y * CAMERA_MOVE_SPEED;
+			m_cameraDir += g_camera3D->GetRight() * x * CAMERA_MOVE_SPEED * GameTime::GetInstance().GetFrameDeltaTime();
+			m_cameraDir += g_camera3D->GetUp() * y * CAMERA_MOVE_SPEED * GameTime::GetInstance().GetFrameDeltaTime();
 			m_cameraDir.Normalize();
 
 			//カメラが上か下に向きすぎた場合、それ以上は上下に向かないようにする。

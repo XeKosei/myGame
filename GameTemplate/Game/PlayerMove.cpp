@@ -37,7 +37,7 @@ namespace nsHikageri
 			//スティックの傾きからプレイヤーの速度を計算
 			Vector3 xSpeed = g_camera3D->GetRight() * g_pad[0]->GetLStickXF();
 			Vector3 ySpeed = Cross(g_camera3D->GetRight(), Vector3::AxisY) * g_pad[0]->GetLStickYF();
-			m_velocity += (xSpeed + ySpeed) * m_plMoveSpeed;
+			m_velocity += (xSpeed + ySpeed) * m_plMoveSpeed * GameTime::GetInstance().GetFrameDeltaTime();
 
 			//減速処理
 			m_velocity.x -= m_velocity.x * PLAYER_MOVE_FRICTION;

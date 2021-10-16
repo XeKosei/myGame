@@ -27,6 +27,7 @@ namespace nsHikageri
 			m_velocity = m_targetPos - m_position;
 			m_velocity.Normalize();
 			m_velocity *= ENEMY_WALK_SPEED;
+			m_velocity *= GameTime::GetInstance().GetFrameDeltaTime();
 
 			//å∏ë¨èàóù
 			m_velocity.x -= m_velocity.x * ENEMY_MOVE_FRICTION;

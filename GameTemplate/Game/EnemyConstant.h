@@ -10,7 +10,7 @@ namespace nsHikageri
 		}
 		namespace nsEnemyMoveConstant
 		{
-			static const float ENEMY_WALK_SPEED = 10.0f;	//エネミーの歩く速さ
+			static const float ENEMY_WALK_SPEED = 500.0f;	//エネミーの歩く速さ
 			static const float ENEMY_DASH_SPEED = ENEMY_WALK_SPEED * 1.5f;//エネミーの走る速さ
 			static const float ENEMY_MOVE_FRICTION = 0.2f;	//エネミーの動くときの摩擦
 			static const float GRAVITY_SPEED = 9.8f * 0.1f;	//落下スピード
