@@ -130,7 +130,8 @@ namespace nsHikageri
 				}
 				else
 				{
-					float dis = 10000.0f;
+					m_targetPos = m_passPoint[0];
+					float dis = (m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_passPoint[0]).Length();
 
 					for (int i = 0; i < 2; i++)
 					{
@@ -147,7 +148,7 @@ namespace nsHikageri
 
 			else
 			{
-				float dot = -1.0f;
+				/*float dot = -1.0f;
 
 				for (int i = 0; i < 2; i++)
 				{
@@ -159,6 +160,20 @@ namespace nsHikageri
 					if (Dot(toPlayerDir, toPassPointDir) >= dot)
 					{
 						dot = Dot(toPlayerDir, toPassPointDir);
+						m_targetPos = m_passPoint[i];
+					}
+				}*/
+
+				m_targetPos = m_passPoint[0];
+				float dis = (m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_passPoint[0]).Length();
+
+				for (int i = 0; i < 2; i++)
+				{
+					Vector3 toPlayerDis = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_passPoint[i];
+
+					if ((toPlayerDis).Length() <= dis)
+					{
+						dis = (toPlayerDis).Length();
 						m_targetPos = m_passPoint[i];
 					}
 				}
