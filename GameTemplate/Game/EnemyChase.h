@@ -4,19 +4,21 @@ namespace nsHikageri
 	namespace nsEnemy
 	{
 		class Enemy;
-		class EnemyMove : public IGameObject
+		class EnemyChase : public IGameObject
 		{
 		public:
 			bool Start();
 			void ExecuteUpdate();
-			void Move();	//移動処理
+			void Chase();	//追跡処理
 			void Turn();	//回転処理
+
+			void Move();
 
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
 			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };
 
-			/// @brief EnemyMoveのm_positionを取得
+			/// @brief Enemyのm_positionを取得
 			/// @return エネミーの位置
 			Vector3 GetPosition() { return m_position; };
 
@@ -37,6 +39,9 @@ namespace nsHikageri
 			Vector3 m_targetPos = {Vector3::Zero};
 			//エネミー
 			Enemy* m_enemy = nullptr;
+
+
+			Vector3 m_passPoint[2] = { Vector3::Zero, {-1000.0f,0.0f, 0.0f} };
 		};
 	}
 }

@@ -6,25 +6,36 @@ namespace nsHikageri
 {
 	namespace nsEnemy
 	{
-		using namespace nsEnemyMoveConstant;
+		using namespace nsEnemyChaseConstant;
 
-		bool EnemyMove::Start()
+		bool EnemyChase::Start()
 		{
 			return true;
 		}
 
 		//Enemy.cppのUpdate()で呼び出す処理
-		void EnemyMove::ExecuteUpdate()
+		void EnemyChase::ExecuteUpdate()
 		{
-			Move();
+			
+			Move();//(仮)
+			Chase();
 			Turn();
 		}
 
-		void EnemyMove::Move()
+		void EnemyChase::Chase()
 		{
-			m_targetPos = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition();
-			//スティックの傾きからプレイヤーの速度を計算
+			//ターゲットの位置
+			//m_targetPos = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition();
+			//ターゲットとエネミーとのベクトルを計算。
 			m_velocity = m_targetPos - m_position;
+
+			//距離が一定以内まで縮まったら、攻撃に移行。
+			/*if (m_velocity.Length() <= ENEMY_CAN_ATTACK_DIS)
+			{
+				m_enemy->SetEnemyState(Enemy::enState_Attack);
+			}*/
+
+			//移動処理
 			m_velocity.Normalize();
 			m_velocity *= ENEMY_WALK_SPEED;
 			m_velocity *= GameTime::GetInstance().GetFrameDeltaTime();
@@ -52,7 +63,7 @@ namespace nsHikageri
 			m_enemy->GetEnemyModel()->SetPosition(m_position);
 		}
 
-		void EnemyMove::Turn()
+		void EnemyChase::Turn()
 		{
 			if (m_velocity.x != 0.0f || m_velocity.z != 0.0f)
 			{
@@ -66,6 +77,28 @@ namespace nsHikageri
 				m_qRot.SetRotation(Vector3::AxisY, angle);
 				m_enemy->GetEnemyModel()->SetRotation(m_qRot);
 			}
+		}
+
+		void EnemyChase::Move()
+		{
+			float dot = -1.0f;
+
+			for (int i = 0; i < 2; i++)
+			{
+				Vector3 toPlayerDis = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_position;
+				toPlayerDis.Normalize();
+				Vector3 toPassPointDis = m_passPoint[i] - m_position;
+				toPassPointDis.Normalize();
+				
+				if (Dot(toPlayerDis, toPassPointDis) >= dot)
+				{
+					dot = Dot(toPlayerDis, toPassPointDis);
+					m_targetPos = m_passPoint[i];
+				}
+			}
+
+
+
 		}
 	}
 }

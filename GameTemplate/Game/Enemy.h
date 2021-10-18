@@ -5,8 +5,8 @@ namespace nsHikageri
 
 	namespace nsEnemy
 	{
-		class EnemyMove;
-		class EnemyState;
+		class EnemySearchPlayer;
+		class EnemyChase;
 		class EnemyAttack;
 
 		class Enemy : public IGameObject
@@ -16,9 +16,18 @@ namespace nsHikageri
 			bool Start();
 			void Update();
 
+			//エネミーの状態
+			enum EnEnemyStates
+			{
+				enState_SearchPlayer,
+				enState_Chase,
+				enState_Attack,
+				enStatesNum
+			};
+
 			SkinModelRender* GetEnemyModel() { return m_enemyModel; }
 
-			/// @brief エネミーのキャラコンを取得する。(EnemyMoveクラスで利用)
+			/// @brief エネミーのキャラコンを取得する。(EnemyChaseクラスで利用)
 			/// @return エネミーのキャラコン
 			CharacterController* GetCharaCon() { return &m_charaCon; };
 
@@ -30,10 +39,13 @@ namespace nsHikageri
 			/// @return プレイヤー
 			nsPlayer::Player* GetPlayer() { return m_player; }
 
+			/// @brief エネミーの状態を設定する。
+			/// @param enState エネミーの状態
+			void SetEnemyState(EnEnemyStates enState) { m_enemyStates = enState; };
+
 			//エネミー関係のインスタンスにアクセスする
-			EnemyMove* GetEnemyMove() { return m_enemyMove; }
+			EnemyChase* GetEnemyChase() { return m_enemyChase; }
 			EnemyAttack* GetEnemyAttack() { return m_enemyAttack; };
-			EnemyState* GetEnemyState() { return m_enemyState; };
 		private:
 			//モデル
 			SkinModelRender* m_enemyModel = nullptr;
@@ -48,12 +60,13 @@ namespace nsHikageri
 
 			//プレイヤー
 			nsPlayer::Player* m_player = nullptr;
-			//ターゲットの位置
-			Vector3 m_targetPos = Vector3::Zero;
+
+			//エネミーの状態
+			EnEnemyStates m_enemyStates = enState_Chase;
 
 			//エネミー関連
-			EnemyMove* m_enemyMove = nullptr;
-			EnemyState* m_enemyState = nullptr;
+			EnemySearchPlayer* m_enemySearchPlayer = nullptr;
+			EnemyChase* m_enemyChase = nullptr;
 			EnemyAttack* m_enemyAttack = nullptr;
 		};
 	}

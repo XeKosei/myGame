@@ -293,8 +293,8 @@
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAttack.cpp" />
-    <ClCompile Include="EnemyMove.cpp" />
-    <ClCompile Include="EnemyState.cpp" />
+    <ClCompile Include="EnemyChase.cpp" />
+    <ClCompile Include="EnemySearchPlayer.cpp" />
     <ClCompile Include="FlashLight.cpp" />
     <ClCompile Include="FlashLightAction.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -389,8 +389,8 @@
     <ClInclude Include="EnemyAttack.h" />
     <ClInclude Include="EnemyConstant.h" />
     <ClInclude Include="EnemyInclude.h" />
-    <ClInclude Include="EnemyMove.h" />
-    <ClInclude Include="EnemyState.h" />
+    <ClInclude Include="EnemyChase.h" />
+    <ClInclude Include="EnemySearchPlayer.h" />
     <ClInclude Include="FlashLight.h" />
     <ClInclude Include="FlashLightAction.h" />
     <ClInclude Include="FlashLightConstant.h" />

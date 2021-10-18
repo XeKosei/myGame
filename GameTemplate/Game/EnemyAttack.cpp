@@ -10,14 +10,13 @@ namespace nsHikageri
 		using namespace nsEnemyAttackConstant;
 		void EnemyAttack::ExecuteUpdate()
 		{
-			
-
+			m_enemy->GetPlayer()->GetPlayerHP()->Damage(34);
+			m_enemy->SetEnemyState(Enemy::enState_Chase);
 		}
 
 		void EnemyAttack::Attack()
 		{
-			m_enemy->GetPlayer()->GetPlayerHP()->Damage(100);
-			m_enemy->GetEnemyState()->SetEnemyState(EnemyState::enState_Chase);
+			
 		}
 	}
 }

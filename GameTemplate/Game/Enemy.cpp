@@ -31,10 +31,10 @@ namespace nsHikageri
 			//m_enemyModel->SetAnimationSpeed(1.0f);
 
 			//エネミー関連のインスタンスを作成
-			m_enemyMove = NewGO<EnemyMove>(0);
-			m_enemyMove->SetEnemy(this);
-			m_enemyState = NewGO<EnemyState>(0);
-			m_enemyState->SetEnemy(this);
+			m_enemySearchPlayer = NewGO<EnemySearchPlayer>(0);
+			m_enemySearchPlayer->SetEnemy(this);
+			m_enemyChase = NewGO<EnemyChase>(0);
+			m_enemyChase->SetEnemy(this);
 			m_enemyAttack = NewGO<EnemyAttack>(0);
 			m_enemyAttack->SetEnemy(this);
 
@@ -45,9 +45,21 @@ namespace nsHikageri
 			m_enemyModel->PlayAnimation(enAnimationClip_Run);
 			
 			//エネミー関連の処理
-			m_enemyMove->ExecuteUpdate();
-			m_enemyState->ExecuteUpdate();
-			m_enemyAttack->ExecuteUpdate();
+			switch (m_enemyStates)
+			{
+			case enState_SearchPlayer:
+				m_enemySearchPlayer->ExecuteUpdate();
+				break;
+			case enState_Chase:
+				//Chase();
+				m_enemyChase->ExecuteUpdate();
+				break;
+			case enState_Attack:
+				m_enemyAttack->ExecuteUpdate();
+				break;
+			default:
+				break;
+			}
 		}
 	}
 }
