@@ -16,8 +16,7 @@ namespace nsHikageri
 		//Enemy.cppのUpdate()で呼び出す処理
 		void EnemyChase::ExecuteUpdate()
 		{
-			
-			Move();//(仮)
+			//Move();//(仮)
 			Chase();
 			Turn();
 		}
@@ -25,7 +24,7 @@ namespace nsHikageri
 		void EnemyChase::Chase()
 		{
 			//ターゲットの位置
-			//m_targetPos = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition();
+			m_targetPos = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition();
 			//ターゲットとエネミーとのベクトルを計算。
 			m_velocity = m_targetPos - m_position;
 
@@ -60,16 +59,16 @@ namespace nsHikageri
 			//位置に速度を加算
 			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, 1.0f);
 
-			/*if ((m_position - m_targetPos).Length() < 1.0f)
+			if ((m_position - m_targetPos).Length() < 5.0f)
 			{
 				m_position = m_targetPos;
 				m_enemy->GetCharaCon()->SetPosition(m_position);
 			}
 
-			else {*/
+			else {
 				//位置を設定する。
 				m_enemy->GetEnemyModel()->SetPosition(m_position);
-			//}
+			}
 		}
 
 		void EnemyChase::Turn()
@@ -102,53 +101,16 @@ namespace nsHikageri
 			passToPlayerDir[1] = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_passPoint[1];
 			passToPlayerDir[1].Normalize();
 			
-			if (Dot(toPassPointDir[0], passToPlayerDir[0]) >= 0 && Dot(toPassPointDir[1], passToPlayerDir[1]) >= 0)
-			{
-				if ((m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_position).Length() <= 200.0f)
+			if (Dot(toPassPointDir[0], passToPlayerDir[0]) >= 0 && Dot(toPassPointDir[1], passToPlayerDir[1]) >= 0
+				&& (m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_position).Length() <= 500.0f)
 				{
 					m_targetPos = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition();
-
 				}
-				else if (Dot(toPassPointDir[0], passToPlayerDir[0]) >= 0.95f 
-					|| Dot(toPassPointDir[1], passToPlayerDir[1]) >= 0.95f)
-				{
-					float dot = -1.0f;
-
-					for (int i = 0; i < 2; i++)
-					{
-						Vector3 toPlayerDir = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_position;
-						toPlayerDir.Normalize();
-						Vector3 toPassPointDir = m_passPoint[i] - m_position;
-						toPassPointDir.Normalize();
-
-						if (Dot(toPlayerDir, toPassPointDir) >= dot)
-						{
-							dot = Dot(toPlayerDir, toPassPointDir);
-							m_targetPos = m_passPoint[i];
-						}
-					}
-				}
-				else
-				{
-					m_targetPos = m_passPoint[0];
-					float dis = (m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_passPoint[0]).Length();
-
-					for (int i = 0; i < 2; i++)
-					{
-						Vector3 toPlayerDis = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_passPoint[i];
-
-						if ((toPlayerDis).Length() <= dis)
-						{
-							dis = (toPlayerDis).Length();
-							m_targetPos = m_passPoint[i];
-						}
-					}
-				}
-			}
-
-			else
+			else if (Dot(toPassPointDir[0], passToPlayerDir[0]) >= 0 && Dot(toPassPointDir[1], passToPlayerDir[1]) >= 0
+				&& (Dot(toPassPointDir[0], passToPlayerDir[0]) >= 0.95f
+					|| Dot(toPassPointDir[1], passToPlayerDir[1]) >= 0.95f))
 			{
-				/*float dot = -1.0f;
+				float dot = -1.0f;
 
 				for (int i = 0; i < 2; i++)
 				{
@@ -162,8 +124,10 @@ namespace nsHikageri
 						dot = Dot(toPlayerDir, toPassPointDir);
 						m_targetPos = m_passPoint[i];
 					}
-				}*/
-
+				}
+			}
+			else
+			{
 				m_targetPos = m_passPoint[0];
 				float dis = (m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_passPoint[0]).Length();
 
@@ -178,6 +142,9 @@ namespace nsHikageri
 					}
 				}
 			}
+			
+
+			
 		}
 	}
 }

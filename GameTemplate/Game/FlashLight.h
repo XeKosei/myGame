@@ -27,7 +27,7 @@ namespace nsHikageri
 			/// @param angle éÀèoäpìx
 			void SetFlashLightAngle(float angle) 
 			{ 
-				if (angle <= 0.9 && angle >= 0.1)
+				if (angle <= 1.0f && angle >= 0.1)
 				{
 					m_flashLightAngle = angle;
 					m_spotLight->SetAngle(m_flashLightAngle / 2);

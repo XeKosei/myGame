@@ -7,7 +7,15 @@ namespace nsHikageri
 		{
 			static const float ENEMY_MODEL_WIDTH = 20.0f;	//プレイヤーのモデルの横幅
 			static const float ENEMY_MODEL_HEIGHT = 20.0f;	//プレイヤーのモデルの高さ
+			static const Vector3 INI_ENEMY_POSITION = {Vector3::Zero};
+			static const Vector3 INI_ENEMY_DIRECTION = { 0.0f,0.0f,1.0f };
 		}
+
+		namespace nsEnemySearchPlayerConstant
+		{
+
+		}
+
 		namespace nsEnemyChaseConstant
 		{
 			static const float ENEMY_WALK_SPEED = 500.0f;	//エネミーの歩く速さ

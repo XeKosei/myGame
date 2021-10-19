@@ -62,7 +62,7 @@ namespace nsHikageri
 			nsPlayer::Player* m_player = nullptr;
 
 			//エネミーの状態
-			EnEnemyStates m_enemyStates = enState_Chase;
+			EnEnemyStates m_enemyStates = enState_SearchPlayer;
 
 			//エネミー関連
 			EnemySearchPlayer* m_enemySearchPlayer = nullptr;

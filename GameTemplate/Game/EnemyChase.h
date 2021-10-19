@@ -41,7 +41,7 @@ namespace nsHikageri
 			Enemy* m_enemy = nullptr;
 
 
-			Vector3 m_passPoint[2] = { {300.0f, 0.0f, 0.0f}, {-1000.0f,0.0f, 0.0f} };
+			Vector3 m_passPoint[2] = { {200.0f, 0.0f, 0.0f}, {-1000.0f,0.0f, 0.0f} };
 		};
 	}
 }

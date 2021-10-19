@@ -18,7 +18,7 @@ namespace nsHikageri
 		{
 			//プレイヤーのモデルを作成
 			m_playerModel = NewGO<SkinModelRender>(0);
-			m_playerModel->Init("Assets/modelData/unityChan.tkm", "Assets/modelData/unityChan.tks", animationClips, enAnimationClip_num);
+			m_playerModel->Init("Assets/modelData/unityChan.tkm");
 			m_playerModel->SetPosition(INI_PLAYER_POSITION);
 			m_playerModel->SetSpotLightCasterFlag(false);
 
@@ -28,12 +28,6 @@ namespace nsHikageri
 				PLAYER_MODEL_HEIGHT,	//高さ
 				INI_PLAYER_POSITION//初期位置
 			);
-
-			//アニメーションをロード
-			animationClips[enAnimationClip_Idle].Load("Assets/animData/Idle.tka");
-			animationClips[enAnimationClip_Idle].SetLoopFlag(true);	//ループモーションにする。
-			animationClips[enAnimationClip_walk].Load("Assets/animData/walk.tka");
-			animationClips[enAnimationClip_walk].SetLoopFlag(true);	//ループモーションにする。
 
 			//プレイヤー関係のインスタンスを作成
 			m_playerMove = NewGO<PlayerMove>(0);

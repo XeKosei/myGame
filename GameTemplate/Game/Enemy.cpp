@@ -14,18 +14,19 @@ namespace nsHikageri
 		}
 		bool Enemy::Start()
 		{
+			//アニメーション
+			
 			m_enemyModel = NewGO<SkinModelRender>(0);
 			m_enemyModel->Init("Assets/modelData/Enemy.tkm", "Assets/modelData/Enemy.tks", animationClips, enAnimationClip_num);
-			m_enemyModel->SetPosition(Vector3::Zero);
-			//アニメーション
-			animationClips[enAnimationClip_Run].Load("Assets/animData/EnemyRun.tka");
+			m_enemyModel->SetPosition(INI_ENEMY_POSITION);
+			
+			animationClips[enAnimationClip_Run].Load("Assets/animData/EnemyIdle.tka");
 			animationClips[enAnimationClip_Run].SetLoopFlag(true);	//ループモーションにする。
-
 			//キャラコンを設定
 			m_charaCon.Init(
 				ENEMY_MODEL_WIDTH,	//半径
 				ENEMY_MODEL_HEIGHT,	//高さ
-				Vector3::Zero//初期位置
+				INI_ENEMY_POSITION//初期位置
 			);
 			
 			//m_enemyModel->SetAnimationSpeed(1.0f);
@@ -38,6 +39,7 @@ namespace nsHikageri
 			m_enemyAttack = NewGO<EnemyAttack>(0);
 			m_enemyAttack->SetEnemy(this);
 
+			//m_enemyStates = enState_SearchPlayer;
 			return true;
 		}
 		void Enemy::Update()
