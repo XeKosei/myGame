@@ -8,6 +8,7 @@ namespace nsHikageri
 		class EnemySearchPlayer;
 		class EnemyChase;
 		class EnemyAttack;
+		class EnemyAnim;
 
 		class Enemy : public IGameObject
 		{
@@ -51,12 +52,6 @@ namespace nsHikageri
 			SkinModelRender* m_enemyModel = nullptr;
 			//キャラコン
 			CharacterController m_charaCon;
-			//アニメーション
-			enum {
-				enAnimationClip_Run,
-				enAnimationClip_num,  //列挙内で使う要素の数を表すダミー
-			};
-			AnimationClip animationClips[enAnimationClip_num];
 
 			//プレイヤー
 			nsPlayer::Player* m_player = nullptr;
@@ -68,6 +63,7 @@ namespace nsHikageri
 			EnemySearchPlayer* m_enemySearchPlayer = nullptr;
 			EnemyChase* m_enemyChase = nullptr;
 			EnemyAttack* m_enemyAttack = nullptr;
+			EnemyAnim* m_enemyAnim = nullptr;
 		};
 	}
 }

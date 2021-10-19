@@ -29,10 +29,10 @@ namespace nsHikageri
 			m_velocity = m_targetPos - m_position;
 
 			//‹——£‚ªˆê’èˆÈ“à‚Ü‚Åk‚Ü‚Á‚½‚çAUŒ‚‚ÉˆÚsB
-			/*if (m_velocity.Length() <= ENEMY_CAN_ATTACK_DIS)
+			if (m_velocity.Length() <= ENEMY_CAN_ATTACK_DIS)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_Attack);
-			}*/
+			}
 
 			//ˆÚ“®ˆ—
 			m_velocity.Normalize();

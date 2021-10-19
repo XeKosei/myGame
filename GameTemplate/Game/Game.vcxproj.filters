@@ -314,6 +314,9 @@
     <ClCompile Include="EnemySearchPlayer.cpp">
       <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyAnim.cpp">
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -584,6 +587,9 @@
       <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemySearchPlayer.h">
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAnim.h">
       <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
