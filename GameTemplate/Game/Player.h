@@ -9,10 +9,20 @@ namespace nsHikageri
 		class PlayerCamera;		
 		class PlayerAction;
 		class PlayerHP;
+		class PlayerBitten;
 
 		class Player : public IGameObject
 		{
 		public:
+			enum EnPlayerStates
+			{
+				enState_Normal,
+				enState_Bitten,
+				enState_Dead,
+				enStatesNum
+			};
+
+
 			~Player();
 			bool Start();
 			void Update();
@@ -25,36 +35,29 @@ namespace nsHikageri
 			/// @return プレイヤーのキャラコン
 			CharacterController* GetCharaCon() { return &m_charaCon; };
 
-			//死んだかどうか(仮)
-			void SetDeadFlag(bool isDead) { m_deadFlag = isDead; }
+			//プレイヤーの状態を設定
+			void SetPlayerState(EnPlayerStates plState) { m_playerState = plState; }
 
 			//プレイヤー関係のインスタンスにアクセスする
 			PlayerMove* GetPlayerMove() { return m_playerMove; };
 			PlayerCamera* GetPlayerCamera() { return m_playerCamera; };
 			PlayerAction* nsPlayerActionConstant() { return m_playerAction; };
 			PlayerHP* GetPlayerHP() { return m_playerHP; };
-
+			PlayerBitten* GetPlayerBitten() { return m_playerBitten; }
 		private:
-			bool m_deadFlag = false;
-
 			//モデル
 			SkinModelRender* m_playerModel = nullptr;
 			//プレイヤーのキャラコン
 			CharacterController m_charaCon;
-
-			//アニメーション関連
-			enum {
-				enAnimationClip_Idle,
-				enAnimationClip_walk,
-				enAnimationClip_num,  //列挙内で使う要素の数を表すダミー
-			};
-			AnimationClip animationClips[enAnimationClip_num];
 
 			//プレイヤー関係のクラス
 			PlayerMove* m_playerMove = nullptr;
 			PlayerCamera* m_playerCamera = nullptr;
 			PlayerAction* m_playerAction = nullptr;
 			PlayerHP* m_playerHP = nullptr;
+			PlayerBitten* m_playerBitten = nullptr;
+
+			EnPlayerStates m_playerState = enState_Normal;
 
 			//懐中電灯
 			nsFlashLight::FlashLight* m_flashLight = nullptr;

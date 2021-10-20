@@ -38,6 +38,7 @@ namespace nsHikageri
 		namespace nsPlayerHPConstant
 		{
 			static const float MAX_PLAYER_HP = 100.0f;	//プレイヤーの体力の最大値
+			static const int DAMAGE_INTERVAL = 20;	//次にダメージを受けられるようになるまでの間隔
 		}
 	}
 }

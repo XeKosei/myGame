@@ -9,13 +9,21 @@ namespace nsHikageri
 		public:
 			//アニメーション
 			enum {
+				enAnimationClip_Idle,
+				enAnimationClip_Walk,
 				enAnimationClip_Run,
+				enAnimationClip_Attack,
+				enAnimationClip_Scream,
+				enAnimationClip_PreBite,
+				enAnimationClip_Bite,
+				enAnimationClip_EndBite,
 				enAnimationClip_num,  //列挙内で使う要素の数を表すダミー
 			};
 
 			bool Start();
 			void ExecuteUpdate();
 
+			//アニメーションクリップに関する情報を取得する関数
 			AnimationClip* GetAnimationClip() { return m_animationClips; };
 			int GetAnimationClipNum() { return enAnimationClip_num; };
 

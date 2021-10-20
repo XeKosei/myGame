@@ -24,10 +24,25 @@ namespace nsHikageri
 			static const float GRAVITY_SPEED = 9.8f * 0.1f;	//落下スピード
 			static const float GRAVITY_INDEX = 1.2f;		//落下スピードにかける指数
 
-			static const float ENEMY_CAN_ATTACK_DIS = 50.0f;	//エネミーが攻撃に移行する距離
+			static const float ENEMY_CAN_ATTACK_DIS = 300.0f;	//エネミーが攻撃に移行する距離
 		}
 
 		namespace nsEnemyAttackConstant
+		{
+			static const int ATTACKMOTION_TIME = 61 * 3;	//攻撃行動をする時間(アニメーションの時間)
+			static const int ATTACKMOTION_HIT_START_TIME = 23 * 2;	//攻撃モーションの攻撃判定が始まる時間。
+			static const int ATTACKMOTION_HIT_END_TIME = 26 * 2;	//攻撃モーションの攻撃判定が終わる時間。
+			static const int ATTACKMOTION_HIT_DOT = 0.2;	//攻撃判定の範囲(内積)
+			static const int ATTACKMOTION_HIT_DIS = 200.0f;	//攻撃判定の距離
+		
+			static const int BITE_TIME = 1000; //エネミーに噛みつかれた続ける時間
+			static const int BITE_RESIST_NUM = 100;	//噛みつきに抵抗する数値
+			static const int BITEANIM_BITE_START_TIME = 20;	//アニメーションで噛みつき始める時間
+			static const int BITEANIM_BITE_END_TIME = 25;	//アニメーションで噛みつき終わる時間
+			static const int BITE_DAMAGE = 5;			//噛みつきのダメージ(連続ヒットする)
+		}
+
+		namespace nsEnemyAnimConstant
 		{
 			
 		}

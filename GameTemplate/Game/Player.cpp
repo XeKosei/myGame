@@ -38,6 +38,8 @@ namespace nsHikageri
 			m_playerAction->SetPlayer(this);
 			m_playerHP = NewGO<PlayerHP>(0);
 			m_playerHP->SetPlayer(this);
+			m_playerBitten = NewGO<PlayerBitten>(0);
+			m_playerBitten->SetPlayer(this);
 
 			//‰ù’†“d“”‚ğ¶¬
 			m_flashLight = NewGO<nsFlashLight::FlashLight>(0);
@@ -48,13 +50,21 @@ namespace nsHikageri
 
 		void Player::Update()
 		{
-			//€‚ñ‚¾‚ç‰½‚à‚Å‚«‚È‚¢(‰¼)
-			if (m_deadFlag == true)
-				return;
-
-			m_playerMove->ExecuteUpdate();
-			m_playerAction->ExecuteUpdate();
-			m_playerCamera->ExecuteUpdate();
+			switch (m_playerState)
+			{
+			case enState_Normal:
+				m_playerMove->ExecuteUpdate();
+				m_playerAction->ExecuteUpdate();
+				m_playerCamera->ExecuteUpdate();
+				m_playerHP->ExecuteUpdate();
+				break;
+			case enState_Bitten:
+				m_playerBitten->ExecuteUpdate();
+				m_playerCamera->ExecuteUpdate();
+				break;
+			case enState_Dead:
+				break;
+			}	
 		}
 	}
 }

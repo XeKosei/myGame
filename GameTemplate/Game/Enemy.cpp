@@ -43,7 +43,7 @@ namespace nsHikageri
 		void Enemy::Update()
 		{
 			//エネミー関連の処理
-			switch (m_enemyStates)
+			switch (m_enemyState)
 			{
 			case enState_SearchPlayer:
 				m_enemySearchPlayer->ExecuteUpdate();

@@ -9,6 +9,8 @@ namespace nsHikageri
 		public:
 			bool Start();
 
+			void ExecuteUpdate();
+
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
 			void SetPlayer(Player* pl) { m_player = pl; };
@@ -22,7 +24,8 @@ namespace nsHikageri
 			Player* m_player = nullptr;
 			//プレイヤーの体力
 			int m_HP = 0.0f;
-
+			//次にダメージを受けることができるようになるまでの間隔
+			int m_damageIntervalCount = 0;
 		};
 	}
 }

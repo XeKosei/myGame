@@ -40,13 +40,16 @@ namespace nsHikageri
 			/// @return プレイヤー
 			nsPlayer::Player* GetPlayer() { return m_player; }
 
+			EnEnemyStates GetEnemyState() { return m_enemyState; };
+
 			/// @brief エネミーの状態を設定する。
 			/// @param enState エネミーの状態
-			void SetEnemyState(EnEnemyStates enState) { m_enemyStates = enState; };
+			void SetEnemyState(EnEnemyStates enState) { m_enemyState = enState; };
 
 			//エネミー関係のインスタンスにアクセスする
 			EnemyChase* GetEnemyChase() { return m_enemyChase; }
 			EnemyAttack* GetEnemyAttack() { return m_enemyAttack; };
+			EnemyAnim* GetEnemyAnim() { return m_enemyAnim; };
 		private:
 			//モデル
 			SkinModelRender* m_enemyModel = nullptr;
@@ -57,7 +60,7 @@ namespace nsHikageri
 			nsPlayer::Player* m_player = nullptr;
 
 			//エネミーの状態
-			EnEnemyStates m_enemyStates = enState_SearchPlayer;
+			EnEnemyStates m_enemyState = enState_SearchPlayer;
 
 			//エネミー関連
 			EnemySearchPlayer* m_enemySearchPlayer = nullptr;

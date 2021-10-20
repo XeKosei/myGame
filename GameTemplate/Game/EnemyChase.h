@@ -22,6 +22,10 @@ namespace nsHikageri
 			/// @return エネミーの位置
 			Vector3 GetPosition() { return m_position; };
 
+			/// @brief Enemyの向きを取得。※正規化されていない可能性がある。
+			/// @return エネミーの向き
+			Vector3 GetDirection() { return m_velocity; }
+
 			/// @brief エネミーが向かう位置を設定
 			/// @param pos エネミーが向かう位置
 			void SetTarget(Vector3 pos) { m_targetPos = pos; }

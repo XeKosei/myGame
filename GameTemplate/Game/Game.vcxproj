@@ -304,6 +304,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAction.cpp" />
+    <ClCompile Include="PlayerBitten.cpp" />
     <ClCompile Include="PlayerCamera.cpp" />
     <ClCompile Include="PlayerHP.cpp" />
     <ClCompile Include="PlayerMove.cpp" />
@@ -402,6 +403,7 @@
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAction.h" />
+    <ClInclude Include="PlayerBitten.h" />
     <ClInclude Include="PlayerCamera.h" />
     <ClInclude Include="PlayerHP.h" />
     <ClInclude Include="PlayerInclude.h" />
