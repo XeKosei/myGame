@@ -36,7 +36,6 @@ namespace nsHikageri
 			static const int ATTACKMOTION_HIT_DIS = 200.0f;	//攻撃判定の距離
 		
 			static const int BITE_TIME = 1000; //エネミーに噛みつかれた続ける時間
-			static const int BITE_RESIST_NUM = 100;	//噛みつきに抵抗する数値
 			static const int BITEANIM_BITE_START_TIME = 20;	//アニメーションで噛みつき始める時間
 			static const int BITEANIM_BITE_END_TIME = 25;	//アニメーションで噛みつき終わる時間
 			static const int BITE_DAMAGE = 5;			//噛みつきのダメージ(連続ヒットする)

@@ -40,5 +40,11 @@ namespace nsHikageri
 			static const float MAX_PLAYER_HP = 100.0f;	//プレイヤーの体力の最大値
 			static const int DAMAGE_INTERVAL = 20;	//次にダメージを受けられるようになるまでの間隔
 		}
+
+		namespace nsPlayerBittenConstant
+		{
+			static const int INI_CAN_MOVE_INTERVAL = 30;	//動けるようになるまでのインターバル
+			static const int RESIST_TO_BITE_NUM = 100;	//噛みつきに抵抗する数値
+		}
 	}
 }

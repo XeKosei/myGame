@@ -37,6 +37,9 @@ namespace nsHikageri
 
 			//プレイヤーの状態を設定
 			void SetPlayerState(EnPlayerStates plState) { m_playerState = plState; }
+			//プレイヤーの状態を取得
+			EnPlayerStates GetPlayerState() { return m_playerState; }
+
 
 			//プレイヤー関係のインスタンスにアクセスする
 			PlayerMove* GetPlayerMove() { return m_playerMove; };

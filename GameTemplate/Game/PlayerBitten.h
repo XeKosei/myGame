@@ -9,6 +9,8 @@ namespace nsHikageri
 		class PlayerBitten : public IGameObject
 		{
 		public:
+			bool Start();
+
 			enum EnBittenStates
 			{
 				enBittenState_PreBitten,
@@ -37,6 +39,8 @@ namespace nsHikageri
 			nsEnemy::Enemy* m_enemy = nullptr;
 			//Šš‚İ‚Â‚©‚ê’†‚Ìˆ—‚Ì‘JˆÚ
 			EnBittenStates m_bittenStates = enBittenState_PreBitten;
+
+			int m_canMoveInterval = 0;
 		};
 	}
 }

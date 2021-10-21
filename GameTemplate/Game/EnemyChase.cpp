@@ -35,7 +35,6 @@ namespace nsHikageri
 				//ƒvƒŒƒCƒ„[‚ğŠš‚İ‚Â‚©‚êó‘Ô‚É
 				m_enemy->GetPlayer()->SetPlayerState(nsPlayer::Player::enState_Bitten);
 				m_enemy->GetPlayer()->GetPlayerBitten()->SetBittenState(nsPlayer::PlayerBitten::enBittenState_PreBitten);
-
 				m_enemy->GetPlayer()->GetPlayerBitten()->SetEnemy(m_enemy);
 			}
 

@@ -26,6 +26,9 @@ namespace nsHikageri
 
 			EnEnemyBiteStates GetBiteState() { return m_biteState; };
 
+			//噛みつきに抵抗する。
+			void RegistToBite(int registNum) { m_enemyBiteCount -= registNum; };
+
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
 			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };

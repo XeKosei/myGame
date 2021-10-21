@@ -66,6 +66,7 @@ namespace nsHikageri
 		//噛みつきの最初の処理
 		void EnemyAttack::PreBite()
 		{
+			//エネミーの向きを設定
 			Vector3 dir = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyChase()->GetPosition();
 			float angle = atan2(dir.x, dir.z);
 			Quaternion qRot;
@@ -76,7 +77,6 @@ namespace nsHikageri
 			if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)
 			{
 				m_biteState = enBiteState_Bite;
-				m_enemy->GetPlayer()->GetPlayerBitten()->SetBittenState(nsPlayer::PlayerBitten::enBittenState_Bitten);
 			}
 		}
 
@@ -87,12 +87,6 @@ namespace nsHikageri
 			m_enemyBiteCount--;
 			//アニメーションの時間をカウント
 			m_enemyBiteAnimCount++;
-
-			//Bボタン連打で時間を減少させる
-			if (g_pad[0]->IsTrigger(enButtonB))
-			{
-				m_enemyBiteCount -= BITE_RESIST_NUM;
-			}
 
 			//アニメーションが噛みつきモーション中なら、ダメージを与える。
 			if (m_enemyBiteAnimCount >= BITEANIM_BITE_START_TIME && m_enemyBiteAnimCount <= BITEANIM_BITE_END_TIME)
@@ -112,7 +106,6 @@ namespace nsHikageri
 			if (m_enemyBiteCount <= 0)
 			{
 				m_biteState = enBiteState_EndBite;
-				m_enemy->GetPlayer()->GetPlayerBitten()->SetBittenState(nsPlayer::PlayerBitten::enBittenState_EndBitten);
 			}
 		}
 
@@ -124,8 +117,6 @@ namespace nsHikageri
 			{
 				//エネミーを追跡状態に移行して、リセット
 				m_biteState = enBiteState_PreBite;
-				m_enemy->GetPlayer()->SetPlayerState(nsPlayer::Player::enState_Normal);
-				m_enemy->GetPlayer()->GetPlayerBitten()->SetBittenState(nsPlayer::PlayerBitten::enBittenState_PreBitten);
 				m_enemy->SetEnemyState(Enemy::enState_Chase);
 				m_enemyBiteCount = BITE_TIME;
 			}
