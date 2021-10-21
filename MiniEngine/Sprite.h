@@ -69,6 +69,27 @@ public:
 	/// </summary>
 	/// <param name="renderContext">レンダリングコンテキスト/param>
 	void Draw(RenderContext& renderContext);
+	/**
+	 * @brief 乗算カラーを設定
+	 * @param mulColor 乗算カラー
+	*/
+	void SetMulColor(const Vector4& mulColor)
+	{
+		m_color = mulColor;
+	}
+	void SetMulColor(const Vector3& mulColor, const float& mulA)
+	{
+		m_color = mulColor;
+		m_color.a = mulA;
+	}
+	/**
+	 * @brief 乗算カラーを取得
+	 * @return 乗算カラー
+	*/
+	const Vector4& GetMulColor()const
+	{
+		return m_color;
+	}
 	/// <summary>
 	/// 初期化されているか判定。
 	/// </summary>
@@ -117,6 +138,7 @@ private:
 	Vector2 m_size;						//サイズ。
 	Quaternion m_rotation ;			//回転。
 	Matrix m_world;					//ワールド行列。
+	Vector4 m_color = { 1.0f,1.0f,1.0f,1.0f };
 
 	struct LocalConstantBuffer {
 		Matrix mvp;

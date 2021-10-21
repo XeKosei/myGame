@@ -38,7 +38,7 @@ namespace nsHikageri
 			static const int BITE_TIME = 1000; //エネミーに噛みつかれた続ける時間
 			static const int BITEANIM_BITE_START_TIME = 20;	//アニメーションで噛みつき始める時間
 			static const int BITEANIM_BITE_END_TIME = 25;	//アニメーションで噛みつき終わる時間
-			static const int BITE_DAMAGE = 5;			//噛みつきのダメージ(連続ヒットする)
+			static const int BITE_DAMAGE = 3;			//噛みつきのダメージ(連続ヒットする)
 		}
 
 		namespace nsEnemyAnimConstant

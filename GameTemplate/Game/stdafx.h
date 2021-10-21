@@ -14,7 +14,7 @@
 
 #include "SkinModelRender.h"
 
-
+#include "SpriteRender.h"
 
 #include "time/Stopwatch.h"
 #include "time/GameTime.h"

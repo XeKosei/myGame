@@ -61,8 +61,10 @@ namespace nsHikageri
 			case enState_Bitten:
 				m_playerBitten->ExecuteUpdate();
 				m_playerCamera->ExecuteUpdate();
+				m_playerHP->ExecuteUpdate();
 				break;
 			case enState_Dead:
+				m_playerHP->ExecuteUpdate();
 				break;
 			}	
 		}

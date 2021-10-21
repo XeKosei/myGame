@@ -39,12 +39,19 @@ namespace nsHikageri
 		{
 			static const float MAX_PLAYER_HP = 100.0f;	//プレイヤーの体力の最大値
 			static const int DAMAGE_INTERVAL = 20;	//次にダメージを受けられるようになるまでの間隔
+			static const Vector4 INI_BLOODSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 0.0f };	//ダメージを受けた時の画面の周りの血のスプライトの初期カラー
+			
+			static const float ADD_RED_SPEED = 0.00001f;	//スプライトが点滅する速さ
+			static const float MAX_ADD_RED = 0.0002f;		//点滅の最大加算値
+			static const float MIN_ADD_RED = -0.0002f;		//点滅の最小加算値
 		}
 
 		namespace nsPlayerBittenConstant
 		{
 			static const int INI_CAN_MOVE_INTERVAL = 30;	//動けるようになるまでのインターバル
 			static const int RESIST_TO_BITE_NUM = 100;	//噛みつきに抵抗する数値
+
+			
 		}
 	}
 }

@@ -11,6 +11,8 @@ namespace nsHikageri
 
 			void ExecuteUpdate();
 
+			void BloodSprite();
+
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
 			void SetPlayer(Player* pl) { m_player = pl; };
@@ -23,9 +25,15 @@ namespace nsHikageri
 			//プレイヤー
 			Player* m_player = nullptr;
 			//プレイヤーの体力
-			int m_HP = 0.0f;
+			int m_HP = 0;
 			//次にダメージを受けることができるようになるまでの間隔
 			int m_damageIntervalCount = 0;
+			//ダメージを受けた際の画面の周りの血の表現
+			SpriteRender* m_bloodSprite = nullptr;
+
+			Vector4 m_bloodColor = {0.0f,0.0f,0.0f,0.0f};
+			float m_addRed = 0.0f;
+			bool m_addRedFlag = true;
 		};
 	}
 }
