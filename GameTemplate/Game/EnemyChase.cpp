@@ -29,16 +29,15 @@ namespace nsHikageri
 			m_velocity = m_targetPos - m_position;
 
 			//距離が一定以内まで縮まったら、攻撃に移行。
-			if (m_velocity.Length() <= ENEMY_CAN_ATTACK_DIS)
+			if (m_velocity.Length() <= ENEMY_CAN_ATTACK_DIS
+				&& m_enemy->GetPlayer()->GetPlayerState() == nsPlayer::Player::enState_Normal)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_Attack);
 				//プレイヤーを噛みつかれ状態に
-				if (m_enemy->GetPlayer()->GetPlayerState() != nsPlayer::Player::enState_Dead)
-				{
-					m_enemy->GetPlayer()->SetPlayerState(nsPlayer::Player::enState_Bitten);
-					m_enemy->GetPlayer()->GetPlayerBitten()->SetBittenState(nsPlayer::PlayerBitten::enBittenState_PreBitten);
-					m_enemy->GetPlayer()->GetPlayerBitten()->SetEnemy(m_enemy);
-				}
+				m_enemy->GetPlayer()->SetPlayerState(nsPlayer::Player::enState_Bitten);
+				m_enemy->GetPlayer()->GetPlayerBitten()->SetBittenState(nsPlayer::PlayerBitten::enBittenState_PreBitten);
+				m_enemy->GetPlayer()->GetPlayerBitten()->SetEnemy(m_enemy);
+
 			}
 
 			//移動処理

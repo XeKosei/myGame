@@ -71,7 +71,7 @@ namespace nsHikageri
 			{
 				m_canMoveInterval = INI_CAN_MOVE_INTERVAL;
 				SetBittenState(enBittenState_PreBitten);
-				m_player->SetPlayerState(Player::enState_Normal);
+				m_player->SetInvincible(200);
 			}
 		}
 

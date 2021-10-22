@@ -27,7 +27,7 @@ namespace nsHikageri
 			//エネミーの向きとの内積が一定以上なら、プレイヤーを追いかけ始める。
 			if (Dot(toTargetDir, m_dir) >= 0.9f)
 			{
-				m_enemy->SetEnemyState(Enemy::enState_Chase);
+				m_enemy->SetEnemyState(Enemy::enState_Scream);
 			}
 		}
 

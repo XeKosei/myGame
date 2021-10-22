@@ -67,7 +67,28 @@ namespace nsHikageri
 				m_playerHP->ExecuteUpdate();
 			case enState_Stop:			
 				break;
-			}	
+			case enState_Invincible:
+				m_playerMove->ExecuteUpdate();
+				m_playerAction->ExecuteUpdate();
+				m_playerCamera->ExecuteUpdate();
+				m_playerHP->ExecuteUpdate();
+				Invincible();
+				break;
+			}		
+		}
+
+		//–³“GŽžŠÔ(‰¼)
+		void Player::Invincible()
+		{
+			if (m_invincibleTime != 0)
+			{
+				m_invincibleTime--;
+				
+			}
+			else
+			{
+				m_playerState = enState_Normal;
+			}
 		}
 	}
 }

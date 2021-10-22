@@ -20,7 +20,7 @@ namespace nsHikageri
 		//プレイヤー
 		nsPlayer::Player* m_player = nullptr;
 		//エネミー
-		nsEnemy::Enemy* m_enemy = nullptr;
+		nsEnemy::Enemy* m_enemy[3] = { nullptr, nullptr, nullptr };
 		//ディレクションライト
 		DirectionLight* m_dirLig = nullptr;
 

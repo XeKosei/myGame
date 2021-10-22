@@ -9,6 +9,7 @@ namespace nsHikageri
 		class EnemyChase;
 		class EnemyAttack;
 		class EnemyAnim;
+		class EnemyScream;
 
 		class Enemy : public IGameObject
 		{
@@ -23,6 +24,7 @@ namespace nsHikageri
 				enState_SearchPlayer,
 				enState_Chase,
 				enState_Attack,
+				enState_Scream,
 				enStatesNum
 			};
 
@@ -52,6 +54,7 @@ namespace nsHikageri
 			EnemySearchPlayer* GetEnemySearchPlayer() { return m_enemySearchPlayer; };
 			EnemyChase* GetEnemyChase() { return m_enemyChase; }
 			EnemyAttack* GetEnemyAttack() { return m_enemyAttack; };
+			EnemyScream* GetEnemyScream() { return m_enemyScream; }
 			EnemyAnim* GetEnemyAnim() { return m_enemyAnim; };
 		private:
 			//ƒ‚ƒfƒ‹
@@ -71,6 +74,7 @@ namespace nsHikageri
 			EnemySearchPlayer* m_enemySearchPlayer = nullptr;
 			EnemyChase* m_enemyChase = nullptr;
 			EnemyAttack* m_enemyAttack = nullptr;
+			EnemyScream* m_enemyScream = nullptr;
 			EnemyAnim* m_enemyAnim = nullptr;
 		};
 	}

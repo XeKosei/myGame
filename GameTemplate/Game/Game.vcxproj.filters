@@ -326,6 +326,9 @@
     <ClCompile Include="FontRender.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyScream.cpp">
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -609,6 +612,9 @@
     </ClInclude>
     <ClInclude Include="FontRender.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyScream.h">
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

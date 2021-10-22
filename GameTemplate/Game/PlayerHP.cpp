@@ -88,7 +88,7 @@ namespace nsHikageri
 				//}
 
 				//HP•\Ž¦(‰¼)
-				f->SetText(std::to_wstring(m_HP));
+				//f->SetText(std::to_wstring(m_HP));
 			}
 		}
 

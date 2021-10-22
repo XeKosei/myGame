@@ -15,9 +15,15 @@ namespace nsHikageri
 		m_player = NewGO<nsPlayer::Player>(0);
 
 		//エネミーを作成
-		m_enemy = NewGO<nsEnemy::Enemy>(0);
-		m_enemy->SetPlayer(m_player);
-		m_enemy->SetMovePos({-1000.0f,0.0f,-1000.0f}, {-1000.0f,0.0f,1000.0f});
+		for (int i = 0; i < 3; i++)
+		{
+			m_enemy[i] = NewGO<nsEnemy::Enemy>(0);
+			m_enemy[i]->SetPlayer(m_player);
+			
+		}
+		m_enemy[0]->SetMovePos({ -1000.0f,0.0f,-1000.0f }, { -1000.0f,0.0f,1000.0f });
+		m_enemy[1]->SetMovePos({ -3400.0f,0.0f,400.0f }, { -3400.0f,0.0f,-1600.0f });
+		m_enemy[2]->SetMovePos({ -5000.0f,0.0f,-1200.0f }, { -5000.0f,0.0f,1000.0f });
 
 		//ディレクションライトを作成
 		m_dirLig = NewGO<DirectionLight>(0);

@@ -15,15 +15,15 @@ namespace nsHikageri
 			m_animationClips[enAnimationClip_Run].Load("Assets/animData/EnemyRun.tka");
 			m_animationClips[enAnimationClip_Run].SetLoopFlag(true);	//ループモーションにする。
 			m_animationClips[enAnimationClip_Attack].Load("Assets/animData/EnemyBite.tka");
-			m_animationClips[enAnimationClip_Attack].SetLoopFlag(false);	//ループモーションにする。
+			m_animationClips[enAnimationClip_Attack].SetLoopFlag(false);	
 			m_animationClips[enAnimationClip_Scream].Load("Assets/animData/EnemyScream.tka");
-			m_animationClips[enAnimationClip_Scream].SetLoopFlag(false);	//ループモーションにする。
+			m_animationClips[enAnimationClip_Scream].SetLoopFlag(false);
 			m_animationClips[enAnimationClip_PreBite].Load("Assets/animData/EnemyBite01.tka");
-			m_animationClips[enAnimationClip_PreBite].SetLoopFlag(false);	//ループモーションにする。
+			m_animationClips[enAnimationClip_PreBite].SetLoopFlag(false);
 			m_animationClips[enAnimationClip_Bite].Load("Assets/animData/EnemyBite02.tka");
-			m_animationClips[enAnimationClip_Bite].SetLoopFlag(false);	//ループモーションにする。
+			m_animationClips[enAnimationClip_Bite].SetLoopFlag(false);	
 			m_animationClips[enAnimationClip_EndBite].Load("Assets/animData/EnemyBite03.tka");
-			m_animationClips[enAnimationClip_EndBite].SetLoopFlag(false);	//ループモーションにする。
+			m_animationClips[enAnimationClip_EndBite].SetLoopFlag(false);	
 
 			return true;
 		}
@@ -54,7 +54,9 @@ namespace nsHikageri
 					break;
 				}
 				break;
-
+			case Enemy::enState_Scream:
+				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Scream);
+				break;
 			default:
 				break;
 			}

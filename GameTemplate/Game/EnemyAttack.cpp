@@ -117,7 +117,7 @@ namespace nsHikageri
 			{
 				//エネミーを追跡状態に移行して、リセット
 				m_biteState = enBiteState_PreBite;
-				m_enemy->SetEnemyState(Enemy::enState_Chase);
+				m_enemy->SetEnemyState(Enemy::enState_Scream);
 				m_enemyBiteCount = BITE_TIME;
 				m_enemyBiteAnimCount = 0;
 			}

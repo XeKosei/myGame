@@ -20,7 +20,8 @@ namespace nsHikageri
 				enState_Bitten,
 				enState_Dead,
 				enState_Stop,
-				enStatesNum
+				enStatesNum,
+				enState_Invincible,
 			};
 
 
@@ -41,6 +42,12 @@ namespace nsHikageri
 			//プレイヤーの状態を取得
 			EnPlayerStates GetPlayerState() { return m_playerState; }
 
+			/// @brief 無敵時間を設定(仮)
+			/// @param time 設定する時間
+			void SetInvincible(int time) { m_playerState = enState_Invincible; m_invincibleTime = time; }
+
+			//無敵中の処理
+			void Invincible();
 
 			//プレイヤー関係のインスタンスにアクセスする
 			PlayerMove* GetPlayerMove() { return m_playerMove; };
@@ -53,6 +60,9 @@ namespace nsHikageri
 			SkinModelRender* m_playerModel = nullptr;
 			//プレイヤーのキャラコン
 			CharacterController m_charaCon;
+
+			//無敵時間
+			int m_invincibleTime = 0;
 
 			//プレイヤー関係のクラス
 			PlayerMove* m_playerMove = nullptr;

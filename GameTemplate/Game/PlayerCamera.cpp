@@ -15,7 +15,8 @@ namespace nsHikageri
 		//Player.cppのUpdate()で呼び出す処理
 		void PlayerCamera::ExecuteUpdate()
 		{
-			if (m_player->GetPlayerState() == Player::enState_Normal)
+			if (m_player->GetPlayerState() == Player::enState_Normal 
+				|| m_player->GetPlayerState() == Player::enState_Invincible)
 			{
 				//前フレームのカメラの向きを取得
 				Vector3 oldCameraDir = m_cameraDir;

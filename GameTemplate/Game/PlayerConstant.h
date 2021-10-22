@@ -38,7 +38,7 @@ namespace nsHikageri
 		namespace nsPlayerHPConstant
 		{
 			static const float MAX_PLAYER_HP = 100.0f;	//プレイヤーの体力の最大値
-			static const int DAMAGE_INTERVAL = 20;	//次にダメージを受けられるようになるまでの間隔
+			static const int DAMAGE_INTERVAL = 200;	//次にダメージを受けられるようになるまでの間隔
 			static const Vector4 INI_BLOODSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 0.0f };	//ダメージを受けた時の画面の周りの血のスプライトの初期カラー
 			
 			static const float ADD_RED_SPEED = 0.00001f;	//スプライトが点滅する速さ
