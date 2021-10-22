@@ -323,6 +323,9 @@
     <ClCompile Include="SpriteRender.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="FontRender.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -602,6 +605,9 @@
       <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRender.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="FontRender.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>

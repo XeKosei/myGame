@@ -19,6 +19,7 @@ namespace nsHikageri
 				enState_Normal,
 				enState_Bitten,
 				enState_Dead,
+				enState_Stop,
 				enStatesNum
 			};
 

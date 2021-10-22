@@ -32,7 +32,7 @@ namespace nsHikageri
 			switch (m_enemy->GetEnemyState())
 			{
 			case Enemy::enState_SearchPlayer:
-				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Idle);
+				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Walk);
 				break;
 			case Enemy::enState_Chase:
 				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Run);

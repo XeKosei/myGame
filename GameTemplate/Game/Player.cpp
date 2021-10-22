@@ -65,6 +65,7 @@ namespace nsHikageri
 				break;
 			case enState_Dead:
 				m_playerHP->ExecuteUpdate();
+			case enState_Stop:			
 				break;
 			}	
 		}

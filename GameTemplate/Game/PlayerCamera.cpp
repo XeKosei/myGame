@@ -36,12 +36,12 @@ namespace nsHikageri
 				}
 
 				//簡易クイックターン(仮で)
-				if (g_pad[0]->IsTrigger(enButtonB) && g_pad[0]->GetLStickYF() < -0.8f)
+				/*if (g_pad[0]->IsTrigger(enButtonB) && g_pad[0]->GetLStickYF() < -0.8f)
 				{
 					m_cameraDir.x *= -1.0f;
 					m_cameraDir.z *= -1.0f;
 					m_cameraDir.y = 0.0f;
-				}
+				}*/
 			}
 
 			//カメラの位置を計算する。

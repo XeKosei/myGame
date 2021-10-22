@@ -43,7 +43,7 @@ namespace nsHikageri
 
 			//ˆÚ“®ˆ—
 			m_velocity.Normalize();
-			m_velocity *= ENEMY_WALK_SPEED;
+			m_velocity *= ENEMY_DASH_SPEED;
 			m_velocity *= GameTime::GetInstance().GetFrameDeltaTime();
 
 			//Œ¸‘¬ˆ—

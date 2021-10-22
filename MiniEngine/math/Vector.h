@@ -433,6 +433,7 @@ public:
 	};
 	static const Vector4 White;
 	static const Vector4 Black;
+	static const Vector4 Red;
 	static const Vector4 Yellow;
 	static const Vector4 Gray;
 public:

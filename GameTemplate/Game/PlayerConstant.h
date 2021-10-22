@@ -14,8 +14,8 @@ namespace nsHikageri
 		//Playerクラスで利用する定数
 		namespace nsPlayerMoveConstant
 		{
-			static const float PLAYER_WALK_SPEED = 150.0f;	//プレイヤーの歩く速さ
-			static const float PLAYER_DASH_SPEED = PLAYER_WALK_SPEED * 1.5f;//プレイヤーの走る速さ
+			static const float PLAYER_WALK_SPEED = 100.0f;	//プレイヤーの歩く速さ
+			static const float PLAYER_DASH_SPEED = PLAYER_WALK_SPEED * 2.0f;//プレイヤーの走る速さ
 			static const float PLAYER_CROUCHDOWN_WALK_SPEED = PLAYER_WALK_SPEED / 2.0f;//プレイヤーの屈み歩きの速さ
 			static const float PLAYER_MOVE_FRICTION = 0.2f;	//プレイヤーが動くときの摩擦
 			static const float GRAVITY_SPEED = 9.8f * 0.1f;		//落下スピード

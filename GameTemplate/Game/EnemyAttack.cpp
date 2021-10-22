@@ -119,6 +119,7 @@ namespace nsHikageri
 				m_biteState = enBiteState_PreBite;
 				m_enemy->SetEnemyState(Enemy::enState_Chase);
 				m_enemyBiteCount = BITE_TIME;
+				m_enemyBiteAnimCount = 0;
 			}
 		}
 	}

@@ -46,8 +46,11 @@ namespace nsHikageri
 		void FlashLight::Update()
 		{
 			//懐中電灯関係の処理
-			m_flashLightAction->ExecuteUpdate();
-			m_abilityStrobeFlash->ExecuteUpdate();
+			if (m_player->GetPlayerState() == nsPlayer::Player::enState_Normal)
+			{
+				m_flashLightAction->ExecuteUpdate();
+				m_abilityStrobeFlash->ExecuteUpdate();
+			}
 
 			//まず懐中電灯をカメラと同じ位置に設定
 			m_position = g_camera3D->GetPosition();

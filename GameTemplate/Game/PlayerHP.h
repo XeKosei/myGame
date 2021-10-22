@@ -13,6 +13,8 @@ namespace nsHikageri
 
 			void BloodSprite();
 
+			void GameOver();//仮
+
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
 			void SetPlayer(Player* pl) { m_player = pl; };
@@ -31,9 +33,21 @@ namespace nsHikageri
 			//ダメージを受けた際の画面の周りの血の表現
 			SpriteRender* m_bloodSprite = nullptr;
 
+			//画面端の血のスプライト関連
+			//血の色
 			Vector4 m_bloodColor = {0.0f,0.0f,0.0f,0.0f};
+			//血の点滅
 			float m_addRed = 0.0f;
 			bool m_addRedFlag = true;
+
+			//HP表示(デバッグ用)
+			FontRender* f = nullptr;
+
+
+			FontRender* m_gameOverFont = nullptr;
+			Vector4 m_gameOverFontColor = { 0.0f,0.0f,0.0f,0.0f };
+			Vector4 m_gameOverFontShadowColor = { 0.0f,0.0f,0.0f,0.0f };
+			int m_gameOverMoveCount = 250.0f;
 		};
 	}
 }

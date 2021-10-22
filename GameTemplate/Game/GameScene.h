@@ -12,6 +12,8 @@ namespace nsHikageri
 		bool Start();
 		void Update();
 
+		void GameClear();//(仮)
+
 	private:
 		//ステージ
 		nsBackGround::BackGround* m_backGround = nullptr;
@@ -22,6 +24,11 @@ namespace nsHikageri
 		//ディレクションライト
 		DirectionLight* m_dirLig = nullptr;
 
+		//クリアフォント(仮)
+		FontRender* m_clearFont = nullptr;
+		int m_clearFontMoveCount = 100;
+		Vector4 m_clearOverFontColor = { 0.0f,0.0f,0.0f,0.0f };
+		Vector4 m_clearOverFontShadowColor = { 0.0f,0.0f,0.0f,0.0f };
 	};
 
 }

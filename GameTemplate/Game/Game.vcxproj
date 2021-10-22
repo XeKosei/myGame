@@ -298,6 +298,7 @@
     <ClCompile Include="EnemySearchPlayer.cpp" />
     <ClCompile Include="FlashLight.cpp" />
     <ClCompile Include="FlashLightAction.cpp" />
+    <ClCompile Include="FontRender.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GaussianBlur.cpp" />
     <ClCompile Include="LightManager.cpp" />
@@ -399,6 +400,7 @@
     <ClInclude Include="FlashLightAction.h" />
     <ClInclude Include="FlashLightConstant.h" />
     <ClInclude Include="FlashLightInclude.h" />
+    <ClInclude Include="FontRender.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="LightManager.h" />

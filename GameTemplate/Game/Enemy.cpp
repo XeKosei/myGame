@@ -18,12 +18,13 @@ namespace nsHikageri
 			m_charaCon.Init(
 				ENEMY_MODEL_WIDTH,	//半径
 				ENEMY_MODEL_HEIGHT,	//高さ
-				INI_ENEMY_POSITION//初期位置
+				m_searchPos[0]//初期位置
 			);		
 
 			//エネミー関連のインスタンスを作成
 			m_enemySearchPlayer = NewGO<EnemySearchPlayer>(0);
 			m_enemySearchPlayer->SetEnemy(this);
+			m_enemySearchPlayer->SetMovePos(m_searchPos[0], m_searchPos[1]);
 			m_enemyChase = NewGO<EnemyChase>(0);
 			m_enemyChase->SetEnemy(this);
 			m_enemyAttack = NewGO<EnemyAttack>(0);
@@ -36,7 +37,7 @@ namespace nsHikageri
 			//モデルを作成
 			m_enemyModel = NewGO<SkinModelRender>(0);
 			m_enemyModel->Init("Assets/modelData/Enemy.tkm", "Assets/modelData/Enemy.tks",m_enemyAnim->GetAnimationClip(), m_enemyAnim->GetAnimationClipNum());
-			m_enemyModel->SetPosition(INI_ENEMY_POSITION);
+			m_enemyModel->SetPosition(m_searchPos[0]);
 
 			return true;
 		}

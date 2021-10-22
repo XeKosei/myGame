@@ -46,7 +46,10 @@ namespace nsHikageri
 			/// @param enState エネミーの状態
 			void SetEnemyState(EnEnemyStates enState) { m_enemyState = enState; };
 
+			void SetMovePos(Vector3 pos1, Vector3 pos2) { m_searchPos[0] = pos1; m_searchPos[1] = pos2; };
+
 			//エネミー関係のインスタンスにアクセスする
+			EnemySearchPlayer* GetEnemySearchPlayer() { return m_enemySearchPlayer; };
 			EnemyChase* GetEnemyChase() { return m_enemyChase; }
 			EnemyAttack* GetEnemyAttack() { return m_enemyAttack; };
 			EnemyAnim* GetEnemyAnim() { return m_enemyAnim; };
@@ -61,6 +64,8 @@ namespace nsHikageri
 
 			//エネミーの状態
 			EnEnemyStates m_enemyState = enState_SearchPlayer;
+
+			Vector3 m_searchPos[2] = { { 0.0f,0.0f,0.0f }, {0.0f,0.0f,0.0f} };
 
 			//エネミー関連
 			EnemySearchPlayer* m_enemySearchPlayer = nullptr;
