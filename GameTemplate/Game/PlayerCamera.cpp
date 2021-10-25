@@ -15,6 +15,8 @@ namespace nsHikageri
 		//Player.cpp‚ÌUpdate()‚ÅŒÄ‚Ño‚·ˆ—
 		void PlayerCamera::ExecuteUpdate()
 		{
+			EyeHeightMove();
+
 			if (m_player->GetPlayerState() == Player::enState_Normal 
 				|| m_player->GetPlayerState() == Player::enState_Invincible)
 			{
@@ -56,6 +58,54 @@ namespace nsHikageri
 			g_camera3D->SetTarget(cameraTarget);
 				
 			g_camera3D->Update();
+		}
+
+		void PlayerCamera::EyeHeightMove()
+		{
+			if (m_player->GetPlayerMove()->GetVelocity().Length() >= 1.0f)
+			{
+				if (m_addEyeHeightFlag == true)
+				{
+					m_addEyeHeight -= ADD_EYEHEIGHT_SPEED_IDLE * speed * speed;
+					m_plEyeHeight += m_addEyeHeight;
+
+					if (m_plEyeHeight < INI_PLAYER_EYE_HEIGHT && m_addEyeHeight < 0.0f && m_resetEyeHeightFlag == false)
+					{
+						m_resetEyeHeightFlag = true;
+					}
+
+					if (m_addEyeHeight < MIN_ADD_EYEHEIGHT * speed)
+					{
+						m_addEyeHeightFlag = false;		
+						m_resetEyeHeightFlag = false;
+					}
+				}
+
+				else if (m_addEyeHeightFlag == false)
+				{
+					m_addEyeHeight += ADD_EYEHEIGHT_SPEED_IDLE * speed * speed;
+					m_plEyeHeight += m_addEyeHeight;
+
+					if (m_plEyeHeight > INI_PLAYER_EYE_HEIGHT && m_addEyeHeight > 0.0f && m_resetEyeHeightFlag == false)
+					{
+						m_resetEyeHeightFlag = true;
+					}
+
+					if (m_addEyeHeight > MAX_ADD_EYEHEIGHT * speed)
+					{
+						m_addEyeHeightFlag = true;		
+						m_resetEyeHeightFlag = false;
+					}
+				}
+
+				if (m_resetEyeHeightFlag)
+				{
+					speed = m_player->GetPlayerMove()->GetVelocity().Length();
+					m_plEyeHeight = INI_PLAYER_EYE_HEIGHT;
+				}
+
+
+			}
 		}
 	}
 }

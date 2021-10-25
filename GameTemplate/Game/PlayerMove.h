@@ -14,6 +14,8 @@ namespace nsHikageri
 			void Move();	//移動処理
 			void Turn();	//回転処理
 
+			Vector3 GetVelocity() { return m_velocity; };
+
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
 			void SetPlayer(Player* pl) { m_player = pl; };

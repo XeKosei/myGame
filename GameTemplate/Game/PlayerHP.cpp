@@ -10,9 +10,13 @@ namespace nsHikageri
 		{
 			//最大HPを設定
 			m_HP = MAX_PLAYER_HP;
+
+			//血のスプライト
 			m_bloodSprite = NewGO<SpriteRender>(1);
 			m_bloodSprite->Init("Assets/Image/BloodBlur.DDS", 1280, 720);
 			m_bloodSprite->SetMulColor(INI_BLOODSPRITE_COLOR);
+			m_bloodSprite->SetScale({ 2.0f,2.0f,2.0f });
+
 
 			//デバッグ用
 			f = NewGO<FontRender>(0);
@@ -42,13 +46,23 @@ namespace nsHikageri
 			//HPが半分を切ったら
 			if (m_HP <= MAX_PLAYER_HP / 2)
 			{
-				BloodSprite();
+				BloodSpriteBlink();
 			}
+
 			if (m_HP <= 0)
 			{
 				GameOver();
 			}
-					
+			
+			/*if (g_pad[0]->IsTrigger(enButtonX))
+			{
+				m_HP = 100;
+			}*/
+
+			/*if (g_pad[0]->IsTrigger(enButtonA))
+			{
+				Damage(5);
+			}*/
 		}
 
 		/// @brief プレイヤーのダメージを指定した値だけ減らす。
@@ -62,20 +76,8 @@ namespace nsHikageri
 				//{
 				m_HP -= damageNum;
 
-				if (m_HP > MAX_PLAYER_HP / 3)
-				{
-					//プレイヤーの体力に合わせて、スプライトのr値とa値を上げる。
-					float rgbColor = (1 - m_HP / MAX_PLAYER_HP) * 150.0f;
-					float a = (1 - m_HP / MAX_PLAYER_HP) / 80.0f;
-					m_bloodSprite->SetMulColor({ rgbColor, rgbColor / 10, rgbColor / 10, a });
-				}
-				else
-				{
-					float rgbColor = (1 - m_HP / MAX_PLAYER_HP) * 1000.0f;
-					float a = (1 - m_HP / MAX_PLAYER_HP) / 80.0f;
-					m_bloodSprite->SetMulColor({ rgbColor, rgbColor / 100, rgbColor / 100, a });
-				}
-
+				//血のスプライトを設定
+				SetBloodSprite();
 
 				//体力が0になったら
 				if (m_HP <= 0)
@@ -92,41 +94,62 @@ namespace nsHikageri
 			}
 		}
 
-		
-		//画面端の血のスプライトの処理
-		void PlayerHP::BloodSprite()
+		void PlayerHP::SetBloodSprite()
 		{
-			//死んだときの演出
-			if (m_player->GetPlayerState() == Player::enState_Dead)
+			//プレイヤーの残体力によって血のスプライトを変化させる。
+			if (m_HP > BIG_DAMAGE_LINE)
 			{
-				m_addRed += MAX_ADD_RED * 1;
+				//スプライトの色は通常。
+				m_bloodSprite->SetMulColor({ DAMAGED_BLOODSPRITE_COLOR });
 			}
-			//スプライトの点滅
-			else if (m_addRedFlag == true)
+			else
 			{
-				m_addRed += ADD_RED_SPEED;
-				if (m_addRed >= MAX_ADD_RED)
+				//残HPの比率から、スプライトの色を決定
+				float bloodColor = (1 - m_HP / MAX_PLAYER_HP);
+				//Rだけ色を強めることで、ブルームを起こす。。
+				m_bloodSprite->SetMulColor({ bloodColor * MUL_BLOODSPRITE_RED_PINCH, bloodColor, bloodColor, 1.0f });
+			}
+
+			//スプライトの大きさを設定する(1～2の範囲)
+			float bloodScale = 1 + m_HP / MAX_PLAYER_HP;
+			m_bloodSprite->SetScale({ bloodScale,bloodScale,bloodScale });
+		}
+
+		//画面端の血のスプライトの処理
+		void PlayerHP::BloodSpriteBlink()
+		{
+			//スプライトの点滅
+			if (m_addRedFlag == true)
+			{
+				m_addAlpha += ADD_ALPHA_SPEED;
+				if (m_addAlpha >= MAX_ADD_ALPHA)
 				{
 					m_addRedFlag = false;
 				}
 			}
 			else if (m_addRedFlag == false)
 			{
-				m_addRed -= ADD_RED_SPEED;
-				if (m_addRed <= MIN_ADD_RED)
+				m_addAlpha -= ADD_ALPHA_SPEED;
+				if (m_addAlpha <= MIN_ADD_ALPHA)
 				{
 					m_addRedFlag = true;
 				}
 			}
 
-			//点滅分の赤色を加算
+			//点滅分のa値を加算
 			m_bloodColor = m_bloodSprite->GetMulColor();
-			m_bloodColor.a += m_addRed;
+			m_bloodColor.a += m_addAlpha;
 			m_bloodSprite->SetMulColor(m_bloodColor);
 		}
 
 		void PlayerHP::GameOver()
 		{
+			//死んだときの演出
+			if (m_player->GetPlayerState() == Player::enState_Dead)
+			{
+				m_addAlpha += MAX_ADD_ALPHA * 1;
+			}
+
 			if (m_gameOverMoveCount > 0)
 			{
 				m_gameOverMoveCount--;

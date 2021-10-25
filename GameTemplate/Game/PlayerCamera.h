@@ -12,6 +12,9 @@ namespace nsHikageri
 			bool Start();
 			void ExecuteUpdate();
 
+			//目の高さの設定で使用する変数
+			void EyeHeightMove();
+
 			void SetCameraDir(Vector3 dir) { m_cameraDir = dir; };
 
 			/// @brief プレイヤーにアクセスできるようにする。
@@ -30,9 +33,15 @@ namespace nsHikageri
 			//カメラの向き
 			Vector3 m_cameraDir = { 0.0f,0.0f,1.0f };
 			//プレイヤーの目の高さ
-			int m_plEyeHeight = 0.0f;
+			float m_plEyeHeight = 0.0f;
 			//プレイヤー
 			Player* m_player = nullptr;
+
+			//目の高さの設定で使用する変数
+			float m_addEyeHeight = 0.0f;
+			bool m_addEyeHeightFlag = true;
+			float speed = 0.0f;
+			bool m_resetEyeHeightFlag = true;
 		};
 	}
 }

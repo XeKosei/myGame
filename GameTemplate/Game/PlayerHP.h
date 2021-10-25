@@ -11,7 +11,9 @@ namespace nsHikageri
 
 			void ExecuteUpdate();
 
-			void BloodSprite();
+			void SetBloodSprite();
+
+			void BloodSpriteBlink();
 
 			void GameOver();//仮
 
@@ -37,7 +39,7 @@ namespace nsHikageri
 			//血の色
 			Vector4 m_bloodColor = {0.0f,0.0f,0.0f,0.0f};
 			//血の点滅
-			float m_addRed = 0.0f;
+			float m_addAlpha = 0.0f;
 			bool m_addRedFlag = true;
 
 			//HP表示(デバッグ用)

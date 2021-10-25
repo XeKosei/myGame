@@ -13,7 +13,7 @@ namespace nsHikageri
 			m_attackMotionCount = ATTACKMOTION_TIME;
 
 			//エネミーに噛みつかれ続ける時間
-			m_enemyBiteCount = BITE_TIME;
+			m_enemyBiteCount = BITING_TIME;
 
 			return true;
 		}
@@ -89,7 +89,7 @@ namespace nsHikageri
 			m_enemyBiteAnimCount++;
 
 			//アニメーションが噛みつきモーション中なら、ダメージを与える。
-			if (m_enemyBiteAnimCount >= BITEANIM_BITE_START_TIME && m_enemyBiteAnimCount <= BITEANIM_BITE_END_TIME)
+			if (m_enemyBiteAnimCount == BITEANIM_BITE_TIMING)
 			{
 				m_enemy->GetPlayer()->GetPlayerHP()->Damage(BITE_DAMAGE);
 			}
@@ -118,7 +118,7 @@ namespace nsHikageri
 				//エネミーを追跡状態に移行して、リセット
 				m_biteState = enBiteState_PreBite;
 				m_enemy->SetEnemyState(Enemy::enState_Scream);
-				m_enemyBiteCount = BITE_TIME;
+				m_enemyBiteCount = BITING_TIME;
 				m_enemyBiteAnimCount = 0;
 			}
 		}

@@ -14,7 +14,7 @@ namespace nsHikageri
 		//Playerクラスで利用する定数
 		namespace nsPlayerMoveConstant
 		{
-			static const float PLAYER_WALK_SPEED = 100.0f;	//プレイヤーの歩く速さ
+			static const float PLAYER_WALK_SPEED = 80.0f;	//プレイヤーの歩く速さ
 			static const float PLAYER_DASH_SPEED = PLAYER_WALK_SPEED * 2.0f;//プレイヤーの走る速さ
 			static const float PLAYER_CROUCHDOWN_WALK_SPEED = PLAYER_WALK_SPEED / 2.0f;//プレイヤーの屈み歩きの速さ
 			static const float PLAYER_MOVE_FRICTION = 0.2f;	//プレイヤーが動くときの摩擦
@@ -27,6 +27,10 @@ namespace nsHikageri
 			static const float CAMERA_MOVE_SPEED = 3.0f;		//カメラが動く速さ
 			static const float INI_PLAYER_EYE_HEIGHT = 200.0f;		//プレイヤーの目の高さ
 			static const float TO_CAMERA_TARGET_DIS = 100.0f;	//カメラのターゲットへの距離
+
+			static const float ADD_EYEHEIGHT_SPEED_IDLE = 0.02f;	//カメラが呼吸で上下する速さ
+			static const float MAX_ADD_EYEHEIGHT = 2.0f;	//カメラが呼吸で上下する最大加算値
+			static const float MIN_ADD_EYEHEIGHT = -2.0f;	//カメラが呼吸で上下する最小加算値
 		}
 
 		namespace nsPlayerActionConstant
@@ -39,11 +43,15 @@ namespace nsHikageri
 		{
 			static const float MAX_PLAYER_HP = 100.0f;	//プレイヤーの体力の最大値
 			static const int DAMAGE_INTERVAL = 200;	//次にダメージを受けられるようになるまでの間隔
-			static const Vector4 INI_BLOODSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 0.0f };	//ダメージを受けた時の画面の周りの血のスプライトの初期カラー
-			
-			static const float ADD_RED_SPEED = 0.00001f;	//スプライトが点滅する速さ
-			static const float MAX_ADD_RED = 0.0002f;		//点滅の最大加算値
-			static const float MIN_ADD_RED = -0.0002f;		//点滅の最小加算値
+			static const Vector4 INI_BLOODSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 0.0f };	//血のスプライトの初期カラー
+			static const Vector4 DAMAGED_BLOODSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };	//ダメージを受けた際の血のスプライトのカラー
+			static const float MUL_BLOODSPRITE_RED_PINCH = 20.0f;	//ピンチ時に血のスプライトのr値に掛ける値
+
+			static const float BIG_DAMAGE_LINE = MAX_PLAYER_HP / 3;	//大ダメージを受けていると判断されるライン
+
+			static const float ADD_ALPHA_SPEED = 0.001f;	//スプライトが点滅する速さ
+			static const float MAX_ADD_ALPHA = 0.02f;		//点滅の最大加算値
+			static const float MIN_ADD_ALPHA = -0.02f;		//点滅の最小加算値
 		}
 
 		namespace nsPlayerBittenConstant
