@@ -167,6 +167,11 @@ namespace nsHikageri
 		/// @return ボーンのワールド行列
 		Matrix GetWorldMatrixFromBoneName(const wchar_t* boneName);
 
+		/// @brief ボーンの名前からそのボーンのワールド座標を取得したかった。
+		/// @param boneName ボーンの名前
+		/// @return ボーンの位置
+		Vector3 GetWorldPosFromBoneName(const wchar_t* boneName);
+
 		static void PreLoadModel(const char* tkmFilePath);
 
 	private:

@@ -15,7 +15,7 @@ namespace nsHikageri
 		//Player.cpp‚ÌUpdate()‚ÅŒÄ‚Ño‚·ˆ—
 		void PlayerCamera::ExecuteUpdate()
 		{
-			EyeHeightMove();
+			//EyeHeightMove();
 
 			if (m_player->GetPlayerState() == Player::enState_Normal 
 				|| m_player->GetPlayerState() == Player::enState_Invincible)

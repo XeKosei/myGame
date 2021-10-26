@@ -110,6 +110,11 @@ namespace nsHikageri
 		return m_skeleton.GetBone(boneNo)->GetWorldMatrix();
 	}
 
+	Vector3 SkinModelRender::GetWorldPosFromBoneName(const wchar_t* boneName)
+	{
+		int boneNo = m_skeleton.FindBoneID(boneName);
+		return m_skeleton.GetBone(boneNo)->GetBoneWorldPos();
+	}
 
 	void SkinModelRender::Render(RenderContext& rc, Camera* camera)
 	{
