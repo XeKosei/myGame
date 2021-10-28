@@ -113,6 +113,7 @@ namespace nsHikageri
 	Vector3 SkinModelRender::GetWorldPosFromBoneName(const wchar_t* boneName)
 	{
 		int boneNo = m_skeleton.FindBoneID(boneName);
+		m_skeleton.GetBone(boneNo)->CalcWorldTRS(m_position, m_qRot, m_scale);
 		return m_skeleton.GetBone(boneNo)->GetBoneWorldPos();
 	}
 

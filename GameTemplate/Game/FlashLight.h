@@ -7,6 +7,7 @@ namespace nsHikageri
 	{	
 		class FlashLightAction;
 		class AbilityStrobeFlash;
+		class FlashLightBattery;
 		//懐中電灯
 		class FlashLight : public IGameObject
 		{
@@ -42,7 +43,7 @@ namespace nsHikageri
 			//懐中電灯関係のインスタンスにアクセスする
 			FlashLightAction* GetFlashLightAction() { return m_flashLightAction; }
 			AbilityStrobeFlash* GetAbilityStrobeFlash() { return m_abilityStrobeFlash; }
-
+			FlashLightBattery* GetFlashLightBattery() { return m_flashLightBattery; }
 		private:
 			SkinModelRender* m_flashLightModel = nullptr;
 			//スポットライト
@@ -60,6 +61,7 @@ namespace nsHikageri
 			//フラッシュライト関連
 			FlashLightAction* m_flashLightAction = nullptr;
 			AbilityStrobeFlash* m_abilityStrobeFlash = nullptr;
+			FlashLightBattery* m_flashLightBattery = nullptr;
 		};
 	}
 }

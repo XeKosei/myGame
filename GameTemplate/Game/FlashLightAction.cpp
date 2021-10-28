@@ -42,21 +42,33 @@ namespace nsHikageri
 
 		void FlashLightAction::SwitchOnOff()
 		{
-			//懐中電灯の電源のスイッチを切り替える
-			SetFlashFlag(!GetFlashFlag());
-
-			//電源がONならば
-			if (GetFlashFlag() == true)
+			if (m_flashLight->GetFlashLightBattery()->GetBatteryLevel() > 0.0f)
 			{
-				//ONならば影響範囲を設定
-				m_flashLight->GetSpotLight()->SetRange(nsFlashLightConstant::INI_FLASHLIGHT_RANGE);
-
+				//懐中電灯の電源のスイッチを切り替える
+				SetFlashFlag(!GetFlashFlag());
+				//電源がOFFだったとき
+				if (GetFlashFlag() == false)
+				{	
+					//OFFならば影響範囲を0にする。
+					m_flashLight->GetSpotLight()->SetRange(0.0f);
+				}
+				else
+				{
+					//ONならば影響範囲を設定
+					m_flashLight->GetSpotLight()->SetRange(nsFlashLightConstant::INI_FLASHLIGHT_RANGE);
+				}
 			}
-			//電源がOFFならば
 			else
 			{
-				//OFFならば影響範囲を0にする。
-				m_flashLight->GetSpotLight()->SetRange(0.0f);
+				//電源がONだったとき
+				if (GetFlashFlag() == true)
+				{
+					//懐中電灯の電源のスイッチを切り替える
+					SetFlashFlag(!GetFlashFlag());
+					//ONならば影響範囲を設定
+					m_flashLight->GetSpotLight()->SetRange(0.0f);
+
+				}
 			}
 		}
 	}

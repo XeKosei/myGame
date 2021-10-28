@@ -120,7 +120,7 @@ public:
 	*@param[out]	rot			回転量の格納先。
 	*@param[out]	scale		拡大率の格納先。
 	*/
-	void CalcWorldTRS(Vector3& trans, Quaternion& rot, Vector3& scale);
+	void CalcWorldTRS(Vector3 trans, Quaternion rot, Vector3 scale);
 		
 	/// @brief ボーンのワールド座標を入手する
 	/// @return ボーンのワールド座標

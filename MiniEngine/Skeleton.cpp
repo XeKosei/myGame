@@ -6,7 +6,7 @@
 #include <comdef.h> 
 
 
-void Bone::CalcWorldTRS(Vector3& trans, Quaternion& rot, Vector3& scale)
+void Bone::CalcWorldTRS(Vector3 trans, Quaternion rot, Vector3 scale)
 {
 	Matrix mWorld = m_worldMatrix;
 	//行列から拡大率を取得する。
@@ -25,6 +25,7 @@ void Bone::CalcWorldTRS(Vector3& trans, Quaternion& rot, Vector3& scale)
 	rot.SetRotation(mWorld);
 	m_rotation = rot;
 }
+
 Skeleton::Skeleton()
 {
 	//リザーブ。

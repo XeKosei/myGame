@@ -329,6 +329,9 @@
     <ClCompile Include="EnemyScream.cpp">
       <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="FlashLightBattery.cpp">
+      <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -615,6 +618,9 @@
     </ClInclude>
     <ClInclude Include="EnemyScream.h">
       <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="FlashLightBattery.h">
+      <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

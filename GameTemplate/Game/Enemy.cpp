@@ -65,15 +65,6 @@ namespace nsHikageri
 			}
 			//アニメーション再生
 			m_enemyAnim->ExecuteUpdate();
-
-			if (g_pad[0]->IsPress(enButtonY))
-			{
-				Vector3 dir = m_enemyModel->GetWorldPosFromBoneName(L"Ghoul:Head") - m_player->GetPlayerMove()->GetPosition();
-
-				g_camera3D->SetTarget(dir);
-
-			}
-
 		}
 	}
 }

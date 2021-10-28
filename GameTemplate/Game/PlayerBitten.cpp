@@ -16,6 +16,16 @@ namespace nsHikageri
 		}
 		void PlayerBitten::ExecuteUpdate()
 		{
+			//プレイヤーカメラとモデルの向きを設定。
+			Vector3 dir = m_enemy->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head") - m_player->GetPlayerCamera()->GetCameraPos();
+			dir.Normalize();
+			m_player->GetPlayerCamera()->SetCameraDir(dir);
+
+			float angle = atan2(dir.x, dir.z);
+			Quaternion qRot;
+			qRot.SetRotation(Vector3::AxisY, angle);
+			m_player->GetPlayerModel()->SetRotation(qRot);
+
 			switch (m_bittenStates)
 			{
 			case enBittenState_PreBitten:
@@ -33,15 +43,6 @@ namespace nsHikageri
 		}
 		void PlayerBitten::PreBitten()
 		{
-			//プレイヤーの向きを設定。
-			Vector3 dir = m_enemy->GetEnemyChase()->GetPosition() - m_player->GetPlayerMove()->GetPosition();
-			dir.Normalize();
-			float angle = atan2(dir.x, dir.z);
-			Quaternion qRot;
-			qRot.SetRotation(Vector3::AxisY, angle);
-			m_player->GetPlayerModel()->SetRotation(qRot);
-			m_player->GetPlayerCamera()->SetCameraDir(dir);
-
 			//エネミーの噛みつきが次のステップへ移行したら、プレイヤーも次のステップへ移行
 			if (m_enemy->GetEnemyAttack()->GetBiteState() == nsEnemy::EnemyAttack::enBiteState_Bite)
 			{

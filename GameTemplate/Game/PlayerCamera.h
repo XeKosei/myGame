@@ -17,6 +17,8 @@ namespace nsHikageri
 
 			void SetCameraDir(Vector3 dir) { m_cameraDir = dir; };
 
+			Vector3 GetCameraPos() { return m_cameraPos; };
+
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
 			void SetPlayer(Player* pl) { m_player = pl; };

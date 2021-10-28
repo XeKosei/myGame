@@ -23,5 +23,12 @@ namespace nsHikageri
 			static const Vector3 INI_STROBEFLASH_COLOR = {150.0f,150.0f,150.0f};	//ストロボフラッシュの明るさの初期値
 			static const Vector3 STROBEFLASH_COLOR_DECREASE_SPEED = {1.5f,1.5f,1.5f};	//ストロボフラッシュの明るさが下がる速さ
 		}
+
+		namespace nsFlashLightBattery
+		{
+			static const float MAX_BATTERY_LEVEL = 100.0f;	//最大バッテリー残量
+			static const float BATTERY_LEVEL_DECREASE_SPEED = 0.001f; //バッテリーの減る速度
+ 
+		}
 	}
 }

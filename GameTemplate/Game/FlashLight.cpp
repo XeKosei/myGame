@@ -39,7 +39,8 @@ namespace nsHikageri
 			m_flashLightAction->SetFlashLight(this);
 			m_abilityStrobeFlash = NewGO<AbilityStrobeFlash>(0);
 			m_abilityStrobeFlash->SetFlashLight(this);
-
+			m_flashLightBattery = NewGO<FlashLightBattery>(0);
+			m_flashLightBattery->SetFlashLight(this);
 			return true;
 		}
 
@@ -50,6 +51,7 @@ namespace nsHikageri
 			{
 				m_flashLightAction->ExecuteUpdate();
 				m_abilityStrobeFlash->ExecuteUpdate();
+				m_flashLightBattery->ExecuteUpdate();
 			}
 
 			//‚Ü‚¸‰ù’†“d“”‚ğƒJƒƒ‰‚Æ“¯‚¶ˆÊ’u‚Éİ’è
