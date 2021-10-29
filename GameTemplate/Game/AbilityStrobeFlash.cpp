@@ -70,35 +70,34 @@ namespace nsHikageri
 
 			if (m_strobeFlashColor.x >= 145.0f)
 			{
-				
-
 				QueryGOs<nsEnemy::Enemy>("enemy", [this](nsEnemy::Enemy* enemy)->bool
 					{
 						//‰ù’†“d“”‚ÌŒü‚«
 						Vector3 strobeDir = m_flashLight->GetFlashLightDir();
 						strobeDir.Normalize();
 
-						//enemy->GetEnemy
-
-						//“G‚Ì“ª‚Ö‚ÌŒü‚«
-						Vector3 toHeadDir = enemy->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head") -  m_flashLight->GetFlashLightPos();
-						toHeadDir.Normalize();
-						
-						//“ñ‚Â‚ÌƒxƒNƒgƒ‹‚Ì“àÏ‚ðŽZo
-						float dot = Dot(toHeadDir, strobeDir);
-
-						//‰ù’†“d“”‚ÌŽËoŠp“x‚©‚çA
-						float flashLightAngle = m_flashLight->GetFlashLightAngle();
-						flashLightAngle /= 2;	//”¼Œa‚ÌŽËoŠp“x‚ª—~‚µ‚¢‚Ì‚ÅA2‚ÅŠ„‚é
-						flashLightAngle /= 3.141592;	//‰~Žü—¦‚ÅŠ„‚é‚±‚Æ‚ÅA0`1‚Ì”ÍˆÍ‚ÉB
-						flashLightAngle = 1 - flashLightAngle;	
-										
-						//“àÏ‚ªŽËoŠp“x‚æ‚è‚à“à‘¤‚È‚ç‚Î
-						if (dot >= flashLightAngle )
+						//ƒtƒ‰ƒbƒVƒ…‚ªƒGƒlƒ~[‚Ì³–Ê‚É“–‚½‚Á‚Ä‚¢‚é‚È‚ç‚Î
+						if (Dot(strobeDir, enemy->GetEnemyMove()->GetDirection()) <= 0.0f)
 						{
-							enemy->SetEnemyState(nsEnemy::Enemy::enState_Flinch);
+							//“G‚Ì“ª‚Ö‚ÌŒü‚«
+							Vector3 toHeadDir = enemy->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head") - m_flashLight->GetFlashLightPos();
+							toHeadDir.Normalize();
+
+							//“ñ‚Â‚ÌƒxƒNƒgƒ‹‚Ì“àÏ‚ðŽZo
+							float dot = Dot(toHeadDir, strobeDir);
+
+							//‰ù’†“d“”‚ÌŽËoŠp“x‚©‚çA
+							float flashLightAngle = m_flashLight->GetFlashLightAngle();
+							flashLightAngle /= 2;	//”¼Œa‚ÌŽËoŠp“x‚ª—~‚µ‚¢‚Ì‚ÅA2‚ÅŠ„‚é
+							flashLightAngle /= 3.141592;	//‰~Žü—¦‚ÅŠ„‚é‚±‚Æ‚ÅA0`1‚Ì”ÍˆÍ‚ÉB
+							flashLightAngle = 1 - flashLightAngle;
+
+							//“àÏ‚ªŽËoŠp“x‚æ‚è‚à“à‘¤‚È‚ç‚Î
+							if (dot >= flashLightAngle)
+							{
+								enemy->SetEnemyState(nsEnemy::Enemy::enState_Flinch);
+							}
 						}
-						
 						return true;
 					}
 				);
