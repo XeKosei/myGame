@@ -10,6 +10,7 @@ namespace nsHikageri
 		class PlayerAction;
 		class PlayerHP;
 		class PlayerBitten;
+		class PlayerPouch;
 
 		class Player : public IGameObject
 		{
@@ -49,12 +50,17 @@ namespace nsHikageri
 			//無敵中の処理
 			void Invincible();
 
+			/// @brief 懐中電灯を取得
+			/// @return 懐中電灯
+			nsFlashLight::FlashLight* GetFlashLight() { return m_flashLight; }
+
 			//プレイヤー関係のインスタンスにアクセスする
 			PlayerMove* GetPlayerMove() { return m_playerMove; };
 			PlayerCamera* GetPlayerCamera() { return m_playerCamera; };
-			PlayerAction* nsPlayerActionConstant() { return m_playerAction; };
+			PlayerAction* GetPlayerAction() { return m_playerAction; };
 			PlayerHP* GetPlayerHP() { return m_playerHP; };
 			PlayerBitten* GetPlayerBitten() { return m_playerBitten; }
+			PlayerPouch* GetPlayerPouch() { return m_playerPouch; }
 		private:
 			//モデル
 			SkinModelRender* m_playerModel = nullptr;
@@ -70,6 +76,7 @@ namespace nsHikageri
 			PlayerAction* m_playerAction = nullptr;
 			PlayerHP* m_playerHP = nullptr;
 			PlayerBitten* m_playerBitten = nullptr;
+			PlayerPouch* m_playerPouch = nullptr;
 
 			EnPlayerStates m_playerState = enState_Normal;
 

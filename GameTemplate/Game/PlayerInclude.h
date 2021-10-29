@@ -5,4 +5,5 @@
 #include "PlayerAction.h"
 #include "PlayerHP.h"
 #include "PlayerBitten.h"
+#include "PlayerPouch.h"
 #include "PlayerConstant.h"

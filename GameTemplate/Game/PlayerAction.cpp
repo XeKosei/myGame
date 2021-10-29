@@ -26,7 +26,6 @@ namespace nsHikageri
 				if (g_pad[0]->IsTrigger(enButtonLB3))
 				{
 					m_player->GetPlayerModel()->SetScale(CROUCHDOWN_PLAYER_SCALE);
-					m_player->GetPlayerMove()->SetCrouchDownFlag(true);
 					m_player->GetPlayerCamera()->SetPlEyeHeight(CROUCHDOWN_PLAYER_EYE_HEIGHT);
 					m_crouchDownFlag = true;
 				}
@@ -37,7 +36,6 @@ namespace nsHikageri
 				if (g_pad[0]->IsTrigger(enButtonLB3))
 				{
 					m_player->GetPlayerModel()->SetScale(nsPlayerConstant::INI_PLAYER_SCALE);
-					m_player->GetPlayerMove()->SetCrouchDownFlag(false);
 					m_player->GetPlayerCamera()->SetPlEyeHeight(nsPlayerCameraConstant::INI_PLAYER_EYE_HEIGHT);
 					m_crouchDownFlag = false;
 				}

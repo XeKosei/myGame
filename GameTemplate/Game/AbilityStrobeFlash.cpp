@@ -6,7 +6,7 @@ namespace nsHikageri
 {
 	namespace nsFlashLight
 	{
-		using  namespace nsAbilityStrobeFlash;
+		using  namespace nsAbilityStrobeFlashConstant;
 
 		bool AbilityStrobeFlash::Start()
 		{
@@ -55,6 +55,7 @@ namespace nsHikageri
 				//ボタンを放したときにカウントが終わっていたら
 				if (m_strobeChargeCount <= 0)
 				{
+					m_flashLight->GetFlashLightBattery()->ConsumBatteryLevel(INI_STROBEFLASH_BATTERY_COST);
 					m_strobeFlashFlag = true;
 				}
 				//カウントをリセット

@@ -20,7 +20,7 @@ namespace nsHikageri
 
 		void PlayerMove::Move()
 		{
-			if (m_crouchDownFlag == true)
+			if (m_player->GetPlayerAction()->GetCrouchDownFlag() == true)
 			{
 				m_plMoveSpeed = PLAYER_CROUCHDOWN_WALK_SPEED;
 			}

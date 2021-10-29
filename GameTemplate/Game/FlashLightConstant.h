@@ -17,18 +17,18 @@ namespace nsHikageri
 			static const float FLASHLIGHT_ANGLE_ADJUST_SPEED = 0.01f;	//懐中電灯の射出角度を調節する速度
 		}
 
-		namespace nsAbilityStrobeFlash
+		namespace nsAbilityStrobeFlashConstant
 		{
 			static const int INI_STROBEFLASH_CHARGE_COUNT = 50;	//ストロボフラッシュのチャージ時間の初期値
 			static const Vector3 INI_STROBEFLASH_COLOR = {150.0f,150.0f,150.0f};	//ストロボフラッシュの明るさの初期値
 			static const Vector3 STROBEFLASH_COLOR_DECREASE_SPEED = {1.5f,1.5f,1.5f};	//ストロボフラッシュの明るさが下がる速さ
+			static const float INI_STROBEFLASH_BATTERY_COST = 20.0f;	//ストロボフラッシュで消費するバッテリーのコスト
 		}
 
-		namespace nsFlashLightBattery
+		namespace nsFlashLightBatteryConstant
 		{
 			static const float MAX_BATTERY_LEVEL = 100.0f;	//最大バッテリー残量
-			static const float BATTERY_LEVEL_DECREASE_SPEED = 0.001f; //バッテリーの減る速度
- 
+			static const float BATTERY_LEVEL_DECREASE_SPEED = 0.01f; //バッテリーの減る速度
 		}
 	}
 }

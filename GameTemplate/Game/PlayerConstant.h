@@ -61,5 +61,11 @@ namespace nsHikageri
 
 			
 		}
+
+		namespace nsPlayerPouchConstant
+		{
+			static const std::wstring ITEM_NAME[PlayerPouch::enItem_num] = { L"ìdír", L"ê∏ê_à¿íËç‹" };
+
+		}
 	}
 }

@@ -338,6 +338,9 @@
     <ClCompile Include="EnemyMove.cpp">
       <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerPouch.cpp">
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -633,6 +636,9 @@
     </ClInclude>
     <ClInclude Include="EnemyMove.h">
       <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPouch.h">
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

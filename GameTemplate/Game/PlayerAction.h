@@ -17,6 +17,9 @@ namespace nsHikageri
 			/// @param pl プレイヤーの参照
 			void SetPlayer(Player* pl) { m_player = pl; };
 
+			//屈んでいるかどうか
+			bool GetCrouchDownFlag() { return m_crouchDownFlag; }
+
 			//屈む。
 			void CrouchDown();
 

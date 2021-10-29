@@ -5,7 +5,7 @@ namespace nsHikageri
 {
 	namespace nsFlashLight
 	{
-		using namespace nsFlashLightBattery;
+		using namespace nsFlashLightBatteryConstant;
 		bool FlashLightBattery::Start()
 		{
 			//“d’rc—Ê‚ğÅ‘å‚Éİ’è

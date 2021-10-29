@@ -313,6 +313,7 @@
     <ClCompile Include="PlayerCamera.cpp" />
     <ClCompile Include="PlayerHP.cpp" />
     <ClCompile Include="PlayerMove.cpp" />
+    <ClCompile Include="PlayerPouch.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PostEffectManager.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
@@ -419,6 +420,7 @@
     <ClInclude Include="PlayerHP.h" />
     <ClInclude Include="PlayerInclude.h" />
     <ClInclude Include="PlayerMove.h" />
+    <ClInclude Include="PlayerPouch.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PostEffectManager.h" />
     <ClInclude Include="SkinModelRender.h" />

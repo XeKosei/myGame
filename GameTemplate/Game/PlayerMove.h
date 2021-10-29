@@ -24,9 +24,6 @@ namespace nsHikageri
 			/// @return プレイヤーの位置
 			Vector3 GetPosition() { return m_position; };
 
-			/// @brief　屈んでいるかどうかを設定する。
-			/// @param crouchDownFlag 屈んでいるかどうか
-			void SetCrouchDownFlag(bool crouchDownFlag) { m_crouchDownFlag = crouchDownFlag; };
 		private:
 			//位置
 			Vector3 m_position = { Vector3::Zero };
@@ -36,8 +33,6 @@ namespace nsHikageri
 			Vector3 m_velocity = { Vector3::Zero };
 			//回転
 			Quaternion m_qRot = { 0.0f,0.0f,0.0f,0.0f };
-			//屈んでいるかどうか
-			bool m_crouchDownFlag = false;
 			//プレイヤー
 			Player* m_player = nullptr;
 		};
