@@ -332,6 +332,12 @@
     <ClCompile Include="FlashLightBattery.cpp">
       <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyFlinch.cpp">
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMove.cpp">
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -621,6 +627,12 @@
     </ClInclude>
     <ClInclude Include="FlashLightBattery.h">
       <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFlinch.h">
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMove.h">
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

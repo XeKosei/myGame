@@ -162,12 +162,12 @@ namespace nsHikageri
 			return m_model[model];
 		}
 
-		/// @brief ボーンの名前からそのボーンのワールド行列を取得する(らしい)。
+		/// @brief ボーンの名前からそのボーンのワールド行列を取得する。
 		/// @param boneName ボーンの名前
 		/// @return ボーンのワールド行列
 		Matrix GetWorldMatrixFromBoneName(const wchar_t* boneName);
 
-		/// @brief ボーンの名前からそのボーンのワールド座標を取得したかった。
+		/// @brief ボーンの名前からそのボーンのワールド座標を取得する。
 		/// @param boneName ボーンの名前
 		/// @return ボーンの位置
 		Vector3 GetWorldPosFromBoneName(const wchar_t* boneName);

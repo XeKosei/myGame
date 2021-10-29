@@ -10,7 +10,8 @@ namespace nsHikageri
 
 		bool EnemySearchPlayer::Start()
 		{
-			m_position = m_searchPos[0];
+			//初期位置を指定
+			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
 			return true;
 		}
 
@@ -18,14 +19,13 @@ namespace nsHikageri
 		{
 			//移動処理(仮)
 			Move();
-			Turn();
 
 			//エネミーの位置からプレイヤーの位置へのベクトルを求める
-			Vector3 toTargetDir = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_position;
-			toTargetDir.Normalize();
+			Vector3 toPlayerDir = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition();
+			toPlayerDir.Normalize();
 
 			//エネミーの向きとの内積が一定以上なら、プレイヤーを追いかけ始める。
-			if (Dot(toTargetDir, m_dir) >= 0.9f)
+			if (Dot(toPlayerDir, m_enemy->GetEnemyMove()->GetDirection()) >= 0.9f)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_Scream);
 			}
@@ -33,42 +33,27 @@ namespace nsHikageri
 
 		void EnemySearchPlayer::Move()
 		{
+			//指定した二か所の位置を往復する処理
+
+			//エネミーの移動の速さを設定
+			m_enemy->GetEnemyMove()->SetMoveSpeed(nsEnemyMoveConstant::ENEMY_WALK_SPEED);
+
+			//エネミーが向かう位置を設定する。
 			if (m_searchFlag == false)
 			{
-				m_targetPos = m_searchPos[1];		
+				m_enemy->GetEnemyMove()->SetTarget(m_searchPos[1]);		
 			}
 			else
 			{
-				m_targetPos = m_searchPos[0];
+				m_enemy->GetEnemyMove()->SetTarget(m_searchPos[0]);
 			}
 
-			m_dir = m_targetPos - m_position;
-			m_dir.Normalize();
-
-			m_velocity = m_dir * ENEMY_WALK_SPEED;
-			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, 1.0f);
-			m_enemy->GetEnemyModel()->SetPosition(m_position);
-
-			if ((m_targetPos - m_position).Length() <= 5.0f)
+			//エネミーの位置がほぼターゲットと一緒になったら、
+			if ((m_enemy->GetEnemyMove()->GetTarget() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= 5.0f)
 			{
 				m_searchFlag = !m_searchFlag;
 			}
 
-		}
-		void EnemySearchPlayer::Turn()
-		{
-			if (m_velocity.x != 0.0f || m_velocity.z != 0.0f)
-			{
-				//atan2はtanθの値を角度(ラジアン単位)に変換してくれる関数。
-				//cameraDir.x / cameraDir.zの結果はtanθになる。
-				//atan2を使用して、角度を求めている。
-				//これが回転角度になる。
-				float angle = atan2(m_velocity.x, m_velocity.z);
-				//atanが返してくる角度はラジアン単位なので
-				//SetRotationDegではなくSetRotationを使用する。
-				m_qRot.SetRotation(Vector3::AxisY, angle);
-				m_enemy->GetEnemyModel()->SetRotation(m_qRot);
-			}
 		}
 	}
 }

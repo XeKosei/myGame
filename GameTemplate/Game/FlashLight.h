@@ -37,8 +37,18 @@ namespace nsHikageri
 			}
 
 			/// @brief 懐中電灯の射出角度を取得
-			/// @return 射出角度
+			/// @return 射出角度(半径ではないことに注意)
 			float GetFlashLightAngle() { return m_flashLightAngle; }
+
+			/// @brief 懐中電灯の向きを取得する。
+			/// @return 懐中電灯の向き
+			Vector3 GetFlashLightDir() { return m_direction; };
+
+			/// @brief 懐中電灯の位置を取得する
+			/// @return 懐中電灯の位置
+			Vector3 GetFlashLightPos() { return m_position; };
+
+			nsPlayer::Player* GetPlayer() { return m_player; };
 
 			//懐中電灯関係のインスタンスにアクセスする
 			FlashLightAction* GetFlashLightAction() { return m_flashLightAction; }

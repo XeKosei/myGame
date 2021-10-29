@@ -17,7 +17,7 @@ namespace nsHikageri
 		//エネミーを作成
 		for (int i = 0; i < 1; i++)
 		{
-			m_enemy[i] = NewGO<nsEnemy::Enemy>(0);
+			m_enemy[i] = NewGO<nsEnemy::Enemy>(0, "enemy");
 			m_enemy[i]->SetPlayer(m_player);
 			
 		}

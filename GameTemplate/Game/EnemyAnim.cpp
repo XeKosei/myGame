@@ -18,6 +18,8 @@ namespace nsHikageri
 			m_animationClips[enAnimationClip_Attack].SetLoopFlag(false);	
 			m_animationClips[enAnimationClip_Scream].Load("Assets/animData/EnemyScream.tka");
 			m_animationClips[enAnimationClip_Scream].SetLoopFlag(false);
+			m_animationClips[enAnimationClip_Flinch].Load("Assets/animData/EnemyFlinch.tka");
+			m_animationClips[enAnimationClip_Flinch].SetLoopFlag(false);
 			m_animationClips[enAnimationClip_PreBite].Load("Assets/animData/EnemyBite01.tka");
 			m_animationClips[enAnimationClip_PreBite].SetLoopFlag(false);
 			m_animationClips[enAnimationClip_Bite].Load("Assets/animData/EnemyBite02.tka");
@@ -56,6 +58,9 @@ namespace nsHikageri
 				break;
 			case Enemy::enState_Scream:
 				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Scream);
+				break;
+			case Enemy::enState_Flinch:
+				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Flinch);
 				break;
 			default:
 				break;

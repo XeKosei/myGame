@@ -1,15 +1,14 @@
 #pragma once
+
 namespace nsHikageri
 {
 	namespace nsEnemy
 	{
 		class Enemy;
-		class EnemyChase : public IGameObject
+		class EnemyFlinch : public IGameObject
 		{
 		public:
-			bool Start();
 			void ExecuteUpdate();
-			void Chase();	//追跡処理
 
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
@@ -19,6 +18,6 @@ namespace nsHikageri
 			//エネミー
 			Enemy* m_enemy = nullptr;
 		};
+
 	}
 }
-

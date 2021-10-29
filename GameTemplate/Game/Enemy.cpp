@@ -22,15 +22,19 @@ namespace nsHikageri
 			);		
 
 			//エネミー関連のインスタンスを作成
+			m_enemyMove = NewGO<EnemyMove>(0);
+			m_enemyMove->SetEnemy(this);
 			m_enemySearchPlayer = NewGO<EnemySearchPlayer>(0);
 			m_enemySearchPlayer->SetEnemy(this);
-			m_enemySearchPlayer->SetMovePos(m_searchPos[0], m_searchPos[1]);
+			m_enemySearchPlayer->SetMovePos(m_searchPos[0], m_searchPos[1]);//仮
 			m_enemyChase = NewGO<EnemyChase>(0);
 			m_enemyChase->SetEnemy(this);
 			m_enemyAttack = NewGO<EnemyAttack>(0);
 			m_enemyAttack->SetEnemy(this);
 			m_enemyScream = NewGO<EnemyScream>(0);
 			m_enemyScream->SetEnemy(this);
+			m_enemyFlinch = NewGO<EnemyFlinch>(0);
+			m_enemyFlinch->SetEnemy(this);
 			m_enemyAnim = NewGO<EnemyAnim>(0);
 			m_enemyAnim->SetEnemy(this);
 
@@ -50,15 +54,20 @@ namespace nsHikageri
 			{
 			case enState_SearchPlayer:
 				m_enemySearchPlayer->ExecuteUpdate();
+				m_enemyMove->ExecuteUpdate();
 				break;
 			case enState_Chase:
 				m_enemyChase->ExecuteUpdate();
+				m_enemyMove->ExecuteUpdate();
 				break;
 			case enState_Attack:
 				m_enemyAttack->ExecuteUpdate();
 				break;
 			case enState_Scream:
 				m_enemyScream->Executeupdate();
+				break;
+			case enState_Flinch:
+				m_enemyFlinch->ExecuteUpdate();
 				break;
 			default:
 				break;

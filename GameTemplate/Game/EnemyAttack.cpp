@@ -46,9 +46,9 @@ namespace nsHikageri
 				&& m_attackMotionCount <= ATTACKMOTION_HIT_END_TIME)
 			{
 				//プレイヤーへのベクトル
-				Vector3 toPlayerDir = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyChase()->GetPosition();
+				Vector3 toPlayerDir = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition();
 				//エネミーの向き
-				Vector3 enemyDir = m_enemy->GetEnemyChase()->GetDirection();
+				Vector3 enemyDir = m_enemy->GetEnemyMove()->GetDirection();
 
 				if (Dot(toPlayerDir, enemyDir) >= ATTACKMOTION_HIT_DOT && toPlayerDir.Length() <= ATTACKMOTION_HIT_DIS)
 				{
@@ -67,7 +67,7 @@ namespace nsHikageri
 		void EnemyAttack::PreBite()
 		{
 			//エネミーの向きを設定
-			Vector3 dir = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyChase()->GetPosition();
+			Vector3 dir = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition();
 			float angle = atan2(dir.x, dir.z);
 			Quaternion qRot;
 			qRot.SetRotation(Vector3::AxisY, angle);

@@ -5,11 +5,13 @@ namespace nsHikageri
 
 	namespace nsEnemy
 	{
+		class EnemyMove;
 		class EnemySearchPlayer;
 		class EnemyChase;
 		class EnemyAttack;
 		class EnemyAnim;
 		class EnemyScream;
+		class EnemyFlinch;
 
 		class Enemy : public IGameObject
 		{
@@ -25,6 +27,7 @@ namespace nsHikageri
 				enState_Chase,
 				enState_Attack,
 				enState_Scream,
+				enState_Flinch,
 				enStatesNum
 			};
 
@@ -48,13 +51,16 @@ namespace nsHikageri
 			/// @param enState エネミーの状態
 			void SetEnemyState(EnEnemyStates enState) { m_enemyState = enState; };
 
+			//m_searchPosでの仮移動処理で使用
 			void SetMovePos(Vector3 pos1, Vector3 pos2) { m_searchPos[0] = pos1; m_searchPos[1] = pos2; };
 
 			//エネミー関係のインスタンスにアクセスする
+			EnemyMove* GetEnemyMove() { return m_enemyMove; }
 			EnemySearchPlayer* GetEnemySearchPlayer() { return m_enemySearchPlayer; };
 			EnemyChase* GetEnemyChase() { return m_enemyChase; }
 			EnemyAttack* GetEnemyAttack() { return m_enemyAttack; };
 			EnemyScream* GetEnemyScream() { return m_enemyScream; }
+			EnemyFlinch* GetEnemyFlinch() { return m_enemyFlinch; }
 			EnemyAnim* GetEnemyAnim() { return m_enemyAnim; };
 		private:
 			//モデル
@@ -71,10 +77,12 @@ namespace nsHikageri
 			Vector3 m_searchPos[2] = { { 0.0f,0.0f,0.0f }, {0.0f,0.0f,0.0f} };
 
 			//エネミー関連
+			EnemyMove* m_enemyMove = nullptr;
 			EnemySearchPlayer* m_enemySearchPlayer = nullptr;
 			EnemyChase* m_enemyChase = nullptr;
 			EnemyAttack* m_enemyAttack = nullptr;
 			EnemyScream* m_enemyScream = nullptr;
+			EnemyFlinch* m_enemyFlinch = nullptr;
 			EnemyAnim* m_enemyAnim = nullptr;
 		};
 	}

@@ -14,6 +14,7 @@ namespace nsHikageri
 				enAnimationClip_Run,
 				enAnimationClip_Attack,
 				enAnimationClip_Scream,
+				enAnimationClip_Flinch,
 				enAnimationClip_PreBite,
 				enAnimationClip_Bite,
 				enAnimationClip_EndBite,
