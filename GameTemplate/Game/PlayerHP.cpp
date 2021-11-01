@@ -13,7 +13,7 @@ namespace nsHikageri
 
 			//血のスプライト
 			m_bloodSprite = NewGO<SpriteRender>(1);
-			m_bloodSprite->Init("Assets/Image/BloodBlur.DDS", 1280, 720);
+			m_bloodSprite->Init("Assets/Image/Hazy.DDS", 1280, 720);
 			m_bloodSprite->SetMulColor(INI_BLOODSPRITE_COLOR);
 			m_bloodSprite->SetScale({ 2.0f,2.0f,2.0f });
 
@@ -54,15 +54,15 @@ namespace nsHikageri
 				GameOver();
 			}
 			
-			/*if (g_pad[0]->IsTrigger(enButtonX))
+			if (g_pad[0]->IsTrigger(enButtonX))
 			{
 				m_HP = 100;
-			}*/
+			}
 
-			/*if (g_pad[0]->IsTrigger(enButtonA))
+			if (g_pad[0]->IsTrigger(enButtonA))
 			{
 				Damage(5);
-			}*/
+			}
 		}
 
 		/// @brief プレイヤーのダメージを指定した値だけ減らす。
@@ -107,7 +107,7 @@ namespace nsHikageri
 				//残HPの比率から、スプライトの色を決定
 				float bloodColor = (1 - m_HP / MAX_PLAYER_HP);
 				//Rだけ色を強めることで、ブルームを起こす。。
-				m_bloodSprite->SetMulColor({ bloodColor * MUL_BLOODSPRITE_RED_PINCH, bloodColor, bloodColor, 1.0f });
+				m_bloodSprite->SetMulColor({ bloodColor, bloodColor, bloodColor, 1.0f });
 			}
 
 			//スプライトの大きさを設定する(1～2の範囲)
