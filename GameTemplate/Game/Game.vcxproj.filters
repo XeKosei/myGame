@@ -84,6 +84,12 @@
     <Filter Include="ヘッダー ファイル\Hikageri\BackGround">
       <UniqueIdentifier>{6cf5905d-7b3f-4d45-b0e1-da27aeeb1557}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Hikageri\Gimmick">
+      <UniqueIdentifier>{4caf4c2f-c375-4857-9c6c-a8d400915cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Gimmick">
+      <UniqueIdentifier>{ca07a7b2-5eb5-4258-9a23-4fba0d60fe0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -302,9 +308,6 @@
     <ClCompile Include="AbilityStrobeFlash.cpp">
       <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerHP.cpp">
-      <Filter>ソース ファイル\Hikageri\Player</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyAttack.cpp">
       <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
@@ -340,6 +343,15 @@
     </ClCompile>
     <ClCompile Include="PlayerPouch.cpp">
       <Filter>ソース ファイル\Hikageri\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSanity.cpp">
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Chandelier.cpp">
+      <Filter>ソース ファイル\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyStress.cpp">
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -592,9 +604,6 @@
     <ClInclude Include="AbilityStrobeFlash.h">
       <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerHP.h">
-      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyAttack.h">
       <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
@@ -639,6 +648,18 @@
     </ClInclude>
     <ClInclude Include="PlayerPouch.h">
       <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSanity.h">
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Chandelier.h">
+      <Filter>ヘッダー ファイル\Hikageri\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="GimmickConstant.h">
+      <Filter>ヘッダー ファイル\Hikageri\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyStress.h">
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

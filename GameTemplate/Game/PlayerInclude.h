@@ -3,7 +3,7 @@
 #include "PlayerMove.h"
 #include "PlayerCamera.h"
 #include "PlayerAction.h"
-#include "PlayerHP.h"
+#include "PlayerSanity.h"
 #include "PlayerBitten.h"
 #include "PlayerPouch.h"
 #include "PlayerConstant.h"

@@ -8,7 +8,7 @@ namespace nsHikageri
 		{
 		public:
 
-			void Executeupdate();
+			void ExecuteUpdate();
 
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照

@@ -36,8 +36,8 @@ namespace nsHikageri
 			m_playerCamera->SetPlayer(this);
 			m_playerAction = NewGO<PlayerAction>(0);
 			m_playerAction->SetPlayer(this);
-			m_playerHP = NewGO<PlayerHP>(0);
-			m_playerHP->SetPlayer(this);
+			m_playerSanity = NewGO<PlayerSanity>(0);
+			m_playerSanity->SetPlayer(this);
 			m_playerBitten = NewGO<PlayerBitten>(0);
 			m_playerBitten->SetPlayer(this);
 			m_playerPouch = NewGO<PlayerPouch>(0);
@@ -58,23 +58,23 @@ namespace nsHikageri
 				m_playerMove->ExecuteUpdate();
 				m_playerAction->ExecuteUpdate();
 				m_playerCamera->ExecuteUpdate();
-				m_playerHP->ExecuteUpdate();
+				m_playerSanity->ExecuteUpdate();
 				m_playerPouch->ExecuteUpdate();
 				break;
 			case enState_Bitten:
 				m_playerBitten->ExecuteUpdate();
 				m_playerCamera->ExecuteUpdate();
-				m_playerHP->ExecuteUpdate();
+				m_playerSanity->ExecuteUpdate();
 				break;
 			case enState_Dead:
-				m_playerHP->ExecuteUpdate();
+				m_playerSanity->ExecuteUpdate();
 			case enState_Stop:			
 				break;
 			case enState_Invincible:
 				m_playerMove->ExecuteUpdate();
 				m_playerAction->ExecuteUpdate();
 				m_playerCamera->ExecuteUpdate();
-				m_playerHP->ExecuteUpdate();
+				m_playerSanity->ExecuteUpdate();
 				m_playerPouch->ExecuteUpdate();
 				Invincible();
 				break;

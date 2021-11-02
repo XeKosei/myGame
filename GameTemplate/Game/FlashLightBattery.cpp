@@ -10,6 +10,13 @@ namespace nsHikageri
 		{
 			//電池残量を最大に設定
 			m_batteryLevel = MAX_BATTERY_LEVEL;
+
+			//デバッグ用
+			m_font = NewGO<FontRender>(3);
+			m_font->SetText(L"バッテリー:" + std::to_wstring(m_batteryLevel));
+			m_font->SetColor({0.5f, 0.5f, 0.0f, 1.0f});
+			m_font->SetPosition({250.0f, 250.0f});
+
 			return true;
 		}
 		void FlashLightBattery::ExecuteUpdate()
@@ -20,22 +27,22 @@ namespace nsHikageri
 				if (m_batteryLevel > 0.0f)
 				{
 					m_batteryLevel -= BATTERY_LEVEL_DECREASE_SPEED;
+					m_font->SetText(L"バッテリー:" + std::to_wstring(m_batteryLevel));
 				}
 
 				//バッテリー残量が無くなったら、懐中電灯を消す。
 				if (m_batteryLevel <= 0.0f)
 				{
 					m_batteryLevel = 0.0f;
+					m_font->SetText(L"バッテリー:" + std::to_wstring(m_batteryLevel));
 					m_flashLight->GetFlashLightAction()->SwitchOnOff();
 				}
 			}
 
-			
-
+			else
+			{
+				m_flashLight->GetPlayer()->GetPlayerSanity()->Damage(0.01f);
+			}
 		}
-
-
-
-
 	}
 }

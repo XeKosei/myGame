@@ -18,7 +18,7 @@ namespace nsHikageri
 		void EnemySearchPlayer::ExecuteUpdate()
 		{
 			//移動処理(仮)
-			Move();
+			Search();
 
 			//エネミーの位置からプレイヤーの位置へのベクトルを求める
 			Vector3 toPlayerDir = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition();
@@ -31,7 +31,7 @@ namespace nsHikageri
 			}
 		}
 
-		void EnemySearchPlayer::Move()
+		void EnemySearchPlayer::Search()
 		{
 			//指定した二か所の位置を往復する処理
 

@@ -26,6 +26,9 @@ namespace nsHikageri
 			//電池を使用したときの処理
 			void UseBattery();
 
+			//精神安定剤を使用したとき
+			void UseTranquilizar();
+
 			//
 			//void CannotUse();
 

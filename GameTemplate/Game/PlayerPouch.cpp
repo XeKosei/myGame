@@ -66,6 +66,9 @@ namespace nsHikageri
 				case enItem_Battery:
 					UseBattery();
 					break;
+				case enItem_Tranquilizer:
+					UseTranquilizar();
+					break;
 				default:
 					break;
 				}
@@ -106,6 +109,12 @@ namespace nsHikageri
 		void PlayerPouch::UseBattery()
 		{
 			m_player->GetFlashLight()->GetFlashLightBattery()->SetBatteryLevel(nsFlashLight::nsFlashLightBatteryConstant::MAX_BATTERY_LEVEL);
+		}
+
+		//¸_ˆÀ’èÜ‚ðŽg—p‚µ‚½‚Æ‚«
+		void PlayerPouch::UseTranquilizar()
+		{
+			m_player->GetPlayerSanity()->Recovery(TRANQUILIZER_RECOVERY_NUM);
 		}
 
 		//void PlayerPouch::CannotUse()

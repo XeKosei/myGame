@@ -5,6 +5,7 @@ namespace nsHikageri
 	namespace nsPlayer { class Player; }
 	namespace nsBackGround { class BackGround; }
 	namespace nsEnemy { class Enemy; }
+	namespace nsGimmick { class Chandelier; }
 
 	class GameScene : public IGameObject
 	{
@@ -20,9 +21,11 @@ namespace nsHikageri
 		//プレイヤー
 		nsPlayer::Player* m_player = nullptr;
 		//エネミー
-		nsEnemy::Enemy* m_enemy[3] = { nullptr, nullptr, nullptr };
+		nsEnemy::Enemy* m_enemy = nullptr;
 		//ディレクションライト
 		DirectionLight* m_dirLig = nullptr;
+		//シャンデリア
+		nsGimmick::Chandelier* m_chandelier = nullptr;
 
 		//クリアフォント(仮)
 		FontRender* m_clearFont = nullptr;

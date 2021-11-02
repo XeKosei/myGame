@@ -8,7 +8,7 @@ namespace nsHikageri
 		public:
 			bool Start();
 
-			void Move();
+			void Search();
 
 			void ExecuteUpdate();
 

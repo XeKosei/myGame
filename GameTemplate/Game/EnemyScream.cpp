@@ -5,7 +5,7 @@ namespace nsHikageri
 {
 	namespace nsEnemy
 	{
-		void EnemyScream::Executeupdate()
+		void EnemyScream::ExecuteUpdate()
 		{
 			if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)
 			{

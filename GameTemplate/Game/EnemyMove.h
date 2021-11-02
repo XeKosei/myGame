@@ -48,6 +48,13 @@ namespace nsHikageri
 			/// @param speed エネミーの移動の速さ
 			void SetMoveSpeed(float speed) { m_moveSpeed = speed; };
 
+			/// @brief 動きが遅くなっているかどうかのフラグを取得する
+			/// @return 動きが遅くなっているかどうか
+			bool GetSlowMoveFlag() { return m_slowMoveFlag; };
+			/// @brief 動きが遅くなるかどうか
+			/// @param flag true:遅くなる　false:遅くならない
+			void SetSlowMoveFlag(bool flag) { m_slowMoveFlag = flag; }
+
 		private:
 			//エネミー
 			Enemy* m_enemy = nullptr;
@@ -63,6 +70,9 @@ namespace nsHikageri
 			Quaternion m_qRot = { 0.0f,0.0f,0.0f,0.0f };
 			//エネミーが向かう位置
 			Vector3 m_targetPos = { Vector3::Zero };
+
+			//動きが遅くなるかどうかのフラグ
+			bool m_slowMoveFlag = false;	
 		};
 
 	}

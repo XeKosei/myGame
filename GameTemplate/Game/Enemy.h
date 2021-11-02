@@ -12,6 +12,7 @@ namespace nsHikageri
 		class EnemyAnim;
 		class EnemyScream;
 		class EnemyFlinch;
+		class EnemyStress;
 
 		class Enemy : public IGameObject
 		{
@@ -28,6 +29,7 @@ namespace nsHikageri
 				enState_Attack,
 				enState_Scream,
 				enState_Flinch,
+				enState_Suffer,
 				enStatesNum
 			};
 
@@ -61,6 +63,7 @@ namespace nsHikageri
 			EnemyAttack* GetEnemyAttack() { return m_enemyAttack; };
 			EnemyScream* GetEnemyScream() { return m_enemyScream; }
 			EnemyFlinch* GetEnemyFlinch() { return m_enemyFlinch; }
+			EnemyStress* GetEnemyStress() { return m_enemyStress; }
 			EnemyAnim* GetEnemyAnim() { return m_enemyAnim; };
 		private:
 			//ƒ‚ƒfƒ‹
@@ -83,6 +86,7 @@ namespace nsHikageri
 			EnemyAttack* m_enemyAttack = nullptr;
 			EnemyScream* m_enemyScream = nullptr;
 			EnemyFlinch* m_enemyFlinch = nullptr;
+			EnemyStress* m_enemyStress = nullptr;
 			EnemyAnim* m_enemyAnim = nullptr;
 		};
 	}

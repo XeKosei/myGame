@@ -35,6 +35,8 @@ namespace nsHikageri
 			m_enemyScream->SetEnemy(this);
 			m_enemyFlinch = NewGO<EnemyFlinch>(0);
 			m_enemyFlinch->SetEnemy(this);
+			m_enemyStress = NewGO<EnemyStress>(0);
+			m_enemyStress->SetEnemy(this);
 			m_enemyAnim = NewGO<EnemyAnim>(0);
 			m_enemyAnim->SetEnemy(this);
 
@@ -59,15 +61,19 @@ namespace nsHikageri
 			case enState_Chase:
 				m_enemyChase->ExecuteUpdate();
 				m_enemyMove->ExecuteUpdate();
+				m_enemyStress->ExecuteUpdate();
 				break;
 			case enState_Attack:
 				m_enemyAttack->ExecuteUpdate();
 				break;
 			case enState_Scream:
-				m_enemyScream->Executeupdate();
+				m_enemyScream->ExecuteUpdate();
 				break;
 			case enState_Flinch:
 				m_enemyFlinch->ExecuteUpdate();
+				break;
+			case enState_Suffer:
+				m_enemyStress->Suffer();
 				break;
 			default:
 				break;

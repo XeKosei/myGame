@@ -8,7 +8,7 @@ namespace nsHikageri
 		class PlayerMove;
 		class PlayerCamera;		
 		class PlayerAction;
-		class PlayerHP;
+		class PlayerSanity;
 		class PlayerBitten;
 		class PlayerPouch;
 
@@ -58,7 +58,7 @@ namespace nsHikageri
 			PlayerMove* GetPlayerMove() { return m_playerMove; };
 			PlayerCamera* GetPlayerCamera() { return m_playerCamera; };
 			PlayerAction* GetPlayerAction() { return m_playerAction; };
-			PlayerHP* GetPlayerHP() { return m_playerHP; };
+			PlayerSanity* GetPlayerSanity() { return m_playerSanity; };
 			PlayerBitten* GetPlayerBitten() { return m_playerBitten; }
 			PlayerPouch* GetPlayerPouch() { return m_playerPouch; }
 		private:
@@ -74,7 +74,7 @@ namespace nsHikageri
 			PlayerMove* m_playerMove = nullptr;
 			PlayerCamera* m_playerCamera = nullptr;
 			PlayerAction* m_playerAction = nullptr;
-			PlayerHP* m_playerHP = nullptr;
+			PlayerSanity* m_playerSanity = nullptr;
 			PlayerBitten* m_playerBitten = nullptr;
 			PlayerPouch* m_playerPouch = nullptr;
 

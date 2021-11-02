@@ -14,12 +14,16 @@ namespace nsHikageri
 			m_animationClips[enAnimationClip_Walk].SetLoopFlag(true);	//ループモーションにする。
 			m_animationClips[enAnimationClip_Run].Load("Assets/animData/EnemyRun.tka");
 			m_animationClips[enAnimationClip_Run].SetLoopFlag(true);	//ループモーションにする。
+			m_animationClips[enAnimationClip_SlowWalk].Load("Assets/animData/EnemySlowWalk.tka");
+			m_animationClips[enAnimationClip_SlowWalk].SetLoopFlag(true);	//ループモーションにする。
 			m_animationClips[enAnimationClip_Attack].Load("Assets/animData/EnemyBite.tka");
 			m_animationClips[enAnimationClip_Attack].SetLoopFlag(false);	
 			m_animationClips[enAnimationClip_Scream].Load("Assets/animData/EnemyScream.tka");
 			m_animationClips[enAnimationClip_Scream].SetLoopFlag(false);
 			m_animationClips[enAnimationClip_Flinch].Load("Assets/animData/EnemyFlinch.tka");
 			m_animationClips[enAnimationClip_Flinch].SetLoopFlag(false);
+			m_animationClips[enAnimationClip_Suffer].Load("Assets/animData/EnemySuffer.tka");
+			m_animationClips[enAnimationClip_Suffer].SetLoopFlag(false);
 			m_animationClips[enAnimationClip_PreBite].Load("Assets/animData/EnemyBite01.tka");
 			m_animationClips[enAnimationClip_PreBite].SetLoopFlag(false);
 			m_animationClips[enAnimationClip_Bite].Load("Assets/animData/EnemyBite02.tka");
@@ -34,10 +38,16 @@ namespace nsHikageri
 			switch (m_enemy->GetEnemyState())
 			{
 			case Enemy::enState_SearchPlayer:
-				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Walk);
+				if (m_enemy->GetEnemyMove()->GetSlowMoveFlag())	
+					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_SlowWalk);
+				else
+					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Walk);
 				break;
-			case Enemy::enState_Chase:
-				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Run);
+			case Enemy::enState_Chase:	
+				if (m_enemy->GetEnemyMove()->GetSlowMoveFlag())
+					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_SlowWalk);
+				else 
+					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Run);
 				break;
 			case Enemy::enState_Attack:
 				//m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Attack);
@@ -61,6 +71,9 @@ namespace nsHikageri
 				break;
 			case Enemy::enState_Flinch:
 				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Flinch);
+				break;
+			case Enemy::enState_Suffer :
+				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Suffer);
 				break;
 			default:
 				break;

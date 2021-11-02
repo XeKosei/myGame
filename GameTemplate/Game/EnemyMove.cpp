@@ -25,7 +25,11 @@ namespace nsHikageri
 			m_direction.Normalize();
 
 			//ˆÚ“®ˆ—
-			m_velocity = m_direction * m_moveSpeed;
+			if (m_slowMoveFlag == false)
+				m_velocity = m_direction * m_moveSpeed;
+			else
+				m_velocity = m_direction * ENEMY_SLOWWALK_SPEED;
+
 			m_velocity *= GameTime::GetInstance().GetFrameDeltaTime();
 
 			//Œ¸‘¬ˆ—

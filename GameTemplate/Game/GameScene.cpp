@@ -3,6 +3,7 @@
 #include "BackGround.h"
 #include "PlayerInclude.h"
 #include "EnemyInclude.h";
+#include "Chandelier.h"
 
 namespace nsHikageri
 {
@@ -15,20 +16,21 @@ namespace nsHikageri
 		m_player = NewGO<nsPlayer::Player>(0);
 
 		//エネミーを作成
-		for (int i = 0; i < 1; i++)
-		{
-			m_enemy[i] = NewGO<nsEnemy::Enemy>(0, "enemy");
-			m_enemy[i]->SetPlayer(m_player);
+		m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
+		m_enemy->SetPlayer(m_player);
 			
-		}
-		m_enemy[0]->SetMovePos({ -1000.0f,0.0f,-1000.0f }, { -1000.0f,0.0f,1000.0f });
-		//m_enemy[1]->SetMovePos({ -3400.0f,0.0f,400.0f }, { -3400.0f,0.0f,-1600.0f });
-		//m_enemy[2]->SetMovePos({ -5000.0f,0.0f,-1200.0f }, { -5000.0f,0.0f,1000.0f });
+		
+		m_enemy->SetMovePos({ -1000.0f,0.0f,-1000.0f }, { -1000.0f,0.0f,1000.0f });
 
 		//ディレクションライトを作成
 		m_dirLig = NewGO<DirectionLight>(0);
 		m_dirLig->SetDirection({ -1.0f, -1.0f, -1.0f });
 		m_dirLig->SetColor({ 1.0f,1.0f,1.0f });
+
+		//シャンデリア　テスト
+		m_chandelier = NewGO<nsGimmick::Chandelier>(1);
+		m_chandelier->SetPlayer(m_player);
+		m_chandelier->SetEnemy(m_enemy);
 
 		//クリアフォント(仮)
 		m_clearFont = NewGO<FontRender>(2);

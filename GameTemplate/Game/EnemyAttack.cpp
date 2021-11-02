@@ -52,7 +52,7 @@ namespace nsHikageri
 
 				if (Dot(toPlayerDir, enemyDir) >= ATTACKMOTION_HIT_DOT && toPlayerDir.Length() <= ATTACKMOTION_HIT_DIS)
 				{
-					m_enemy->GetPlayer()->GetPlayerHP()->Damage(0);
+					m_enemy->GetPlayer()->GetPlayerSanity()->Damage(0);
 				}
 			}
 			//カウントが終わったら、エネミーの状態を追跡モードに移行し、リセット
@@ -91,7 +91,7 @@ namespace nsHikageri
 			//アニメーションが噛みつきモーション中なら、ダメージを与える。
 			if (m_enemyBiteAnimCount == BITEANIM_BITE_TIMING)
 			{
-				m_enemy->GetPlayer()->GetPlayerHP()->Damage(BITE_DAMAGE);
+				m_enemy->GetPlayer()->GetPlayerSanity()->Damage(BITE_DAMAGE);
 			}
 			//アニメーションが1ループしたら
 			else if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)

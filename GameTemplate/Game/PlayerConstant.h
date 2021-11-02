@@ -39,15 +39,15 @@ namespace nsHikageri
 			static const Vector3 CROUCHDOWN_PLAYER_SCALE = { 1.0f, 0.5f, 1.0f };	//プレイヤーのモデルの大きさの初期値
 		}
 
-		namespace nsPlayerHPConstant
+		namespace nsPlayerSanityConstant
 		{
-			static const float MAX_PLAYER_HP = 100.0f;	//プレイヤーの体力の最大値
+			static const float MAX_PLAYER_SANITY = 100.0f;	//プレイヤーのSAN値の最大値
 			static const int DAMAGE_INTERVAL = 200;	//次にダメージを受けられるようになるまでの間隔
-			static const Vector4 INI_BLOODSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 0.0f };	//血のスプライトの初期カラー
-			static const Vector4 DAMAGED_BLOODSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };	//ダメージを受けた際の血のスプライトのカラー
-			static const float MUL_BLOODSPRITE_RED_PINCH = 20.0f;	//ピンチ時に血のスプライトのr値に掛ける値
+			static const Vector4 INI_HAZYSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 0.0f };	//Hazyスプライトの初期カラー
+			static const Vector4 DAMAGED_HAZYSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };	//ダメージを受けた際のHazyスプライトのカラー
+			static const float HAZYSPRITE_MUL_COLOR_PINCH = 20.0f;	//ピンチ時にHazyスプライトのカラーに掛ける値
 
-			static const float BIG_DAMAGE_LINE = MAX_PLAYER_HP / 3;	//大ダメージを受けていると判断されるライン
+			static const float BIG_DAMAGE_LINE = MAX_PLAYER_SANITY / 3;	//大ダメージを受けていると判断されるライン
 
 			static const float ADD_ALPHA_SPEED = 0.001f;	//スプライトが点滅する速さ
 			static const float MAX_ADD_ALPHA = 0.02f;		//点滅の最大加算値
@@ -66,6 +66,7 @@ namespace nsHikageri
 		{
 			static const std::wstring ITEM_NAME[PlayerPouch::enItem_num] = { L"電池", L"精神安定剤" };
 
+			static const int TRANQUILIZER_RECOVERY_NUM = 50.0f;	//精神安定剤を使った時の回復量
 		}
 	}
 }

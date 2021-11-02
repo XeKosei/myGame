@@ -290,6 +290,7 @@
     <ClCompile Include="..\..\MiniEngine\tkFile\TksFile.cpp" />
     <ClCompile Include="..\..\MiniEngine\VertexBuffer.cpp" />
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Chandelier.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAnim.cpp" />
@@ -299,6 +300,7 @@
     <ClCompile Include="EnemyMove.cpp" />
     <ClCompile Include="EnemyScream.cpp" />
     <ClCompile Include="EnemySearchPlayer.cpp" />
+    <ClCompile Include="EnemyStress.cpp" />
     <ClCompile Include="FlashLight.cpp" />
     <ClCompile Include="FlashLightAction.cpp" />
     <ClCompile Include="FlashLightBattery.cpp" />
@@ -311,7 +313,7 @@
     <ClCompile Include="PlayerAction.cpp" />
     <ClCompile Include="PlayerBitten.cpp" />
     <ClCompile Include="PlayerCamera.cpp" />
-    <ClCompile Include="PlayerHP.cpp" />
+    <ClCompile Include="PlayerSanity.cpp" />
     <ClCompile Include="PlayerMove.cpp" />
     <ClCompile Include="PlayerPouch.cpp" />
     <ClCompile Include="PointLight.cpp" />
@@ -393,6 +395,7 @@
     <ClInclude Include="..\..\MiniEngine\tkFile\TksFile.h" />
     <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Chandelier.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAnim.h" />
@@ -404,6 +407,7 @@
     <ClInclude Include="EnemyMove.h" />
     <ClInclude Include="EnemyScream.h" />
     <ClInclude Include="EnemySearchPlayer.h" />
+    <ClInclude Include="EnemyStress.h" />
     <ClInclude Include="FlashLight.h" />
     <ClInclude Include="FlashLightAction.h" />
     <ClInclude Include="FlashLightBattery.h" />
@@ -412,12 +416,13 @@
     <ClInclude Include="FontRender.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GaussianBlur.h" />
+    <ClInclude Include="GimmickConstant.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAction.h" />
     <ClInclude Include="PlayerBitten.h" />
     <ClInclude Include="PlayerCamera.h" />
-    <ClInclude Include="PlayerHP.h" />
+    <ClInclude Include="PlayerSanity.h" />
     <ClInclude Include="PlayerInclude.h" />
     <ClInclude Include="PlayerMove.h" />
     <ClInclude Include="PlayerPouch.h" />
