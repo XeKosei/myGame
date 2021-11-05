@@ -4,7 +4,7 @@
 #include "PlayerInclude.h"
 #include "EnemyInclude.h";
 #include "Chandelier.h"
-
+#include "Door.h"
 namespace nsHikageri
 {
 	bool GameScene::Start()
@@ -31,6 +31,10 @@ namespace nsHikageri
 		m_chandelier = NewGO<nsGimmick::Chandelier>(1);
 		m_chandelier->SetPlayer(m_player);
 		m_chandelier->SetEnemy(m_enemy);
+
+		nsGimmick::Door* door = NewGO<nsGimmick::Door>(0);
+		door->SetPlayer(m_player);
+		door->SetEnemy(m_enemy);
 
 		//クリアフォント(仮)
 		m_clearFont = NewGO<FontRender>(2);

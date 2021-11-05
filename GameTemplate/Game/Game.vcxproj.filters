@@ -353,6 +353,9 @@
     <ClCompile Include="EnemyStress.cpp">
       <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>ソース ファイル\Gimmick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -660,6 +663,9 @@
     </ClInclude>
     <ClInclude Include="EnemyStress.h">
       <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>ヘッダー ファイル\Hikageri\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -292,6 +292,7 @@
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Chandelier.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyAnim.cpp" />
     <ClCompile Include="EnemyAttack.cpp" />
@@ -397,6 +398,7 @@
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Chandelier.h" />
     <ClInclude Include="DirectionLight.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyAnim.h" />
     <ClInclude Include="EnemyAttack.h" />
