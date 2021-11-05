@@ -12,6 +12,7 @@ namespace nsHikageri
 			bool Start();
 			void Update();
 
+			//開閉
 			void Open();
 			void Close();
 
@@ -23,6 +24,7 @@ namespace nsHikageri
 			void SetEnemy(nsEnemy::Enemy* enemy) { m_enemy = enemy; };
 
 			void SetPosition(Vector3 pos) { m_position = pos; };
+			void SetDirection(Vector3 dir) { m_direction = dir; };
 		private:
 			nsPlayer::Player* m_player = nullptr;
 			nsEnemy::Enemy* m_enemy = nullptr;
@@ -31,6 +33,7 @@ namespace nsHikageri
 
 			Vector3 m_position = Vector3::Zero;
 			Vector3 m_direction = Vector3::Zero;
+			Quaternion m_qRot = Quaternion::Identity;
 
 			//ドアが開いているかどうか
 			bool m_openFlag = false;
@@ -41,8 +44,9 @@ namespace nsHikageri
 			//ドアが前から開けられたか、後ろから開けられたか
 			bool m_isOpenFromForward = false;
 
+			//デフォルトのドアの角度
 			float m_defaultAngle = 0.0f;
-
+			//開閉時にデフォルトの角度に加える角度
 			float m_addAngle = 0.0f;
 
 			//CharaConとの当たり判定に使用する静的物理オブジェクト

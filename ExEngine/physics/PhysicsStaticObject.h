@@ -35,6 +35,12 @@ public:
 	{
 		m_rigidBody.SetFriction(friction);
 	}
+
+	void SetPositionAndRotation(const Vector3& pos, const Quaternion& rot)
+	{
+		m_rigidBody.SetPositionAndRotation(pos, rot);
+	}
+
 private:
 	MeshCollider m_meshCollider;		//メッシュコライダー。
 	RigidBody m_rigidBody;				//剛体。
