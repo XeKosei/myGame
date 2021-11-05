@@ -14,12 +14,9 @@ namespace nsHikageri
 
 		//プレイヤーを作成
 		m_player = NewGO<nsPlayer::Player>(0);
-
 		//エネミーを作成
 		m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
 		m_enemy->SetPlayer(m_player);
-			
-		
 		m_enemy->SetMovePos({ -1000.0f,0.0f,-1000.0f }, { -1000.0f,0.0f,1000.0f });
 
 		//ディレクションライトを作成
@@ -32,6 +29,7 @@ namespace nsHikageri
 		m_chandelier->SetPlayer(m_player);
 		m_chandelier->SetEnemy(m_enemy);
 
+		//ドア　テスト
 		nsGimmick::Door* door = NewGO<nsGimmick::Door>(0);
 		door->SetPlayer(m_player);
 		door->SetEnemy(m_enemy);

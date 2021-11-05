@@ -32,6 +32,8 @@ namespace nsHikageri
 		int m_clearFontMoveCount = 100;
 		Vector4 m_clearOverFontColor = { 0.0f,0.0f,0.0f,0.0f };
 		Vector4 m_clearOverFontShadowColor = { 0.0f,0.0f,0.0f,0.0f };
+
+		Level m_level;
 	};
 
 }

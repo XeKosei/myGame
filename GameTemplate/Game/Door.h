@@ -21,6 +21,8 @@ namespace nsHikageri
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
 			void SetEnemy(nsEnemy::Enemy* enemy) { m_enemy = enemy; };
+
+			void SetPosition(Vector3 pos) { m_position = pos; };
 		private:
 			nsPlayer::Player* m_player = nullptr;
 			nsEnemy::Enemy* m_enemy = nullptr;

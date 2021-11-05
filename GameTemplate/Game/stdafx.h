@@ -19,3 +19,5 @@
 
 #include "time/Stopwatch.h"
 #include "time/GameTime.h"
+
+#include "Level.h"
