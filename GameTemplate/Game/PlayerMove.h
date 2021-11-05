@@ -23,7 +23,7 @@ namespace nsHikageri
 			/// @brief プレイヤーのモデルの位置を取得
 			/// @return プレイヤーの位置
 			Vector3 GetPosition() { return m_position; };
-
+			
 		private:
 			//位置
 			Vector3 m_position = { Vector3::Zero };

@@ -12,6 +12,7 @@ namespace nsHikageri
 			bool Start();
 			void Update();
 
+			void Execute();
 			//ŠJ•Â
 			void Open();
 			void Close();

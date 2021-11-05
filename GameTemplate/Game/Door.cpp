@@ -29,28 +29,42 @@ namespace nsHikageri
 			m_defaultAngle = atan2(m_direction.x, m_direction.z);
 			m_qRot.SetRotation(Vector3::AxisY, m_defaultAngle);
 			m_doorModel->SetRotation(m_qRot);
+
+			//静的物理オブジェクトの位置と回転を設定
+			m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
 			
 			return true;
 		}
 
 		void Door::Update()
 		{
+			//ドアの処理を開始
+			Execute();
+		}
+		//ドアの処理
+		void Door::Execute()
+		{
 			//ドアが開閉していないとき
 			if (m_moveFlag == false)
 			{
-				//ボタンが押されたら、ドアが開閉し始める
-				if (g_pad[0]->IsTrigger(enButtonA))
+				//プレイヤーへの向き
+				Vector3 dis = m_position - m_player->GetPlayerMove()->GetPosition();
+				Vector3 toPlayerDir = dis;
+				toPlayerDir.Normalize();
+
+				//プレイヤーとの距離が近く、ドアの方を向いていて、ボタンが押されたら、ドアが開閉し始める
+				if (g_pad[0]->IsTrigger(enButtonA)
+					&& dis.Length() <= 500.0f
+					&& Dot(m_player->GetPlayerCamera()->GetDirection(), toPlayerDir) >= 0.5f )
 				{
 					m_moveFlag = true;
-					
+
 					//ドアが開くとき
 					if (m_openFlag == false)
 					{
-						//プレイヤーへの向き
-						Vector3 m_toPlayerDir = m_player->GetPlayerMove()->GetPosition() - m_position;
-						m_toPlayerDir.Normalize();
 						//プレイヤーとの位置関係で、扉が前に開くか奥に開くかを決める
-						if (Dot(m_direction, m_toPlayerDir) >= 0)
+						float dot = Dot(m_direction, toPlayerDir);
+						if (Dot(m_direction, toPlayerDir) >= 0)
 						{
 							m_isOpenFromForward = true;
 						}
@@ -82,9 +96,10 @@ namespace nsHikageri
 			//前から開けられたとき
 			if (m_isOpenFromForward)
 			{
-				if (m_addAngle > MAX_DOOR_OPNE_ANGLE)
+				if (m_addAngle < MAX_DOOR_OPNE_ANGLE)
 				{
-					m_addAngle -= DOOR_OPEN_SPEED;
+					m_addAngle += DOOR_OPEN_SPEED;
+
 				}
 				else
 				{
@@ -95,10 +110,9 @@ namespace nsHikageri
 			//後ろから開けられたとき
 			else
 			{
-				if (m_addAngle < MAX_DOOR_OPNE_ANGLE)
+				if (m_addAngle > -MAX_DOOR_OPNE_ANGLE)
 				{
-					m_addAngle += DOOR_OPEN_SPEED;
-
+					m_addAngle -= DOOR_OPEN_SPEED;
 				}
 				else
 				{
@@ -117,9 +131,9 @@ namespace nsHikageri
 			//前から開けられているとき
 			if (m_isOpenFromForward)
 			{
-				if (m_addAngle < 0.0f)
+				if (m_addAngle > 0.0f)
 				{
-					m_addAngle += DOOR_OPEN_SPEED;
+					m_addAngle -= DOOR_OPEN_SPEED;
 				}
 				else
 				{
@@ -130,9 +144,9 @@ namespace nsHikageri
 			//後ろから開けられているとき
 			else
 			{
-				if (m_addAngle > 0.0f)
+				if (m_addAngle < 0.0f)
 				{
-					m_addAngle -= DOOR_OPEN_SPEED;
+					m_addAngle += DOOR_OPEN_SPEED;
 				}
 				else
 				{
