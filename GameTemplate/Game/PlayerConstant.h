@@ -8,7 +8,7 @@ namespace nsHikageri
 		{
 			static const Vector3 INI_PLAYER_POSITION = { 1000.0f,0.0f,0.0f };	//プレイヤーの初期位置
 			static const float PLAYER_MODEL_WIDTH = 10.0f;	//プレイヤーのモデルの横幅
-			static const float PLAYER_MODEL_HEIGHT = 20.0f;	//プレイヤーのモデルの高さ
+			static const float PLAYER_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
 			static const Vector3 INI_PLAYER_SCALE = { 1.0f, 1.0f, 1.0f };	//プレイヤーのモデルの大きさの初期値
 		}
 		//Playerクラスで利用する定数
@@ -25,7 +25,7 @@ namespace nsHikageri
 		namespace nsPlayerCameraConstant
 		{
 			static const float CAMERA_MOVE_SPEED = 3.0f;		//カメラが動く速さ
-			static const float INI_PLAYER_EYE_HEIGHT = 200.0f;		//プレイヤーの目の高さ
+			static const float INI_PLAYER_EYE_HEIGHT = 250.0f;		//プレイヤーの目の高さ
 			static const float TO_CAMERA_TARGET_DIS = 100.0f;	//カメラのターゲットへの距離
 
 			static const float ADD_EYEHEIGHT_SPEED_IDLE = 0.02f;	//カメラが呼吸で上下する速さ

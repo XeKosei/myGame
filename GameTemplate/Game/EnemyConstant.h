@@ -5,14 +5,13 @@ namespace nsHikageri
 	{
 		namespace nsEnemyConstant
 		{
-			static const float ENEMY_MODEL_WIDTH = 20.0f;	//プレイヤーのモデルの横幅
-			static const float ENEMY_MODEL_HEIGHT = 20.0f;	//プレイヤーのモデルの高さ
-			static const Vector3 INI_ENEMY_POSITION = {Vector3::Zero};
-			static const Vector3 INI_ENEMY_DIRECTION = { 0.0f,0.0f,1.0f };
+			static const float ENEMY_MODEL_WIDTH = 10.0f;	//プレイヤーのモデルの横幅
+			static const float ENEMY_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
+			static const Vector3 INI_ENEMY_SCALE = {1.2f, 1.2f, 1.2f};	//エネミーの初期Scale
 		}
 		namespace nsEnemyMoveConstant
 		{
-			static const float ENEMY_WALK_SPEED = 200.0f;	//エネミーの歩く速さ
+			static const float ENEMY_WALK_SPEED = 250.0f;	//エネミーの歩く速さ
 			static const float ENEMY_DASH_SPEED = 800.0f;//エネミーの走る速さ
 			static const float ENEMY_SLOWWALK_SPEED = 100.0f;	//エネミーの遅い歩きの速さ
 			static const float ENEMY_MOVE_FRICTION = 0.2f;	//エネミーの動くときの摩擦

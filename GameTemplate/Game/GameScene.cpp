@@ -20,14 +20,26 @@ namespace nsHikageri
 		m_enemy->SetMovePos({ -1000.0f,0.0f,-1000.0f }, { -1000.0f,0.0f,1000.0f });
 
 		//ディレクションライトを作成
-		m_dirLig = NewGO<DirectionLight>(0);
+		/*m_dirLig = NewGO<DirectionLight>(0);
 		m_dirLig->SetDirection({ -1.0f, -1.0f, -1.0f });
-		m_dirLig->SetColor({ 1.0f,1.0f,1.0f });
+		m_dirLig->SetColor({ 1.0f,1.0f,1.0f });*/
+
+		Vector3 chandelierPos[5] = {
+			{ 1000.0f,800.0f,0.0f } ,
+			{ -1000.0f, 800.0f, 1000.0f},
+			{-1400.0f, 800.0f, -3600.0f},
+			{-1000.0f, 800.0f, 3400.0f},
+			{0.0f, 800.0f, -2000.0f}
+		};
 
 		//シャンデリア　テスト
-		m_chandelier = NewGO<nsGimmick::Chandelier>(1);
-		m_chandelier->SetPlayer(m_player);
-		m_chandelier->SetEnemy(m_enemy);
+		for (int chandelierNum = 0; chandelierNum < 5; chandelierNum++)
+		{
+			m_chandelier[chandelierNum] = NewGO<nsGimmick::Chandelier>(1);
+			m_chandelier[chandelierNum]->SetPlayer(m_player);
+			m_chandelier[chandelierNum]->SetEnemy(m_enemy);
+			m_chandelier[chandelierNum]->SetPosition(chandelierPos[chandelierNum]);
+		}
 
 		//ドア　テスト
 		nsGimmick::Door* door = NewGO<nsGimmick::Door>(0);
@@ -55,7 +67,7 @@ namespace nsHikageri
 	//仮
 	void GameScene::GameClear()
 	{		
-		if (m_player->GetPlayerMove()->GetPosition().z >= 1600.0f)
+		if (m_player->GetPlayerMove()->GetPosition().z >= 5000.0f)
 		{
 			if (m_clearFontMoveCount > 0)
 			{

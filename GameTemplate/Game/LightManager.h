@@ -10,7 +10,7 @@ namespace nsHikageri
 	{
 		//各ライトの最大数　この数はmodel.fxのライト配列の数と一緒にしなければならない
 		const int DIRECTIONLIGHT_NUMBER_MAX = 5;
-		const int POINTLIGHT_NUMBER_MAX = 20;
+		const int POINTLIGHT_NUMBER_MAX = 50;
 		const int SPOTLIGHT_NUMBER_MAX = 20;
 	}
 

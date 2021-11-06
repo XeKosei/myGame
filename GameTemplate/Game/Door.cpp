@@ -12,7 +12,7 @@ namespace nsHikageri
 		bool Door::Start()
 		{
 			//‰¼‚ÌˆÊ’u‚Æ‰ñ“]
-			m_position = { 0.0f, 0.0f, 150.0f };
+			m_position = { 0.0f, 0.0f, 100.0f };
 			m_direction = {-1.0f,0.0f,0.0f };
 
 			m_doorModel = NewGO<SkinModelRender>(0);

@@ -40,7 +40,7 @@ cbuffer LightDataCb : register(b1)
 {
 	//各配列数はCLightManager.hのMaxLightNumと同じにすること
 	DirectionLigData directionLigData[5];
-	PointLigData pointLigData[20];
+	PointLigData pointLigData[50];
 	SpotLigData spotLigData[20];
 	float3 eyePos;
 	int directionLigNum;
@@ -411,7 +411,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	}
 
 	//環境光
-	float3 ambientLig = 0.5f;
+	float3 ambientLig = 0.2f;
 	finalColor.xyz += ambientLig;
 
 	finalColor *= albedoColor;

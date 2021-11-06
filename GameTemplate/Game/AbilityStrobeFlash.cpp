@@ -69,7 +69,7 @@ namespace nsHikageri
 			//‰ù’†“d“”‚Ì–¾‚é‚³‚ðÝ’è
 			m_flashLight->GetSpotLight()->SetColor(m_strobeFlashColor);
 
-			if (m_strobeFlashColor.x >= 145.0f)
+			if (m_strobeFlashColor.x == INI_STROBEFLASH_COLOR.x)
 			{
 				QueryGOs<nsEnemy::Enemy>("enemy", [this](nsEnemy::Enemy* enemy)->bool
 					{

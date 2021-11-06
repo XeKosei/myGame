@@ -5,7 +5,7 @@ namespace nsHikageri
 	{
 		namespace nsChandelierConstant
 		{
-			static const float CHANDELIER_LIGHT_RANGE = 1000.0f;	//シャンデリアの光の範囲
+			static const float CHANDELIER_LIGHT_RANGE = 1500.0f;	//シャンデリアの光の範囲
 
 		}
 

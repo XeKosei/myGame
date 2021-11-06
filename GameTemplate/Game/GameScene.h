@@ -25,7 +25,7 @@ namespace nsHikageri
 		//ディレクションライト
 		DirectionLight* m_dirLig = nullptr;
 		//シャンデリア
-		nsGimmick::Chandelier* m_chandelier = nullptr;
+		nsGimmick::Chandelier* m_chandelier[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
 		//クリアフォント(仮)
 		FontRender* m_clearFont = nullptr;

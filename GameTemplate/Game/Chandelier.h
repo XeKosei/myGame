@@ -13,6 +13,8 @@ namespace nsHikageri
 
 			void Update();
 
+			void SetPosition(Vector3 pos) { m_position = pos; };
+
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
 			void SetEnemy(nsEnemy::Enemy* enemy) { m_enemy = enemy; };
