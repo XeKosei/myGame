@@ -14,7 +14,21 @@ namespace nsHikageri
 		bool ItemKey::Start()
 		{
 			m_keyModel = NewGO<SkinModelRender>(0);
-			m_keyModel->Init("Assets/modelData/Key.tkm");
+			switch (m_keyColor)
+			{
+			case enKeyColor_Red:
+				m_keyModel->Init("Assets/modelData/RedKey.tkm");
+				break;
+			case enKeyColor_Blue:
+				m_keyModel->Init("Assets/modelData/BlueKey.tkm");
+				break;
+			case enKeyColor_Green:
+				m_keyModel->Init("Assets/modelData/GreenKey.tkm");
+				break;
+			default:
+				m_keyModel->Init("Assets/modelData/Key.tkm");
+				break;
+			}
 			m_keyModel->SetPosition(m_position);
 
 			return true;

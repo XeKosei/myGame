@@ -12,8 +12,21 @@ namespace nsHikageri
 		bool Door::Start()
 		{
 			m_doorModel = NewGO<SkinModelRender>(0);
-			m_doorModel->Init("Assets/modelData/Door.tkm");
-
+			switch (m_doorColor)
+			{
+			case enDoorColor_Red:
+				m_doorModel->Init("Assets/modelData/RedDoor.tkm");
+				break;
+			case enDoorColor_Blue:
+				m_doorModel->Init("Assets/modelData/BlueDoor.tkm");
+				break;
+			case enDoorColor_Green:
+				m_doorModel->Init("Assets/modelData/GreenDoor.tkm");
+				break;
+			default:
+				m_doorModel->Init("Assets/modelData/Door.tkm");
+				break;
+			}
 			//ステージのモデルの静的物理オブジェクトを作成       
 			m_physicsStaticObject.CreateFromModel(m_doorModel->GetModel(), m_doorModel->GetModel().GetWorldMatrix());
 			//※静的物理オブジェクトを作成した後でモデルの座標や回転を設定しないと、ずれが生じる。
@@ -115,6 +128,7 @@ namespace nsHikageri
 				}
 				else
 				{
+					//m_addAngle = MAX_DOOR_OPNE_ANGLE;
 					m_moveFlag = false;
 					m_openFlag = true;
 				}
@@ -128,6 +142,7 @@ namespace nsHikageri
 				}
 				else
 				{
+					//m_addAngle = -MAX_DOOR_OPNE_ANGLE;
 					m_moveFlag = false;
 					m_openFlag = true;
 				}	
