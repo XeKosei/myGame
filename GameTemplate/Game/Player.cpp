@@ -42,7 +42,8 @@ namespace nsHikageri
 			m_playerBitten->SetPlayer(this);
 			m_playerPouch = NewGO<PlayerPouch>(0);
 			m_playerPouch->SetPlayer(this);
-
+			m_playerTarget = NewGO<PlayerTarget>(0);
+			m_playerTarget->SetPlayer(this);
 			//‰ù’†“d“”‚ğ¶¬
 			m_flashLight = NewGO<nsFlashLight::FlashLight>(0);
 			m_flashLight->SetPlayer(this);
@@ -60,6 +61,7 @@ namespace nsHikageri
 				m_playerCamera->ExecuteUpdate();
 				m_playerSanity->ExecuteUpdate();
 				m_playerPouch->ExecuteUpdate();
+				m_playerTarget->ExecuteUpdate();
 				break;
 			case enState_Bitten:
 				m_playerBitten->ExecuteUpdate();
@@ -76,6 +78,7 @@ namespace nsHikageri
 				m_playerCamera->ExecuteUpdate();
 				m_playerSanity->ExecuteUpdate();
 				m_playerPouch->ExecuteUpdate();
+				m_playerTarget->ExecuteUpdate();
 				Invincible();
 				break;
 			}		

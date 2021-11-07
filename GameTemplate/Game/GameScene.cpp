@@ -45,6 +45,7 @@ namespace nsHikageri
 		nsGimmick::Door* door = NewGO<nsGimmick::Door>(0);
 		door->SetPlayer(m_player);
 		door->SetEnemy(m_enemy);
+		door->SetDoorColor(nsGimmick::Door::enDoorColor_Red);
 
 		//クリアフォント(仮)
 		m_clearFont = NewGO<FontRender>(2);

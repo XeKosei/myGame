@@ -6,4 +6,5 @@
 #include "PlayerSanity.h"
 #include "PlayerBitten.h"
 #include "PlayerPouch.h"
+#include "PlayerTarget.h"
 #include "PlayerConstant.h"

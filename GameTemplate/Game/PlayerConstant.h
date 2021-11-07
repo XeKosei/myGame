@@ -64,7 +64,7 @@ namespace nsHikageri
 
 		namespace nsPlayerPouchConstant
 		{
-			static const std::wstring ITEM_NAME[PlayerPouch::enItem_num] = { L"電池", L"精神安定剤" };
+			static const std::wstring ITEM_NAME[PlayerPouch::enItem_num] = { L"電池", L"精神安定剤" , L"赤色の鍵"};
 
 			static const int TRANQUILIZER_RECOVERY_NUM = 50.0f;	//精神安定剤を使った時の回復量
 		}

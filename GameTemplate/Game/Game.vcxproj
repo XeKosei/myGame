@@ -319,6 +319,7 @@
     <ClCompile Include="PlayerSanity.cpp" />
     <ClCompile Include="PlayerMove.cpp" />
     <ClCompile Include="PlayerPouch.cpp" />
+    <ClCompile Include="PlayerTarget.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PostEffectManager.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
@@ -433,6 +434,7 @@
     <ClInclude Include="PlayerInclude.h" />
     <ClInclude Include="PlayerMove.h" />
     <ClInclude Include="PlayerPouch.h" />
+    <ClInclude Include="PlayerTarget.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PostEffectManager.h" />
     <ClInclude Include="SkinModelRender.h" />

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlayerInclude.h"
 #include "FlashLightInclude.h"
+#include "Door.h"
 namespace nsHikageri
 {
 	namespace nsPlayer
@@ -57,10 +58,6 @@ namespace nsHikageri
 			//アイテムを1個以上持っているならば
 			if (m_haveItemNum[m_choseItem] > 0)
 			{
-				//アイテムの数を1減らす
-				m_haveItemNum[m_choseItem]--;
-				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
-
 				switch (m_choseItem)
 				{
 				case enItem_Battery:
@@ -68,6 +65,9 @@ namespace nsHikageri
 					break;
 				case enItem_Tranquilizer:
 					UseTranquilizar();
+					break;
+				case enItem_RedKey:
+					UseKey();
 					break;
 				default:
 					break;
@@ -81,12 +81,21 @@ namespace nsHikageri
 			//右ボタンを押すと
 			if (g_pad[0]->IsTrigger(enButtonRight))
 			{
-				m_choseItem++;
-				//アイテムの番号が最大になったら、番号を0に戻す。
-				if (m_choseItem >= enItem_num)
+				for (int i = 0; i < enItem_num; i++)
 				{
-					m_choseItem = 0;
+					m_choseItem++;
+					//アイテムの番号が最大になったら、番号を0に戻す。
+					if (m_choseItem >= enItem_num)
+					{
+						m_choseItem = 0;
+					}
+					//所持していないアイテムは飛ばす
+					if (m_haveItemNum[m_choseItem] > 0)
+					{
+						break;
+					}
 				}
+		
 				//テキストを設定
 				m_itemFont->SetText(ITEM_NAME[m_choseItem]);
 				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));		
@@ -94,12 +103,22 @@ namespace nsHikageri
 			//左ボタンを押すと
 			if (g_pad[0]->IsTrigger(enButtonLeft))
 			{
-				m_choseItem--;
-				//アイテムの番号が0以下になったら、番号を最大にする。
-				if (m_choseItem < 0)
+				for (int i = 0; i < enItem_num; i++)
 				{
-					m_choseItem = enItem_num - 1;
+					m_choseItem--;
+					//アイテムの番号が0以下になったら、番号を最大にする。
+					if (m_choseItem < 0)
+					{
+						m_choseItem = enItem_num - 1;
+					}
+
+					//所持していないアイテムは飛ばす
+					if (m_haveItemNum[m_choseItem] > 0)
+					{
+						break;
+					}
 				}
+
 				//テキストを設定
 				m_itemFont->SetText(ITEM_NAME[m_choseItem]);
 				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));		
@@ -108,13 +127,41 @@ namespace nsHikageri
 		//電池を使用したときの処理
 		void PlayerPouch::UseBattery()
 		{
+			//アイテムの数を1減らす
+			m_haveItemNum[m_choseItem]--;
+			m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
 			m_player->GetFlashLight()->GetFlashLightBattery()->SetBatteryLevel(nsFlashLight::nsFlashLightBatteryConstant::MAX_BATTERY_LEVEL);
 		}
 
 		//精神安定剤を使用したとき
 		void PlayerPouch::UseTranquilizar()
 		{
+			//アイテムの数を1減らす
+			m_haveItemNum[m_choseItem]--;
+			m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
 			m_player->GetPlayerSanity()->Recovery(TRANQUILIZER_RECOVERY_NUM);
+		}
+
+		void PlayerPouch::UseKey()
+		{
+			switch (m_choseItem)
+			{
+			case enItem_RedKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
+				{
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Red)
+					{
+						//アイテムの数を1減らす
+						m_haveItemNum[m_choseItem]--;
+						m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
+						m_player->GetPlayerTarget()->GetTargetDoor()->SetUnlockFlag(true);
+					}
+				}
+				break;
+			default:
+				break;
+			}
+
 		}
 
 		//void PlayerPouch::CannotUse()

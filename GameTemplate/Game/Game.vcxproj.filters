@@ -365,6 +365,9 @@
     <ClCompile Include="Level.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerTarget.cpp">
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -684,6 +687,9 @@
     </ClInclude>
     <ClInclude Include="MapChipRender.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTarget.h">
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

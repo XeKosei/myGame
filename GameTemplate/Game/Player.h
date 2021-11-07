@@ -11,6 +11,7 @@ namespace nsHikageri
 		class PlayerSanity;
 		class PlayerBitten;
 		class PlayerPouch;
+		class PlayerTarget;
 
 		class Player : public IGameObject
 		{
@@ -61,6 +62,7 @@ namespace nsHikageri
 			PlayerSanity* GetPlayerSanity() { return m_playerSanity; };
 			PlayerBitten* GetPlayerBitten() { return m_playerBitten; }
 			PlayerPouch* GetPlayerPouch() { return m_playerPouch; }
+			PlayerTarget* GetPlayerTarget() { return m_playerTarget; };
 		private:
 			//ƒ‚ƒfƒ‹
 			SkinModelRender* m_playerModel = nullptr;
@@ -77,6 +79,7 @@ namespace nsHikageri
 			PlayerSanity* m_playerSanity = nullptr;
 			PlayerBitten* m_playerBitten = nullptr;
 			PlayerPouch* m_playerPouch = nullptr;
+			PlayerTarget* m_playerTarget = nullptr;
 
 			EnPlayerStates m_playerState = enState_Normal;
 

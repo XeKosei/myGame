@@ -38,9 +38,30 @@ namespace nsHikageri
 
 		void Door::Update()
 		{
-			//ドアの処理を開始
-			Execute();
+			PlayerTargetSetting();
+
+			if (m_unlockFlag == true)
+			{
+				//ドアの処理
+				Execute();
+			}
 		}
+
+		void Door::PlayerTargetSetting()
+		{
+			Vector3 dis = m_position - m_player->GetPlayerMove()->GetPosition();
+			Vector3 toPlayerDir = dis;
+			toPlayerDir.Normalize();
+
+			//プレイヤーとの距離が近く、ドアの方を向いていたら
+			if (dis.Length() <= 500.0f
+				&& Dot(m_player->GetPlayerCamera()->GetDirection(), toPlayerDir) >= 0.5f)
+			{
+				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_Door);
+				m_player->GetPlayerTarget()->SetTargetDoor(this);
+			}
+		}
+
 		//ドアの処理
 		void Door::Execute()
 		{

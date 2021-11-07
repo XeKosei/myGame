@@ -9,13 +9,28 @@ namespace nsHikageri
 		class Door : public IGameObject
 		{
 		public:
+			//ドアの色の種類
+			enum EnDoorColor
+			{
+				enDoorColor_Red,
+				enDoorColor_Blue,
+				enDoorColor_Green,
+				enDoorColor_num
+			};
+
 			bool Start();
 			void Update();
 
 			void Execute();
+
+			void PlayerTargetSetting();
+
 			//開閉
 			void Open();
 			void Close();
+
+			//位置を取得
+			Vector3 GetPosition() { return m_position; };
 
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
@@ -23,6 +38,16 @@ namespace nsHikageri
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
 			void SetEnemy(nsEnemy::Enemy* enemy) { m_enemy = enemy; };
+			/// @brief ドアの色を設定
+			/// @param color ドアの色
+			void SetDoorColor(EnDoorColor color) { m_doorColor = color; }
+			/// @brief ドアの色を取得
+			/// @return ドアの色
+			EnDoorColor GetDoorColor() { return m_doorColor; }
+
+			/// @brief 鍵が開いているかどうかを設定
+			/// @param unlockFlag 鍵がかかっているかどうか。
+			void SetUnlockFlag(bool unlockFlag) { m_unlockFlag = unlockFlag; }
 
 			void SetPosition(Vector3 pos) { m_position = pos; };
 			void SetDirection(Vector3 dir) { m_direction = dir; };
@@ -31,6 +56,12 @@ namespace nsHikageri
 			nsEnemy::Enemy* m_enemy = nullptr;
 
 			SkinModelRender* m_doorModel = nullptr;
+
+			//ドアの色
+			EnDoorColor m_doorColor = enDoorColor_Red;
+
+			//鍵が開いているかどうか
+			bool m_unlockFlag = false;
 
 			Vector3 m_position = Vector3::Zero;
 			Vector3 m_direction = Vector3::Zero;
