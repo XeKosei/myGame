@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlayerInclude.h"
 #include "Door.h"
+#include "ItemInclude.h"
 namespace nsHikageri
 {
 	namespace nsPlayer
@@ -17,6 +18,9 @@ namespace nsHikageri
 				break;
 			case enTarget_Door:
 				targetPos = m_targetDoor->GetPosition();
+				break;
+			case enTarget_Key:
+				targetPos = m_targetKey->GetPosition();
 				break;
 			default:
 				break;

@@ -5,6 +5,7 @@
 #include "EnemyInclude.h";
 #include "Chandelier.h"
 #include "Door.h"
+#include "ItemInclude.h"
 namespace nsHikageri
 {
 	bool GameScene::Start()
@@ -17,13 +18,14 @@ namespace nsHikageri
 		//エネミーを作成
 		m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
 		m_enemy->SetPlayer(m_player);
-		m_enemy->SetMovePos({ -5000.0f,0.0f,-1000.0f }, { -5000.0f,0.0f,1000.0f });
+		m_enemy->SetMovePos({ -3000.0f,0.0f,800.0f }, { -3000.0f,0.0f,-1200.0f });
 
 		//ディレクションライトを作成
 		/*m_dirLig = NewGO<DirectionLight>(0);
 		m_dirLig->SetDirection({ -1.0f, -1.0f, -1.0f });
 		m_dirLig->SetColor({ 1.0f,1.0f,1.0f });*/
 
+		//シャンデリア　テスト
 		Vector3 chandelierPos[5] = {
 			{ 1000.0f,800.0f,0.0f } ,
 			{ -1000.0f, 800.0f, 1000.0f},
@@ -32,7 +34,6 @@ namespace nsHikageri
 			{0.0f, 800.0f, -2000.0f}
 		};
 
-		//シャンデリア　テスト
 		for (int chandelierNum = 0; chandelierNum < 5; chandelierNum++)
 		{
 			m_chandelier[chandelierNum] = NewGO<nsGimmick::Chandelier>(1);
@@ -41,6 +42,7 @@ namespace nsHikageri
 			m_chandelier[chandelierNum]->SetPosition(chandelierPos[chandelierNum]);
 		}
 
+		//ドア　テスト
 		Vector3 doorPos[3]
 		{
 			{ 0.0f, 0.0f, -100.0f },
@@ -55,7 +57,6 @@ namespace nsHikageri
 			{-1.0f, 0.0f, 0.0f}
 		};
 
-		//ドア　テスト
 		for (int doorNum = 0; doorNum < 3; doorNum++)
 		{
 			m_door[doorNum] = NewGO<nsGimmick::Door>(0);
@@ -68,6 +69,22 @@ namespace nsHikageri
 		m_door[1]->SetDoorColor(nsGimmick::Door::enDoorColor_Blue);
 		m_door[2]->SetDoorColor(nsGimmick::Door::enDoorColor_Green);
 
+		//鍵テスト
+		Vector3 KeyPos[3] = {
+			{1500.0f, 145.0f, 0.0f},
+			{ -2290.0f, 145.0f, 400.0f },
+			{110.0f, 145.0f, 2800.0f}
+		};
+
+		for (int keyNum = 0; keyNum < 3; keyNum++)
+		{
+			m_key[keyNum] = NewGO<nsItem::ItemKey>(0);
+			m_key[keyNum]->SetPlayer(m_player);
+			m_key[keyNum]->SetPosition(KeyPos[keyNum]);
+		}
+		m_key[0]->SetKeyColor(nsItem::ItemKey::enKeyColor_Red);
+		m_key[1]->SetKeyColor(nsItem::ItemKey::enKeyColor_Blue);
+		m_key[2]->SetKeyColor(nsItem::ItemKey::enKeyColor_Green);
 
 		//クリアフォント(仮)
 		m_clearFont = NewGO<FontRender>(2);

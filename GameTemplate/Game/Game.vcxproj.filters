@@ -87,8 +87,14 @@
     <Filter Include="ヘッダー ファイル\Hikageri\Gimmick">
       <UniqueIdentifier>{4caf4c2f-c375-4857-9c6c-a8d400915cec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Gimmick">
+    <Filter Include="ソース ファイル\Hikageri\Gimmick">
       <UniqueIdentifier>{ca07a7b2-5eb5-4258-9a23-4fba0d60fe0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Hikageri\Item">
+      <UniqueIdentifier>{fbe3a48a-ae19-4216-a29a-0863c474d797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Hikageri\Item">
+      <UniqueIdentifier>{b446eafb-6260-43c1-bcd4-d8d766149eeb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -348,13 +354,13 @@
       <Filter>ソース ファイル\Hikageri\Player</Filter>
     </ClCompile>
     <ClCompile Include="Chandelier.cpp">
-      <Filter>ソース ファイル\Gimmick</Filter>
+      <Filter>ソース ファイル\Hikageri\Gimmick</Filter>
     </ClCompile>
     <ClCompile Include="EnemyStress.cpp">
       <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Door.cpp">
-      <Filter>ソース ファイル\Gimmick</Filter>
+      <Filter>ソース ファイル\Hikageri\Gimmick</Filter>
     </ClCompile>
     <ClCompile Include="tklFile.cpp">
       <Filter>ソース ファイル\prefab</Filter>
@@ -367,6 +373,12 @@
     </ClCompile>
     <ClCompile Include="PlayerTarget.cpp">
       <Filter>ソース ファイル\Hikageri\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBase.cpp">
+      <Filter>ソース ファイル\Hikageri\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemKey.cpp">
+      <Filter>ソース ファイル\Hikageri\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -690,6 +702,15 @@
     </ClInclude>
     <ClInclude Include="PlayerTarget.h">
       <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBase.h">
+      <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemKey.h">
+      <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemInclude.h">
+      <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

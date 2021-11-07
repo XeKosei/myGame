@@ -68,5 +68,11 @@ namespace nsHikageri
 
 			static const int TRANQUILIZER_RECOVERY_NUM = 50.0f;	//精神安定剤を使った時の回復量
 		}
+
+		namespace nsPlayerTargetConstant
+		{
+			static const int CATCH_EYES_DIS = 500.0f;	//オブジェクトがプレイヤーの目を引く距離
+			static const int CATCH_EYES_DOT = 0.5f;		//オブジェクトがプレイヤーの目を引く内積
+		}
 	}
 }

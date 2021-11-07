@@ -2,6 +2,7 @@
 namespace nsHikageri
 {
 	namespace nsGimmick{ class Door; }
+	namespace nsItem { class ItemKey; }
 	namespace nsPlayer
 	{
 		class Player;
@@ -15,6 +16,7 @@ namespace nsHikageri
 			{
 				enTarget_None,
 				enTarget_Door,
+				enTarget_Key,
 				enTarget_num
 			};
 
@@ -24,6 +26,9 @@ namespace nsHikageri
 
 			void SetTargetDoor(nsGimmick::Door* door) { m_targetDoor = door; };
 			nsGimmick::Door* GetTargetDoor() { return m_targetDoor; }
+
+			void SetTargetKey(nsItem::ItemKey* key) { m_targetKey = key; };
+			nsItem::ItemKey* GetTargetKey() { return m_targetKey; }
 
 
 			/// @brief プレイヤーにアクセスできるようにする。
@@ -39,6 +44,7 @@ namespace nsHikageri
 
 			//ドア
 			nsGimmick::Door* m_targetDoor = nullptr;
+			nsItem::ItemKey* m_targetKey = nullptr;
 		};
 	}
 }

@@ -50,8 +50,8 @@ namespace nsHikageri
 			m_toPlayerDir.Normalize();
 
 			//プレイヤーとの距離が近く、ドアの方を向いていたら
-			if (dis.Length() <= 500.0f
-				&& Dot(m_player->GetPlayerCamera()->GetDirection(), m_toPlayerDir) >= 0.5f)
+			if (dis.Length() <= nsPlayer::nsPlayerTargetConstant::CATCH_EYES_DIS
+				&& Dot(m_player->GetPlayerCamera()->GetDirection(), m_toPlayerDir) >= nsPlayer::nsPlayerTargetConstant::CATCH_EYES_DOT)
 			{
 				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_Door);
 				m_player->GetPlayerTarget()->SetTargetDoor(this);
