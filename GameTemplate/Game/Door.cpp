@@ -11,10 +11,6 @@ namespace nsHikageri
 		using namespace nsDoorConstant;
 		bool Door::Start()
 		{
-			//仮の位置と回転
-			m_position = { 0.0f, 0.0f, 100.0f };
-			m_direction = {-1.0f,0.0f,0.0f };
-
 			m_doorModel = NewGO<SkinModelRender>(0);
 			m_doorModel->Init("Assets/modelData/Door.tkm");
 
@@ -50,12 +46,12 @@ namespace nsHikageri
 		void Door::PlayerTargetSetting()
 		{
 			Vector3 dis = m_position - m_player->GetPlayerMove()->GetPosition();
-			Vector3 toPlayerDir = dis;
-			toPlayerDir.Normalize();
+			m_toPlayerDir = dis;
+			m_toPlayerDir.Normalize();
 
 			//プレイヤーとの距離が近く、ドアの方を向いていたら
 			if (dis.Length() <= 500.0f
-				&& Dot(m_player->GetPlayerCamera()->GetDirection(), toPlayerDir) >= 0.5f)
+				&& Dot(m_player->GetPlayerCamera()->GetDirection(), m_toPlayerDir) >= 0.5f)
 			{
 				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_Door);
 				m_player->GetPlayerTarget()->SetTargetDoor(this);
@@ -68,15 +64,10 @@ namespace nsHikageri
 			//ドアが開閉していないとき
 			if (m_moveFlag == false)
 			{
-				//プレイヤーへの向き
-				Vector3 dis = m_position - m_player->GetPlayerMove()->GetPosition();
-				Vector3 toPlayerDir = dis;
-				toPlayerDir.Normalize();
-
-				//プレイヤーとの距離が近く、ドアの方を向いていて、ボタンが押されたら、ドアが開閉し始める
+				//プレイヤーのターゲットがこのドアで、Aボタンが押されたら、ドアが開閉
 				if (g_pad[0]->IsTrigger(enButtonA)
-					&& dis.Length() <= 500.0f
-					&& Dot(m_player->GetPlayerCamera()->GetDirection(), toPlayerDir) >= 0.5f )
+					&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Door
+					&& m_player->GetPlayerTarget()->GetTargetDoor() == this )
 				{
 					m_moveFlag = true;
 
@@ -84,8 +75,8 @@ namespace nsHikageri
 					if (m_openFlag == false)
 					{
 						//プレイヤーとの位置関係で、扉が前に開くか奥に開くかを決める
-						float dot = Dot(m_direction, toPlayerDir);
-						if (Dot(m_direction, toPlayerDir) >= 0)
+						float dot = Dot(m_direction, m_toPlayerDir);
+						if (Dot(m_direction, m_toPlayerDir) >= 0)
 						{
 							m_isOpenFromForward = true;
 						}

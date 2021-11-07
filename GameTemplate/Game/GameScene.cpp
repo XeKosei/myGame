@@ -17,7 +17,7 @@ namespace nsHikageri
 		//エネミーを作成
 		m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
 		m_enemy->SetPlayer(m_player);
-		m_enemy->SetMovePos({ -1000.0f,0.0f,-1000.0f }, { -1000.0f,0.0f,1000.0f });
+		m_enemy->SetMovePos({ -5000.0f,0.0f,-1000.0f }, { -5000.0f,0.0f,1000.0f });
 
 		//ディレクションライトを作成
 		/*m_dirLig = NewGO<DirectionLight>(0);
@@ -41,11 +41,33 @@ namespace nsHikageri
 			m_chandelier[chandelierNum]->SetPosition(chandelierPos[chandelierNum]);
 		}
 
+		Vector3 doorPos[3]
+		{
+			{ 0.0f, 0.0f, -100.0f },
+			{-900.0f, 0.0f, -600.0f},
+			{-800.0f, 0.0f, -1900.0f}
+		};
+
+		Vector3 doorDir[3]
+		{
+			{1.0f,0.0f,0.0f },
+			{0.0f, 0.0f, 1.0f},
+			{-1.0f, 0.0f, 0.0f}
+		};
+
 		//ドア　テスト
-		nsGimmick::Door* door = NewGO<nsGimmick::Door>(0);
-		door->SetPlayer(m_player);
-		door->SetEnemy(m_enemy);
-		door->SetDoorColor(nsGimmick::Door::enDoorColor_Red);
+		for (int doorNum = 0; doorNum < 3; doorNum++)
+		{
+			m_door[doorNum] = NewGO<nsGimmick::Door>(0);
+			m_door[doorNum]->SetPlayer(m_player);
+			m_door[doorNum]->SetEnemy(m_enemy);
+			m_door[doorNum]->SetPosition(doorPos[doorNum]);
+			m_door[doorNum]->SetDirection(doorDir[doorNum]);
+		}
+		m_door[0]->SetDoorColor(nsGimmick::Door::enDoorColor_Red);
+		m_door[1]->SetDoorColor(nsGimmick::Door::enDoorColor_Blue);
+		m_door[2]->SetDoorColor(nsGimmick::Door::enDoorColor_Green);
+
 
 		//クリアフォント(仮)
 		m_clearFont = NewGO<FontRender>(2);

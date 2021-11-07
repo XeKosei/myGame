@@ -13,6 +13,8 @@ namespace nsHikageri
 				enItem_Battery,
 				enItem_Tranquilizer,
 				enItem_RedKey,
+				enItem_BlueKey,
+				enItem_GreenKey,
 				enItem_num
 			};
 
@@ -55,7 +57,7 @@ namespace nsHikageri
 			Vector4 m_itemUsedFontColor = {0.0f,0.0f,0.0f,0.0f};*/
 
 			int m_choseItem = enItem_Battery;
-			int m_haveItemNum[enItem_num] = { 3, 3, 1};
+			int m_haveItemNum[enItem_num] = { 3, 3, 1, 1, 1};
 		};
 
 	}

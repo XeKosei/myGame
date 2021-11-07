@@ -50,7 +50,7 @@ namespace nsHikageri
 			void SetUnlockFlag(bool unlockFlag) { m_unlockFlag = unlockFlag; }
 
 			void SetPosition(Vector3 pos) { m_position = pos; };
-			void SetDirection(Vector3 dir) { m_direction = dir; };
+			void SetDirection(Vector3 dir) { dir.Normalize(); m_direction = dir; };
 		private:
 			nsPlayer::Player* m_player = nullptr;
 			nsEnemy::Enemy* m_enemy = nullptr;
@@ -66,6 +66,9 @@ namespace nsHikageri
 			Vector3 m_position = Vector3::Zero;
 			Vector3 m_direction = Vector3::Zero;
 			Quaternion m_qRot = Quaternion::Identity;
+
+			//プレイヤーへの向き
+			Vector3 m_toPlayerDir = Vector3::Zero;
 
 			//ドアが開いているかどうか
 			bool m_openFlag = false;

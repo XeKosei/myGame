@@ -69,6 +69,12 @@ namespace nsHikageri
 				case enItem_RedKey:
 					UseKey();
 					break;
+				case enItem_BlueKey:
+					UseKey();
+					break;
+				case enItem_GreenKey:
+					UseKey();
+					break;
 				default:
 					break;
 				}
@@ -144,17 +150,36 @@ namespace nsHikageri
 
 		void PlayerPouch::UseKey()
 		{
+			//ドアのカギを開けるかどうかのフラグ
+			bool unlockFlag = false;
+
+			//鍵の色とドアの色が一致しているかを管理
 			switch (m_choseItem)
-			{
+			{		
 			case enItem_RedKey:
 				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
 				{
 					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Red)
 					{
-						//アイテムの数を1減らす
-						m_haveItemNum[m_choseItem]--;
-						m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
-						m_player->GetPlayerTarget()->GetTargetDoor()->SetUnlockFlag(true);
+						unlockFlag = true;
+					}
+				}
+				break;
+			case enItem_BlueKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
+				{
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Blue)
+					{
+						unlockFlag = true;
+					}
+				}
+				break;
+			case enItem_GreenKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
+				{
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Green)
+					{
+						unlockFlag = true;
 					}
 				}
 				break;
@@ -162,6 +187,14 @@ namespace nsHikageri
 				break;
 			}
 
+			if (unlockFlag)
+			{
+				//アイテムの数を1減らす
+				m_haveItemNum[m_choseItem]--;
+				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
+				//鍵を解除
+				m_player->GetPlayerTarget()->GetTargetDoor()->SetUnlockFlag(true);
+			}
 		}
 
 		//void PlayerPouch::CannotUse()

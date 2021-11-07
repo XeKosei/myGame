@@ -9,6 +9,7 @@ namespace nsHikageri
 		{
 			Vector3 targetPos = Vector3::Zero;
 
+			//ターゲットの位置を取得
 			switch (m_target)
 			{
 			case enTarget_None:
@@ -21,6 +22,7 @@ namespace nsHikageri
 				break;
 			}
 
+			//ターゲットとの距離が離れたら、ターゲットを解除
 			if ((targetPos - m_player->GetPlayerMove()->GetPosition()).Length() > 500.0f)
 			{
 				m_target = enTarget_None;
