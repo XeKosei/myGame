@@ -7,6 +7,7 @@ namespace nsHikageri
 	{	
 		class FlashLightAction;
 		class AbilityStrobeFlash;
+		class AbilityClairvoyance;
 		class FlashLightBattery;
 		//懐中電灯
 		class FlashLight : public IGameObject
@@ -71,6 +72,7 @@ namespace nsHikageri
 			//フラッシュライト関連
 			FlashLightAction* m_flashLightAction = nullptr;
 			AbilityStrobeFlash* m_abilityStrobeFlash = nullptr;
+			AbilityClairvoyance* m_abilityClairvoyance = nullptr;
 			FlashLightBattery* m_flashLightBattery = nullptr;
 		};
 	}

@@ -94,6 +94,7 @@ struct SPSIn {
 Texture2D<float4> g_albedo : register(t0);				//アルベドマップ
 Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
 Texture2D<float4> g_spotLightMap : register(t11);		//スポットライトマップ
+Texture2D<float4> g_clairvoyanceMap : register(t12);	//透視マップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。
 sampler g_sampler : register(s0);	//サンプラステート。
 
@@ -343,8 +344,19 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 			&& spotLightMapUV.y > 0.0f && spotLightMapUV.y < 1.0f)
 		{
 			float zInSpotLightMap = g_spotLightMap.Sample(g_sampler, spotLightMapUV).x;
+
 			if (zInSpotLVP < zInSpotLightMap + 0.0001f)// && zInSpotLVP <= 1.0f)
 			{
+				//透視の処理
+				float4 clairvoyanceMap = g_clairvoyanceMap.Sample(g_sampler, spotLightMapUV);
+				if (clairvoyanceMap.x > 0.0f)
+				{
+					albedoColor.x = 5.0f;
+					albedoColor.y = 0.0f;
+					albedoColor.z = 0.0f;;
+				}
+				//ここまで透視処理
+
 				float3 spotLigDir = psIn.worldPos - spotLigData[i].ligPos;
 				spotLigDir = normalize(spotLigDir);
 
@@ -456,5 +468,6 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 			finalColor.xyz *= 0.5f;
 		}*/
 	}
+
 	return finalColor;
 }

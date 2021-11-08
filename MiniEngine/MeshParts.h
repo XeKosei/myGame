@@ -48,7 +48,7 @@ public:
 		const char* psEntryPointFunc,
 		void* const expandData[3],
 		const int expandDataSize[3],
-		IShaderResource* expandShaderResourceView[2],
+		IShaderResource* expandShaderResourceView[3],
 		DXGI_FORMAT m_colorBufferFormat
 	);
 	/// <summary>
@@ -121,7 +121,7 @@ private:
 	};
 	ConstantBuffer m_commonConstantBuffer;					//メッシュ共通の定数バッファ。
 	ConstantBuffer m_expandConstantBuffer[3];					//ユーザー拡張用の定数バッファ
-	IShaderResource* m_expandShaderResourceView[2] = { nullptr, nullptr };	//ユーザー拡張シェーダーリソースビュー。
+	IShaderResource* m_expandShaderResourceView[3] = { nullptr, nullptr, nullptr };	//ユーザー拡張シェーダーリソースビュー。
 	StructuredBuffer m_boneMatricesStructureBuffer;	//ボーン行列の構造化バッファ。
 	std::vector< SMesh* > m_meshs;							//メッシュ。
 	std::vector< DescriptorHeap > m_descriptorHeap;		//ディスクリプタヒープ。

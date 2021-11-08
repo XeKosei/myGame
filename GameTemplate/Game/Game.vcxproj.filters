@@ -380,6 +380,9 @@
     <ClCompile Include="ItemKey.cpp">
       <Filter>ソース ファイル\Hikageri\Item</Filter>
     </ClCompile>
+    <ClCompile Include="AbilityClairvoyance.cpp">
+      <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -711,6 +714,9 @@
     </ClInclude>
     <ClInclude Include="ItemInclude.h">
       <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityClairvoyance.h">
+      <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -53,7 +53,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	// シャドウマップを表示するためのスプライトを初期化する
 	SpriteInitData spriteInitData;
-	spriteInitData.m_textures[0] = &nsHikageri::PostEffectManager::GetInstance()->GetSpotLightMap();
+	spriteInitData.m_textures[0] = &nsHikageri::PostEffectManager::GetInstance()->GetClairvoyanceMap();
 	spriteInitData.m_fxFilePath = "Assets/shader/sprite.fx";
 	spriteInitData.m_width = 256;
 	spriteInitData.m_height = 256;
@@ -80,7 +80,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		GameObjectManager::GetInstance()->ExecutePostRender(renderContext);
 
 		sprite.Update({ FRAME_BUFFER_W / -2.04f, FRAME_BUFFER_H / 2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 0.0f, 1.0f });
-		//sprite.Draw(renderContext);
+		sprite.Draw(renderContext);
 
 		//////////////////////////////////////
 		//ここから絵を描くコードを記述する。

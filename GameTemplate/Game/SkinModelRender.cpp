@@ -19,26 +19,32 @@ namespace nsHikageri
 		ModelInitData shadowModelInitData;
 		//スポットライト用のモデルの初期化データ
 		ModelInitData spotLightModelInitData;
+		//透視用
+		ModelInitData clairvoyanceModelInitData;
 
 		//モデルのファイルパスを指定
 		modelInitData.m_tkmFilePath = modelPath;
 		shadowModelInitData.m_tkmFilePath = modelPath;
 		spotLightModelInitData.m_tkmFilePath = modelPath;
+		clairvoyanceModelInitData.m_tkmFilePath = modelPath;
 
 		//シェーダーパスの指定
 		modelInitData.m_fxFilePath = "Assets/shader/shadowReceiver.fx";
 		shadowModelInitData.m_fxFilePath = "Assets/shader/shadow.fx";
-		spotLightModelInitData.m_fxFilePath = "Assets/shader/spotLight.fx";
+		spotLightModelInitData.m_fxFilePath = "Assets/shader/GetDepth.fx";
+		clairvoyanceModelInitData.m_fxFilePath = "Assets/shader/GetDepth.fx";
 
 		//シェーダーの頂点シェーダーのエントリー関数名の指定
 		modelInitData.m_vsEntryPointFunc = "VSMain";
 		shadowModelInitData.m_vsEntryPointFunc = "VSMain";
 		spotLightModelInitData.m_vsEntryPointFunc = "VSMain";
+		clairvoyanceModelInitData.m_vsEntryPointFunc = "VSMain";
 
 		//シェーダーのピクセルシェーダーのエントリー関数名の指定
 		modelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
 		shadowModelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
 		spotLightModelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
+		clairvoyanceModelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
 
 		//スケルトンが存在しているときはスケルトンを初期化
 		if (skeletonPath != nullptr)
@@ -47,22 +53,28 @@ namespace nsHikageri
 			modelInitData.m_skeleton = &m_skeleton;
 			shadowModelInitData.m_skeleton = &m_skeleton;
 			spotLightModelInitData.m_skeleton = &m_skeleton;
+			clairvoyanceModelInitData.m_skeleton = &m_skeleton;
 		}
 
 		//カラーバッファのフォーマットを指定。
 		modelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		shadowModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32_FLOAT;
 		spotLightModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32_FLOAT;
+		clairvoyanceModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
 		//モデルデータの上方向の軸を指定
 		modelInitData.m_modelUpAxis = enModelUpAxisZ;
 		shadowModelInitData.m_modelUpAxis = enModelUpAxisZ;
 		spotLightModelInitData.m_modelUpAxis = enModelUpAxisZ;
+		clairvoyanceModelInitData.m_modelUpAxis = enModelUpAxisZ;
 
 		//モデルの影を落とすために影のテクスチャを紐づける。
 		modelInitData.m_expandShaderResoruceView[0] = &PostEffectManager::GetInstance()->GetBlurShadowMap();
 		modelInitData.m_expandShaderResoruceView[1] = &PostEffectManager::GetInstance()->GetSpotLightMap();
+		modelInitData.m_expandShaderResoruceView[2] = &PostEffectManager::GetInstance()->GetClairvoyanceMap();
 
+		clairvoyanceModelInitData.m_expandShaderResoruceView[0] = &PostEffectManager::GetInstance()->GetSpotLightMap();
+		clairvoyanceModelInitData.m_expandShaderResoruceView[1] = &PostEffectManager::GetInstance()->GetMainRenderTarget();
 		//定数バッファをモデルに紐づける
 		modelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigDataSize();
 		modelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigDatas();
@@ -75,6 +87,8 @@ namespace nsHikageri
 		shadowModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigCameraDatas();
 		spotLightModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetSpotLigCameraDataSize();
 		spotLightModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetSpotLigCameraDatas();
+		clairvoyanceModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetSpotLigCameraDataSize();
+		clairvoyanceModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetSpotLigCameraDatas();
 
 		//モデルの初期化
 		m_model[eModel].Init(modelInitData);
@@ -83,6 +97,8 @@ namespace nsHikageri
 		m_model[eModel_Shadow].Init(shadowModelInitData);
 		//スポットライト用のモデルの初期化
 		m_model[eModel_SpotLight].Init(spotLightModelInitData);
+		//透視用
+		m_model[eModel_Clairvoyance].Init(clairvoyanceModelInitData);
 
 		//アニメーション関連の初期化
 		m_animationClips = animClips;
@@ -123,7 +139,10 @@ namespace nsHikageri
 		switch (rc.GetRenderStep()) {
 		case RenderContext::eStep_Render:
 			//画面に描画
-			m_model[eModel].Draw(rc, camera);
+			if (m_isNormalCaster)
+			{
+				m_model[eModel].Draw(rc, camera);
+			}
 			break;
 		case RenderContext::eStep_RenderShadowMap:
 			//影を作るモデルの時だけ影を描画
@@ -137,6 +156,13 @@ namespace nsHikageri
 			if (m_isSpotLightCaster)
 			{
 				m_model[eModel_SpotLight].Draw(rc, camera);
+			}
+			break;
+		case RenderContext::eStep_RenderClairvoyanceMap:
+			//透視用
+			if (m_isClairvoyanceCaster)
+			{
+				m_model[eModel_Clairvoyance].Draw(rc, camera);
 			}
 			break;
 		}

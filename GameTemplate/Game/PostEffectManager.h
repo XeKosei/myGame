@@ -36,11 +36,15 @@ namespace nsHikageri
 
 		bool GetShadowFlag() { return m_shadowMode; };
 
+		Texture& GetMainRenderTarget() { return m_mainRenderTarget.GetRenderTargetTexture(); }
+
 		Texture& GetShadowMap() { return m_shadowMap.GetRenderTargetTexture(); };
 
 		Texture& GetBlurShadowMap() { return m_shadowBlur.GetBokeTexture(); };
 
 		Texture& GetSpotLightMap() { return m_spotLightMap.GetRenderTargetTexture(); };
+
+		Texture& GetClairvoyanceMap() {return m_clairvoyanceMap.GetRenderTargetTexture();}
 
 		//レンダリング前の処理
 		void BeforeRender(RenderContext& rc);
@@ -53,6 +57,9 @@ namespace nsHikageri
 		void SpotLightRender(RenderContext& rc);
 		void EndSpotLightRender(RenderContext& rc);
 
+		void ClairvoyanceRender(RenderContext& rc);
+		void EndClairvoyanceRender(RenderContext& rc);
+		
 	private:
 		RenderTarget m_mainRenderTarget;
 		Sprite m_copyToFrameBufferSprite;//画面に表示する最終結果のスプライト
@@ -68,6 +75,7 @@ namespace nsHikageri
 		RenderTarget m_shadowMap;
 		RenderTarget m_spotLightMap;
 		GaussianBlur m_shadowBlur;
+		RenderTarget m_clairvoyanceMap;
 	};
 
 }

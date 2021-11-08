@@ -94,6 +94,16 @@ namespace nsHikageri
 			DXGI_FORMAT_D32_FLOAT
 		);
 
+		//透視用のマップ
+		m_clairvoyanceMap.Create(
+			1280,
+			720,
+			1,
+			1,
+			DXGI_FORMAT_R32G32_FLOAT,
+			DXGI_FORMAT_D32_FLOAT
+		);
+
 		//最終的な画面に出力されるスプライト
 		SpriteInitData copyToBufferSpriteInitData;
 		copyToBufferSpriteInitData.m_textures[0] = &m_mainRenderTarget.GetRenderTargetTexture();
@@ -148,6 +158,18 @@ namespace nsHikageri
 	void PostEffectManager::EndSpotLightRender(RenderContext& rc)
 	{
 		rc.WaitUntilFinishDrawingToRenderTarget(m_spotLightMap);
+	}
+
+	void PostEffectManager::ClairvoyanceRender(RenderContext& rc)
+	{
+		rc.WaitUntilToPossibleSetRenderTarget(m_clairvoyanceMap);
+		rc.SetRenderTargetAndViewport(m_clairvoyanceMap);
+		rc.ClearRenderTargetView(m_clairvoyanceMap.GetRTVCpuDescriptorHandle(), m_clairvoyanceMap.GetRTVClearColor());
+		rc.ClearDepthStencilView(m_clairvoyanceMap.GetDSVCpuDescriptorHandle(), m_clairvoyanceMap.GetDSVClearValue());
+	}
+	void PostEffectManager::EndClairvoyanceRender(RenderContext& rc)
+	{
+		rc.WaitUntilFinishDrawingToRenderTarget(m_clairvoyanceMap);
 	}
 
 	//レンダリング前の処理

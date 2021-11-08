@@ -37,10 +37,13 @@ namespace nsHikageri
 			//懐中電灯関係のインスタンスを作成
 			m_flashLightAction = NewGO<FlashLightAction>(0);
 			m_flashLightAction->SetFlashLight(this);
-			m_abilityStrobeFlash = NewGO<AbilityStrobeFlash>(0);
-			m_abilityStrobeFlash->SetFlashLight(this);
 			m_flashLightBattery = NewGO<FlashLightBattery>(0);
 			m_flashLightBattery->SetFlashLight(this);
+			m_abilityStrobeFlash = NewGO<AbilityStrobeFlash>(0);
+			m_abilityStrobeFlash->SetFlashLight(this);
+			m_abilityClairvoyance = NewGO<AbilityClairvoyance>(0);
+			m_abilityClairvoyance->SetFlashLight(this);
+
 			return true;
 		}
 
@@ -50,8 +53,9 @@ namespace nsHikageri
 			if (m_player->GetPlayerState() == nsPlayer::Player::enState_Normal)
 			{
 				m_flashLightAction->ExecuteUpdate();
-				m_abilityStrobeFlash->ExecuteUpdate();
 				m_flashLightBattery->ExecuteUpdate();
+				m_abilityStrobeFlash->ExecuteUpdate();
+				m_abilityClairvoyance->ExecuteUpdate();
 			}
 
 			//まず懐中電灯をカメラと同じ位置に設定

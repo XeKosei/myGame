@@ -71,13 +71,25 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	//スポットライト用のモデルを描く。
 	nsHikageri::PostEffectManager::GetInstance()->SpotLightRender(rc);
 	rc.SetStep(RenderContext::eStep_RenderSpotLightMap);
-		//SpotLightRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+	//SpotLightRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
 			go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetSpotLightCamera());
 		}
 	}
 	nsHikageri::PostEffectManager::GetInstance()->EndSpotLightRender(rc);
+
+	//透視用のモデルを描く
+	nsHikageri::PostEffectManager::GetInstance()->ClairvoyanceRender(rc);
+	rc.SetStep(RenderContext::eStep_RenderClairvoyanceMap);
+	//ClairvoyanceRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+	for (auto& goList : m_gameObjectListArray) {
+		for (auto& go : goList) {
+			go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetSpotLightCamera());
+		}
+	}
+	nsHikageri::PostEffectManager::GetInstance()->EndClairvoyanceRender(rc);
+	
 
 	//ポストエフェクト用。Render前の処理
 	nsHikageri::PostEffectManager::GetInstance()->BeforeRender(rc);
@@ -113,7 +125,6 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 
 	//ポストエフェクト用。Render後の処理
 	nsHikageri::PostEffectManager::GetInstance()->AfterRender(rc);
-
 }
 
 void GameObjectManager::ExecutePostRender(RenderContext& rc)

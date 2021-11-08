@@ -41,7 +41,7 @@ namespace nsHikageri
 
 			//静的物理オブジェクトの位置と回転を設定
 			m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
-			
+
 			return true;
 		}
 

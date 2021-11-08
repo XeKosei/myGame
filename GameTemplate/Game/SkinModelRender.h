@@ -9,6 +9,7 @@ namespace nsHikageri
 			eModel,	//画面に描画されるモデル
 			eModel_Shadow,	//影を描画する用モデル
 			eModel_SpotLight,	//スポットライトマップに使用するモデル
+			eModel_Clairvoyance,	//透視用
 			eModel_Num,		//モデルの状態の数
 		};
 		SkinModelRender() :m_position(Vector3::Zero), m_qRot(g_quatIdentity), m_scale(Vector3::One) {}
@@ -107,6 +108,13 @@ namespace nsHikageri
 			}
 		}
 
+		/// @brief モデルが通常描画するかどうか。
+		/// @param isNormalCaster する:true しない:false
+		void SetNormalCasterFlag(bool isNormalCaster)
+		{
+			m_isNormalCaster = isNormalCaster;
+		}
+
 		/// @brief モデルが影を作るかどうかを設定する。
 		/// @param isShadowCaster 作る:true 作らない:false
 		void SetShadowCasterFlag(bool isShadowCaster)
@@ -119,6 +127,13 @@ namespace nsHikageri
 		void SetSpotLightCasterFlag(bool isSpotLightCaster)
 		{
 			m_isSpotLightCaster = isSpotLightCaster;
+		}
+
+		/// @brief モデルが透視可能かどうか
+		/// @param isClairvoyanceCaster 可能:true 不可能:false
+		void SetClairvoyanceCasterFlag(bool isClairvoyanceCaster)
+		{
+			m_isClairvoyanceCaster = isClairvoyanceCaster;
 		}
 
 		/// @brief モデルの座標を取得
@@ -183,10 +198,12 @@ namespace nsHikageri
 		AnimationClip* m_animationClips = nullptr;	//アニメーションクリップ
 		int m_animationClipNum = 0;					//アニメーションクリップの数
 		Animation m_animation;						//アニメーション
+		bool m_isNormalCaster = true;
 		bool m_isShadowCaster = true;				//このモデルは影を作るか
 		float m_animation_speed = 1.0f;				//アニメーション速度
 		float m_animationSpeed = 1.0f;				//アニメーション速度(何故二つあるんだ?)
 		bool m_isSpotLightCaster = true;			//このモデルはスポットライトの光を受けるかどうか
+		bool m_isClairvoyanceCaster = false;		//このモデルは、透視可能かどうか
 	};
 
 }

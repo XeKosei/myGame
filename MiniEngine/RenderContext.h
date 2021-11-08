@@ -17,6 +17,7 @@ public:
 		eStep_Render,	// Render to AllScreen
 		eStep_RenderShadowMap,	// Render to shadowMap
 		eStep_RenderSpotLightMap,	// Render to spotLightMap
+		eStep_RenderClairvoyanceMap,	//Render to clairvoyanceMap
 	};
 	/// <summary>
 	/// ‰Šú‰»B
