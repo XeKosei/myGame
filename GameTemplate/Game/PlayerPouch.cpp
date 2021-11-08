@@ -75,6 +75,12 @@ namespace nsHikageri
 				case enItem_GreenKey:
 					UseKey();
 					break;
+				case enItem_YellowKey:
+					UseKey();
+					break;
+				case enItem_PurpleKey:
+					UseKey();
+					break;
 				default:
 					break;
 				}
@@ -178,6 +184,24 @@ namespace nsHikageri
 				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
 				{
 					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Green)
+					{
+						unlockFlag = true;
+					}
+				}
+				break;
+			case enItem_YellowKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
+				{
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Yellow)
+					{
+						unlockFlag = true;
+					}
+				}
+				break;
+			case enItem_PurpleKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
+				{
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Purple)
 					{
 						unlockFlag = true;
 					}

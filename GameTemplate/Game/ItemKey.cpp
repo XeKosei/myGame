@@ -25,6 +25,12 @@ namespace nsHikageri
 			case enKeyColor_Green:
 				m_keyModel->Init("Assets/modelData/GreenKey.tkm");
 				break;
+			case enKeyColor_Yellow:
+				m_keyModel->Init("Assets/modelData/YellowKey.tkm");
+				break;
+			case enKeyColor_Purple:
+				m_keyModel->Init("Assets/modelData/PurpleKey.tkm");
+				break;
 			default:
 				m_keyModel->Init("Assets/modelData/Key.tkm");
 				break;
@@ -63,6 +69,12 @@ namespace nsHikageri
 					break;
 				case enKeyColor_Green:
 					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_GreenKey);
+					break;
+				case enKeyColor_Yellow:
+					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_YellowKey);
+					break;
+				case enKeyColor_Purple:
+					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_PurpleKey);
 					break;
 				default:
 					return;

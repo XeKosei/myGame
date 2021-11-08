@@ -15,6 +15,8 @@ namespace nsHikageri
 				enDoorColor_Red,
 				enDoorColor_Blue,
 				enDoorColor_Green,
+				enDoorColor_Yellow,
+				enDoorColor_Purple,
 				enDoorColor_num
 			};
 

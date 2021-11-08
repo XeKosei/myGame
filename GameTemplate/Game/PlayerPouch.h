@@ -15,6 +15,8 @@ namespace nsHikageri
 				enItem_RedKey,
 				enItem_BlueKey,
 				enItem_GreenKey,
+				enItem_YellowKey,
+				enItem_PurpleKey,
 				enItem_num
 			};
 

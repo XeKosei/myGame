@@ -23,6 +23,12 @@ namespace nsHikageri
 			case enDoorColor_Green:
 				m_doorModel->Init("Assets/modelData/GreenDoor.tkm");
 				break;
+			case enDoorColor_Yellow:
+				m_doorModel->Init("Assets/modelData/YellowDoor.tkm");
+				break;
+			case enDoorColor_Purple:
+				m_doorModel->Init("Assets/modelData/PurpleDoor.tkm");
+				break;
 			default:
 				m_doorModel->Init("Assets/modelData/Door.tkm");
 				break;

@@ -14,6 +14,8 @@ namespace nsHikageri
 				enKeyColor_Red,
 				enKeyColor_Blue,
 				enKeyColor_Green,
+				enKeyColor_Yellow,
+				enKeyColor_Purple,
 				enKeyColor_num
 			};
 

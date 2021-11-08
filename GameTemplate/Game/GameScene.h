@@ -28,9 +28,9 @@ namespace nsHikageri
 		//シャンデリア
 		nsGimmick::Chandelier* m_chandelier[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 		//ドア
-		nsGimmick::Door* m_door[3] = { nullptr, nullptr, nullptr };
+		nsGimmick::Door* m_door[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 		//鍵
-		nsItem::ItemKey* m_key[3] = { nullptr, nullptr, nullptr };
+		nsItem::ItemKey* m_key[4] = { nullptr, nullptr, nullptr,nullptr };
 
 		//クリアフォント(仮)
 		FontRender* m_clearFont = nullptr;
