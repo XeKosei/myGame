@@ -16,7 +16,7 @@ namespace nsHikageri
 			//フラッシュライト
 			FlashLight* m_flashLight = nullptr;
 			
-			bool m_canSetClairvoyance = false;
+			bool m_isClairvoyanceActivate = false;
 		};
 	}
 }

@@ -25,6 +25,11 @@ namespace nsHikageri
 			static const float INI_STROBEFLASH_BATTERY_COST = 20.0f;	//ストロボフラッシュで消費するバッテリーのコスト
 		}
 
+		namespace nsAbilityClairvoyanceConstant
+		{
+			static const int INI_CRAIRVOYANCE_BATTERY_COST = 0.05f;	//クレアボヤンスで消費するバッテリー(発動中毎フレーム)
+		}
+
 		namespace nsFlashLightBatteryConstant
 		{
 			static const float MAX_BATTERY_LEVEL = 100.0f;	//最大バッテリー残量
