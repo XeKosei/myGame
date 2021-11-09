@@ -59,6 +59,7 @@ cbuffer SpotLightCameraCb : register(b3)
 {
 	float4x4 mSpotLVP;
 	float3 spotLightCameraPos;
+	float spotLightCameraRange;
 	float3 spotLightCameraDir;
 };
 
@@ -350,10 +351,11 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 				//透視の処理
 				float4 clairvoyanceMap = g_clairvoyanceMap.Sample(g_sampler, spotLightMapUV);
 				if (clairvoyanceMap.x > 0.0f)
-				{
+				{	
 					albedoColor.x = 5.0f;
 					albedoColor.y = 0.0f;
 					albedoColor.z = 0.0f;;
+					
 				}
 				//ここまで透視処理
 

@@ -42,12 +42,20 @@ namespace nsHikageri
 			float pad;
 			Vector3 lightCameraDirection;	//ライトカメラの向き
 		};
+
+		struct SpotLigCameraDatas
+		{
+			Matrix lightCameraProjectionMatrix;	//ライトビュープロジェクション行列
+			Vector3 lightCameraPosition;	//ライトカメラの位置
+			float lightCameraRange;
+			Vector3 lightCameraDirection;	//ライトカメラの向き	
+		};
 		LigCameraDatas m_ligCameraData;
 		int m_ligCameraDataSize = sizeof(m_ligCameraData);
 
 		Camera m_lightCamera;	//シャドウマップ用のライトの位置のカメラ。テスト用
 
-		LigCameraDatas m_spotLigCameraData;
+		SpotLigCameraDatas m_spotLigCameraData;
 		int m_spotLigCameraDataSize = sizeof(m_spotLigCameraData);
 		Camera m_spotLightCamera;	//スポットライトの光を描画する用のスポットライトの位置のカメラ
 
@@ -345,7 +353,7 @@ namespace nsHikageri
 
 		/// @brief スポットライトに使用するライトカメラのデータの塊を取得する(定数バッファに渡す用)
 		/// @return ライトカメラのデータ
-		LigCameraDatas* GetSpotLigCameraDatas() { return &m_spotLigCameraData; };
+		SpotLigCameraDatas* GetSpotLigCameraDatas() { return &m_spotLigCameraData; };
 
 		/// @brief スポットライトに使用するライトカメラのデータの塊のサイズを取得する(定数バッファに渡す用)
 		/// @return 
@@ -390,6 +398,8 @@ namespace nsHikageri
 
 			m_spotLightCamera.Update(1.0f);
 			m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
+		
+			m_spotLigCameraData.lightCameraRange = angle;
 		}
 
 		/// @brief スポットライトに使用するライトカメラの上方向を指定する。

@@ -32,7 +32,7 @@ namespace nsHikageri
 		modelInitData.m_fxFilePath = "Assets/shader/shadowReceiver.fx";
 		shadowModelInitData.m_fxFilePath = "Assets/shader/shadow.fx";
 		spotLightModelInitData.m_fxFilePath = "Assets/shader/GetDepth.fx";
-		clairvoyanceModelInitData.m_fxFilePath = "Assets/shader/GetDepth.fx";
+		clairvoyanceModelInitData.m_fxFilePath = "Assets/shader/Clairvoyance.fx";
 
 		//シェーダーの頂点シェーダーのエントリー関数名の指定
 		modelInitData.m_vsEntryPointFunc = "VSMain";
