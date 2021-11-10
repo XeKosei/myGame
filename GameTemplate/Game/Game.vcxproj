@@ -290,6 +290,7 @@
     <ClCompile Include="..\..\MiniEngine\tkFile\TksFile.cpp" />
     <ClCompile Include="..\..\MiniEngine\VertexBuffer.cpp" />
     <ClCompile Include="AbilityClairvoyance.cpp" />
+    <ClCompile Include="AbilityManager.cpp" />
     <ClCompile Include="AI\PathFinding\Cell.cpp" />
     <ClCompile Include="AI\PathFinding\NaviMesh.cpp" />
     <ClCompile Include="AI\PathFinding\Path.cpp" />
@@ -331,6 +332,7 @@
     <ClCompile Include="PlayerTarget.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PostEffectManager.cpp" />
+    <ClCompile Include="SecretRoom.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="SpriteRender.cpp" />
@@ -410,11 +412,13 @@
     <ClInclude Include="..\..\MiniEngine\tkFile\TksFile.h" />
     <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
     <ClInclude Include="AbilityClairvoyance.h" />
+    <ClInclude Include="AbilityManager.h" />
     <ClInclude Include="AI\PathFinding\Cell.h" />
     <ClInclude Include="AI\PathFinding\NaviMesh.h" />
     <ClInclude Include="AI\PathFinding\Path.h" />
     <ClInclude Include="AI\PathFinding\PathFinding.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="BackGroundInclude.h" />
     <ClInclude Include="Chandelier.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Door.h" />
@@ -440,6 +444,7 @@
     <ClInclude Include="geometry\AABB.h" />
     <ClInclude Include="geometry\BSP.h" />
     <ClInclude Include="GimmickConstant.h" />
+    <ClInclude Include="GimmickInclude.h" />
     <ClInclude Include="ItemBase.h" />
     <ClInclude Include="ItemInclude.h" />
     <ClInclude Include="ItemKey.h" />
@@ -457,6 +462,7 @@
     <ClInclude Include="PlayerTarget.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PostEffectManager.h" />
+    <ClInclude Include="SecretRoom.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="SpriteRender.h" />

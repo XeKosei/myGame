@@ -88,7 +88,7 @@ namespace nsHikageri
 		}
 
 		//アイテムを選択する
-		void PlayerPouch::SelectItem() 
+		void PlayerPouch::SelectItem()
 		{
 			//右ボタンを押すと
 			if (g_pad[0]->IsTrigger(enButtonRight))
@@ -107,10 +107,10 @@ namespace nsHikageri
 						break;
 					}
 				}
-		
+
 				//テキストを設定
 				m_itemFont->SetText(ITEM_NAME[m_choseItem]);
-				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));		
+				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
 			}
 			//左ボタンを押すと
 			if (g_pad[0]->IsTrigger(enButtonLeft))
@@ -133,7 +133,7 @@ namespace nsHikageri
 
 				//テキストを設定
 				m_itemFont->SetText(ITEM_NAME[m_choseItem]);
-				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));		
+				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
 			}
 		}
 		//電池を使用したときの処理
@@ -161,7 +161,7 @@ namespace nsHikageri
 
 			//鍵の色とドアの色が一致しているかを管理
 			switch (m_choseItem)
-			{		
+			{
 			case enItem_RedKey:
 				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
 				{

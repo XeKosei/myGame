@@ -39,10 +39,16 @@ namespace nsHikageri
 			m_flashLightAction->SetFlashLight(this);
 			m_flashLightBattery = NewGO<FlashLightBattery>(0);
 			m_flashLightBattery->SetFlashLight(this);
+
+			//アビリティ関連
+			m_abilityManager = NewGO<AbilityManager>(0);
+			m_abilityManager->SetFlashLight(this);
 			m_abilityStrobeFlash = NewGO<AbilityStrobeFlash>(0);
 			m_abilityStrobeFlash->SetFlashLight(this);
+			m_abilityStrobeFlash->SetAbilityManager(m_abilityManager);
 			m_abilityClairvoyance = NewGO<AbilityClairvoyance>(0);
 			m_abilityClairvoyance->SetFlashLight(this);
+			m_abilityClairvoyance->SetAbilityManager(m_abilityManager);
 
 			return true;
 		}

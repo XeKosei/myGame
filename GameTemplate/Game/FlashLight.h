@@ -4,11 +4,13 @@ namespace nsHikageri
 	namespace nsPlayer { class Player; }
 
 	namespace nsFlashLight
-	{	
+	{
 		class FlashLightAction;
+		class FlashLightBattery;
+		class AbilityManager;
 		class AbilityStrobeFlash;
 		class AbilityClairvoyance;
-		class FlashLightBattery;
+
 		//懐中電灯
 		class FlashLight : public IGameObject
 		{
@@ -27,8 +29,8 @@ namespace nsHikageri
 
 			/// @brief 懐中電灯の射出角度を設定する。
 			/// @param angle 射出角度
-			void SetFlashLightAngle(float angle) 
-			{ 
+			void SetFlashLightAngle(float angle)
+			{
 				if (angle <= 1.0f && angle >= 0.1)
 				{
 					m_flashLightAngle = angle;
@@ -53,8 +55,10 @@ namespace nsHikageri
 
 			//懐中電灯関係のインスタンスにアクセスする
 			FlashLightAction* GetFlashLightAction() { return m_flashLightAction; }
-			AbilityStrobeFlash* GetAbilityStrobeFlash() { return m_abilityStrobeFlash; }
 			FlashLightBattery* GetFlashLightBattery() { return m_flashLightBattery; }
+			AbilityManager* GetAbilityManager() { return m_abilityManager; }
+			AbilityStrobeFlash* GetAbilityStrobeFlash() { return m_abilityStrobeFlash; }
+			AbilityClairvoyance* GetAbilityClairvoyance() { return m_abilityClairvoyance; }
 		private:
 			SkinModelRender* m_flashLightModel = nullptr;
 			//スポットライト
@@ -71,9 +75,11 @@ namespace nsHikageri
 
 			//フラッシュライト関連
 			FlashLightAction* m_flashLightAction = nullptr;
+			FlashLightBattery* m_flashLightBattery = nullptr;
+			AbilityManager* m_abilityManager = nullptr;
 			AbilityStrobeFlash* m_abilityStrobeFlash = nullptr;
 			AbilityClairvoyance* m_abilityClairvoyance = nullptr;
-			FlashLightBattery* m_flashLightBattery = nullptr;
+
 		};
 	}
 }

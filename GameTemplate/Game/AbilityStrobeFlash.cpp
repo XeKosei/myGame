@@ -71,37 +71,33 @@ namespace nsHikageri
 
 			if (m_strobeFlashColor.x == INI_STROBEFLASH_COLOR.x)
 			{
-				QueryGOs<nsEnemy::Enemy>("enemy", [this](nsEnemy::Enemy* enemy)->bool
+
+				//懐中電灯の向き
+				Vector3 strobeDir = m_flashLight->GetFlashLightDir();
+				strobeDir.Normalize();
+
+				//フラッシュがエネミーの正面に当たっているならば
+				if (Dot(strobeDir, m_abilityManager->GetEnemy()->GetEnemyMove()->GetDirection()) <= 0.0f)
+				{
+					//敵の頭への向き
+					Vector3 toHeadDir = m_abilityManager->GetEnemy()->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head") - m_flashLight->GetFlashLightPos();
+					toHeadDir.Normalize();
+
+					//二つのベクトルの内積を算出
+					float dot = Dot(toHeadDir, strobeDir);
+
+					//懐中電灯の射出角度から、
+					float flashLightAngle = m_flashLight->GetFlashLightAngle();
+					flashLightAngle /= 2;	//半径の射出角度が欲しいので、2で割る
+					flashLightAngle /= 3.141592;	//円周率で割ることで、0～1の範囲に。
+					flashLightAngle = 1 - flashLightAngle;
+
+					//内積が射出角度よりも内側ならば
+					if (dot >= flashLightAngle)
 					{
-						//懐中電灯の向き
-						Vector3 strobeDir = m_flashLight->GetFlashLightDir();
-						strobeDir.Normalize();
-
-						//フラッシュがエネミーの正面に当たっているならば
-						if (Dot(strobeDir, enemy->GetEnemyMove()->GetDirection()) <= 0.0f)
-						{
-							//敵の頭への向き
-							Vector3 toHeadDir = enemy->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head") - m_flashLight->GetFlashLightPos();
-							toHeadDir.Normalize();
-
-							//二つのベクトルの内積を算出
-							float dot = Dot(toHeadDir, strobeDir);
-
-							//懐中電灯の射出角度から、
-							float flashLightAngle = m_flashLight->GetFlashLightAngle();
-							flashLightAngle /= 2;	//半径の射出角度が欲しいので、2で割る
-							flashLightAngle /= 3.141592;	//円周率で割ることで、0～1の範囲に。
-							flashLightAngle = 1 - flashLightAngle;
-
-							//内積が射出角度よりも内側ならば
-							if (dot >= flashLightAngle)
-							{
-								enemy->SetEnemyState(nsEnemy::Enemy::enState_Flinch);
-							}
-						}
-						return true;
+						m_abilityManager->GetEnemy()->SetEnemyState(nsEnemy::Enemy::enState_Flinch);
 					}
-				);
+				}
 			}
 
 			//段々明るさを減衰
@@ -112,7 +108,7 @@ namespace nsHikageri
 			{
 				m_flashLight->GetSpotLight()->SetColor(nsFlashLightConstant::INI_FLASHLIGHT_COLOR);
 				m_strobeFlashColor = INI_STROBEFLASH_COLOR;
-				m_strobeFlashFlag = false;		
+				m_strobeFlashFlag = false;
 			}
 		}
 

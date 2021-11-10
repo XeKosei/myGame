@@ -5,6 +5,7 @@ namespace nsHikageri
 	namespace nsFlashLight
 	{
 		class FlashLight;
+		class AbilityManager;
 		//ストロボのようなフラッシュ
 		class AbilityStrobeFlash : public IGameObject
 		{
@@ -22,16 +23,21 @@ namespace nsHikageri
 			/// @brief ストロボフラッシュを発動する処理
 			void StrobeFlash();
 
+			/// @brief アビリティマネージャーを設定
+			/// @param abilityManager アビリティマネージャー
+			void SetAbilityManager(AbilityManager* abilityManager) { m_abilityManager = abilityManager; }
+
 		private:
 			//フラッシュライト
 			FlashLight* m_flashLight = nullptr;
-			
+			AbilityManager* m_abilityManager = nullptr;
+
 			//ストロボフラッシュをチャージするカウント
 			int m_strobeChargeCount = 0;
 
 			//ストロボフラッシュのカラー(明るさ)
 			Vector3 m_strobeFlashColor = { 0.0f, 0.0f, 0.0f };
-			
+
 			//ストロボフラッシュを発動するフラグ
 			bool m_strobeFlashFlag = false;
 

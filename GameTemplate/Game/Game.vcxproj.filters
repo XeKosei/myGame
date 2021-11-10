@@ -404,6 +404,12 @@
     <ClCompile Include="TknFile.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="SecretRoom.cpp">
+      <Filter>ソース ファイル\Hikageri\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityManager.cpp">
+      <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -759,6 +765,18 @@
     </ClInclude>
     <ClInclude Include="TknFile.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityManager.h">
+      <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
+    </ClInclude>
+    <ClInclude Include="SecretRoom.h">
+      <Filter>ヘッダー ファイル\Hikageri\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGroundInclude.h">
+      <Filter>ヘッダー ファイル\Hikageri\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="GimmickInclude.h">
+      <Filter>ヘッダー ファイル\Hikageri\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

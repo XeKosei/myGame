@@ -47,7 +47,7 @@ namespace nsHikageri
 			bool Start();
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };		
+			void SetPlayer(Player* pl) { m_player = pl; };
 
 		private:
 			//プレイヤー
@@ -63,7 +63,7 @@ namespace nsHikageri
 			Vector4 m_itemUsedFontColor = {0.0f,0.0f,0.0f,0.0f};*/
 
 			int m_choseItem = enItem_Battery;
-			int m_haveItemNum[enItem_num] = { 3, 3, 0, 0, 0};
+			int m_haveItemNum[enItem_num] = { 3, 3, 1, 1, 1, 1, 1 };
 		};
 
 	}

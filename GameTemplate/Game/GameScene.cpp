@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "GameScene.h"
-#include "BackGround.h"
+#include "BackGroundInclude.h"
 #include "PlayerInclude.h"
 #include "EnemyInclude.h";
-#include "Chandelier.h"
-#include "Door.h"
+#include "GimmickInclude.h"
 #include "ItemInclude.h"
 namespace nsHikageri
 {
@@ -12,6 +11,7 @@ namespace nsHikageri
 	{
 		//ステージを作成
 		m_backGround = NewGO<nsBackGround::BackGround>(0);
+		m_secretRoom = NewGO<nsBackGround::SecretRoom>(0, "secretRoom");
 
 		//プレイヤーを作成
 		m_player = NewGO<nsPlayer::Player>(0);
@@ -76,14 +76,15 @@ namespace nsHikageri
 		m_door[4]->SetDoorColor(nsGimmick::Door::enDoorColor_Purple);
 
 		//鍵テスト
-		Vector3 KeyPos[4] = {
+		Vector3 KeyPos[5] = {
 			{1500.0f, 145.0f, 0.0f},
 			{ -2290.0f, 145.0f, 400.0f },
 			{110.0f, 145.0f, 2800.0f},
 			{-11090.0f,145.0f, 2400.0f},
+			{-7000.0f, 145.0f, -1900.0f}
 		};
 
-		for (int keyNum = 0; keyNum < 4; keyNum++)
+		for (int keyNum = 0; keyNum < 5; keyNum++)
 		{
 			m_key[keyNum] = NewGO<nsItem::ItemKey>(0);
 			m_key[keyNum]->SetPlayer(m_player);
@@ -93,6 +94,7 @@ namespace nsHikageri
 		m_key[1]->SetKeyColor(nsItem::ItemKey::enKeyColor_Blue);
 		m_key[2]->SetKeyColor(nsItem::ItemKey::enKeyColor_Green);
 		m_key[3]->SetKeyColor(nsItem::ItemKey::enKeyColor_Yellow);
+		m_key[4]->SetKeyColor(nsItem::ItemKey::enKeyColor_Purple);
 
 		//クリアフォント(仮)
 		m_clearFont = NewGO<FontRender>(2);
@@ -114,7 +116,7 @@ namespace nsHikageri
 
 	//仮
 	void GameScene::GameClear()
-	{		
+	{
 		if (m_player->GetPlayerMove()->GetPosition().z >= 8000.0f)
 		{
 			if (m_clearFontMoveCount > 0)

@@ -3,7 +3,7 @@
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
-	namespace nsBackGround { class BackGround; }
+	namespace nsBackGround { class BackGround; class SecretRoom; }
 	namespace nsEnemy { class Enemy; }
 	namespace nsGimmick { class Chandelier; class Door; }
 	namespace nsItem { class ItemKey; }
@@ -19,6 +19,7 @@ namespace nsHikageri
 	private:
 		//ステージ
 		nsBackGround::BackGround* m_backGround = nullptr;
+		nsBackGround::SecretRoom* m_secretRoom = nullptr;
 		//プレイヤー
 		nsPlayer::Player* m_player = nullptr;
 		//エネミー
@@ -30,7 +31,8 @@ namespace nsHikageri
 		//ドア
 		nsGimmick::Door* m_door[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 		//鍵
-		nsItem::ItemKey* m_key[4] = { nullptr, nullptr, nullptr,nullptr };
+		nsItem::ItemKey* m_key[5] = { nullptr, nullptr, nullptr,nullptr, nullptr };
+		//
 
 		//クリアフォント(仮)
 		FontRender* m_clearFont = nullptr;
