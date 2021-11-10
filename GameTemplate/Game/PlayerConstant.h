@@ -6,7 +6,7 @@ namespace nsHikageri
 	{
 		namespace nsPlayerConstant
 		{
-			static const Vector3 INI_PLAYER_POSITION = { -8000.0f,0.0f,0.0f };	//プレイヤーの初期位置
+			static const Vector3 INI_PLAYER_POSITION = { 0.0f,0.0f,0.0f };	//プレイヤーの初期位置
 			static const float PLAYER_MODEL_WIDTH = 10.0f;	//プレイヤーのモデルの横幅
 			static const float PLAYER_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
 			static const Vector3 INI_PLAYER_SCALE = { 1.0f, 1.0f, 1.0f };	//プレイヤーのモデルの大きさの初期値

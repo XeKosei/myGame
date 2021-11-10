@@ -20,8 +20,8 @@ namespace nsHikageri
 		namespace nsAbilityStrobeFlashConstant
 		{
 			static const int INI_STROBEFLASH_CHARGE_COUNT = 50;	//ストロボフラッシュのチャージ時間の初期値
-			static const Vector3 INI_STROBEFLASH_COLOR = {100.0f,100.0f,100.0f};	//ストロボフラッシュの明るさの初期値
-			static const Vector3 STROBEFLASH_COLOR_DECREASE_SPEED = {1.5f,1.5f,1.5f};	//ストロボフラッシュの明るさが下がる速さ
+			static const Vector3 INI_STROBEFLASH_COLOR = {50.0f,50.0f,50.0f};	//ストロボフラッシュの明るさの初期値
+			static const Vector3 STROBEFLASH_COLOR_DECREASE_SPEED = {1.0f,1.0f,1.0f};	//ストロボフラッシュの明るさが下がる速さ
 			static const float INI_STROBEFLASH_BATTERY_COST = 20.0f;	//ストロボフラッシュで消費するバッテリーのコスト
 		}
 

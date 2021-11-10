@@ -2,6 +2,7 @@
 #include "FlashLightInclude.h"
 #include "EnemyInclude.h"
 #include "PlayerInclude.h"
+#include "EyeWall.h"
 namespace nsHikageri
 {
 	namespace nsFlashLight
@@ -71,33 +72,38 @@ namespace nsHikageri
 
 			if (m_strobeFlashColor.x == INI_STROBEFLASH_COLOR.x)
 			{
-
 				//懐中電灯の向き
 				Vector3 strobeDir = m_flashLight->GetFlashLightDir();
 				strobeDir.Normalize();
 
+				//エネミー
 				//フラッシュがエネミーの正面に当たっているならば
 				if (Dot(strobeDir, m_abilityManager->GetEnemy()->GetEnemyMove()->GetDirection()) <= 0.0f)
 				{
-					//敵の頭への向き
-					Vector3 toHeadDir = m_abilityManager->GetEnemy()->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head") - m_flashLight->GetFlashLightPos();
-					toHeadDir.Normalize();
-
-					//二つのベクトルの内積を算出
-					float dot = Dot(toHeadDir, strobeDir);
-
-					//懐中電灯の射出角度から、
-					float flashLightAngle = m_flashLight->GetFlashLightAngle();
-					flashLightAngle /= 2;	//半径の射出角度が欲しいので、2で割る
-					flashLightAngle /= 3.141592;	//円周率で割ることで、0～1の範囲に。
-					flashLightAngle = 1 - flashLightAngle;
-
-					//内積が射出角度よりも内側ならば
-					if (dot >= flashLightAngle)
+					//エネミーの頭がフラッシュの範囲だったかどうかを調べる。
+					bool hitFlag = CheckHitFlash(m_abilityManager->GetEnemy()->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head"));
+					//trueならばエネミーを怯ませる。
+					if (hitFlag)
 					{
 						m_abilityManager->GetEnemy()->SetEnemyState(nsEnemy::Enemy::enState_Flinch);
 					}
 				}
+				//目の壁
+				QueryGOs<nsGimmick::EyeWall>("eyeWall", [this, strobeDir](nsGimmick::EyeWall* eyeWall)->bool
+					{
+						if (Dot(strobeDir, eyeWall->GetDirection()) <= 0.0f)
+						{
+							//目の壁の目の位置がフラッシュの範囲だったかどうかを調べる。
+							bool hitFlag = CheckHitFlash(eyeWall->GetPosition());
+							//trueならばエネミーを怯ませる。
+							if (hitFlag)
+							{
+								eyeWall->SetDisapperFlag(true);
+							}
+						}
+						return true;
+					}
+				);
 			}
 
 			//段々明るさを減衰
@@ -112,5 +118,37 @@ namespace nsHikageri
 			}
 		}
 
+		/// @brief 懐中電灯のフラッシュが当たっているかどうかを調べる。
+		/// @param chackPos 当たっているか調べたい位置
+		/// @return 当たっていたかどうか
+		bool AbilityStrobeFlash::CheckHitFlash(Vector3 checkPos)
+		{
+			//懐中電灯の向き
+			Vector3 strobeDir = m_flashLight->GetFlashLightDir();
+			strobeDir.Normalize();
+
+			//調べる位置への向き
+			Vector3 toCheckPosDir = checkPos - m_flashLight->GetFlashLightPos();
+			toCheckPosDir.Normalize();
+
+			//二つのベクトルの内積を算出
+			float dot = Dot(toCheckPosDir, strobeDir);
+
+			//懐中電灯の射出角度と比較する
+			float flashLightAngle = m_flashLight->GetFlashLightAngle();
+			flashLightAngle /= 2;	//半径の射出角度が欲しいので、2で割る
+			flashLightAngle /= 3.141592;	//円周率で割ることで、0～1の範囲に。
+			flashLightAngle = 1 - flashLightAngle;
+
+			//内積が射出角度よりも内側ならば
+			if (dot >= flashLightAngle)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 }

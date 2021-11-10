@@ -308,6 +308,7 @@
     <ClCompile Include="EnemyScream.cpp" />
     <ClCompile Include="EnemySearchPlayer.cpp" />
     <ClCompile Include="EnemyStress.cpp" />
+    <ClCompile Include="EyeWall.cpp" />
     <ClCompile Include="FlashLight.cpp" />
     <ClCompile Include="FlashLightAction.cpp" />
     <ClCompile Include="FlashLightBattery.cpp" />
@@ -433,6 +434,7 @@
     <ClInclude Include="EnemyScream.h" />
     <ClInclude Include="EnemySearchPlayer.h" />
     <ClInclude Include="EnemyStress.h" />
+    <ClInclude Include="EyeWall.h" />
     <ClInclude Include="FlashLight.h" />
     <ClInclude Include="FlashLightAction.h" />
     <ClInclude Include="FlashLightBattery.h" />

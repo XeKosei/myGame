@@ -24,6 +24,7 @@ namespace nsHikageri
 
 			nsEnemy::Enemy* m_enemy = nullptr;
 			nsBackGround::SecretRoom* m_secretRoom = nullptr;
+
 		};
 	}
 }

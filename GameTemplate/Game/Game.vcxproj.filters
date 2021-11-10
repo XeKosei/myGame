@@ -410,6 +410,9 @@
     <ClCompile Include="AbilityManager.cpp">
       <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
     </ClCompile>
+    <ClCompile Include="EyeWall.cpp">
+      <Filter>ソース ファイル\Hikageri\Gimmick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -776,6 +779,9 @@
       <Filter>ヘッダー ファイル\Hikageri\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="GimmickInclude.h">
+      <Filter>ヘッダー ファイル\Hikageri\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="EyeWall.h">
       <Filter>ヘッダー ファイル\Hikageri\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>

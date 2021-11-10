@@ -3,9 +3,9 @@
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
-	namespace nsBackGround { class BackGround; class SecretRoom; }
+	namespace nsBackGround { class BackGround; class SecretRoom;}
 	namespace nsEnemy { class Enemy; }
-	namespace nsGimmick { class Chandelier; class Door; }
+	namespace nsGimmick { class Chandelier; class Door;  class EyeWall;}
 	namespace nsItem { class ItemKey; }
 
 	class GameScene : public IGameObject
@@ -30,6 +30,8 @@ namespace nsHikageri
 		nsGimmick::Chandelier* m_chandelier[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 		//ƒhƒA
 		nsGimmick::Door* m_door[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
+		//–Ú‚Ì•t‚¢‚½•Ç
+		nsGimmick::EyeWall* m_eyeWall[3] = { nullptr, nullptr, nullptr };
 		//Œ®
 		nsItem::ItemKey* m_key[5] = { nullptr, nullptr, nullptr,nullptr, nullptr };
 		//

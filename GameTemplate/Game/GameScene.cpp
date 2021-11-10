@@ -18,7 +18,7 @@ namespace nsHikageri
 		//エネミーを作成
 		m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
 		m_enemy->SetPlayer(m_player);
-		m_enemy->SetMovePos({ -3000.0f,0.0f,800.0f }, { -3000.0f,0.0f,-1200.0f });
+		m_enemy->SetMovePos({ 0.0f,0.0f,0.0f }, { -3000.0f,0.0f,-1200.0f });
 
 		//ディレクションライトを作成
 		/*m_dirLig = NewGO<DirectionLight>(0);
@@ -95,6 +95,29 @@ namespace nsHikageri
 		m_key[2]->SetKeyColor(nsItem::ItemKey::enKeyColor_Green);
 		m_key[3]->SetKeyColor(nsItem::ItemKey::enKeyColor_Yellow);
 		m_key[4]->SetKeyColor(nsItem::ItemKey::enKeyColor_Purple);
+
+
+		Vector3 eyeWallPos[3]
+		{
+			{ -4400.0f, 200.0f,-400.0f },
+			{-5800.0f, 200.0f, -1000.0f},
+			{-10400.0f, 200.0f,2000.0f}
+		};
+
+		Vector3 eyeWalDir[3]
+		{
+			{ 1.0f,0.0f,0.0f },
+			{0.0f,0.0f,1.0f},
+			{ 1.0f,0.0f,0.0f },
+		};
+			
+
+		for (int eyeWallNum = 0; eyeWallNum < 3; eyeWallNum++)
+		{
+			m_eyeWall[eyeWallNum] = NewGO<nsGimmick::EyeWall>(0, "eyeWall");
+			m_eyeWall[eyeWallNum]->SetPosition(eyeWallPos[eyeWallNum]);
+			m_eyeWall[eyeWallNum]->SetDirection(eyeWalDir[eyeWallNum]);
+		}
 
 		//クリアフォント(仮)
 		m_clearFont = NewGO<FontRender>(2);

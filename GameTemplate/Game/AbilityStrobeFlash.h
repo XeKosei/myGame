@@ -23,6 +23,11 @@ namespace nsHikageri
 			/// @brief ストロボフラッシュを発動する処理
 			void StrobeFlash();
 
+			/// @brief 懐中電灯のフラッシュが当たっているかどうかを調べる。
+			/// @param chackPos 当たっているか調べたい位置
+			/// @return 当たっていたかどうか
+			bool CheckHitFlash(Vector3 chackPos);
+
 			/// @brief アビリティマネージャーを設定
 			/// @param abilityManager アビリティマネージャー
 			void SetAbilityManager(AbilityManager* abilityManager) { m_abilityManager = abilityManager; }
