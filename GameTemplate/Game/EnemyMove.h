@@ -1,6 +1,12 @@
 #pragma once
+#include "AI/PathFinding/NaviMesh.h"
+#include "AI/PathFinding/Path.h"
+#include "AI/PathFinding/PathFinding.h"
+
 namespace nsHikageri
 {
+	namespace nsAI { class NaviMesh; class Path; class PathFinding; };
+
 	namespace nsEnemy
 	{
 		class Enemy;
@@ -73,6 +79,11 @@ namespace nsHikageri
 
 			//“®‚«‚ª’x‚­‚È‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
 			bool m_slowMoveFlag = false;	
+
+			//Œo˜H’TõŠÖ˜A
+			nsAI::NaviMesh m_nvmMesh;
+			nsAI::Path m_path;
+			nsAI::PathFinding m_pathFiding;
 		};
 
 	}

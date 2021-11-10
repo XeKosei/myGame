@@ -15,6 +15,33 @@ class PhysicsWorld
 #endif
 
 public:
+	struct MyRayResultCallback : public btCollisionWorld::RayResultCallback
+	{
+		Vector3 hitPos;
+		Vector3 rayStart;
+		Vector3 rayEnd;
+		bool isHit = false;
+		float hitFraction = 1.0f;
+		btScalar	addSingleResult(btCollisionWorld::LocalRayResult& rayResult, bool normalInWorldSpace) override
+		{
+			if (rayResult.m_hitFraction < hitFraction) {
+				// こちらの方が近い。
+				hitPos.Lerp(rayResult.m_hitFraction, rayStart, rayEnd);
+			}
+			isHit = true;
+			return rayResult.m_hitFraction;
+		}
+	};
+	struct ResultConvexSweepTest : public btCollisionWorld::ConvexResultCallback
+	{
+		bool isHit = false;
+		btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace) override
+		{
+			isHit = true;
+			return 0.0f;
+		}
+	};
+
 	static void CreateInstance()
 	{
 		if (m_instance == nullptr) {
@@ -57,7 +84,20 @@ public:
 		m_dynamicWorld->addRigidBody(rb.GetBody());
 	}
 
-	
+	bool RayTest(const Vector3& rayStart, const Vector3& rayEnd, Vector3& hitPos) const
+	{
+		btVector3 start, end;
+		start.setValue(rayStart.x, rayStart.y, rayStart.z);
+		end.setValue(rayEnd.x, rayEnd.y, rayEnd.z);
+		MyRayResultCallback cb;
+		cb.rayStart = rayStart;
+		cb.rayEnd = rayEnd;
+		m_dynamicWorld->rayTest(start, end, cb);
+		if (cb.isHit) {
+			hitPos = cb.hitPos;
+		}
+		return cb.isHit;
+	}
 	/*!
 	* @brief	剛体を破棄。
 	*/
@@ -75,6 +115,9 @@ public:
 	{
 		m_dynamicWorld->convexSweepTest(castShape, convexFromWorld, convexToWorld, resultCallback, allowedCcdPenetration);
 	}
+	bool ConvexSweepTest(ICollider& collider, const Vector3& rayStart, const Vector3& rayEnd);
+
+	
 #if 0
 	/*!
 	* @brief	コリジョンオブジェクトをワールドに登録。

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "EnemyInclude.h"
 #include "PlayerInclude.h"
+#include "TknFile.h"
+
 namespace nsHikageri
 {
 	namespace nsEnemy
@@ -9,6 +11,8 @@ namespace nsHikageri
 
 		bool EnemyMove::Start()
 		{
+			// ナビメッシュを構築。
+		//	m_nvmMesh.Init("Assets/nvm/test.tkn");
 			return true;
 		}
 

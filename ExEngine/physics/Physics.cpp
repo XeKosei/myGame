@@ -43,6 +43,25 @@ void PhysicsWorld::Release()
 	m_collisionDispatcher.reset();
 	m_collisionConfig.reset();
 }
+
+bool PhysicsWorld::ConvexSweepTest(ICollider& collider, const Vector3& rayStart, const Vector3& rayEnd) 
+{
+	btTransform start, end;
+	start.setIdentity();
+	end.setIdentity();
+
+	start.setOrigin(btVector3(rayStart.x, rayStart.y, rayStart.z));
+	end.setOrigin(btVector3(rayEnd.x, rayEnd.y, rayEnd.z));
+	ResultConvexSweepTest result;
+	ConvexSweepTest(
+		(const btConvexShape*)collider.GetBody(),
+		start,
+		end,
+		result
+	);
+	return result.isHit;
+}
+
 void PhysicsWorld::Init()
 {
 	Release();

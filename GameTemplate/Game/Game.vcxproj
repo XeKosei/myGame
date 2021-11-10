@@ -290,6 +290,10 @@
     <ClCompile Include="..\..\MiniEngine\tkFile\TksFile.cpp" />
     <ClCompile Include="..\..\MiniEngine\VertexBuffer.cpp" />
     <ClCompile Include="AbilityClairvoyance.cpp" />
+    <ClCompile Include="AI\PathFinding\Cell.cpp" />
+    <ClCompile Include="AI\PathFinding\NaviMesh.cpp" />
+    <ClCompile Include="AI\PathFinding\Path.cpp" />
+    <ClCompile Include="AI\PathFinding\PathFinding.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Chandelier.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
@@ -309,6 +313,8 @@
     <ClCompile Include="FontRender.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GaussianBlur.cpp" />
+    <ClCompile Include="geometry\AABB.cpp" />
+    <ClCompile Include="geometry\BSP.cpp" />
     <ClCompile Include="ItemBase.cpp" />
     <ClCompile Include="ItemKey.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -340,6 +346,7 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="tklFile.cpp" />
+    <ClCompile Include="TknFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ExEngine\ExEngine.h" />
@@ -403,6 +410,10 @@
     <ClInclude Include="..\..\MiniEngine\tkFile\TksFile.h" />
     <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
     <ClInclude Include="AbilityClairvoyance.h" />
+    <ClInclude Include="AI\PathFinding\Cell.h" />
+    <ClInclude Include="AI\PathFinding\NaviMesh.h" />
+    <ClInclude Include="AI\PathFinding\Path.h" />
+    <ClInclude Include="AI\PathFinding\PathFinding.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Chandelier.h" />
     <ClInclude Include="DirectionLight.h" />
@@ -426,6 +437,8 @@
     <ClInclude Include="FontRender.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GaussianBlur.h" />
+    <ClInclude Include="geometry\AABB.h" />
+    <ClInclude Include="geometry\BSP.h" />
     <ClInclude Include="GimmickConstant.h" />
     <ClInclude Include="ItemBase.h" />
     <ClInclude Include="ItemInclude.h" />
@@ -453,6 +466,7 @@
     <ClInclude Include="Test.h" />
     <ClInclude Include="PlayerConstant.h" />
     <ClInclude Include="tklFile.h" />
+    <ClInclude Include="TknFile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

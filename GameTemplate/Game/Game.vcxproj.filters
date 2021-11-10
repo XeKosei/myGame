@@ -257,9 +257,6 @@
     <ClCompile Include="..\..\ExEngine\level2D\MapChip2D.cpp">
       <Filter>ExEngine\level2D</Filter>
     </ClCompile>
-    <ClCompile Include="DirectionLight.cpp">
-      <Filter>ソース ファイル\prefab</Filter>
-    </ClCompile>
     <ClCompile Include="SkinModelRender.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
@@ -382,6 +379,30 @@
     </ClCompile>
     <ClCompile Include="AbilityClairvoyance.cpp">
       <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionLight.cpp">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry\AABB.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry\BSP.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\PathFinding\Cell.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\PathFinding\NaviMesh.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\PathFinding\Path.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\PathFinding\PathFinding.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="TknFile.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -717,6 +738,27 @@
     </ClInclude>
     <ClInclude Include="AbilityClairvoyance.h">
       <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry\AABB.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry\BSP.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\PathFinding\PathFinding.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\PathFinding\Path.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\PathFinding\NaviMesh.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\PathFinding\Cell.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="TknFile.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
