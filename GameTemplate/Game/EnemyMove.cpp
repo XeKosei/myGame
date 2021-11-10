@@ -12,14 +12,16 @@ namespace nsHikageri
 		bool EnemyMove::Start()
 		{
 			// ナビメッシュを構築。
-		//	m_nvmMesh.Init("Assets/nvm/test.tkn");
+			m_nvmMesh.Init("Assets/nvm/test.tkn");
 			return true;
 		}
 
 		void EnemyMove::ExecuteUpdate()
 		{
-			Move();
+			//Move();
 			Turn();
+
+			RouteSearchMove();
 		}
 
 		void EnemyMove::Move()
@@ -65,6 +67,30 @@ namespace nsHikageri
 			
 			//モデル位置を設定する。
 			m_enemy->GetEnemyModel()->SetPosition(m_position);	
+		}
+		void EnemyMove::RouteSearchMove()
+		{
+			bool isEnd;
+			if (g_pad[0]->IsTrigger(enButtonA)) {
+				// パス検索
+				m_pathFiding.Execute(
+					m_path,							// 構築されたパスの格納先
+					m_nvmMesh,						// ナビメッシュ
+					m_position,						// 開始座標
+					m_enemy->GetPlayer()->GetPlayerMove()->GetPosition(),			// 移動目標座標
+					PhysicsWorld::GetInstance(),	// 物理エンジン	
+					50.0f,							// AIエージェントの半径
+					200.0f							// AIエージェントの高さ。
+				);
+			}
+			 //パス上を移動する。
+			m_position = m_path.Move(
+				m_position,
+				10.0f,
+				isEnd
+			);
+			m_enemy->GetEnemyModel()->SetPosition(m_position);
+
 		}
 
 		void EnemyMove::Turn()

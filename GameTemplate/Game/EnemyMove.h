@@ -2,11 +2,10 @@
 #include "AI/PathFinding/NaviMesh.h"
 #include "AI/PathFinding/Path.h"
 #include "AI/PathFinding/PathFinding.h"
-
+#include "TknFile.h"
 namespace nsHikageri
 {
 	namespace nsAI { class NaviMesh; class Path; class PathFinding; };
-
 	namespace nsEnemy
 	{
 		class Enemy;
@@ -17,6 +16,8 @@ namespace nsHikageri
 			void ExecuteUpdate();
 
 			void Move();
+			//Œo˜H’Tõ‚Å‚ÌˆÚ“®ˆ—
+			void RouteSearchMove();
 
 			void Turn();
 
@@ -84,6 +85,7 @@ namespace nsHikageri
 			nsAI::NaviMesh m_nvmMesh;
 			nsAI::Path m_path;
 			nsAI::PathFinding m_pathFiding;
+			TknFile m_tknFile;
 		};
 
 	}
