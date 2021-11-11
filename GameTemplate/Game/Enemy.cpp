@@ -44,10 +44,10 @@ namespace nsHikageri
 			
 			//ƒ‚ƒfƒ‹‚ğì¬
 			m_enemyModel = NewGO<SkinModelRender>(0);
+			m_enemyModel->SetMakeSkinModelRenderEX(true);
 			m_enemyModel->Init("Assets/modelData/Enemy.tkm", "Assets/modelData/Enemy.tks",m_enemyAnim->GetAnimationClip(), m_enemyAnim->GetAnimationClipNum());
 			m_enemyModel->SetPosition(m_searchPos[0]);
 			m_enemyModel->SetScale(INI_ENEMY_SCALE);
-			m_enemyModel->SetClairvoyanceCasterFlag(false);
 
 			return true;
 		}

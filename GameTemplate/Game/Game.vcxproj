@@ -291,6 +291,7 @@
     <ClCompile Include="..\..\MiniEngine\VertexBuffer.cpp" />
     <ClCompile Include="AbilityClairvoyance.cpp" />
     <ClCompile Include="AbilityManager.cpp" />
+    <ClCompile Include="AbilityMedousaEye.cpp" />
     <ClCompile Include="AI\PathFinding\Cell.cpp" />
     <ClCompile Include="AI\PathFinding\NaviMesh.cpp" />
     <ClCompile Include="AI\PathFinding\Path.cpp" />
@@ -335,6 +336,7 @@
     <ClCompile Include="PostEffectManager.cpp" />
     <ClCompile Include="SecretRoom.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
+    <ClCompile Include="SkinModelRenderEX.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="SpriteRender.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -414,6 +416,7 @@
     <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
     <ClInclude Include="AbilityClairvoyance.h" />
     <ClInclude Include="AbilityManager.h" />
+    <ClInclude Include="AbilityMedousaEye.h" />
     <ClInclude Include="AI\PathFinding\Cell.h" />
     <ClInclude Include="AI\PathFinding\NaviMesh.h" />
     <ClInclude Include="AI\PathFinding\Path.h" />
@@ -466,6 +469,7 @@
     <ClInclude Include="PostEffectManager.h" />
     <ClInclude Include="SecretRoom.h" />
     <ClInclude Include="SkinModelRender.h" />
+    <ClInclude Include="SkinModelRenderEX.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="SpriteRender.h" />
     <ClInclude Include="stdafx.h" />

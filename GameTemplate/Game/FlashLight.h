@@ -10,6 +10,7 @@ namespace nsHikageri
 		class AbilityManager;
 		class AbilityStrobeFlash;
 		class AbilityClairvoyance;
+		class AbilityMedousaEye;
 
 		//懐中電灯
 		class FlashLight : public IGameObject
@@ -59,6 +60,7 @@ namespace nsHikageri
 			AbilityManager* GetAbilityManager() { return m_abilityManager; }
 			AbilityStrobeFlash* GetAbilityStrobeFlash() { return m_abilityStrobeFlash; }
 			AbilityClairvoyance* GetAbilityClairvoyance() { return m_abilityClairvoyance; }
+			AbilityMedousaEye* GetAbilityMedousaEye() { return m_abilityMedousaEye; }
 		private:
 			SkinModelRender* m_flashLightModel = nullptr;
 			//スポットライト
@@ -79,7 +81,7 @@ namespace nsHikageri
 			AbilityManager* m_abilityManager = nullptr;
 			AbilityStrobeFlash* m_abilityStrobeFlash = nullptr;
 			AbilityClairvoyance* m_abilityClairvoyance = nullptr;
-
+			AbilityMedousaEye* m_abilityMedousaEye = nullptr;
 		};
 	}
 }

@@ -49,6 +49,9 @@ namespace nsHikageri
 			m_abilityClairvoyance = NewGO<AbilityClairvoyance>(0);
 			m_abilityClairvoyance->SetFlashLight(this);
 			m_abilityClairvoyance->SetAbilityManager(m_abilityManager);
+			m_abilityMedousaEye = NewGO<AbilityMedousaEye>(0);
+			m_abilityMedousaEye->SetFlashLight(this);
+			m_abilityMedousaEye->SetAbilityManager(m_abilityManager);
 
 			return true;
 		}
@@ -62,6 +65,7 @@ namespace nsHikageri
 				m_flashLightBattery->ExecuteUpdate();
 				m_abilityStrobeFlash->ExecuteUpdate();
 				m_abilityClairvoyance->ExecuteUpdate();
+				m_abilityMedousaEye->ExecuteUpdate();
 			}
 
 			//‚Ü‚¸‰ù’†“d“”‚ğƒJƒƒ‰‚Æ“¯‚¶ˆÊ’u‚Éİ’è

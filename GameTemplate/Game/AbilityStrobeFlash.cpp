@@ -13,6 +13,8 @@ namespace nsHikageri
 		{
 			//ストロボフラッシュの明るさを設定
 			m_strobeFlashColor = INI_STROBEFLASH_COLOR;
+			//ストロボフラッシュのカウントを設定
+			m_strobeChargeCount = INI_STROBEFLASH_CHARGE_COUNT;
 			return true;
 		}
 

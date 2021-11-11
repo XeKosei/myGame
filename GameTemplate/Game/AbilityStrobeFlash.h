@@ -32,6 +32,9 @@ namespace nsHikageri
 			/// @param abilityManager アビリティマネージャー
 			void SetAbilityManager(AbilityManager* abilityManager) { m_abilityManager = abilityManager; }
 
+			/// @brief ストロボフラッシュのチャージが完了しているかどうかを取得
+			/// @return チャージ完了:true 未完了:false
+			bool GetIsFinishStrobeCharge() { if (m_strobeChargeCount <= 0) { return true; } else { return false; } }
 		private:
 			//フラッシュライト
 			FlashLight* m_flashLight = nullptr;

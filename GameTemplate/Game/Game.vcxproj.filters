@@ -413,6 +413,12 @@
     <ClCompile Include="EyeWall.cpp">
       <Filter>ソース ファイル\Hikageri\Gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="AbilityMedousaEye.cpp">
+      <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinModelRenderEX.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -783,6 +789,12 @@
     </ClInclude>
     <ClInclude Include="EyeWall.h">
       <Filter>ヘッダー ファイル\Hikageri\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityMedousaEye.h">
+      <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinModelRenderEX.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

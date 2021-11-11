@@ -68,6 +68,7 @@ namespace nsHikageri
 		private:
 			//ƒ‚ƒfƒ‹
 			SkinModelRender* m_enemyModel = nullptr;
+			SkinModelRenderEX* m_enemyModelEX = nullptr;
 			//ƒLƒƒƒ‰ƒRƒ“
 			CharacterController m_charaCon;
 

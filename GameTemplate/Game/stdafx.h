@@ -13,6 +13,7 @@
 #include "PostEffectManager.h"
 
 #include "SkinModelRender.h"
+#include "SkinModelRenderEX.h"
 
 #include "SpriteRender.h"
 #include "FontRender.h"
