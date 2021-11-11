@@ -1,24 +1,16 @@
 #pragma once
+#include "Door.h"
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
+	namespace nsGimmcik { class Door; }
+
 	namespace nsItem
 	{
 		class ItemBase;
 		class ItemKey : public IGameObject
 		{
 		public:
-			//åÆÇÃêFÇÃéÌóﬁ
-			enum EnKeyColor
-			{
-				enKeyColor_Red,
-				enKeyColor_Blue,
-				enKeyColor_Green,
-				enKeyColor_Yellow,
-				enKeyColor_Purple,
-				enKeyColor_num
-			};
-
 			~ItemKey();
 			bool Start();
 			void Update();
@@ -31,14 +23,14 @@ namespace nsHikageri
 
 			/// @brief åÆÇÃêFÇê›íË
 			/// @param color åÆÇÃêF
-			void SetKeyColor(EnKeyColor color) { m_keyColor = color; }
+			void SetKeyColor(nsGimmick::Door::EnDoorColor color) { m_keyColor = color; }
 		private:
 			nsPlayer::Player* m_player = nullptr;
 			SkinModelRender* m_keyModel = nullptr;
 
 			Vector3 m_position = Vector3::Zero;
 
-			EnKeyColor m_keyColor = enKeyColor_Red;
+			nsGimmick::Door::EnDoorColor m_keyColor = nsGimmick::Door::enDoorColor_Red;
 		};
 	}
 }

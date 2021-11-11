@@ -4,7 +4,7 @@
 #include "PlayerInclude.h"
 namespace nsHikageri
 {
-
+	using namespace nsGimmick;
 	namespace nsItem
 	{
 		ItemKey::~ItemKey()
@@ -16,20 +16,23 @@ namespace nsHikageri
 			m_keyModel = NewGO<SkinModelRender>(0);
 			switch (m_keyColor)
 			{
-			case enKeyColor_Red:
+			case Door::enDoorColor_Red:
 				m_keyModel->Init("Assets/modelData/RedKey.tkm");
 				break;
-			case enKeyColor_Blue:
+			case Door::enDoorColor_Blue:
 				m_keyModel->Init("Assets/modelData/BlueKey.tkm");
 				break;
-			case enKeyColor_Green:
+			case Door::enDoorColor_Green:
 				m_keyModel->Init("Assets/modelData/GreenKey.tkm");
 				break;
-			case enKeyColor_Yellow:
+			case Door::enDoorColor_Yellow:
 				m_keyModel->Init("Assets/modelData/YellowKey.tkm");
 				break;
-			case enKeyColor_Purple:
+			case Door::enDoorColor_Purple:
 				m_keyModel->Init("Assets/modelData/PurpleKey.tkm");
+				break;
+			case Door::enDoorColor_White:
+				m_keyModel->Init("Assets/modelData/WhiteKey.tkm");
 				break;
 			default:
 				m_keyModel->Init("Assets/modelData/Key.tkm");
@@ -61,20 +64,23 @@ namespace nsHikageri
 			{
 				switch (m_keyColor)
 				{
-				case enKeyColor_Red:
+				case Door::enDoorColor_Red:
 					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_RedKey);
 					break;
-				case enKeyColor_Blue:
+				case Door::enDoorColor_Blue:
 					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_BlueKey);
 					break;
-				case enKeyColor_Green:
+				case Door::enDoorColor_Green:
 					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_GreenKey);
 					break;
-				case enKeyColor_Yellow:
+				case Door::enDoorColor_Yellow:
 					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_YellowKey);
 					break;
-				case enKeyColor_Purple:
+				case Door::enDoorColor_Purple:
 					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_PurpleKey);
+					break;
+				case Door::enDoorColor_White:
+					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_LastKey);
 					break;
 				default:
 					return;

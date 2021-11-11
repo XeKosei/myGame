@@ -51,7 +51,17 @@ namespace nsAI {
 	const Cell& NaviMesh::FindNearestCell(const Vector3& pos) const
 	{
 		const Cell* nearestCell = nullptr;
-
+#if 1
+		float dist = FLT_MAX;
+		for (const Cell& cell : m_cellArray) {
+			auto distTmp = (cell.GetCenterPosition() - pos).Length();
+			if (distTmp < dist) {
+				//‚±‚¿‚ç‚Ì•û‚ª‹ß‚¢B
+				dist = distTmp;
+				nearestCell = &cell;
+			}
+		}
+#else
 		float dist = FLT_MAX;
 		m_cellCenterPosBSP.WalkTree(pos, [&](BSP::SLeaf* leaf) {
 			Cell* cell = static_cast<Cell*>(leaf->extraData);
@@ -62,6 +72,7 @@ namespace nsAI {
 				nearestCell = cell;
 			}
 		});
+#endif
 		return *nearestCell;
 	}
 }

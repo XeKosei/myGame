@@ -277,15 +277,23 @@ float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView,float3 n
 /// </summary>
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
-	float4 albedoColor;
-	albedoColor.x = 0.1f;
-	albedoColor.y = 0.1f;
-	albedoColor.z = 0.1f;
+	float4 albedoColor = g_albedo.Sample(g_sampler, psIn.uv);
+	if (albedoColor.x > 0.8f)
+		albedoColor.x = 0.8f;
+	else if (albedoColor.x < 0.05f);
+		albedoColor.x = 0.05f;
+	if (albedoColor.y > 0.8f)
+		albedoColor.y = 0.8f;
+	else if(albedoColor.y < 0.05f);
+		albedoColor.y = 0.05f;
+	if (albedoColor.z > 0.8f)
+		albedoColor.z = 0.8f;
+	else if (albedoColor.z < 0.05f);
+		albedoColor.z = 0.05f;
 	albedoColor.w = 1.0f;
 
 	float4 finalColor = 0.0f;
 	finalColor.a = 1.0f;
-
 
 	//ディレクションライト
 	for (int i = 0;i < directionLigNum;i++)

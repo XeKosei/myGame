@@ -12,7 +12,7 @@ namespace nsHikageri
 		bool EnemyMove::Start()
 		{
 			// ナビメッシュを構築。
-			//m_nvmMesh.Init("Assets/nvm/test.tkn");
+			m_nvmMesh.Init("Assets/nvm/nvmTest.tkn");
 			return true;
 		}
 
@@ -70,26 +70,26 @@ namespace nsHikageri
 		}
 		void EnemyMove::RouteSearchMove()
 		{
-			//bool isEnd;
-			//if (g_pad[0]->IsTrigger(enButtonA)) {
-			//	// パス検索
-			//	m_pathFiding.Execute(
-			//		m_path,							// 構築されたパスの格納先
-			//		m_nvmMesh,						// ナビメッシュ
-			//		m_position,						// 開始座標
-			//		m_enemy->GetPlayer()->GetPlayerMove()->GetPosition(),			// 移動目標座標
-			//		PhysicsWorld::GetInstance(),	// 物理エンジン	
-			//		50.0f,							// AIエージェントの半径
-			//		200.0f							// AIエージェントの高さ。
-			//	);
-			//}
-			// //パス上を移動する。
-			//m_position = m_path.Move(
-			//	m_position,
-			//	500.0f,
-			//	isEnd
-			//);
-			//m_enemy->GetEnemyModel()->SetPosition(m_position);
+			bool isEnd;
+			if (g_pad[0]->IsTrigger(enButtonA)) {
+				// パス検索
+				m_pathFiding.Execute(
+					m_path,							// 構築されたパスの格納先
+					m_nvmMesh,						// ナビメッシュ
+					m_position,						// 開始座標
+					m_enemy->GetPlayer()->GetPlayerMove()->GetPosition(),			// 移動目標座標
+					PhysicsWorld::GetInstance(),	// 物理エンジン	
+					50.0f,							// AIエージェントの半径
+					200.0f							// AIエージェントの高さ。
+				);
+			}
+			 //パス上を移動する。
+			m_position = m_path.Move(
+				m_position,
+				5.0f,
+				isEnd
+			);
+			m_enemy->GetEnemyModel()->SetPosition(m_position);
 
 		}
 
