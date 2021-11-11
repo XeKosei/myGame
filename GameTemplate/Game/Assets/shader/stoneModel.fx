@@ -278,9 +278,9 @@ float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView,float3 n
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
 	float4 albedoColor;
-	albedoColor.x = 0.2f;
-	albedoColor.y = 0.2f;
-	albedoColor.z = 0.2f;
+	albedoColor.x = 0.1f;
+	albedoColor.y = 0.1f;
+	albedoColor.z = 0.1f;
 	albedoColor.w = 1.0f;
 
 	float4 finalColor = 0.0f;

@@ -16,6 +16,7 @@ namespace nsHikageri
 				enAnimationClip_Attack,
 				enAnimationClip_Scream,
 				enAnimationClip_Flinch,
+				enAnimationClip_Petrifaction,
 				enAnimationClip_Suffer,
 				enAnimationClip_PreBite,
 				enAnimationClip_Bite,

@@ -18,7 +18,7 @@ namespace nsHikageri
 			{
 				if (g_pad[0]->IsPress(enButtonRB2) == false)
 				{
-					m_abilityManager->GetEnemy()->GetEnemyModel()->SetStoneRenderFlag(true);
+					m_abilityManager->GetEnemy()->SetEnemyState(nsEnemy::Enemy::enState_Petrifaction);
 				}
 			}
 			if (m_flashLight->GetAbilityStrobeFlash()->GetIsFinishStrobeCharge())

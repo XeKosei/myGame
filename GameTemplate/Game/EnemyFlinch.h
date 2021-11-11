@@ -10,6 +10,9 @@ namespace nsHikageri
 		public:
 			void ExecuteUpdate();
 
+			//石化
+			void Mineralization();
+
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
 			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };

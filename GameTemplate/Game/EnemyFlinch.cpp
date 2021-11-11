@@ -12,7 +12,11 @@ namespace nsHikageri
 			{
 				m_enemy->SetEnemyState(Enemy::enState_Scream);
 			}
+		}
 
+		void EnemyFlinch::Mineralization()
+		{
+			m_enemy->GetEnemyModel()->SetStoneRenderFlag(true);
 		}
 	}
 }

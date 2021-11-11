@@ -29,6 +29,7 @@ namespace nsHikageri
 				enState_Attack,
 				enState_Scream,
 				enState_Flinch,
+				enState_Petrifaction,
 				enState_Suffer,
 				enStatesNum
 			};
@@ -51,7 +52,7 @@ namespace nsHikageri
 
 			/// @brief エネミーの状態を設定する。
 			/// @param enState エネミーの状態
-			void SetEnemyState(EnEnemyStates enState) { m_enemyState = enState; };
+			void SetEnemyState(EnEnemyStates enState) { if (m_enemyState != enState_Petrifaction) { m_enemyState = enState; } };
 
 			//m_searchPosでの仮移動処理で使用
 			void SetMovePos(Vector3 pos1, Vector3 pos2) { m_searchPos[0] = pos1; m_searchPos[1] = pos2; };

@@ -74,6 +74,9 @@ namespace nsHikageri
 			case enState_Flinch:
 				m_enemyFlinch->ExecuteUpdate();
 				break;
+			case enState_Petrifaction:
+				m_enemyFlinch->Mineralization();
+				break;
 			case enState_Suffer:
 				m_enemyStress->Suffer();
 				break;
