@@ -68,6 +68,8 @@ namespace nsHikageri
 			//モデル位置を設定する。
 			m_enemy->GetEnemyModel()->SetPosition(m_position);	
 		}
+
+		//経路探索での移動処理
 		void EnemyMove::RouteSearchMove()
 		{
 			bool isEnd;

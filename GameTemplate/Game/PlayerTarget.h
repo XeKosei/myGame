@@ -2,7 +2,7 @@
 namespace nsHikageri
 {
 	namespace nsGimmick{ class Door; }
-	namespace nsItem { class ItemKey; }
+	namespace nsItem { class ItemKey; class ItemFlashLightParts; }
 	namespace nsPlayer
 	{
 		class Player;
@@ -17,6 +17,7 @@ namespace nsHikageri
 				enTarget_None,
 				enTarget_Door,
 				enTarget_Key,
+				enTarget_FlashLightParts,
 				enTarget_num
 			};
 
@@ -30,6 +31,8 @@ namespace nsHikageri
 			void SetTargetKey(nsItem::ItemKey* key) { m_targetKey = key; };
 			nsItem::ItemKey* GetTargetKey() { return m_targetKey; }
 
+			void SetTargetFlashLightParts(nsItem::ItemFlashLightParts* parts) { m_targetFlashLightParts = parts; };
+			nsItem::ItemFlashLightParts* GetTargetFlashLightParts() { return m_targetFlashLightParts; }
 
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
@@ -41,10 +44,10 @@ namespace nsHikageri
 			//プレイヤーが注目している対象
 			EnTarget m_target = enTarget_None;
 
-
 			//ドア
 			nsGimmick::Door* m_targetDoor = nullptr;
 			nsItem::ItemKey* m_targetKey = nullptr;
+			nsItem::ItemFlashLightParts* m_targetFlashLightParts = nullptr;
 		};
 	}
 }

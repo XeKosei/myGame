@@ -319,6 +319,7 @@
     <ClCompile Include="geometry\AABB.cpp" />
     <ClCompile Include="geometry\BSP.cpp" />
     <ClCompile Include="ItemBase.cpp" />
+    <ClCompile Include="ItemFlashLightParts.cpp" />
     <ClCompile Include="ItemKey.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LightManager.cpp" />
@@ -451,6 +452,7 @@
     <ClInclude Include="GimmickConstant.h" />
     <ClInclude Include="GimmickInclude.h" />
     <ClInclude Include="ItemBase.h" />
+    <ClInclude Include="ItemFlashLightParts.h" />
     <ClInclude Include="ItemInclude.h" />
     <ClInclude Include="ItemKey.h" />
     <ClInclude Include="Level.h" />

@@ -280,16 +280,19 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	float4 albedoColor = g_albedo.Sample(g_sampler, psIn.uv);
 	if (albedoColor.x > 0.8f)
 		albedoColor.x = 0.8f;
-	else if (albedoColor.x < 0.05f);
-		albedoColor.x = 0.05f;
+	else if (albedoColor.x < 0.2f);
+		albedoColor.x = 0.2f;
+
 	if (albedoColor.y > 0.8f)
 		albedoColor.y = 0.8f;
-	else if(albedoColor.y < 0.05f);
-		albedoColor.y = 0.05f;
+	else if(albedoColor.y < 0.2f);
+		albedoColor.y = 0.2f;
+
 	if (albedoColor.z > 0.8f)
 		albedoColor.z = 0.8f;
-	else if (albedoColor.z < 0.05f);
-		albedoColor.z = 0.05f;
+	else if (albedoColor.z < 0.2f);
+		albedoColor.z = 0.2f;
+
 	albedoColor.w = 1.0f;
 
 	float4 finalColor = 0.0f;

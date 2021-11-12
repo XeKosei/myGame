@@ -9,6 +9,10 @@ namespace nsHikageri
 	{
 		ItemKey::~ItemKey()
 		{
+			if (m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Key
+				&& m_player->GetPlayerTarget()->GetTargetKey() == this)
+				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_None);
+
 			DeleteGO(m_keyModel);
 		}
 		bool ItemKey::Start()

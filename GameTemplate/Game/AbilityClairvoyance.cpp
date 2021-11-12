@@ -15,6 +15,9 @@ namespace nsHikageri
 
 		void AbilityClairvoyance::ExecuteUpdate()
 		{
+			if (m_abilityAcitveFlag == false)
+				return;
+
 			//‰ù’†“d“”‚ð‚Â‚¯‚Ä‚¢‚é‚Æ‚«
 			if (m_flashLight->GetFlashLightAction()->GetFlashFlag())
 			{

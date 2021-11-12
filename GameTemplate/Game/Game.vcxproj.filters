@@ -419,6 +419,9 @@
     <ClCompile Include="SkinModelRenderEX.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="ItemFlashLightParts.cpp">
+      <Filter>ソース ファイル\Hikageri\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -795,6 +798,9 @@
     </ClInclude>
     <ClInclude Include="SkinModelRenderEX.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemFlashLightParts.h">
+      <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

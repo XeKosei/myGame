@@ -20,6 +20,9 @@ namespace nsHikageri
 
 		void AbilityStrobeFlash::ExecuteUpdate()
 		{
+			if(m_abilityAcitveFlag == false) 
+				return;
+
 			//‰ù’†“d“”‚ª‚Â‚¢‚Ä‚¢‚é‚Æ‚«B
 			if (m_flashLight->GetFlashLightAction()->GetFlashFlag())
 			{

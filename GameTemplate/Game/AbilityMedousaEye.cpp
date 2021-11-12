@@ -14,6 +14,9 @@ namespace nsHikageri
 		}
 		void AbilityMedousaEye::ExecuteUpdate()
 		{
+			if (m_abilityAcitveFlag == false)
+				return;
+
 			if (m_medousaEyeFlashCount <= 0)
 			{
 				if (g_pad[0]->IsPress(enButtonRB2) == false)

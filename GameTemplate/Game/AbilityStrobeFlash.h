@@ -35,6 +35,10 @@ namespace nsHikageri
 			/// @brief ストロボフラッシュのチャージが完了しているかどうかを取得
 			/// @return チャージ完了:true 未完了:false
 			bool GetIsFinishStrobeCharge() { if (m_strobeChargeCount <= 0) { return true; } else { return false; } }
+		
+			/// @brief アビリティが解放されているかどうかを設定する。
+			/// @param flag 解放するかどうか
+			void SetAbilityActiveFlag(bool flag) { m_abilityAcitveFlag = flag; }
 		private:
 			//フラッシュライト
 			FlashLight* m_flashLight = nullptr;
@@ -49,6 +53,8 @@ namespace nsHikageri
 			//ストロボフラッシュを発動するフラグ
 			bool m_strobeFlashFlag = false;
 
+			//アビリティが解放されているかどうか
+			bool m_abilityAcitveFlag = false;
 		};
 	}
 }
