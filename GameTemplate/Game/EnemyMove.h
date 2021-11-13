@@ -16,6 +16,10 @@ namespace nsHikageri
 			void ExecuteUpdate();
 
 			void Move();
+			/// @brief 経路探索で道を検索する処理
+			/// @param pos 開始座標
+			/// @param targetPos 移動目標座標
+			void RouteSearch(Vector3 pos, Vector3 targetPos);
 			//経路探索での移動処理
 			void RouteSearchMove();
 

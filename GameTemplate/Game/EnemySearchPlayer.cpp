@@ -12,6 +12,8 @@ namespace nsHikageri
 		{
 			//初期位置を指定
 			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
+			m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[0], m_searchPos[1]);
+
 			return true;
 		}
 
@@ -25,10 +27,10 @@ namespace nsHikageri
 			toPlayerDir.Normalize();
 
 			//エネミーの向きとの内積が一定以上なら、プレイヤーを追いかけ始める。
-			if (Dot(toPlayerDir, m_enemy->GetEnemyMove()->GetDirection()) >= 0.9f)
+			/*if (Dot(toPlayerDir, m_enemy->GetEnemyMove()->GetDirection()) >= 0.9f)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_Scream);
-			}
+			}*/
 		}
 
 		void EnemySearchPlayer::Search()
@@ -38,22 +40,20 @@ namespace nsHikageri
 			//エネミーの移動の速さを設定
 			m_enemy->GetEnemyMove()->SetMoveSpeed(nsEnemyMoveConstant::ENEMY_WALK_SPEED);
 
-			//エネミーが向かう位置を設定する。
-			if (m_searchFlag == false)
-			{
-				m_enemy->GetEnemyMove()->SetTarget(m_searchPos[1]);		
-			}
-			else
-			{
-				m_enemy->GetEnemyMove()->SetTarget(m_searchPos[0]);
-			}
-
 			//エネミーの位置がほぼターゲットと一緒になったら、
 			if ((m_enemy->GetEnemyMove()->GetTarget() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= 5.0f)
 			{
+				if (m_searchFlag)
+				{
+					m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[1], m_searchPos[0]);
+				}
+				else
+				{
+					m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[0], m_searchPos[1]);
+
+				}
 				m_searchFlag = !m_searchFlag;
 			}
-
 		}
 	}
 }

@@ -17,14 +17,6 @@ namespace nsHikageri
 		void EnemyChase::ExecuteUpdate()
 		{
 			Chase();
-		}
-
-		void EnemyChase::Chase()
-		{
-			//ターゲットをプレイヤーの位置に指定
-			m_enemy->GetEnemyMove()->SetTarget(m_enemy->GetPlayer()->GetPlayerMove()->GetPosition());
-			//移動速度を指定
-			m_enemy->GetEnemyMove()->SetMoveSpeed(nsEnemyMoveConstant::ENEMY_DASH_SPEED);
 
 			//距離が一定以内まで縮まったら、攻撃に移行。
 			if ((m_enemy->GetEnemyMove()->GetTarget() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= ENEMY_CAN_ATTACK_DIS
@@ -37,6 +29,16 @@ namespace nsHikageri
 				//プレイヤーが噛みつかれている相手を、このエネミーに設定y
 				m_enemy->GetPlayer()->GetPlayerBitten()->SetEnemy(m_enemy);
 			}
+		}
+
+		void EnemyChase::Chase()
+		{
+			//ターゲットをプレイヤーの位置に指定
+			m_enemy->GetEnemyMove()->SetTarget(m_enemy->GetPlayer()->GetPlayerMove()->GetPosition());
+			//移動速度を指定
+			m_enemy->GetEnemyMove()->SetMoveSpeed(nsEnemyMoveConstant::ENEMY_DASH_SPEED);
+
+			
 		}				
 	}
 }
