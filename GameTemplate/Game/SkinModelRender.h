@@ -220,6 +220,8 @@ namespace nsHikageri
 
 		static void PreLoadModel(const char* tkmFilePath);
 
+		bool isLineHitModel(const Vector3& start, const Vector3& end, Vector3& crossPoint);
+
 	private:
 		Skeleton m_skeleton;		//スケルトン
 		Model m_model[eModel_Num];	//モデル

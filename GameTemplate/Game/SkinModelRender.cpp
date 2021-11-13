@@ -167,6 +167,12 @@ namespace nsHikageri
 			m_skinModelRenderEX->UpdateModel();
 	}
 
+	bool SkinModelRender::isLineHitModel(const Vector3& start, const Vector3& end, Vector3& crossPoint)
+	{
+		//2画面用にCSkinModelRenderはModelクラスを2つ保持しているが、どちらもカメラ以外同じなので0番目のモデルで判定する。
+		return m_model[eModel].isLineHitModel(start, end, crossPoint);
+	}
+
 	void SkinModelRender::PreLoadModel(const char* tkmFilePath)
 	{
 		//プリロードはまだできない。

@@ -2,7 +2,7 @@
 #include "EnemyInclude.h"
 #include "PlayerInclude.h"
 #include "TknFile.h"
-
+#include "BackGround.h"
 namespace nsHikageri
 {
 	namespace nsEnemy
@@ -72,6 +72,24 @@ namespace nsHikageri
 		//Œo˜H’Tõ‚Å‚ÌˆÚ“®ˆ—
 		void EnemyMove::RouteSearchMove()
 		{
+			if (g_pad[0]->IsTrigger(enButtonA))
+			{
+				QueryGOs<nsBackGround::BackGround>("backGround", [this](nsBackGround::BackGround* backGround)->bool {
+					Vector3 pos = Vector3::Zero;
+					Vector3 startPos = m_position;
+					startPos.y += 10.0f;
+					Vector3 endPos = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition();
+					endPos.y += 10.0f;
+
+					if (backGround->GetStageModel()->isLineHitModel(startPos, endPos, pos) == false)
+					{
+						m_enemy->SetEnemyState(Enemy::enState_Scream);
+					}
+					return true;
+					}
+				);
+			}
+
 			m_pathFindingInterval++;
 
 			if (m_pathFindingInterval >= 10)

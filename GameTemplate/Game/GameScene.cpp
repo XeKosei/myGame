@@ -10,7 +10,7 @@ namespace nsHikageri
 	bool GameScene::Start()
 	{
 		//ステージを作成
-		m_backGround = NewGO<nsBackGround::BackGround>(0);
+		m_backGround = NewGO<nsBackGround::BackGround>(0, "backGround");
 		m_secretRoom = NewGO<nsBackGround::SecretRoom>(0, "secretRoom");
 
 		//プレイヤーを作成
