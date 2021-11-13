@@ -18,7 +18,7 @@ namespace nsHikageri
 		//エネミーを作成
 		m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
 		m_enemy->SetPlayer(m_player);
-		m_enemy->SetMovePos({ 0.0f,0.0f,0.0f }, { -3000.0f,0.0f,-1200.0f });
+		m_enemy->SetMovePos({ 1200.0f,0.0f,0.0f }, { -3000.0f,0.0f,-1200.0f });
 
 		//ディレクションライトを作成
 		/*m_dirLig = NewGO<DirectionLight>(0);
@@ -69,32 +69,32 @@ namespace nsHikageri
 		//	m_door[doorNum]->SetPosition(doorPos[doorNum]);
 		//	m_door[doorNum]->SetDirection(doorDir[doorNum]);
 		//}
-		//m_door[0]->SetDoorColor(nsGimmick::Door::enDoorColor_White);
+		//m_door[0]->SetDoorColor(nsGimmick::Door::enDoorColor_Red);
 		//m_door[1]->SetDoorColor(nsGimmick::Door::enDoorColor_Blue);
 		//m_door[2]->SetDoorColor(nsGimmick::Door::enDoorColor_Green);
 		//m_door[3]->SetDoorColor(nsGimmick::Door::enDoorColor_Yellow);
 		//m_door[4]->SetDoorColor(nsGimmick::Door::enDoorColor_Purple);
 
-		//鍵テスト
-		Vector3 KeyPos[5] = {
-			{1500.0f, 145.0f, 0.0f},
-			{ -2290.0f, 145.0f, 400.0f },
-			{110.0f, 145.0f, 2800.0f},
-			{-11090.0f,145.0f, 2400.0f},
-			{-7000.0f, 145.0f, -1900.0f}
-		};
+		////鍵テスト
+		//Vector3 KeyPos[5] = {
+		//	{1500.0f, 145.0f, 0.0f},
+		//	{ -2290.0f, 145.0f, 400.0f },
+		//	{110.0f, 145.0f, 2800.0f},
+		//	{-11090.0f,145.0f, 2400.0f},
+		//	{-7000.0f, 145.0f, -1900.0f}
+		//};
 
-		for (int keyNum = 0; keyNum < 5; keyNum++)
-		{
-			m_key[keyNum] = NewGO<nsItem::ItemKey>(0);
-			m_key[keyNum]->SetPlayer(m_player);
-			m_key[keyNum]->SetPosition(KeyPos[keyNum]);
-		}
-		m_key[0]->SetKeyColor(nsGimmick::Door::enDoorColor_White);
-		m_key[1]->SetKeyColor(nsGimmick::Door::enDoorColor_Blue);
-		m_key[2]->SetKeyColor(nsGimmick::Door::enDoorColor_Green);
-		m_key[3]->SetKeyColor(nsGimmick::Door::enDoorColor_Yellow);
-		m_key[4]->SetKeyColor(nsGimmick::Door::enDoorColor_Purple);
+		//for (int keyNum = 0; keyNum < 5; keyNum++)
+		//{
+		//	m_key[keyNum] = NewGO<nsItem::ItemKey>(0);
+		//	m_key[keyNum]->SetPlayer(m_player);
+		//	m_key[keyNum]->SetPosition(KeyPos[keyNum]);
+		//}
+		//m_key[0]->SetKeyColor(nsGimmick::Door::enDoorColor_Red);
+		//m_key[1]->SetKeyColor(nsGimmick::Door::enDoorColor_Blue);
+		//m_key[2]->SetKeyColor(nsGimmick::Door::enDoorColor_Green);
+		//m_key[3]->SetKeyColor(nsGimmick::Door::enDoorColor_Yellow);
+		//m_key[4]->SetKeyColor(nsGimmick::Door::enDoorColor_Purple);
 
 		//Vector3 eyeWallPos[3]
 		//{
@@ -139,7 +139,7 @@ namespace nsHikageri
 	//仮
 	void GameScene::GameClear()
 	{
-		if (m_player->GetPlayerMove()->GetPosition().z >= 8000.0f)
+		if (m_player->GetPlayerMove()->GetPosition().z <= -4500.0f)
 		{
 			if (m_clearFontMoveCount > 0)
 			{

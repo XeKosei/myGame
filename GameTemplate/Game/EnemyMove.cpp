@@ -72,27 +72,41 @@ namespace nsHikageri
 		//経路探索での移動処理
 		void EnemyMove::RouteSearchMove()
 		{
-			bool isEnd;
-			if (g_pad[0]->IsTrigger(enButtonA)) {
+			m_pathFindingInterval++;
+
+			if (m_pathFindingInterval >= 10)
+			{
+				m_pathFindingInterval = 0;
+
+				Vector3 oldPos = m_position;
+
+				bool isEnd;
+
 				// パス検索
 				m_pathFiding.Execute(
 					m_path,							// 構築されたパスの格納先
 					m_nvmMesh,						// ナビメッシュ
 					m_position,						// 開始座標
-					m_enemy->GetPlayer()->GetPlayerMove()->GetPosition(),			// 移動目標座標
+					m_targetPos,					// 移動目標座標
 					PhysicsWorld::GetInstance(),	// 物理エンジン	
-					50.0f,							// AIエージェントの半径
-					200.0f							// AIエージェントの高さ。
+					10.0f,							// AIエージェントの半径
+					120.0f							// AIエージェントの高さ。
 				);
-			}
-			 //パス上を移動する。
-			m_position = m_path.Move(
-				m_position,
-				5.0f,
-				isEnd
-			);
-			m_enemy->GetEnemyModel()->SetPosition(m_position);
 
+				//パス上を移動する。
+				m_position = m_path.Move(
+					m_position,
+					5.0f,
+					isEnd
+				);
+
+				m_velocity = m_position - oldPos;
+				m_direction = m_velocity;
+				m_direction.Normalize();
+
+				m_enemy->GetEnemyModel()->SetPosition(m_position);
+				m_enemy->GetCharaCon()->SetPosition(m_position);
+			}
 		}
 
 		void EnemyMove::Turn()

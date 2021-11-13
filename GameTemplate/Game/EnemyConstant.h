@@ -17,6 +17,8 @@ namespace nsHikageri
 			static const float ENEMY_MOVE_FRICTION = 0.2f;	//エネミーの動くときの摩擦
 			static const float GRAVITY_SPEED = 9.8f * 0.1f;	//落下スピード
 			static const float GRAVITY_INDEX = 1.2f;		//落下スピードにかける指数
+		
+			static const int PATH_FINDING_INTERVAL = 5;	//経路探索を行う間隔
 		}
 
 		namespace nsEnemySearchPlayerConstant

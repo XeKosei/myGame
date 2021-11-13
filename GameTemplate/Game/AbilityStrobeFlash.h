@@ -54,7 +54,7 @@ namespace nsHikageri
 			bool m_strobeFlashFlag = false;
 
 			//アビリティが解放されているかどうか
-			bool m_abilityAcitveFlag = false;
+			bool m_abilityAcitveFlag = true;
 		};
 	}
 }

@@ -86,6 +86,7 @@ namespace nsHikageri
 			nsAI::Path m_path;
 			nsAI::PathFinding m_pathFiding;
 			TknFile m_tknFile;
+			int m_pathFindingInterval = 0;
 		};
 
 	}
