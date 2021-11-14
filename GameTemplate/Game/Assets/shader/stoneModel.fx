@@ -61,6 +61,7 @@ cbuffer SpotLightCameraCb : register(b3)
 	float3 spotLightCameraPos;
 	float spotLightCameraRange;
 	float3 spotLightCameraDir;
+	bool isFlashLightSwitchOn;
 };
 
 ////////////////////////////////////////////////

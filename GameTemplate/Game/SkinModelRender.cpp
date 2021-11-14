@@ -75,8 +75,6 @@ namespace nsHikageri
 
 		shadowModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigCameraDataSize();
 		shadowModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigCameraDatas();
-		spotLightModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetSpotLigCameraDataSize();
-		spotLightModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetSpotLigCameraDatas();
 		
 		//ƒ‚ƒfƒ‹‚Ì‰Šú‰»
 		m_model[eModel].Init(modelInitData);

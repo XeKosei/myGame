@@ -22,7 +22,7 @@ namespace nsHikageri
 		void FlashLightBattery::ExecuteUpdate()
 		{
 			//‰ù’†“d“”‚Ì“dŒ¹‚ª•t‚¢‚Ä‚¢‚é‚È‚ç‚Î
-			if (m_flashLight->GetFlashLightAction()->GetFlashFlag() == true)
+			if (m_flashLight->GetFlashLightAction()->GetIsFlashLightSwitchOn() == true)
 			{
 				if (m_batteryLevel > 0.0f)
 				{

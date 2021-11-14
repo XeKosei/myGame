@@ -7,12 +7,14 @@ namespace nsHikageri
 		{
 		public:
 			bool Start();
-
-			void Search();
-
 			void ExecuteUpdate();
 
-			void SetMovePos(Vector3 pos1, Vector3 pos2) { m_searchPos[0] = pos1; m_searchPos[1] = pos2; };
+			void Search();
+			void CalcNextSearchPos();
+
+			/// @brief 徘徊して移動する位置を追加する。
+			/// @param pos 追加する位置
+			void PushSearchPos(Vector3 pos) { m_searchPos.push_back(pos); }
 
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
@@ -22,9 +24,12 @@ namespace nsHikageri
 			//エネミー
 			Enemy* m_enemy = nullptr;
 
-			//仮の移動処理
-			Vector3 m_searchPos[2] = { { 0.0f,0.0f,0.0f }, {0.0f,0.0f,0.0f} };
 			bool m_searchFlag = false;
+
+			std::vector<Vector3> m_searchPos;
+			FontRender* m_fontTest = nullptr;
+
+			int m_targetPosNo = 0;
 		};
 
 	}

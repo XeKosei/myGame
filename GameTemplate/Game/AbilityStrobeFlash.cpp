@@ -3,6 +3,7 @@
 #include "EnemyInclude.h"
 #include "PlayerInclude.h"
 #include "EyeWall.h"
+#include "BackGround.h"
 namespace nsHikageri
 {
 	namespace nsFlashLight
@@ -11,6 +12,8 @@ namespace nsHikageri
 
 		bool AbilityStrobeFlash::Start()
 		{
+			m_backGround = FindGO<nsBackGround::BackGround>("backGround");
+
 			//ストロボフラッシュの明るさを設定
 			m_strobeFlashColor = INI_STROBEFLASH_COLOR;
 			//ストロボフラッシュのカウントを設定
@@ -24,7 +27,7 @@ namespace nsHikageri
 				return;
 
 			//懐中電灯がついているとき。
-			if (m_flashLight->GetFlashLightAction()->GetFlashFlag())
+			if (m_flashLight->GetFlashLightAction()->GetIsFlashLightSwitchOn())
 			{
 				//ストロボフラッシュのチャージ
 				StrobeFlashPrepare();
@@ -127,7 +130,16 @@ namespace nsHikageri
 		/// @param chackPos 当たっているか調べたい位置
 		/// @return 当たっていたかどうか
 		bool AbilityStrobeFlash::CheckHitFlash(Vector3 checkPos)
-		{
+		{		
+			//間に遮蔽物がないかを調べる。
+			Vector3 hitPos = Vector3::Zero;
+			Vector3 startPos = m_flashLight->GetPosition();
+			Vector3 endPos = checkPos;
+			if (m_backGround->GetStageModel()->isLineHitModel(startPos, endPos, hitPos))
+			{
+				return false;
+			}			
+			
 			//懐中電灯の向き
 			Vector3 strobeDir = m_flashLight->GetFlashLightDir();
 			strobeDir.Normalize();

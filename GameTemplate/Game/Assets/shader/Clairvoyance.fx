@@ -19,6 +19,7 @@ cbuffer SpotLightCameraCb : register(b1)
 	float3 spotLightCameraPos;
 	float spotLightCameraRange;
 	float3 spotLightCameraDir;
+	bool isFlashLightSwitchOn;
 };
 
 ////////////////////////////////////////////////
@@ -154,7 +155,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	float3 spotLigCameraDir = normalize(spotLightCameraDir);
 	float spotLigDot = dot(toPsInDir, spotLigCameraDir);
 	float range = spotLightCameraRange;
-	range /= 2;
+	range /= 3.141579;
 	range /= 3.141579;
 	range = 1 - range;
 

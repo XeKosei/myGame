@@ -26,7 +26,7 @@ namespace nsHikageri
 				SwitchOnOff();
 			}
 
-			if (GetFlashFlag() == true)
+			if (GetIsFlashLightSwitchOn() == true)
 			{
 				//十字ボタンの上下で、懐中電灯の射出角度を調節できる。
 				if (g_pad[0]->IsPress(enButtonUp))
@@ -45,9 +45,9 @@ namespace nsHikageri
 			if (m_flashLight->GetFlashLightBattery()->GetBatteryLevel() > 0.0f)
 			{
 				//懐中電灯の電源のスイッチを切り替える
-				SetFlashFlag(!GetFlashFlag());
+				SetIsFlashLightSwitchOn(!GetIsFlashLightSwitchOn());
 				//電源がOFFだったとき
-				if (GetFlashFlag() == false)
+				if (GetIsFlashLightSwitchOn() == false)
 				{	
 					//OFFならば影響範囲を0にする。
 					m_flashLight->GetSpotLight()->SetRange(0.0f);
@@ -61,10 +61,10 @@ namespace nsHikageri
 			else
 			{
 				//電源がONだったとき
-				if (GetFlashFlag() == true)
+				if (GetIsFlashLightSwitchOn() == true)
 				{
 					//懐中電灯の電源のスイッチを切り替える
-					SetFlashFlag(!GetFlashFlag());
+					SetIsFlashLightSwitchOn(!GetIsFlashLightSwitchOn());
 					//ONならば影響範囲を設定
 					m_flashLight->GetSpotLight()->SetRange(0.0f);
 

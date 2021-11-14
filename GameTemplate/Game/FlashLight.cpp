@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "FlashLightInclude.h"
 #include "PlayerInclude.h"
-
+#include "BackGround.h"
 namespace nsHikageri
 {
 	namespace nsFlashLight
@@ -74,7 +74,9 @@ namespace nsHikageri
 			m_position += g_camera3D->GetRight() * APPLY_FLASHLIGHT_POS_VALUE.x;
 			//懐中電灯の位置を奥にずらす。
 			m_position += g_camera3D->GetForward() * APPLY_FLASHLIGHT_POS_VALUE.z;
-
+			//懐中電灯の位置を縦にずらす
+			m_position -= Cross(g_camera3D->GetForward(), g_camera3D->GetRight()) * APPLY_FLASHLIGHT_POS_VALUE.y;
+			
 			//向きを設定
 			m_direction = g_camera3D->GetForward();
 			m_direction.Normalize();
@@ -88,7 +90,6 @@ namespace nsHikageri
 			m_flashLightModel->SetRotation(qRotMat);
 
 			//懐中電灯の位置を計算。※懐中電灯の位置を縦にずらすのは、後でやらないとモデルの回転が上手く行かない。
-			m_position -= Cross(g_camera3D->GetForward(), g_camera3D->GetRight()) * APPLY_FLASHLIGHT_POS_VALUE.y;
 			m_flashLightModel->SetPosition(m_position);
 			m_spotLight->SetPosition(m_position);
 			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_position);

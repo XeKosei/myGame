@@ -18,7 +18,6 @@ namespace nsHikageri
 		//エネミーを作成
 		m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
 		m_enemy->SetPlayer(m_player);
-		m_enemy->SetMovePos({ 1200.0f,0.0f,0.0f }, { -3000.0f,0.0f,-1200.0f });
 
 		//ディレクションライトを作成
 		/*m_dirLig = NewGO<DirectionLight>(0);

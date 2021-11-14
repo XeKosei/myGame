@@ -10,9 +10,16 @@ namespace nsHikageri
 
 		bool EnemySearchPlayer::Start()
 		{
+			m_fontTest = NewGO<FontRender>(0);
+			m_fontTest->SetText(std::to_wstring(m_searchPos.size()));
+
 			//初期位置を指定
 			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
-			m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[0], m_searchPos[1]);
+
+			CalcNextSearchPos();
+			m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[0], m_searchPos[m_targetPosNo]);
+
+			
 
 			return true;
 		}
@@ -35,6 +42,7 @@ namespace nsHikageri
 
 		void EnemySearchPlayer::Search()
 		{
+			
 			//指定した二か所の位置を往復する処理
 
 			//エネミーの移動の速さを設定
@@ -43,17 +51,24 @@ namespace nsHikageri
 			//エネミーの位置がほぼターゲットと一緒になったら、
 			if ((m_enemy->GetEnemyMove()->GetTarget() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= 5.0f)
 			{
-				if (m_searchFlag)
-				{
-					m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[1], m_searchPos[0]);
-				}
-				else
-				{
-					m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[0], m_searchPos[1]);
-
-				}
-				m_searchFlag = !m_searchFlag;
+				CalcNextSearchPos();	
 			}
 		}
+
+		void EnemySearchPlayer::CalcNextSearchPos()
+		{
+			//乱数から、次のターゲット位置を決める。
+			int nextTargetPosNo = rand() % (m_searchPos.size() - 1);
+			if (nextTargetPosNo >= m_targetPosNo)
+			{
+				nextTargetPosNo++;
+			}
+			m_fontTest->SetText(std::to_wstring(nextTargetPosNo));
+
+			m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[m_targetPosNo], m_searchPos[nextTargetPosNo]);
+
+			m_targetPosNo = nextTargetPosNo;
+		}
+
 	}
 }

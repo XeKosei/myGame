@@ -61,6 +61,7 @@ cbuffer SpotLightCameraCb : register(b3)
 	float3 spotLightCameraPos;
 	float spotLightCameraRange;
 	float3 spotLightCameraDir;
+	int isFlashLightSwitchOn;
 };
 
 ////////////////////////////////////////////////
@@ -424,9 +425,28 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	}
 
 	//環境光
-	float3 ambientLig = 0.5f;
-	finalColor.xyz += ambientLig;
+	//懐中電灯に照らされていない場合は、遠くが暗く見えるようにする。
+	float3 ambientLig = 1 - (length(eyePos - psIn.worldPos) * 0.0005f);
+	if (isFlashLightSwitchOn == 1)
+	{
+		float3 toPsInDir = psIn.worldPos - spotLightCameraPos;
+		toPsInDir = normalize(toPsInDir);
+		float3 spotLigCameraDir = normalize(spotLightCameraDir);
+		float spotLigDot = dot(toPsInDir, spotLigCameraDir);
+		float range = spotLightCameraRange;
+		range /= 2;
+		range /= 3.141579;
+		range = 1 - range;
 
+		if (spotLigDot >= range && ambientLig.r <= 0.5f)
+		{
+			ambientLig = 0.5f;
+		}
+	}
+	
+	
+	finalColor.xyz += ambientLig;
+	
 	finalColor *= albedoColor;
 
 	//影

@@ -54,6 +54,8 @@ namespace nsHikageri
 
 			nsPlayer::Player* GetPlayer() { return m_player; };
 
+			Vector3 GetPosition() { return m_position; }
+
 			//懐中電灯関係のインスタンスにアクセスする
 			FlashLightAction* GetFlashLightAction() { return m_flashLightAction; }
 			FlashLightBattery* GetFlashLightBattery() { return m_flashLightBattery; }

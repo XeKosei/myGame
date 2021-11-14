@@ -123,9 +123,7 @@ namespace nsHikageri
 			m_direction.Normalize();
 
 			//ˆÊ’u‚ðÝ’è
-			m_enemy->GetEnemyModel()->SetPosition(m_position);
-			m_enemy->GetCharaCon()->SetPosition(m_position);
-
+			m_enemy->GetEnemyMove()->SetPosition(m_position);
 		}
 
 		void EnemyMove::Turn()

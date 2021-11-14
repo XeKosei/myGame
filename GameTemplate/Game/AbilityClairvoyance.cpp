@@ -19,7 +19,7 @@ namespace nsHikageri
 				return;
 
 			//懐中電灯をつけているとき
-			if (m_flashLight->GetFlashLightAction()->GetFlashFlag())
+			if (m_flashLight->GetFlashLightAction()->GetIsFlashLightSwitchOn())
 			{
 				//バッテリー消費
 				if (m_isClairvoyanceActivate)

@@ -1,4 +1,5 @@
 #pragma once
+
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
@@ -17,6 +18,14 @@ namespace nsHikageri
 		class Enemy : public IGameObject
 		{
 		public:
+			enum EnSearchArea
+			{
+				enSearchArea_1,
+				enSearchArea_2,
+				enSearchArea_3,
+				enSearchArea_num
+			};
+
 			~Enemy();
 			bool Start();
 			void Update();
@@ -54,9 +63,6 @@ namespace nsHikageri
 			/// @param enState エネミーの状態
 			void SetEnemyState(EnEnemyStates enState) { if (m_enemyState != enState_Petrifaction) { m_enemyState = enState; } };
 
-			//m_searchPosでの仮移動処理で使用
-			void SetMovePos(Vector3 pos1, Vector3 pos2) { m_searchPos[0] = pos1; m_searchPos[1] = pos2; };
-
 			//エネミー関係のインスタンスにアクセスする
 			EnemyMove* GetEnemyMove() { return m_enemyMove; }
 			EnemySearchPlayer* GetEnemySearchPlayer() { return m_enemySearchPlayer; };
@@ -78,8 +84,7 @@ namespace nsHikageri
 
 			//エネミーの状態
 			EnEnemyStates m_enemyState = enState_SearchPlayer;
-
-			Vector3 m_searchPos[2] = { { 0.0f,0.0f,0.0f }, {0.0f,0.0f,0.0f} };
+			EnSearchArea m_searchArea = enSearchArea_1;
 
 			//エネミー関連
 			EnemyMove* m_enemyMove = nullptr;

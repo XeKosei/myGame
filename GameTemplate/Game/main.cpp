@@ -41,9 +41,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition({ 0.0f,0.0f,100.0f });
 	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget({ 0.0f,0.0f,0.0f });
-	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraUp({Vector3::AxisY});
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraUp({ Vector3::AxisY });
 	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective);//enUpdateProjMatrixFunc_Perspective);
-	
+	nsHikageri::LightManager::GetInstance()->SetIsFlashLightSwitchOn(false);
+
 	nsHikageri::PostEffectManager::CreateInstance();
 	//ブルームフラグ、シャドウフラグの順番
 	nsHikageri::PostEffectManager::GetInstance()->Init(true, true);

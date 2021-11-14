@@ -1,7 +1,8 @@
 #pragma once
-
+#include "BackGround.h"
 namespace nsHikageri
 {
+	namespace nsBackGround { class BachGround; }
 	namespace nsFlashLight
 	{
 		class FlashLight;
@@ -40,6 +41,7 @@ namespace nsHikageri
 			/// @param flag 解放するかどうか
 			void SetAbilityActiveFlag(bool flag) { m_abilityAcitveFlag = flag; }
 		private:
+			nsBackGround::BackGround* m_backGround = nullptr;
 			//フラッシュライト
 			FlashLight* m_flashLight = nullptr;
 			AbilityManager* m_abilityManager = nullptr;

@@ -13,14 +13,6 @@ cbuffer ModelCb : register(b0) {
 	float4x4 mProj;
 };
 
-//ライトカメラの情報
-cbuffer LightCameraCb : register(b1)
-{
-	float4x4 mLVP;
-	float3 lightCameraPos;
-	float3 lightCameraDir;
-};
-
 ////////////////////////////////////////////////
 // 構造体
 ////////////////////////////////////////////////

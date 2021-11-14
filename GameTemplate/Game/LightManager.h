@@ -49,6 +49,7 @@ namespace nsHikageri
 			Vector3 lightCameraPosition;	//ライトカメラの位置
 			float lightCameraRange;
 			Vector3 lightCameraDirection;	//ライトカメラの向き	
+			int isFlashLightSwitchOn;	//懐中電灯の電源がONかOFFか
 		};
 		LigCameraDatas m_ligCameraData;
 		int m_ligCameraDataSize = sizeof(m_ligCameraData);
@@ -418,6 +419,11 @@ namespace nsHikageri
 			m_spotLightCamera.SetUpdateProjMatrixFunc(func);
 			m_spotLightCamera.Update(1.0f);
 			m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
+		}
+
+		void SetIsFlashLightSwitchOn(const bool& switchOn)
+		{
+			m_spotLigCameraData.isFlashLightSwitchOn = switchOn;
 		}
 
 		/// @brief スポットライトに使用するライトカメラの横幅を指定する(並行投影限定)
