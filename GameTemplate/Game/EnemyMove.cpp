@@ -18,10 +18,17 @@ namespace nsHikageri
 
 		void EnemyMove::ExecuteUpdate()
 		{
-			//Move();
-			Turn();
+			switch (m_moveState)
+			{
+			case enMoveState_Straight:
+				Move();
+				break;
+			case enMoveState_RouteSearch:
+				RouteSearchMove();
+				break;
+			};		
 
-			RouteSearchMove();
+			Turn();
 		}
 
 		void EnemyMove::Move()
@@ -66,7 +73,7 @@ namespace nsHikageri
 			}
 			
 			//ƒ‚ƒfƒ‹ˆÊ’u‚ðÝ’è‚·‚éB
-			m_enemy->GetEnemyModel()->SetPosition(m_position);	
+			SetPosition(m_position);	
 		}
 
 		//Œo˜H’Tõ‚ÅA“¹‚ð’²‚×‚éˆ—
@@ -88,24 +95,6 @@ namespace nsHikageri
 		//Œo˜H’Tõ‚Å‚ÌˆÚ“®ˆ—
 		void EnemyMove::RouteSearchMove()
 		{
-			/*if (g_pad[0]->IsTrigger(enButtonA))
-			{
-				QueryGOs<nsBackGround::BackGround>("backGround", [this](nsBackGround::BackGround* backGround)->bool {
-					Vector3 pos = Vector3::Zero;
-					Vector3 startPos = m_position;
-					startPos.y += 10.0f;
-					Vector3 endPos = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition();
-					endPos.y += 10.0f;
-
-					if (backGround->GetStageModel()->isLineHitModel(startPos, endPos, pos) == false)
-					{
-						m_enemy->SetEnemyState(Enemy::enState_Scream);
-					}
-					return true;
-					}
-				);
-			}*/
-
 			Vector3 oldPos = m_position;
 
 			bool isEnd;		

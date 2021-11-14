@@ -24,10 +24,10 @@ namespace nsHikageri
 			//エネミー
 			Enemy* m_enemy = nullptr;
 
-			bool m_searchFlag = false;
-
 			std::vector<Vector3> m_searchPos;
-			FontRender* m_fontTest = nullptr;
+
+			//レイを飛ばす間隔
+			int m_calcLineHitModelConstant = 0;
 
 			int m_targetPosNo = 0;
 		};

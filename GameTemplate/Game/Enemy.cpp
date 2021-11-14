@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "EnemyInclude.h"
 #include "PlayerInclude.h"
-
+#include "BackGround.h"
 namespace nsHikageri
 {
 	namespace nsEnemy
@@ -82,6 +82,8 @@ namespace nsHikageri
 				ENEMY_MODEL_HEIGHT,	//‚‚³
 				Vector3::Zero//‰ŠúˆÊ’u
 			);
+
+			m_backGround = FindGO<nsBackGround::BackGround>("backGround");
 
 			return true;
 		}

@@ -3,6 +3,7 @@
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
+	namespace nsBackGround { class BackGround; }
 
 	namespace nsEnemy
 	{
@@ -57,6 +58,10 @@ namespace nsHikageri
 			/// @return プレイヤー
 			nsPlayer::Player* GetPlayer() { return m_player; }
 
+			/// @brief ステージを取得
+			/// @return ステージ
+			nsBackGround::BackGround* GetBackGround() { return m_backGround; }
+
 			EnEnemyStates GetEnemyState() { return m_enemyState; };
 
 			/// @brief エネミーの状態を設定する。
@@ -81,6 +86,9 @@ namespace nsHikageri
 
 			//プレイヤー
 			nsPlayer::Player* m_player = nullptr;
+
+			//ステージ
+			nsBackGround::BackGround* m_backGround = nullptr;
 
 			//エネミーの状態
 			EnEnemyStates m_enemyState = enState_SearchPlayer;

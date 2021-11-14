@@ -12,6 +12,13 @@ namespace nsHikageri
 		class EnemyMove : public IGameObject
 		{
 		public:
+			enum EnMoveStates
+			{
+				enMoveState_Straight,
+				enMoveState_RouteSearch,
+				enMoveState_num
+			};
+
 			bool Start();
 			void ExecuteUpdate();
 
@@ -49,7 +56,7 @@ namespace nsHikageri
 
 			/// @brief エネミーが向かう位置を設定
 			/// @param pos エネミーが向かう位置
-			void SetTarget(Vector3 pos) { m_targetPos = pos; }
+			void SetTargetPos(Vector3 pos) { m_targetPos = pos; }
 
 			/// @brief エネミーのターゲット位置を取得する。
 			/// @return エネミーのターゲット位置
@@ -66,9 +73,13 @@ namespace nsHikageri
 			/// @param flag true:遅くなる　false:遅くならない
 			void SetSlowMoveFlag(bool flag) { m_slowMoveFlag = flag; }
 
+			void SetMoveState(EnMoveStates moveState) { m_moveState = moveState; }
+
 		private:
 			//エネミー
 			Enemy* m_enemy = nullptr;
+			//移動の仕方
+			EnMoveStates m_moveState = enMoveState_RouteSearch;
 			//位置
 			Vector3 m_position = { Vector3::Zero };
 			//エネミーが動く速さ

@@ -1,25 +1,33 @@
 #include "stdafx.h"
 #include "EnemyInclude.h"
 #include "PlayerInclude.h"
-
+#include "BackGround.h"
 namespace nsHikageri
 {
 	namespace nsEnemy
 	{
 		using namespace nsEnemyChaseConstant;
-
+		using namespace nsEnemyConstant;
 		bool EnemyChase::Start()
 		{
+			m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
 			return true;
 		}
 
 		//Enemy.cppのUpdate()で呼び出す処理
 		void EnemyChase::ExecuteUpdate()
 		{
-			Chase();
 
+			if (m_isPlayerHidden == false)
+			{
+				Chase();
+			}
+			else
+			{
+				GoHiddenPos();
+			}
 			//距離が一定以内まで縮まったら、攻撃に移行。
-			if ((m_enemy->GetEnemyMove()->GetTarget() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= ENEMY_CAN_ATTACK_DIS
+			if ((m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= ENEMY_CAN_ATTACK_DIS
 				&& m_enemy->GetPlayer()->GetPlayerState() == nsPlayer::Player::enState_Normal)
 			{
 				//エネミーを噛みつき状態にする
@@ -33,12 +41,74 @@ namespace nsHikageri
 
 		void EnemyChase::Chase()
 		{
-			//ターゲットをプレイヤーの位置に指定
-			m_enemy->GetEnemyMove()->SetTarget(m_enemy->GetPlayer()->GetPlayerMove()->GetPosition());
 			//移動速度を指定
 			m_enemy->GetEnemyMove()->SetMoveSpeed(nsEnemyMoveConstant::ENEMY_DASH_SPEED);
+			m_enemy->GetEnemyMove()->SetTargetPos(m_enemy->GetPlayer()->GetPlayerMove()->GetPosition());
+			m_calcLineHitModelConstant--;
 
-			
-		}				
+			if (m_calcLineHitModelConstant <= 0)
+			{
+				m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+
+				Vector3 toPlayerDis = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition();
+
+				Vector3 startPos = m_enemy->GetEnemyMove()->GetPosition();
+				startPos.y += 10.0f;	//地面との接触をなくすために少し浮かせる
+				Vector3 endPos = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition();
+				endPos.y += 10.0f;
+				Vector3 hitPos = Vector3::Zero;
+
+				//プレイヤーが視界に入っているならば
+				if (toPlayerDis.Length() <= ENEMY_SEARCH_DIS && m_enemy->GetBackGround()->GetStageModel()->isLineHitModel(startPos, endPos, hitPos) == false)
+				{
+					startPos.y -= 10.0f;
+					endPos.y -= 10.0f;
+					m_enemy->GetEnemyMove()->SetTargetPos(endPos);
+				}
+				//入っていないなら経路探索
+				else
+				{
+					startPos.y -= 10.0f;
+					endPos.y -= 10.0f;
+					m_enemy->GetEnemyMove()->RouteSearch(m_enemy->GetEnemyMove()->GetPosition(), endPos);
+					m_enemy->GetEnemyMove()->SetMoveState(EnemyMove::enMoveState_RouteSearch);
+					m_isPlayerHidden = true;
+				}
+			}				
+		}	
+
+		void EnemyChase::GoHiddenPos()
+		{
+			m_calcLineHitModelConstant--;
+
+			if (m_calcLineHitModelConstant <= 0)
+			{
+				m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+
+				Vector3 startPos = m_enemy->GetEnemyMove()->GetPosition();
+				startPos.y += 10.0f;	//地面との接触をなくすために少し浮かせる
+				Vector3 endPos = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition();
+				endPos.y += 10.0f;
+				Vector3 hitPos = Vector3::Zero;
+
+				//プレイヤーが視界に入っているならば、再び追跡
+				if (m_enemy->GetBackGround()->GetStageModel()->isLineHitModel(startPos, endPos, hitPos) == false)
+				{
+					startPos.y -= 10.0f;
+					endPos.y -= 10.0f;
+					m_enemy->GetEnemyMove()->SetTargetPos(endPos);
+					m_enemy->GetEnemyMove()->SetMoveState(EnemyMove::enMoveState_Straight);
+					m_isPlayerHidden = false;
+				}
+			}
+
+			//探す場所とほぼ同じ位置に付いたら
+			if ((m_enemy->GetEnemyMove()->GetTarget() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= 5.0f)
+			{
+				m_enemy->SetEnemyState(Enemy::enState_SearchPlayer);
+				m_isPlayerHidden = false;
+				m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+			}
+		}
 	}
 }
