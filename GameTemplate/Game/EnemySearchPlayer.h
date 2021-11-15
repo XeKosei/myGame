@@ -6,6 +6,14 @@ namespace nsHikageri
 		class EnemySearchPlayer : public IGameObject
 		{
 		public:
+			enum EnSearchArea
+			{
+				enSearchArea_1,
+				enSearchArea_2,
+				enSearchArea_3,
+				enSearchArea_num
+			};
+
 			bool Start();
 			void ExecuteUpdate();
 
@@ -15,6 +23,8 @@ namespace nsHikageri
 			/// @brief 徘徊して移動する位置を追加する。
 			/// @param pos 追加する位置
 			void PushSearchPos(Vector3 pos) { m_searchPos.push_back(pos); }
+
+			void SetSearchPos(EnSearchArea searchArea);
 
 			/// @brief エネミーにアクセスできるようにする。
 			/// @param pl エネミーの参照
@@ -30,6 +40,8 @@ namespace nsHikageri
 			int m_calcLineHitModelConstant = 0;
 
 			int m_targetPosNo = 0;
+
+			EnSearchArea m_searchArea = enSearchArea_1;
 		};
 
 	}

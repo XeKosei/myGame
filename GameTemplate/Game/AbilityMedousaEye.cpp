@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "FlashLightInclude.h"
 #include "EnemyInclude.h"
+#include "ItemKey.h"
+#include "Door.h"
 namespace nsHikageri
 {
 	namespace nsFlashLight
@@ -22,6 +24,10 @@ namespace nsHikageri
 				if (g_pad[0]->IsPress(enButtonRB2) == false)
 				{
 					m_abilityManager->GetEnemy()->SetEnemyState(nsEnemy::Enemy::enState_Petrifaction);
+					nsItem::ItemKey* itemKey = NewGO<nsItem::ItemKey>(0);
+					itemKey->SetPlayer(m_flashLight->GetPlayer());
+					itemKey->SetKeyColor(nsGimmick::Door::enDoorColor_White);
+					itemKey->SetPosition(m_abilityManager->GetEnemy()->GetEnemyMove()->GetPosition());
 				}
 			}
 			if (m_flashLight->GetAbilityStrobeFlash()->GetIsFinishStrobeCharge())

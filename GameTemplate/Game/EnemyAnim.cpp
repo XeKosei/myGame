@@ -9,7 +9,7 @@ namespace nsHikageri
 		bool EnemyAnim::Start()
 		{
 			m_animationClips[enAnimationClip_Idle].Load("Assets/animData/EnemyIdle.tka");
-			m_animationClips[enAnimationClip_Idle].SetLoopFlag(true);	//ループモーションにする。
+			m_animationClips[enAnimationClip_Idle].SetLoopFlag(false);
 			m_animationClips[enAnimationClip_Walk].Load("Assets/animData/EnemyWalk.tka");
 			m_animationClips[enAnimationClip_Walk].SetLoopFlag(true);	//ループモーションにする。
 			m_animationClips[enAnimationClip_Run].Load("Assets/animData/EnemyRun.tka");
@@ -79,6 +79,9 @@ namespace nsHikageri
 				break;
 			case Enemy::enState_Suffer :
 				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Suffer);
+				break;
+			case Enemy::enState_Vigilant:
+				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Idle);
 				break;
 			default:
 				break;

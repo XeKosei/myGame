@@ -17,6 +17,8 @@ namespace nsHikageri
 			//エネミー関連のインスタンスを作成
 			m_enemyMove = NewGO<EnemyMove>(0);
 			m_enemyMove->SetEnemy(this);
+			m_enemySearchPlayer = NewGO<EnemySearchPlayer>(0);
+			m_enemySearchPlayer->SetEnemy(this);
 			m_enemyChase = NewGO<EnemyChase>(0);
 			m_enemyChase->SetEnemy(this);
 			m_enemyAttack = NewGO<EnemyAttack>(0);
@@ -27,45 +29,10 @@ namespace nsHikageri
 			m_enemyFlinch->SetEnemy(this);
 			m_enemyStress = NewGO<EnemyStress>(0);
 			m_enemyStress->SetEnemy(this);
+			m_enemyVigilant = NewGO<EnemyVigilant>(0);
+			m_enemyVigilant->SetEnemy(this);
 			m_enemyAnim = NewGO<EnemyAnim>(0);
-			m_enemyAnim->SetEnemy(this);
-
-			m_enemySearchPlayer = NewGO<EnemySearchPlayer>(0);
-			m_enemySearchPlayer->SetEnemy(this);
-			switch (m_searchArea)
-			{
-			case enSearchArea_1:
-				m_enemySearchPlayer->PushSearchPos({ -2600.0f,0.0f,2400.0f });
-				m_enemySearchPlayer->PushSearchPos({ -3400.0f,0.0f,2400.0f });
-				m_enemySearchPlayer->PushSearchPos({ -2600.0f,0.0f,1600.0f });
-				m_enemySearchPlayer->PushSearchPos({ -3400.0f,0.0f,800.0f });
-				m_enemySearchPlayer->PushSearchPos({ -1400.0f,0.0f,-2000.0f });
-				break;
-			case enSearchArea_2:
-				m_enemySearchPlayer->PushSearchPos({ -9400.0f,0.0f,0.0f });
-				m_enemySearchPlayer->PushSearchPos({ -9400.0f,0.0f,3200.0f });
-				m_enemySearchPlayer->PushSearchPos({ -6200.0f,0.0f,3200.0f });
-				m_enemySearchPlayer->PushSearchPos({ -6200.0f,0.0f,0.0f });
-				m_enemySearchPlayer->PushSearchPos({ -7000.0f,0.0f,2400.0f });
-				m_enemySearchPlayer->PushSearchPos({ -8600.0f,0.0f,2400.0f });
-				m_enemySearchPlayer->PushSearchPos({ -7000.0f,0.0f,800.0f });
-				m_enemySearchPlayer->PushSearchPos({ -8600.0f,0.0f,800.0f });
-				m_enemySearchPlayer->PushSearchPos({ -9400.0f,0.0f,4800.0f });
-				m_enemySearchPlayer->PushSearchPos({ -6600.0f,0.0f,4800.0f });
-				m_enemySearchPlayer->PushSearchPos({ -6200.0f,0.0f,4400.0f });
-
-				break;
-			case enSearchArea_3:
-				m_enemySearchPlayer->PushSearchPos({ -4600,0.0f,6000.0f });
-				m_enemySearchPlayer->PushSearchPos({ -4600,0.0f,7200.0f });
-				m_enemySearchPlayer->PushSearchPos({ -1400,0.0f,6000.0f });
-				m_enemySearchPlayer->PushSearchPos({ -1400,0.0f,7200.0f });
-				m_enemySearchPlayer->PushSearchPos({ -3000,0.0f,6600.0f });
-
-				break;
-			default:
-				break;
-			}
+			m_enemyAnim->SetEnemy(this);		
 
 			//m_enemyStates = enState_SearchPlayer;
 			
@@ -115,6 +82,9 @@ namespace nsHikageri
 				break;
 			case enState_Suffer:
 				m_enemyStress->Suffer();
+				break;
+			case enState_Vigilant:
+				m_enemyVigilant->ExecuteUpdate();
 				break;
 			default:
 				break;

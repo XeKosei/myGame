@@ -102,7 +102,7 @@ namespace nsHikageri
 			//ƒpƒXã‚ğˆÚ“®‚·‚éB
 			m_position = m_path.Move(
 				m_position,
-				5.0f,
+				m_moveSpeed * GameTime::GetInstance().GetFrameDeltaTime(),
 				isEnd
 			);
 

@@ -49,8 +49,12 @@ namespace nsHikageri
 			EnDoorColor GetDoorColor() { return m_doorColor; }
 
 			/// @brief 鍵が開いているかどうかを設定
-			/// @param unlockFlag 鍵がかかっているかどうか。
+			/// @param unlockFlag 鍵か開いているかどうか。
 			void SetUnlockFlag(bool unlockFlag) { m_unlockFlag = unlockFlag; }
+
+			/// @brief 鍵が開いているかどうかを取得
+			/// @return 鍵か開いているかどうか
+			bool GetUnlockFlag() { return m_unlockFlag; }
 
 			void SetPosition(Vector3 pos) { m_position = pos; };
 			void SetDirection(Vector3 dir) { dir.Normalize(); m_direction = dir; };

@@ -24,6 +24,9 @@ namespace nsHikageri
 			/// @param disapperFlag 消えるかどうか
 			void SetDisapperFlag(bool disapperFlag) { m_disapperFlag = disapperFlag; }
 
+			/// @brief 消えるかどうかのフラグを設定。
+			/// @return 消えるかどうか
+			bool GetDisapperFlag() { return m_disapperFlag; }
 		private:
 			SkinModelRender* m_eyeWallModel = nullptr;
 			//CharaConとの当たり判定に使用する静的物理オブジェクト

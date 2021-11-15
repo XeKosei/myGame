@@ -24,6 +24,7 @@ namespace nsHikageri
 			/// @brief Œ®‚ÌF‚ğİ’è
 			/// @param color Œ®‚ÌF
 			void SetKeyColor(nsGimmick::Door::EnDoorColor color) { m_keyColor = color; }
+		
 		private:
 			nsPlayer::Player* m_player = nullptr;
 			SkinModelRender* m_keyModel = nullptr;

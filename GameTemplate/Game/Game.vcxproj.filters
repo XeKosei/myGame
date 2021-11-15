@@ -422,6 +422,9 @@
     <ClCompile Include="ItemFlashLightParts.cpp">
       <Filter>ソース ファイル\Hikageri\Item</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyVigilant.cpp">
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -801,6 +804,9 @@
     </ClInclude>
     <ClInclude Include="ItemFlashLightParts.h">
       <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyVigilant.h">
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

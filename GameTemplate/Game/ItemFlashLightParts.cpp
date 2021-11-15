@@ -18,7 +18,7 @@ namespace nsHikageri
 		bool ItemFlashLightParts::Start()
 		{
 			m_partsModel = NewGO<SkinModelRender>(0);
-			switch (m_partsType)
+			/*switch (m_partsType)
 			{
 			case enFlashLightPartsTypes_StrobeFlash:
 				m_partsModel->Init("Assets/modelData/Key.tkm");
@@ -32,8 +32,8 @@ namespace nsHikageri
 			default:
 				m_partsModel->Init("Assets/modelData/Door.tkm");
 				break;
-			};
-
+			};*/
+			m_partsModel->Init("Assets/modelData/FlashLightParts.tkm");
 			m_partsModel->SetPosition(m_position);
 
 			return true;
@@ -49,7 +49,7 @@ namespace nsHikageri
 			if (dis.Length() <= nsPlayer::nsPlayerTargetConstant::CATCH_EYES_DIS
 				&& Dot(m_player->GetPlayerCamera()->GetDirection(), m_toPlayerDir) >= nsPlayer::nsPlayerTargetConstant::CATCH_EYES_DOT)
 			{
-				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_Key);
+				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_FlashLightParts);
 				m_player->GetPlayerTarget()->SetTargetFlashLightParts(this);
 			}
 

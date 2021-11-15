@@ -2,6 +2,7 @@
 #include "ItemKey.h"
 #include "ItemBase.h"
 #include "PlayerInclude.h"
+
 namespace nsHikageri
 {
 	using namespace nsGimmick;

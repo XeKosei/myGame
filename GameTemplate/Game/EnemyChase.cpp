@@ -105,7 +105,7 @@ namespace nsHikageri
 			//’T‚·êŠ‚Æ‚Ù‚Ú“¯‚¶ˆÊ’u‚É•t‚¢‚½‚ç
 			if ((m_enemy->GetEnemyMove()->GetTarget() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= 5.0f)
 			{
-				m_enemy->SetEnemyState(Enemy::enState_SearchPlayer);
+				m_enemy->SetEnemyState(Enemy::enState_Vigilant);
 				m_isPlayerHidden = false;
 				m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
 			}

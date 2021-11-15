@@ -15,18 +15,11 @@ namespace nsHikageri
 		class EnemyScream;
 		class EnemyFlinch;
 		class EnemyStress;
+		class EnemyVigilant;
 
 		class Enemy : public IGameObject
 		{
 		public:
-			enum EnSearchArea
-			{
-				enSearchArea_1,
-				enSearchArea_2,
-				enSearchArea_3,
-				enSearchArea_num
-			};
-
 			~Enemy();
 			bool Start();
 			void Update();
@@ -41,6 +34,7 @@ namespace nsHikageri
 				enState_Flinch,
 				enState_Petrifaction,
 				enState_Suffer,
+				enState_Vigilant,
 				enStatesNum
 			};
 
@@ -76,6 +70,7 @@ namespace nsHikageri
 			EnemyScream* GetEnemyScream() { return m_enemyScream; }
 			EnemyFlinch* GetEnemyFlinch() { return m_enemyFlinch; }
 			EnemyStress* GetEnemyStress() { return m_enemyStress; }
+			EnemyVigilant* GetEnemyVigilant() { return m_enemyVigilant; }
 			EnemyAnim* GetEnemyAnim() { return m_enemyAnim; };
 		private:
 			//モデル
@@ -92,7 +87,6 @@ namespace nsHikageri
 
 			//エネミーの状態
 			EnEnemyStates m_enemyState = enState_SearchPlayer;
-			EnSearchArea m_searchArea = enSearchArea_1;
 
 			//エネミー関連
 			EnemyMove* m_enemyMove = nullptr;
@@ -102,6 +96,7 @@ namespace nsHikageri
 			EnemyScream* m_enemyScream = nullptr;
 			EnemyFlinch* m_enemyFlinch = nullptr;
 			EnemyStress* m_enemyStress = nullptr;
+			EnemyVigilant* m_enemyVigilant = nullptr;
 			EnemyAnim* m_enemyAnim = nullptr;
 		};
 	}

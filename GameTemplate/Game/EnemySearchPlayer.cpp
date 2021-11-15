@@ -11,13 +11,15 @@ namespace nsHikageri
 
 		bool EnemySearchPlayer::Start()
 		{
-			//初期位置を指定
-			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
+			SetSearchPos(enSearchArea_1);
 
 			CalcNextSearchPos();
 			m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[0], m_searchPos[m_targetPosNo]);
 
 			int m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+
+			//初期位置を指定
+			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
 
 			return true;
 		}
@@ -73,7 +75,7 @@ namespace nsHikageri
 			//エネミーの位置がほぼターゲットと一緒になったら、
 			if ((m_enemy->GetEnemyMove()->GetTarget() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= 5.0f)
 			{
-				CalcNextSearchPos();	
+				m_enemy->SetEnemyState(Enemy::enState_Vigilant);
 			}
 		}
 
@@ -90,6 +92,50 @@ namespace nsHikageri
 
 			m_targetPosNo = nextTargetPosNo;
 		}
+		void EnemySearchPlayer::SetSearchPos(EnSearchArea searchArea)
+		{
+			m_searchArea = searchArea;
 
+			std::vector<Vector3>::iterator it;
+			while(m_searchPos.size() > 0)
+			{
+				it = m_searchPos.begin(),			
+				m_searchPos.erase(it);
+			}
+
+			switch (m_searchArea)
+			{
+			case enSearchArea_1:
+				PushSearchPos({ -2600.0f,0.0f,2400.0f });
+				PushSearchPos({ -3400.0f,0.0f,2400.0f });
+				PushSearchPos({ -2600.0f,0.0f,1600.0f });
+				PushSearchPos({ -3400.0f,0.0f,800.0f });
+				PushSearchPos({ -1400.0f,0.0f,-2000.0f });
+				break;
+			case enSearchArea_2:
+				PushSearchPos({ -9400.0f,0.0f,0.0f });
+				PushSearchPos({ -9400.0f,0.0f,3200.0f });
+				PushSearchPos({ -6200.0f,0.0f,3200.0f });
+				PushSearchPos({ -6200.0f,0.0f,0.0f });
+				PushSearchPos({ -7000.0f,0.0f,2400.0f });
+				PushSearchPos({ -8600.0f,0.0f,2400.0f });
+				PushSearchPos({ -7000.0f,0.0f,800.0f });
+				PushSearchPos({ -8600.0f,0.0f,800.0f });
+				PushSearchPos({ -9400.0f,0.0f,4800.0f });
+				PushSearchPos({ -6600.0f,0.0f,4800.0f });
+				PushSearchPos({ -6200.0f,0.0f,4400.0f });
+				break;
+			case enSearchArea_3:
+				PushSearchPos({ -4600,0.0f,6000.0f });
+				PushSearchPos({ -4600,0.0f,7200.0f });
+				PushSearchPos({ -1400,0.0f,6000.0f });
+				PushSearchPos({ -1400,0.0f,7200.0f });
+				PushSearchPos({ -3000,0.0f,6600.0f });
+				break;
+			default:
+				break;
+			}
+			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
+		}
 	}
 }

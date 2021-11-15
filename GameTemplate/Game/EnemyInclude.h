@@ -7,6 +7,7 @@
 #include "EnemyScream.h"
 #include "EnemyFlinch.h"
 #include "EnemyStress.h"
+#include "EnemyVigilant.h"
 
 #include "EnemyAnim.h"
 #include "EnemyConstant.h"
