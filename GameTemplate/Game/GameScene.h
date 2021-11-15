@@ -38,7 +38,7 @@ namespace nsHikageri
 
 	private:
 		//ゲームの進行段階
-		EnGameSteps m_gameStep = enGameStep_03;
+		EnGameSteps m_gameStep = enGameStep_04;
 		bool m_canGoNextStepFlag = false;
 
 		//ステージ

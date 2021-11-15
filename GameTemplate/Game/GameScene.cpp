@@ -203,7 +203,7 @@ namespace nsHikageri
 	}
 	void GameScene::ExecuteUpdateStep04()
 	{
-		if (m_door[5]->GetUnlockFlag())
+		if (m_door[4]->GetUnlockFlag())
 		{
 			m_enemy->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_3);
 			m_enemy->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);

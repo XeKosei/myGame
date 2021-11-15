@@ -11,10 +11,9 @@ namespace nsHikageri
 
 		bool EnemySearchPlayer::Start()
 		{
-			SetSearchPos(enSearchArea_1);
+			SetSearchPos(enSearchArea_2);
 
 			CalcNextSearchPos();
-			m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[0], m_searchPos[m_targetPosNo]);
 
 			int m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
 
@@ -82,15 +81,15 @@ namespace nsHikageri
 		void EnemySearchPlayer::CalcNextSearchPos()
 		{
 			//乱数から、次のターゲット位置を決める。
-			int nextTargetPosNo = rand() % (m_searchPos.size() - 1);
-			if (nextTargetPosNo >= m_targetPosNo)
+			int nextTargetSearchPosNo = rand() % (m_searchPos.size() - 1);
+			if (nextTargetSearchPosNo >= m_targetSearchPosNo)
 			{
-				nextTargetPosNo++;
+				nextTargetSearchPosNo++;
 			}
 
-			m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[m_targetPosNo], m_searchPos[nextTargetPosNo]);
+			m_enemy->GetEnemyMove()->RouteSearch(m_searchPos[m_targetSearchPosNo], m_searchPos[nextTargetSearchPosNo]);
 
-			m_targetPosNo = nextTargetPosNo;
+			m_targetSearchPosNo = nextTargetSearchPosNo;
 		}
 		void EnemySearchPlayer::SetSearchPos(EnSearchArea searchArea)
 		{
@@ -136,6 +135,7 @@ namespace nsHikageri
 				break;
 			}
 			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
+			SetTargetSearchPosNo(0);	//次に向かうSearchPosをリセット
 		}
 	}
 }

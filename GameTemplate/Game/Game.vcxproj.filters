@@ -425,6 +425,12 @@
     <ClCompile Include="EnemyVigilant.cpp">
       <Filter>ソース ファイル\Hikageri\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="ItemTranquilizer.cpp">
+      <Filter>ソース ファイル\Hikageri\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBattery.cpp">
+      <Filter>ソース ファイル\Hikageri\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -807,6 +813,12 @@
     </ClInclude>
     <ClInclude Include="EnemyVigilant.h">
       <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemTranquilizer.h">
+      <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBattery.h">
+      <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

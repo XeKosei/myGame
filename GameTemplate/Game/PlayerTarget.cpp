@@ -25,6 +25,9 @@ namespace nsHikageri
 			case enTarget_FlashLightParts:
 				targetPos = m_targetFlashLightParts->GetPosition();
 				break;
+			case enTarget_Tranquilizer:
+				targetPos = m_targetTranquilizer->GetPosition();
+				break;
 			default:
 				break;
 			}

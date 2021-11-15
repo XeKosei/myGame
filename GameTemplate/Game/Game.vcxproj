@@ -320,8 +320,10 @@
     <ClCompile Include="geometry\AABB.cpp" />
     <ClCompile Include="geometry\BSP.cpp" />
     <ClCompile Include="ItemBase.cpp" />
+    <ClCompile Include="ItemBattery.cpp" />
     <ClCompile Include="ItemFlashLightParts.cpp" />
     <ClCompile Include="ItemKey.cpp" />
+    <ClCompile Include="ItemTranquilizer.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -454,9 +456,11 @@
     <ClInclude Include="GimmickConstant.h" />
     <ClInclude Include="GimmickInclude.h" />
     <ClInclude Include="ItemBase.h" />
+    <ClInclude Include="ItemBattery.h" />
     <ClInclude Include="ItemFlashLightParts.h" />
     <ClInclude Include="ItemInclude.h" />
     <ClInclude Include="ItemKey.h" />
+    <ClInclude Include="ItemTranquilizer.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="MapChipRender.h" />

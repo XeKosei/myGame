@@ -30,6 +30,9 @@ namespace nsHikageri
 			/// @param pl エネミーの参照
 			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };
 
+			/// @brief 次に向かうsearchPosの番号を設定
+			/// @param no 設定する番号
+			void SetTargetSearchPosNo(int no) { m_targetSearchPosNo = no; }
 		private:
 			//エネミー
 			Enemy* m_enemy = nullptr;
@@ -39,7 +42,7 @@ namespace nsHikageri
 			//レイを飛ばす間隔
 			int m_calcLineHitModelConstant = 0;
 
-			int m_targetPosNo = 0;
+			int m_targetSearchPosNo = 0;
 
 			EnSearchArea m_searchArea = enSearchArea_1;
 		};
