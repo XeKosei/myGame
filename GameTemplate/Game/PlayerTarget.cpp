@@ -28,6 +28,9 @@ namespace nsHikageri
 			case enTarget_Tranquilizer:
 				targetPos = m_targetTranquilizer->GetPosition();
 				break;
+			case enTarget_Battery:
+				targetPos = m_targetBattery->GetPosition();
+				break;
 			default:
 				break;
 			}

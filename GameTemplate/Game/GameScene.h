@@ -6,7 +6,7 @@ namespace nsHikageri
 	namespace nsBackGround { class BackGround; class SecretRoom;}
 	namespace nsEnemy { class Enemy; }
 	namespace nsGimmick { class Chandelier; class Door;  class EyeWall;}
-	namespace nsItem { class ItemKey; class ItemFlashLightParts; }
+	namespace nsItem { class ItemKey; class ItemFlashLightParts; class ItemTranquilizer; class ItemBattery; }
 
 	class GameScene : public IGameObject
 	{
@@ -38,7 +38,7 @@ namespace nsHikageri
 
 	private:
 		//ゲームの進行段階
-		EnGameSteps m_gameStep = enGameStep_04;
+		EnGameSteps m_gameStep = enGameStep_01;
 		bool m_canGoNextStepFlag = false;
 
 		//ステージ
@@ -51,7 +51,9 @@ namespace nsHikageri
 		//ディレクションライト
 		DirectionLight* m_dirLig = nullptr;
 		//シャンデリア
-		nsGimmick::Chandelier* m_chandelier[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
+		nsGimmick::Chandelier* m_chandelier[10] = {
+			nullptr,nullptr,nullptr,nullptr,nullptr,
+			nullptr,nullptr,nullptr,nullptr,nullptr };
 		//ドア
 		nsGimmick::Door* m_door[6] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 		//目の付いた壁
@@ -60,6 +62,16 @@ namespace nsHikageri
 		nsItem::ItemKey* m_key[5] = { nullptr, nullptr, nullptr,nullptr, nullptr };
 		//懐中電灯のパーツ
 		nsItem::ItemFlashLightParts* m_flashLightParts[3] = {nullptr, nullptr, nullptr};
+		//精神安定剤
+		nsItem::ItemTranquilizer* m_tranquilizer[10] = {
+			nullptr,nullptr,nullptr,nullptr,nullptr,
+			nullptr,nullptr,nullptr,nullptr,nullptr };
+
+		//電池
+		nsItem::ItemBattery* m_battery[15] = {
+			nullptr,nullptr,nullptr,nullptr,nullptr,
+			nullptr,nullptr,nullptr,nullptr,nullptr,
+			nullptr,nullptr,nullptr,nullptr,nullptr };
 
 		//クリアフォント(仮)
 		FontRender* m_clearFont = nullptr;

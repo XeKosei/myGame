@@ -11,7 +11,7 @@ namespace nsHikageri
 
 		bool EnemySearchPlayer::Start()
 		{
-			SetSearchPos(enSearchArea_2);
+			SetSearchPos(enSearchArea_1);
 
 			CalcNextSearchPos();
 
@@ -66,7 +66,8 @@ namespace nsHikageri
 
 		void EnemySearchPlayer::Search()
 		{
-			//指定した二か所の位置を往復する処理
+			//エネミーの移動方法は経路探索
+			m_enemy->GetEnemyMove()->SetMoveState(EnemyMove::enMoveState_RouteSearch);
 
 			//エネミーの移動の速さを設定
 			m_enemy->GetEnemyMove()->SetMoveSpeed(nsEnemyMoveConstant::ENEMY_WALK_SPEED);

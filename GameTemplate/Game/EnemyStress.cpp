@@ -7,11 +7,20 @@ namespace nsHikageri
 		using namespace nsEnemyStressConstant;
 		void EnemyStress::ExecuteUpdate()
 		{
+			//ストレス値が前フレームの値と同じか下回っているとき、ストレスを受けていない。
+			if (m_stressNum <= m_oldStressNum)
+			{
+				SubStress(SUB_STRESS_SPEED);
+				m_enemy->GetEnemyMove()->SetSlowMoveFlag(false);
+			}
+
 			if (m_stressNum >= MAX_STRESS_NUM)
 			{
 				m_stressNum = 0;
 				m_enemy->SetEnemyState(Enemy::enState_Suffer);
 			}
+
+			m_oldStressNum = m_stressNum;
 		}
 
 		void EnemyStress::Suffer()
@@ -19,6 +28,8 @@ namespace nsHikageri
 			if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_SearchPlayer);
+				m_enemy->GetEnemySearchPlayer()->CalcNextSearchPos();
+				m_enemy->GetEnemyMove()->SetSlowMoveFlag(false);
 			}
 		}
 

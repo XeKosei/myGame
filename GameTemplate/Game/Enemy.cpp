@@ -61,12 +61,13 @@ namespace nsHikageri
 			{
 			case enState_SearchPlayer:
 				m_enemySearchPlayer->ExecuteUpdate();
+				m_enemyStress->ExecuteUpdate();
 				m_enemyMove->ExecuteUpdate();
 				break;
 			case enState_Chase:
 				m_enemyChase->ExecuteUpdate();
-				m_enemyMove->ExecuteUpdate();
 				m_enemyStress->ExecuteUpdate();
+				m_enemyMove->ExecuteUpdate();
 				break;
 			case enState_Attack:
 				m_enemyAttack->ExecuteUpdate();

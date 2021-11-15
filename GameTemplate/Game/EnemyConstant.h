@@ -52,7 +52,8 @@ namespace nsHikageri
 
 		namespace nsEnemyStressConstant
 		{
-			static const int MAX_STRESS_NUM = 1000;	//エネミーのストレス値の最大値
+			static const int MAX_STRESS_NUM = 500;	//エネミーのストレス値の最大値
+			static const int SUB_STRESS_SPEED = 1;	//ストレスが減る速度
 		}
 	}
 }

@@ -43,7 +43,9 @@ namespace nsHikageri
 
 			/// @brief 指定したアイテムを一つポーチに追加する
 			/// @param item 追加するアイテム
-			void AddItem(EnPlayerItems item) { m_haveItemNum[item]++; }
+			void AddItem(EnPlayerItems item) { m_haveItemNum[item]++; 
+			m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
+			}
 
 			bool Start();
 			/// @brief プレイヤーにアクセスできるようにする。
@@ -64,7 +66,7 @@ namespace nsHikageri
 			Vector4 m_itemUsedFontColor = {0.0f,0.0f,0.0f,0.0f};*/
 
 			int m_choseItem = enItem_Battery;
-			int m_haveItemNum[enItem_num] = { 10, 10, 1, 1, 1, 1, 1, 1};
+			int m_haveItemNum[enItem_num] = { 0, 0, 0, 0, 0, 0, 0, 0};
 		};
 
 	}

@@ -1,5 +1,5 @@
 #pragma once
-#include "Door.h"
+
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }

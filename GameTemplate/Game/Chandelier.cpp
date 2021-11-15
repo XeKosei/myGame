@@ -32,24 +32,22 @@ namespace nsHikageri
 			Vector3 playerPos = m_player->GetPlayerMove()->GetPosition();
 			Vector3 enemyPos = m_enemy->GetEnemyMove()->GetPosition();
 
-			//プレイヤーが近くにいるならば、SAN値回復
-			if ((playerPos - m_position).Length() <= CHANDELIER_LIGHT_RANGE
+			//プレイヤーが近くにいるならば、SAN値回復 (一旦保留)
+			/*if ((playerPos - m_position).Length() <= CHANDELIER_LIGHT_RANGE
 				&& (enemyPos - playerPos).Length() >= 1000.0f 
 				&& m_enemy->GetEnemyState() != nsEnemy::Enemy::enState_Chase)
 			{
 				m_player->GetPlayerSanity()->Recovery(1.0f);
-			}
+			}*/
 
 			//エネミーが近くにいるならば、
 			if ((enemyPos - m_position).Length() <= CHANDELIER_LIGHT_RANGE)
 			{
 				m_enemy->GetEnemyMove()->SetSlowMoveFlag(true);
-				m_enemy->GetEnemyStress()->AddStress(1);
-			}
-			else
-			{
-				m_enemy->GetEnemyMove()->SetSlowMoveFlag(false);
-				m_enemy->GetEnemyStress()->SubStress(1);
+				if (m_enemy->GetEnemyState() == nsEnemy::Enemy::enState_Chase)
+				{
+					m_enemy->GetEnemyStress()->AddStress(CHANDELIER_ADD_STRESS_SPEED);
+				}
 			}
 		}
 	}

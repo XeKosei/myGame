@@ -38,10 +38,12 @@ namespace nsHikageri
 			m_direction.Normalize();
 
 			//ˆÚ“®ˆ—
-			if (m_slowMoveFlag == false)
-				m_velocity = m_direction * m_moveSpeed;
-			else
-				m_velocity = m_direction * ENEMY_SLOWWALK_SPEED;
+			if (m_slowMoveFlag)
+			{
+				m_moveSpeed = ENEMY_SLOWWALK_SPEED;
+			}
+
+			m_velocity = m_direction * m_moveSpeed;
 
 			m_velocity *= GameTime::GetInstance().GetFrameDeltaTime();
 
@@ -99,6 +101,12 @@ namespace nsHikageri
 
 			bool isEnd;		
 			
+			//ˆÚ“®ˆ—
+			if (m_slowMoveFlag)
+			{
+				m_moveSpeed = ENEMY_SLOWWALK_SPEED;
+			}
+
 			//ƒpƒXã‚ğˆÚ“®‚·‚éB
 			m_position = m_path.Move(
 				m_position,

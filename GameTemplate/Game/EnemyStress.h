@@ -28,6 +28,8 @@ namespace nsHikageri
 			Enemy* m_enemy = nullptr;
 			//ストレス値
 			int m_stressNum = 0;
+			//前フレームでのストレス値
+			int m_oldStressNum = 0;
 		};
 	}
 }
