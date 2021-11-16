@@ -60,7 +60,7 @@ namespace nsHikageri
 
 			/// @brief エネミーのターゲット位置を取得する。
 			/// @return エネミーのターゲット位置
-			Vector3 GetTarget() { return m_targetPos; }
+			Vector3 GetTargetPos() { return m_targetPos; }
 
 			/// @brief エネミーの移動の速さを取得
 			/// @param speed エネミーの移動の速さ

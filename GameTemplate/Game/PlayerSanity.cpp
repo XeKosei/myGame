@@ -37,6 +37,12 @@ namespace nsHikageri
 
 		void PlayerSanity::ExecuteUpdate()
 		{
+			if (m_reliefFlag == false)
+			{
+				Damage(DARKNESS_SANITY_DAMAGE_SPEED);
+			}
+			m_reliefFlag = false;
+
 			//インターバルをカウント
 			if (m_damageIntervalCount != 0)
 			{

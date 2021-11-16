@@ -28,7 +28,8 @@ namespace nsHikageri
 			if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_SearchPlayer);
-				m_enemy->GetEnemySearchPlayer()->CalcNextSearchPos();
+				//m_enemy->GetEnemySearchPlayer()->CalcNextSearchPos();
+				m_enemy->GetEnemyMove()->RouteSearch(m_enemy->GetEnemyMove()->GetPosition(), m_enemy->GetEnemySearchPlayer()->GetTargetSearchPos());
 				m_enemy->GetEnemyMove()->SetSlowMoveFlag(false);
 			}
 		}

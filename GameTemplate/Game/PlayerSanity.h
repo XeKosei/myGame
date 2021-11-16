@@ -31,6 +31,10 @@ namespace nsHikageri
 			/// @param recoveryNum 回復量
 			void Recovery(int recoveryNum);
 
+			/// @brief プレイヤーが安心できる状態かを設定
+			/// @param flag 安心できる:true できない:false
+			void SetReliefFlag(bool flag) { m_reliefFlag = flag; }
+
 		private:
 			//プレイヤー
 			Player* m_player = nullptr;
@@ -51,6 +55,8 @@ namespace nsHikageri
 			//HP表示(デバッグ用)
 			FontRender* f = nullptr;
 
+			//安心できるかどうか。
+			bool m_reliefFlag = false;
 
 			FontRender* m_gameOverFont = nullptr;
 			Vector4 m_gameOverFontColor = { 0.0f,0.0f,0.0f,0.0f };

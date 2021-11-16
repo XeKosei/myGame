@@ -48,7 +48,8 @@ namespace nsHikageri
 			{
 				m_enemy->SetEnemyState(Enemy::enState_SearchPlayer);
 				m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
-				m_enemy->GetEnemySearchPlayer()->CalcNextSearchPos();
+				//m_enemy->GetEnemySearchPlayer()->CalcNextSearchPos();
+				m_enemy->GetEnemyMove()->RouteSearch(m_enemy->GetEnemyMove()->GetPosition(), m_enemy->GetEnemySearchPlayer()->GetTargetSearchPos());
 			}
 		}
 	}

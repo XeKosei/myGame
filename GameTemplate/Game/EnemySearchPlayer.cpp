@@ -73,7 +73,7 @@ namespace nsHikageri
 			m_enemy->GetEnemyMove()->SetMoveSpeed(nsEnemyMoveConstant::ENEMY_WALK_SPEED);
 
 			//エネミーの位置がほぼターゲットと一緒になったら、
-			if ((m_enemy->GetEnemyMove()->GetTarget() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= 5.0f)
+			if ((m_enemy->GetEnemyMove()->GetTargetPos() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= 5.0f)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_Vigilant);
 			}

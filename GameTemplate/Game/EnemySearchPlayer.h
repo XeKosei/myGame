@@ -33,6 +33,10 @@ namespace nsHikageri
 			/// @brief 次に向かうsearchPosの番号を設定
 			/// @param no 設定する番号
 			void SetTargetSearchPosNo(int no) { m_targetSearchPosNo = no; }
+
+			/// @brief　次に徘徊する目的地を取得
+			/// @return 次の位置
+			Vector3 GetTargetSearchPos() { return m_searchPos[m_targetSearchPosNo]; }
 		private:
 			//エネミー
 			Enemy* m_enemy = nullptr;

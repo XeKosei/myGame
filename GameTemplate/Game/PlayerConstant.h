@@ -6,7 +6,7 @@ namespace nsHikageri
 	{
 		namespace nsPlayerConstant
 		{
-			static const Vector3 INI_PLAYER_POSITION = { 1000.0f,0.0f,0.0f };	//プレイヤーの初期位置
+			static const Vector3 INI_PLAYER_POSITION = { -3000.0f,0.0f,0.0f };	//プレイヤーの初期位置
 			static const float PLAYER_MODEL_WIDTH = 10.0f;	//プレイヤーのモデルの横幅
 			static const float PLAYER_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
 			static const Vector3 INI_PLAYER_SCALE = { 1.0f, 1.0f, 1.0f };	//プレイヤーのモデルの大きさの初期値
@@ -52,6 +52,8 @@ namespace nsHikageri
 			static const float ADD_ALPHA_SPEED = 0.001f;	//スプライトが点滅する速さ
 			static const float MAX_ADD_ALPHA = 0.02f;		//点滅の最大加算値
 			static const float MIN_ADD_ALPHA = -0.02f;		//点滅の最小加算値
+
+			static const float DARKNESS_SANITY_DAMAGE_SPEED = 0.05f;	//暗い時にSAN値がじわじわと減っていくスピード
 		}
 
 		namespace nsPlayerBittenConstant

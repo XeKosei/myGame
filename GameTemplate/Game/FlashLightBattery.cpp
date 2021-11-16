@@ -24,10 +24,12 @@ namespace nsHikageri
 			//懐中電灯の電源が付いているならば
 			if (m_flashLight->GetFlashLightAction()->GetIsFlashLightSwitchOn() == true)
 			{
+				//プレイヤーは安心できる。(SAN値が減らない)
+				m_flashLight->GetPlayer()->GetPlayerSanity()->SetReliefFlag(true);
+
 				if (m_batteryLevel > 0.0f)
 				{
-					m_batteryLevel -= BATTERY_LEVEL_DECREASE_SPEED;
-					m_font->SetText(L"バッテリー:" + std::to_wstring(m_batteryLevel));
+					ConsumBatteryLevel(BATTERY_LEVEL_DECREASE_SPEED);
 				}
 
 				//バッテリー残量が無くなったら、懐中電灯を消す。
@@ -37,11 +39,6 @@ namespace nsHikageri
 					m_font->SetText(L"バッテリー:" + std::to_wstring(m_batteryLevel));
 					m_flashLight->GetFlashLightAction()->SwitchOnOff();
 				}
-			}
-
-			else
-			{
-				m_flashLight->GetPlayer()->GetPlayerSanity()->Damage(0.01f);
 			}
 		}
 	}
