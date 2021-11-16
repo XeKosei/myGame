@@ -17,7 +17,7 @@ cbuffer SpotLightCameraCb : register(b1)
 {
 	float4x4 mSpotLVP;
 	float3 spotLightCameraPos;
-	float spotLightCameraRange;
+	float spotLightCameraAngle;
 	float3 spotLightCameraDir;
 	bool isFlashLightSwitchOn;
 };
@@ -152,14 +152,18 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 	float3 toPsInDir = psIn.worldPos - spotLightCameraPos;
 	toPsInDir = normalize(toPsInDir);
-	float3 spotLigCameraDir = normalize(spotLightCameraDir);
-	float spotLigDot = dot(toPsInDir, spotLigCameraDir);
-	float range = spotLightCameraRange;
-	range /= 3.141579;
-	range /= 3.141579;
-	range = 1 - range;
+	float3 spotLigDir = normalize(spotLightCameraDir);
+	float toPsInAngle = dot(toPsInDir, spotLigDir);
+	toPsInAngle = acos(toPsInAngle);
+	if (toPsInAngle < 0.0f)
+	{
+		toPsInAngle *= -1.0f;
+	}
 
-	if (spotLigDot >= range)
+	float spotLigAngle = spotLightCameraAngle;
+	spotLigAngle /= 2;
+
+	if (toPsInAngle <= spotLigAngle)
 	{
 		return float4(psIn.pos.z, psIn.pos.z, psIn.pos.z, 1.0f);
 	}

@@ -31,9 +31,9 @@ namespace nsHikageri
 			m_flashLightAngle = INI_FLASHLIGHT_ANGLE;	//スポットライトの射出角度
 			m_spotLight->SetAngle(m_flashLightAngle / 2);//(スポットライトに送るアングルは半径なので、2で割る。
 
-			//スポットライトカメラのアングルを設定
-			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(m_flashLightAngle);
-
+			//スポットライトカメラの設定
+			LightManager::GetInstance()->SetSpotLightCameraAngle(m_flashLightAngle);
+			//LightManager::GetInstance()->SetSpotLightCameraFar(INI_FLASHLIGHT_RANGE);
 			//懐中電灯関係のインスタンスを作成
 			m_flashLightAction = NewGO<FlashLightAction>(0);
 			m_flashLightAction->SetFlashLight(this);
@@ -69,15 +69,23 @@ namespace nsHikageri
 				m_abilityMedousaEye->ExecuteUpdate();
 			}
 
+			// モデル用の嘘座標を計算する
+			Vector3 spotLightUp = Cross(g_camera3D->GetForward(), g_camera3D->GetRight());
+			Vector3 modelPos;
+			modelPos = g_camera3D->GetPosition();
+			modelPos += g_camera3D->GetRight() * FLASHLIGHT_MODEL_POS_APPLY_VALUE.x;
+			modelPos += g_camera3D->GetForward() * FLASHLIGHT_MODEL_POS_APPLY_VALUE.z;
+			modelPos += spotLightUp * FLASHLIGHT_MODEL_POS_APPLY_VALUE.y;
+
+			//実際の懐中電灯の座標
+
 			//まず懐中電灯をカメラと同じ位置に設定
 			m_position = g_camera3D->GetPosition();
 			//懐中電灯の位置を横にずらす。
-			m_position += g_camera3D->GetRight() * APPLY_FLASHLIGHT_POS_VALUE.x;
-			//懐中電灯の位置を奥にずらす。
-			m_position += g_camera3D->GetForward() * APPLY_FLASHLIGHT_POS_VALUE.z;
+			m_position += g_camera3D->GetRight() * FLASHLIGHT_POS_APPLY_VALUE.x;
 			//懐中電灯の位置を縦にずらす
-			m_position -= Cross(g_camera3D->GetForward(), g_camera3D->GetRight()) * APPLY_FLASHLIGHT_POS_VALUE.y;
-			
+			m_position += spotLightUp * FLASHLIGHT_POS_APPLY_VALUE.y;
+	
 			//向きを設定
 			m_direction = g_camera3D->GetForward();
 			m_direction.Normalize();
@@ -90,8 +98,8 @@ namespace nsHikageri
 			qRotMat.SetRotation(g_camera3D->GetCameraRotation());
 			m_flashLightModel->SetRotation(qRotMat);
 
-			//懐中電灯の位置を計算。※懐中電灯の位置を縦にずらすのは、後でやらないとモデルの回転が上手く行かない。
-			m_flashLightModel->SetPosition(m_position);
+			//懐中電灯の位置を計算。※懐中電灯の位置をずらすのは、後でやらないとモデルの回転が上手く行かない。
+			m_flashLightModel->SetPosition(modelPos);
 			m_spotLight->SetPosition(m_position);
 			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_position);
 		}

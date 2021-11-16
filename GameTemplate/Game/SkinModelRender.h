@@ -232,7 +232,7 @@ namespace nsHikageri
 		int m_animationClipNum = 0;					//アニメーションクリップの数
 		Animation m_animation;						//アニメーション
 		bool m_isNormalCaster = true;
-		bool m_isShadowCaster = true;				//このモデルは影を作るか
+		bool m_isShadowCaster = false;				//このモデルは影を作るか
 		float m_animation_speed = 1.0f;				//アニメーション速度
 		float m_animationSpeed = 1.0f;				//アニメーション速度(何故二つあるんだ?)
 		bool m_isSpotLightCaster = true;			//このモデルはスポットライトの光を受けるかどうか

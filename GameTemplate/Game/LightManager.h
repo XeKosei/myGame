@@ -47,7 +47,7 @@ namespace nsHikageri
 		{
 			Matrix lightCameraProjectionMatrix;	//ライトビュープロジェクション行列
 			Vector3 lightCameraPosition;	//ライトカメラの位置
-			float lightCameraRange;
+			float lightCameraAngle;
 			Vector3 lightCameraDirection;	//ライトカメラの向き	
 			int isFlashLightSwitchOn;	//懐中電灯の電源がONかOFFか
 		};
@@ -392,7 +392,13 @@ namespace nsHikageri
 			m_spotLigCameraData.lightCameraDirection.Normalize();
 		}
 
-		void SetSpotLightCameraAngle(const float angle)
+		void SetSpotLightCameraFar(const float& farNum)
+		{
+			m_spotLightCamera.SetFar(farNum);
+			m_spotLightCamera.Update(1.0f);
+		}
+
+		void SetSpotLightCameraAngle(const float& angle)
 		{
 
 			m_spotLightCamera.SetViewAngle(angle);
@@ -400,7 +406,7 @@ namespace nsHikageri
 			m_spotLightCamera.Update(1.0f);
 			m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
 		
-			m_spotLigCameraData.lightCameraRange = angle;
+			m_spotLigCameraData.lightCameraAngle = angle;
 		}
 
 		/// @brief スポットライトに使用するライトカメラの上方向を指定する。

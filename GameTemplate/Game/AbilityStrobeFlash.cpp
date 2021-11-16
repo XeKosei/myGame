@@ -110,7 +110,6 @@ namespace nsHikageri
 						{
 							//目の壁の目の位置がフラッシュの範囲だったかどうかを調べる。
 							bool hitFlag = CheckHitFlash(eyeWall->GetPosition());
-							//trueならばエネミーを怯ませる。
 							if (hitFlag)
 							{
 								eyeWall->SetDisapperFlag(true);
@@ -155,17 +154,17 @@ namespace nsHikageri
 			Vector3 toCheckPosDir = checkPos - m_flashLight->GetFlashLightPos();
 			toCheckPosDir.Normalize();
 
-			//二つのベクトルの内積を算出
-			float dot = Dot(toCheckPosDir, strobeDir);
+			//二つのベクトルの内積から、ラジアン角度を算出する。
+			float angle = Dot(toCheckPosDir, strobeDir);
+			angle = acos(angle);
+			angle = fabsf(angle);
 
 			//懐中電灯の射出角度と比較する
 			float flashLightAngle = m_flashLight->GetFlashLightAngle();
-			flashLightAngle /= 2;	//半径の射出角度が欲しいので、2で割る
-			flashLightAngle /= 3.141592;	//円周率で割ることで、0～1の範囲に。
-			flashLightAngle = 1 - flashLightAngle;
+			flashLightAngle /= 2;	//半径の値が欲しいので、2で割る
 
 			//内積が射出角度よりも内側ならば
-			if (dot >= flashLightAngle)
+			if (angle <= flashLightAngle)
 			{
 				return true;
 			}

@@ -13,6 +13,15 @@ cbuffer ModelCb : register(b0) {
 	float4x4 mProj;
 };
 
+cbuffer SpotLightCameraCb : register(b1)
+{
+	float4x4 mSpotLVP;
+	float3 spotLightCameraPos;
+	float spotLightCameraRange;
+	float3 spotLightCameraDir;
+	int isFlashLightSwitchOn;
+};
+
 ////////////////////////////////////////////////
 // 構造体
 ////////////////////////////////////////////////
@@ -118,17 +127,17 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 {
 	////ライトからの距離
 	////本来の比較用の距離はこっち
-	////float depth = length(psIn.worldPos - lightCameraPos)/1000.0f;//深度値を1000で割って0.0～1.0にする
+	//float depth = length(psIn.worldPos - spotLightCameraPos)/1000.0f;//深度値を1000で割って0.0～1.0にする
 
 	////ここから平行光源の深度チェック。
 
-	////ライトの向きを取得。
-	//float3 cameraDir = lightCameraDir;
+	//ライトの向きを取得。
+	//float3 cameraDir = spotLightCameraDir;
 	////正規化されてるはずだけど、念の為。
 	//cameraDir = normalize(cameraDir);
 
 	////ライトカメラから判定ピクセルまでのベクトルを求める
-	//float3 toPic = psIn.worldPos - lightCameraPos;
+	//float3 toPic = psIn.worldPos - spotLightCameraPos;
 
 	////カメラの向きと内積を取ることでカメラのXY平面上での最短距離が分かる
 	//float depth = dot(toPic,cameraDir);

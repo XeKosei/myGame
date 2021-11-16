@@ -53,7 +53,7 @@ namespace nsHikageri
 		//カラーバッファのフォーマットを指定。
 		modelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		shadowModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32_FLOAT;
-		spotLightModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32_FLOAT;
+		spotLightModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
 		//モデルデータの上方向の軸を指定
 		modelInitData.m_modelUpAxis = enModelUpAxisZ;
@@ -76,6 +76,9 @@ namespace nsHikageri
 		shadowModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigCameraDataSize();
 		shadowModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigCameraDatas();
 		
+		spotLightModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetSpotLigCameraDataSize();
+		spotLightModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetSpotLigCameraDatas();
+
 		//モデルの初期化
 		m_model[eModel].Init(modelInitData);
 		//影描画モデルの初期化
