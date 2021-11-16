@@ -5,7 +5,7 @@ namespace nsHikageri
 	{
 		namespace nsEnemyConstant
 		{
-			static const float ENEMY_MODEL_WIDTH = 10.0f;	//プレイヤーのモデルの横幅
+			static const float ENEMY_MODEL_WIDTH = 30.0f;	//プレイヤーのモデルの横幅
 			static const float ENEMY_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
 			static const Vector3 INI_ENEMY_SCALE = {1.2f, 1.2f, 1.2f};	//エネミーの初期Scale
 			static const int CALC_LINEHITMODEL_COSNTANT = 15;	//レイを飛ばす間隔
@@ -13,10 +13,10 @@ namespace nsHikageri
 		}
 		namespace nsEnemyMoveConstant
 		{
-			static const float ENEMY_WALK_SPEED = 250.0f;	//エネミーの歩く速さ
-			static const float ENEMY_DASH_SPEED = 800.0f;//エネミーの走る速さ
-			static const float ENEMY_SLOWWALK_SPEED = 100.0f;	//エネミーの遅い歩きの速さ
-			static const float ENEMY_MOVE_FRICTION = 0.2f;	//エネミーの動くときの摩擦
+			static const float ENEMY_WALK_SPEED = 4.0f;	//エネミーの歩く速さ
+			static const float ENEMY_DASH_SPEED = 13.0f;//エネミーの走る速さ
+			static const float ENEMY_SLOWWALK_SPEED = 2.0f;	//エネミーの遅い歩きの速さ
+			static const float ENEMY_MOVE_FRICTION = 0.02f;	//エネミーの動くときの摩擦
 			static const float GRAVITY_SPEED = 9.8f * 0.1f;	//落下スピード
 			static const float GRAVITY_INDEX = 1.2f;		//落下スピードにかける指数
 		

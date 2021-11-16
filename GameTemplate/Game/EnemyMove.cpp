@@ -43,13 +43,14 @@ namespace nsHikageri
 				m_moveSpeed = ENEMY_SLOWWALK_SPEED;
 			}
 
-			m_velocity = m_direction * m_moveSpeed;
-
-			m_velocity *= GameTime::GetInstance().GetFrameDeltaTime();
+			m_velocity += m_direction * m_moveSpeed * GameTime::GetInstance().GetFrameDeltaTime();
 
 			//減速処理
 			m_velocity.x -= m_velocity.x * ENEMY_MOVE_FRICTION;
 			m_velocity.z -= m_velocity.z * ENEMY_MOVE_FRICTION;
+
+			m_direction = m_velocity;
+			m_direction.Normalize();
 
 			//重力
 			if (m_enemy->GetCharaCon()->IsOnGround() == false)
@@ -108,17 +109,40 @@ namespace nsHikageri
 			}
 
 			//パス上を移動する。
-			m_position = m_path.Move(
+			Vector3 pathPos = m_path.Move(
 				m_position,
-				m_moveSpeed * GameTime::GetInstance().GetFrameDeltaTime(),
+				m_moveSpeed,
 				isEnd
 			);
 
 			//向きと速度
-			m_velocity = m_position - oldPos;
+			m_direction = pathPos - oldPos;
+			m_direction.Normalize();
+
+			m_velocity += m_direction * m_moveSpeed * GameTime::GetInstance().GetFrameDeltaTime();
+
+			//減速処理
+			m_velocity.x -= m_velocity.x * ENEMY_MOVE_FRICTION;
+			m_velocity.z -= m_velocity.z * ENEMY_MOVE_FRICTION;
+
 			m_direction = m_velocity;
 			m_direction.Normalize();
 
+			//速度がほぼ0ならば、0にする。
+			if (fabsf(m_velocity.x + m_velocity.z) < 0.001f)
+			{
+				m_velocity.x = 0.0f;
+				m_velocity.z = 0.0f;
+			}
+
+			//位置に速度を加算
+			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, 1.0f);
+
+			//パスの位置にほぼ到達したら、
+			if ((m_position - pathPos).Length() < 12.0f)
+			{
+				m_position = pathPos;
+			}
 			//位置を設定
 			m_enemy->GetEnemyMove()->SetPosition(m_position);
 		}
