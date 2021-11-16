@@ -38,8 +38,9 @@ namespace nsHikageri
 
 		namespace nsAbilityMedousaEyeConstant
 		{
-			static const int INI_MEDOUSAEYEFLASH_CHARGE_COUNT = 50;	//ストロボフラッシュのチャージ時間の初期値
+			static const int INI_MEDOUSAEYEFLASH_CHARGE_COUNT = 50;	//メドゥーサアイのチャージ時間の初期値
 			static const Vector3 INI_MEDOUSAEYEFLASH_COLOR = { 50.0f,50.0f,50.0f };	//ストロボフラッシュの明るさの初期値
+			static const float  INI_MEDOUSAEYEFLASH_BATTERY_COST = 20.0f;	//メドゥーサアイで消費するバッテリーのコスト
 		}
 	}
 }

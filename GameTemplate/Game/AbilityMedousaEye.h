@@ -28,10 +28,10 @@ namespace nsHikageri
 			FlashLight* m_flashLight = nullptr;
 			AbilityManager* m_abilityManager = nullptr;
 
-			int m_medousaEyeFlashCount = 0;
+			int m_medousaEyeChargeCount = 0;
 
 			//アビリティが解放されているかどうか
-			bool m_abilityAcitveFlag = false;
+			bool m_abilityAcitveFlag = true;
 		};
 	}
 }

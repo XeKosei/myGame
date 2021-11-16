@@ -74,6 +74,7 @@ namespace nsHikageri
 				break;
 			case enState_Scream:
 				m_enemyScream->ExecuteUpdate();
+				m_enemyStress->ExecuteUpdate();
 				break;
 			case enState_Flinch:
 				m_enemyFlinch->ExecuteUpdate();

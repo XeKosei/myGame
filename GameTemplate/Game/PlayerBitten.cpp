@@ -40,6 +40,14 @@ namespace nsHikageri
 			default:
 				break;
 			}
+
+			//“G‚Ìó‘Ô‚ªŠš‚Ý‚Â‚«‚Å‚Í‚È‚­‚È‚Á‚½‚çA
+			if (m_enemy->GetEnemyState() != nsEnemy::Enemy::enState_Attack)
+			{
+				m_canMoveInterval = INI_CAN_MOVE_INTERVAL;
+				SetBittenState(enBittenState_PreBitten);
+				m_player->SetInvincible(200);
+			}
 		}
 		void PlayerBitten::PreBitten()
 		{

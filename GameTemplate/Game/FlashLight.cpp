@@ -59,7 +59,8 @@ namespace nsHikageri
 		void FlashLight::Update()
 		{
 			//‰ù’†“d“”ŠÖŒW‚Ìˆ—
-			if (m_player->GetPlayerState() == nsPlayer::Player::enState_Normal)
+			//if (m_player->GetPlayerState() == nsPlayer::Player::enState_Normal ||
+			//	m_player->GetPlayerState() == nsPlayer::Player::enState_Invincible )
 			{
 				m_flashLightAction->ExecuteUpdate();
 				m_flashLightBattery->ExecuteUpdate();

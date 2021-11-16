@@ -27,8 +27,8 @@ namespace nsHikageri
 			FlashLight* m_flashLight = nullptr;
 			AbilityManager* m_abilityManager = nullptr;
 
-			//クレアボヤンスが発動中かどうか
-			bool m_isClairvoyanceActivate = false;
+			//アビリティを発動中かどうか
+			bool m_useAbility = false;
 
 			//アビリティが解放されているかどうか
 			bool m_abilityAcitveFlag = true;

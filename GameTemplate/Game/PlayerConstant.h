@@ -59,9 +59,7 @@ namespace nsHikageri
 		namespace nsPlayerBittenConstant
 		{
 			static const int INI_CAN_MOVE_INTERVAL = 30;	//動けるようになるまでのインターバル
-			static const int RESIST_TO_BITE_NUM = 100;	//噛みつきに抵抗する数値
-
-			
+			static const int RESIST_TO_BITE_NUM = 100;	//噛みつきに抵抗する数値	
 		}
 
 		namespace nsPlayerPouchConstant
@@ -73,8 +71,8 @@ namespace nsHikageri
 
 		namespace nsPlayerTargetConstant
 		{
-			static const int CATCH_EYES_DIS = 500.0f;	//オブジェクトがプレイヤーの目を引く距離
-			static const int CATCH_EYES_DOT = 0.7f;		//オブジェクトがプレイヤーの目を引く内積
+			static const int CATCH_EYES_DIS = 300.0f;	//オブジェクトがプレイヤーの目を引く距離
+			static const int CATCH_EYES_DOT = 0.8f;		//オブジェクトがプレイヤーの目を引く内積
 		}
 	}
 }

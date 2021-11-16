@@ -33,7 +33,7 @@ namespace nsHikageri
 				StrobeFlashPrepare();
 
 				//フラグがtrueならばストロボフラッシュ発動
-				if (m_strobeFlashFlag == true)
+				if (m_useAbility == true)
 				{
 					StrobeFlash();
 				}
@@ -44,7 +44,7 @@ namespace nsHikageri
 				m_strobeChargeCount = INI_STROBEFLASH_CHARGE_COUNT;
 				m_flashLight->GetSpotLight()->SetColor(nsFlashLightConstant::INI_FLASHLIGHT_COLOR);
 				m_strobeFlashColor = INI_STROBEFLASH_COLOR;
-				m_strobeFlashFlag = false;
+				m_useAbility = false;
 			}
 		}
 
@@ -65,7 +65,7 @@ namespace nsHikageri
 				if (m_strobeChargeCount <= 0)
 				{
 					m_flashLight->GetFlashLightBattery()->ConsumBatteryLevel(INI_STROBEFLASH_BATTERY_COST);
-					m_strobeFlashFlag = true;
+					m_useAbility = true;
 				}
 				//カウントをリセット
 				m_strobeChargeCount = INI_STROBEFLASH_CHARGE_COUNT;
@@ -93,7 +93,14 @@ namespace nsHikageri
 					//trueならばエネミーを怯ませる。
 					if (hitFlag)
 					{
-						m_abilityManager->GetEnemy()->SetEnemyState(nsEnemy::Enemy::enState_Flinch);
+						//相手が噛みつき状態だったなら、
+						if (m_abilityManager->GetEnemy()->GetEnemyState() == nsEnemy::Enemy::enState_Attack)
+						{
+							m_abilityManager->GetEnemy()->GetEnemyStress()->AddStress(600.0f);
+						}
+
+						//相手は怯む。
+						m_abilityManager->GetEnemy()->SetEnemyState(nsEnemy::Enemy::enState_Flinch);				
 					}
 				}
 				//目の壁
@@ -122,7 +129,7 @@ namespace nsHikageri
 			{
 				m_flashLight->GetSpotLight()->SetColor(nsFlashLightConstant::INI_FLASHLIGHT_COLOR);
 				m_strobeFlashColor = INI_STROBEFLASH_COLOR;
-				m_strobeFlashFlag = false;
+				m_useAbility = false;
 			}
 		}
 

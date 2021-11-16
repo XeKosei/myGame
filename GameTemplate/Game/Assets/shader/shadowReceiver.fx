@@ -426,7 +426,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 	//環境光
 	//懐中電灯に照らされていない場合は、遠くが暗く見えるようにする。
-	float3 ambientLig = 1 - (length(eyePos - psIn.worldPos) * 0.0005f);
+	float3 ambientLig = 1 - (length(eyePos - psIn.worldPos) * 0.001f);
 	if (isFlashLightSwitchOn == 1)
 	{
 		float3 toPsInDir = psIn.worldPos - spotLightCameraPos;

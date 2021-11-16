@@ -28,7 +28,8 @@ namespace nsHikageri
 			}
 			//距離が一定以内まで縮まったら、攻撃に移行。
 			if ((m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= ENEMY_CAN_ATTACK_DIS
-				&& m_enemy->GetPlayer()->GetPlayerState() == nsPlayer::Player::enState_Normal)
+				&& m_enemy->GetPlayer()->GetPlayerState() == nsPlayer::Player::enState_Normal
+				&& m_isPlayerHidden == false)
 			{
 				//エネミーを噛みつき状態にする
 				m_enemy->SetEnemyState(Enemy::enState_Attack);

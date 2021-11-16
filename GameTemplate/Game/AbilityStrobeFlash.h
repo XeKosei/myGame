@@ -53,10 +53,10 @@ namespace nsHikageri
 			Vector3 m_strobeFlashColor = { 0.0f, 0.0f, 0.0f };
 
 			//ストロボフラッシュを発動するフラグ
-			bool m_strobeFlashFlag = false;
+			bool m_useAbility = false;
 
 			//アビリティが解放されているかどうか
-			bool m_abilityAcitveFlag = false;
+			bool m_abilityAcitveFlag = true;
 		};
 	}
 }
