@@ -96,6 +96,12 @@
     <Filter Include="ヘッダー ファイル\Hikageri\Item">
       <UniqueIdentifier>{b446eafb-6260-43c1-bcd4-d8d766149eeb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Hikageri\GameScene">
+      <UniqueIdentifier>{fdd84a7c-82c3-463b-9020-6a5d62db6ae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Hikageri\GameScene">
+      <UniqueIdentifier>{50756db2-db9c-46ef-8376-a2ac3e0ea6d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -281,9 +287,6 @@
     <ClCompile Include="..\..\MiniEngine\RenderTarget.cpp">
       <Filter>MiniEngine</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル\Hikageri\Player</Filter>
     </ClCompile>
@@ -430,6 +433,18 @@
     </ClCompile>
     <ClCompile Include="ItemBattery.cpp">
       <Filter>ソース ファイル\Hikageri\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>ソース ファイル\Hikageri</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>ソース ファイル\Hikageri\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>ソース ファイル\Hikageri\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClear.cpp">
+      <Filter>ソース ファイル\Hikageri\GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -643,9 +658,6 @@
     <ClInclude Include="..\..\MiniEngine\RenderTarget.h">
       <Filter>MiniEngine</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
@@ -819,6 +831,18 @@
     </ClInclude>
     <ClInclude Include="ItemBattery.h">
       <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>ヘッダー ファイル\Hikageri</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>ヘッダー ファイル\Hikageri\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClear.h">
+      <Filter>ヘッダー ファイル\Hikageri\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>ヘッダー ファイル\Hikageri\GameScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

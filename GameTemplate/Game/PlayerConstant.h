@@ -6,8 +6,8 @@ namespace nsHikageri
 	{
 		namespace nsPlayerConstant
 		{
-			static const Vector3 INI_PLAYER_POSITION = { -3000.0f,0.0f,0.0f };	//プレイヤーの初期位置
-			static const float PLAYER_MODEL_WIDTH = 10.0f;	//プレイヤーのモデルの横幅
+			static const Vector3 INI_PLAYER_POSITION = { 1000.0f,0.0f,0.0f };	//プレイヤーの初期位置
+			static const float PLAYER_MODEL_WIDTH = 50.0f;	//プレイヤーのモデルの横幅
 			static const float PLAYER_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
 			static const Vector3 INI_PLAYER_SCALE = { 1.0f, 1.0f, 1.0f };	//プレイヤーのモデルの大きさの初期値
 		}
@@ -60,6 +60,7 @@ namespace nsHikageri
 		{
 			static const int INI_CAN_MOVE_INTERVAL = 30;	//動けるようになるまでのインターバル
 			static const int RESIST_TO_BITE_NUM = 100;	//噛みつきに抵抗する数値	
+			static const float CAMERA_TURN_SPEED = 0.2f;	//カメラが振り向く速さ
 		}
 
 		namespace nsPlayerPouchConstant

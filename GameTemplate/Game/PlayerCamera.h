@@ -15,7 +15,7 @@ namespace nsHikageri
 			//目の高さの設定で使用する変数
 			void EyeHeightMove();
 
-			void SetCameraDir(Vector3 dir) { m_cameraDir = dir; };
+			void SetCameraDir(Vector3 dir) { dir.Normalize(); m_cameraDir = dir; };
 
 			Vector3 GetCameraPos() { return m_cameraPos; };
 			/// @brief カメラの向きを取得
@@ -29,6 +29,8 @@ namespace nsHikageri
 			/// @brief プレイヤーの目の高さを設定
 			/// @param height 設定する高さ。
 			void SetPlEyeHeight(int height) { m_plEyeHeight = height; };
+
+			Vector3 GetCameraRight() { return g_camera3D->GetRight(); }
 
 		private:
 			//カメラの視点

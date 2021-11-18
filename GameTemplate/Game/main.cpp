@@ -3,7 +3,7 @@
 #include "system/system.h" 
 #include "Test.h"
 #include "GameScene.h"
-
+#include "TitleScene.h"
 namespace
 {
 	const Vector3 LIGHTCAMERA_POSITION = { 1000.0f, 1000.0f,1000.0f };
@@ -50,7 +50,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsHikageri::PostEffectManager::GetInstance()->Init(true, true);
 
 	//Test* testScene = NewGO<Test>(0, "testScene");
-	nsHikageri::GameScene* gameScene = NewGO<nsHikageri::GameScene>(0, "gameScene");
+	nsHikageri::nsGameScene::GameScene* gameScene = NewGO<nsHikageri::nsGameScene::GameScene>(0, "gameScene");
+	//nsHikageri::TitleScene* titleScene = NewGO<nsHikageri::TitleScene>(0, "titleScene");
 
 	// シャドウマップを表示するためのスプライトを初期化する
 	SpriteInitData spriteInitData;

@@ -68,6 +68,5 @@ namespace nsHikageri
 			int m_choseItem = enItem_Battery;
 			int m_haveItemNum[enItem_num] = { 10, 10, 0, 0, 0, 0, 0, 0};
 		};
-
 	}
 }

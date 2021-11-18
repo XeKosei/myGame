@@ -34,7 +34,7 @@ namespace nsHikageri
 			FlashLight* m_flashLight = nullptr;
 
 			//バッテリー残量
-			float m_batteryLevel = 0.0f;
+			float m_batteryLevel = 50.0f;
 
 			//バッテリー量仮表示
 			FontRender* m_font = nullptr;

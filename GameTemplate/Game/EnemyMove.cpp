@@ -139,10 +139,17 @@ namespace nsHikageri
 			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, 1.0f);
 
 			//パスの位置にほぼ到達したら、
-			if ((m_position - pathPos).Length() < 12.0f)
+			if (m_moveSpeed == ENEMY_DASH_SPEED
+			&& (m_position - pathPos).Length() < ENEMY_DASH_SPEED)
 			{
 				m_position = pathPos;
 			}
+			else if (m_moveSpeed == ENEMY_WALK_SPEED
+				&& (m_position - pathPos).Length() < ENEMY_WALK_SPEED)
+			{
+				m_position = pathPos;
+			}
+
 			//位置を設定
 			m_enemy->GetEnemyMove()->SetPosition(m_position);
 		}

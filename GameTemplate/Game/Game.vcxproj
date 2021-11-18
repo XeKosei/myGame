@@ -315,6 +315,8 @@
     <ClCompile Include="FlashLightAction.cpp" />
     <ClCompile Include="FlashLightBattery.cpp" />
     <ClCompile Include="FontRender.cpp" />
+    <ClCompile Include="GameClear.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GaussianBlur.cpp" />
     <ClCompile Include="geometry\AABB.cpp" />
@@ -354,6 +356,7 @@
     <ClCompile Include="AbilityStrobeFlash.cpp" />
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="Test.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="tklFile.cpp" />
     <ClCompile Include="TknFile.cpp" />
   </ItemGroup>
@@ -449,6 +452,8 @@
     <ClInclude Include="FlashLightConstant.h" />
     <ClInclude Include="FlashLightInclude.h" />
     <ClInclude Include="FontRender.h" />
+    <ClInclude Include="GameClear.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="geometry\AABB.h" />
@@ -485,6 +490,7 @@
     <ClInclude Include="system\system.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="PlayerConstant.h" />
+    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="tklFile.h" />
     <ClInclude Include="TknFile.h" />
   </ItemGroup>

@@ -16,16 +16,6 @@ namespace nsHikageri
 		}
 		void PlayerBitten::ExecuteUpdate()
 		{
-			//プレイヤーカメラとモデルの向きを設定。
-			Vector3 dir = m_enemy->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head") - m_player->GetPlayerCamera()->GetCameraPos();
-			dir.Normalize();
-			m_player->GetPlayerCamera()->SetCameraDir(dir);
-
-			float angle = atan2(dir.x, dir.z);
-			Quaternion qRot;
-			qRot.SetRotation(Vector3::AxisY, angle);
-			m_player->GetPlayerModel()->SetRotation(qRot);
-
 			switch (m_bittenStates)
 			{
 			case enBittenState_PreBitten:
@@ -51,6 +41,49 @@ namespace nsHikageri
 		}
 		void PlayerBitten::PreBitten()
 		{
+			//プレイヤーのカメラの向きを設定。
+			Vector3 toEnemyDir = m_enemy->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head") - m_player->GetPlayerCamera()->GetCameraPos();
+			toEnemyDir.Normalize();
+			Vector3 cameraDir = m_player->GetPlayerCamera()->GetDirection();
+			//エネミーへの向きと、カメラの向きで内積を取る。
+			float dot = Dot(toEnemyDir, cameraDir);
+
+			//内積の結果によって、カメラの動きが変化
+			Vector3 dir = m_player->GetPlayerCamera()->GetDirection();
+			//向きがほぼ同じなら、同じにする。
+			if (dot >= 0.99f)
+			{
+				dir = toEnemyDir;
+			}
+			//0以上なら、滑らかに相手に振り向く
+			else if(dot >= 0)
+			{				
+				dir += (toEnemyDir - cameraDir) * CAMERA_TURN_SPEED;
+			}
+			//0以下なら、まずカメラを左右に回転させる。
+			else
+			{
+				Vector3 enemyRight = Cross(toEnemyDir, Vector3::AxisY);
+				//右を向く方が早いなら右を向く
+				if (Dot(enemyRight, cameraDir) >= 0)
+				{
+					dir += m_player->GetPlayerCamera()->GetCameraRight() * CAMERA_TURN_SPEED;
+				}
+				//左を向く方が早いなら左を向く
+				else
+				{
+					dir += m_player->GetPlayerCamera()->GetCameraRight() * -CAMERA_TURN_SPEED;
+				}
+			}
+
+			m_player->GetPlayerCamera()->SetCameraDir(dir);
+
+			//モデルの向きを設定。
+			float angle = atan2(dir.x, dir.z);
+			Quaternion qRot;
+			qRot.SetRotation(Vector3::AxisY, angle);
+			m_player->GetPlayerModel()->SetRotation(qRot);
+
 			//エネミーの噛みつきが次のステップへ移行したら、プレイヤーも次のステップへ移行
 			if (m_enemy->GetEnemyAttack()->GetBiteState() == nsEnemy::EnemyAttack::enBiteState_Bite)
 			{
@@ -70,6 +103,16 @@ namespace nsHikageri
 			{
 				SetBittenState(enBittenState_EndBitten);
 			}
+
+			//プレイヤーカメラとモデルの向きを設定。
+			Vector3 dir = m_enemy->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head") - m_player->GetPlayerCamera()->GetCameraPos();
+			dir.Normalize();
+			m_player->GetPlayerCamera()->SetCameraDir(dir);
+
+			float angle = atan2(dir.x, dir.z);
+			Quaternion qRot;
+			qRot.SetRotation(Vector3::AxisY, angle);
+			m_player->GetPlayerModel()->SetRotation(qRot);
 		}
 		void PlayerBitten::EndBitten()
 		{
