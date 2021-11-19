@@ -8,7 +8,7 @@ namespace nsHikageri
 		//モデルの状態
 		enum EModel {
 			eModel,	//画面に描画されるモデル
-			eModel_Shadow,	//影を描画する用モデル
+			//eModel_Shadow,	//影を描画する用モデル
 			eModel_SpotLight00,	//スポットライトマップに使用するモデル	
 			eModel_SpotLight01,
 			eModel_SpotLight02,

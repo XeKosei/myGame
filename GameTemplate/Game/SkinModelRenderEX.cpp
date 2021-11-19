@@ -23,7 +23,7 @@ namespace nsHikageri
 		stoneModelInitData.m_tkmFilePath = modelPath;
 
 		clairvoyanceModelInitData.m_fxFilePath = "Assets/shader/Clairvoyance.fx";
-		stoneModelInitData.m_fxFilePath = "Assets/shader/shadowReceiver.fx";
+		stoneModelInitData.m_fxFilePath = "Assets/shader/stoneModel.fx";
 
 		clairvoyanceModelInitData.m_vsEntryPointFunc = "VSMain";
 		stoneModelInitData.m_vsEntryPointFunc = "VSMain";
@@ -46,14 +46,17 @@ namespace nsHikageri
 		clairvoyanceModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetSpotLigCameraDataSize(0);
 		clairvoyanceModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetSpotLigCameraDatas(0);
 
-		stoneModelInitData.m_expandShaderResoruceView[0] = &PostEffectManager::GetInstance()->GetBlurShadowMap();
-		stoneModelInitData.m_expandShaderResoruceView[1] = &PostEffectManager::GetInstance()->GetSpotLightMap(0);
+		//stoneModelInitData.m_expandShaderResoruceView[0] = &PostEffectManager::GetInstance()->GetBlurShadowMap();
+		stoneModelInitData.m_expandShaderResoruceView[0] = &PostEffectManager::GetInstance()->GetSpotLightMap(0);
+		stoneModelInitData.m_expandShaderResoruceView[1] = &PostEffectManager::GetInstance()->GetSpotLightMap(1);
+		stoneModelInitData.m_expandShaderResoruceView[2] = &PostEffectManager::GetInstance()->GetSpotLightMap(2);
+		
 		stoneModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigDataSize();
 		stoneModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigDatas();
-		stoneModelInitData.m_expandConstantBufferSize[1] = LightManager::GetInstance()->GetLigCameraDataSize();
-		stoneModelInitData.m_expandConstantBuffer[1] = LightManager::GetInstance()->GetLigCameraDatas();
-		stoneModelInitData.m_expandConstantBufferSize[2] = LightManager::GetInstance()->GetSpotLigCameraDataSize(0);
-		stoneModelInitData.m_expandConstantBuffer[2] = LightManager::GetInstance()->GetSpotLigCameraDatas(0);
+		//stoneModelInitData.m_expandConstantBufferSize[1] = LightManager::GetInstance()->GetLigCameraDataSize();
+		//stoneModelInitData.m_expandConstantBuffer[1] = LightManager::GetInstance()->GetLigCameraDatas();
+		//stoneModelInitData.m_expandConstantBufferSize[2] = LightManager::GetInstance()->GetSpotLigCameraDataSize(0);
+		//stoneModelInitData.m_expandConstantBuffer[2] = LightManager::GetInstance()->GetSpotLigCameraDatas(0);
 		
 		m_model[eModelEX_Clairvoyance].Init(clairvoyanceModelInitData);
 		m_model[eModelEX_Stone].Init(stoneModelInitData);

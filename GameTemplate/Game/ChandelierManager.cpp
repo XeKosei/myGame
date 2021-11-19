@@ -5,10 +5,12 @@ namespace nsHikageri
 {
 	namespace nsGimmick
 	{
+		using namespace nsChandelierManagerConstant;
+
 		bool ChandelierManager::Start()
 		{
 			////シャンデリア　テスト
-			for (int chandelierNum = 0; chandelierNum < 10; chandelierNum++)
+			for (int chandelierNum = 0; chandelierNum < CHANDELIER_NUM; chandelierNum++)
 			{
 				m_chandelier[chandelierNum] = NewGO<nsGimmick::Chandelier>(1);
 				m_chandelier[chandelierNum]->SetPlayer(m_player);
@@ -19,11 +21,11 @@ namespace nsHikageri
 			for (int i = 0; i < 2; i++)
 			{
 				//スポットライト
-				m_spotLig[i] = NewGO<SpotLight>(0);
-				m_spotLig[i]->SetColor({ 10.0f,10.0f,10.0f });
+				m_spotLig[i] = NewGO<SpotLight>(1);
+				m_spotLig[i]->SetColor(CHANDELIER_SPOTLIGHT_COLOR);
 				m_spotLig[i]->SetPosition(m_chandelierPos[i]);
-				m_spotLig[i]->SetRange(10000);
-				m_spotLig[i]->SetAngle(1);
+				m_spotLig[i]->SetRange(CHANDELIER_SPOTLIGHT_RANGE);
+				m_spotLig[i]->SetAngle(CHANDELIER_SPOTLIGHT_ANGLE / 2);	//半径なので2で割る
 				Vector3 targetPos = m_chandelierPos[i];
 				targetPos.y = 0.0f;
 				Vector3 dir = targetPos - m_chandelierPos[i];
@@ -32,17 +34,18 @@ namespace nsHikageri
 
 				nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_chandelierPos[i], i + 1);				
 				nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget(targetPos, i + 1);
-				nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(2, i + 1);
+				nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(CHANDELIER_SPOTLIGHT_ANGLE, i + 1);
 			}
 
 			return true;
 		}
 		void ChandelierManager::Update()
 		{
+			//プレイヤーとの距離が近い二つにスポットライトとライトカメラが付けられる。
 			Vector3 plPos = m_player->GetPlayerMove()->GetPosition();
 			float toPlDis = (plPos - m_chandelierPos[0]).Length();
 			int cameraPosNo[2] = { 0,1 };
-			for (int no = 1; no < 10; no++)
+			for (int no = 1; no < CHANDELIER_NUM; no++)
 			{
 				float dis = (plPos - m_chandelierPos[no]).Length();
 				if (dis < toPlDis)

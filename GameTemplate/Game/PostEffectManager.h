@@ -38,9 +38,9 @@ namespace nsHikageri
 
 		Texture& GetMainRenderTarget() { return m_mainRenderTarget.GetRenderTargetTexture(); }
 
-		Texture& GetShadowMap() { return m_shadowMap.GetRenderTargetTexture(); };
+		//Texture& GetShadowMap() { return m_shadowMap.GetRenderTargetTexture(); };
 
-		Texture& GetBlurShadowMap() { return m_shadowBlur.GetBokeTexture(); };
+		//Texture& GetBlurShadowMap() { return m_shadowBlur.GetBokeTexture(); };
 
 		Texture& GetSpotLightMap(int no) { return m_spotLightMap[no].GetRenderTargetTexture(); };
 
@@ -72,9 +72,9 @@ namespace nsHikageri
 		GaussianBlur m_gaussianBlur[4];//ブラー
 
 		bool m_shadowMode = false;	//シャドウが有効かどうか
-		RenderTarget m_shadowMap;
+		//RenderTarget m_shadowMap;
 		RenderTarget m_spotLightMap[3];
-		GaussianBlur m_shadowBlur;
+		//GaussianBlur m_shadowBlur;
 		RenderTarget m_clairvoyanceMap;
 	};
 

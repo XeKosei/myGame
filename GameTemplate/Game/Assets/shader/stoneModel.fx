@@ -58,12 +58,12 @@ cbuffer LightDataCb : register(b1)
 	int spotLigNum;
 };
 
-cbuffer LightCameraCb : register(b2)
-{
-	float4x4 mLVP;
-	float3 lightCameraPos;
-	float3 lightCameraDir;
-};
+//cbuffer LightCameraCb : register(b2)
+//{
+//	float4x4 mLVP;
+//	float3 lightCameraPos;
+//	float3 lightCameraDir;
+//};
 
 ////////////////////////////////////////////////
 // 構造体
@@ -88,16 +88,20 @@ struct SPSIn {
 	float3 worldPos		: TEXCOORD1;
 	float3 normalInView : TEXCOORD2;
 	float4 posInLVP 	: TEXCOORD3;
-	float4 posInSpotLVP : TEXCOORD4;
+	float4 posInSpotLVP00 : TEXCOORD4;
+	float4 posInSpotLVP01 : TEXCOORD5;
+	float4 posInSpotLVP02 : TEXCOORD6;
 };
 
 ////////////////////////////////////////////////
 // グローバル変数。
 ////////////////////////////////////////////////
 Texture2D<float4> g_albedo : register(t0);				//アルベドマップ
-Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
-Texture2D<float4> g_clairvoyanceMap : register(t11);	//透視マップ
-Texture2D<float4> g_spotLightMap : register(t12);		//スポットライトマップ
+//Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
+//Texture2D<float4> g_clairvoyanceMap : register(t10);	//透視マップ
+Texture2D<float4> g_spotLightMap00 : register(t10);		//スポットライトマップ
+Texture2D<float4> g_spotLightMap01 : register(t11);		//スポットライトマップ
+Texture2D<float4> g_spotLightMap02 : register(t12);		//スポットライトマップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。
 sampler g_sampler : register(s0);	//サンプラステート。
 
@@ -138,7 +142,7 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 		m = mWorld;
 	}
 	psIn.pos = mul(m, vsIn.pos);
-	
+
 	psIn.worldPos = psIn.pos;
 
 	psIn.pos = mul(mView, psIn.pos);
@@ -150,39 +154,41 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 
 	psIn.uv = vsIn.uv;
 
-	psIn.posInLVP = mul(mLVP,float4(psIn.worldPos, 1.0f));
+	//psIn.posInLVP = mul(mLVP,float4(psIn.worldPos, 1.0f));
 
-	////本来の比較用の距離はこっち
-	//psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
-	//ここから平行光源の深度チェックのテスト用。
-	//ライトの向きを取得。
-	float3 cameraDir = lightCameraDir;
-	//正規化されてるはずだけど、念の為。
-	cameraDir = normalize(cameraDir);
-	float3 axisX = {1.0f,0.0f,0.0f};
-	float3 lightCameraAnotherAxis = cross(axisX,cameraDir);
-	//axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
-	float3 start = psIn.worldPos;
-	//スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
-	float3 end = psIn.worldPos + -100 * cameraDir;
-	//ポリゴンと線分の交差判定を参考に、
-	//仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
-	//3点でできる平面との交点を求めていく。
-	float3 toStart = start - lightCameraPos;
-	float3 toEnd = end - lightCameraPos;
-	float a = dot(cameraDir,toStart);
-	float3 cameraDirRev = -cameraDir;
-	float b = dot(cameraDirRev,toEnd);
-	//crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
-	float3 crossPoint = toStart - toEnd;
-	crossPoint *= b / (a+b);
-	crossPoint += end;
+	//////本来の比較用の距離はこっち
+	////psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
+	////ここから平行光源の深度チェックのテスト用。
+	////ライトの向きを取得。
+	//float3 cameraDir = lightCameraDir;
+	////正規化されてるはずだけど、念の為。
+	//cameraDir = normalize(cameraDir);
+	//float3 axisX = {1.0f,0.0f,0.0f};
+	//float3 lightCameraAnotherAxis = cross(axisX,cameraDir);
+	////axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
+	//float3 start = psIn.worldPos;
+	////スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
+	//float3 end = psIn.worldPos + -100 * cameraDir;
+	////ポリゴンと線分の交差判定を参考に、
+	////仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
+	////3点でできる平面との交点を求めていく。
+	//float3 toStart = start - lightCameraPos;
+	//float3 toEnd = end - lightCameraPos;
+	//float a = dot(cameraDir,toStart);
+	//float3 cameraDirRev = -cameraDir;
+	//float b = dot(cameraDirRev,toEnd);
+	////crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
+	//float3 crossPoint = toStart - toEnd;
+	//crossPoint *= b / (a+b);
+	//crossPoint += end;
 
-	psIn.posInLVP.z = length(psIn.worldPos - crossPoint)/2000.0f;
+	//psIn.posInLVP.z = length(psIn.worldPos - crossPoint)/2000.0f;
 	//ここまで平行光源の深度チェックのテスト用。
 
 	//スポットライトビューのスクリーン空間の座標を計算
-	psIn.posInSpotLVP = mul(mSpotLVP, float4(psIn.worldPos, 1.0f));
+	psIn.posInSpotLVP00 = mul(spotLigCameraData[0].mSpotLVP, float4(psIn.worldPos, 1.0f));
+	psIn.posInSpotLVP01 = mul(spotLigCameraData[1].mSpotLVP, float4(psIn.worldPos, 1.0f));
+	psIn.posInSpotLVP02 = mul(spotLigCameraData[2].mSpotLVP, float4(psIn.worldPos, 1.0f));
 
 	////ライトの向きを取得。
 	//cameraDir = spotLightCameraDir;
@@ -227,10 +233,10 @@ SPSIn VSSkinMain(SVSIn vsIn)
 }
 
 //ランバート拡散反射を計算する。
-float3 CalcLambertDiffuse(float3 ligDir, float3 ligColor,float3 normal )
+float3 CalcLambertDiffuse(float3 ligDir, float3 ligColor, float3 normal)
 {
 	float t = dot(normal, -ligDir);
-	
+
 	if (t < 0)
 	{
 		t = 0;
@@ -250,7 +256,7 @@ float3 CalcPhongSpecular(float3 ligDir, float3 ligColor, float3 worldPos, float3
 	float3 refVec = reflect(ligDir, normal);
 
 	float t = dot(toEye, refVec);
-	
+
 	if (t < 0)
 	{
 		t = 0;
@@ -261,7 +267,7 @@ float3 CalcPhongSpecular(float3 ligDir, float3 ligColor, float3 worldPos, float3
 	return ligColor * t;
 }
 
-float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView,float3 normal)
+float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView, float3 normal)
 {
 	float power1 = 1.0f - max(0.0f, dot(ligDir, normal));
 
@@ -287,7 +293,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 	if (albedoColor.y > 0.8f)
 		albedoColor.y = 0.8f;
-	else if(albedoColor.y < 0.2f);
+	else if (albedoColor.y < 0.2f);
 		albedoColor.y = 0.2f;
 
 	if (albedoColor.z > 0.8f)
@@ -314,7 +320,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 		float3 finalLig = diffuseLig + specularLig;
 
-		finalColor.xyz +=  finalLig;
+		finalColor.xyz += finalLig;
 	}
 
 	//ポイントライト
@@ -332,7 +338,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		//リムライト
 		//float3 limLig = CalcLimLight(pointLigDir, pointLigData[i].ligColor, psIn.normalInView, psIn.normal);
 
-		float3 finalLig = diffuseLig +specularLig;
+		float3 finalLig = diffuseLig + specularLig;
 
 		//距離による減衰
 
@@ -349,31 +355,40 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 		finalColor.xyz += finalLig;
 	}
+	Texture2D<float4> spotLightMap[3];
+	spotLightMap[0] = g_spotLightMap00;
+	spotLightMap[1] = g_spotLightMap01;
+	spotLightMap[2] = g_spotLightMap02;
+
+	float4 posInSpotLVP[3];
+	posInSpotLVP[0] = psIn.posInSpotLVP00;
+	posInSpotLVP[1] = psIn.posInSpotLVP01;
+	posInSpotLVP[2] = psIn.posInSpotLVP02;
 
 	//スポットライト
 	for (int i = 0; i < spotLigNum; i++)
 	{
-		float2 spotLightMapUV = psIn.posInSpotLVP.xy / psIn.posInSpotLVP.w;
+		float2 spotLightMapUV = posInSpotLVP[i].xy / posInSpotLVP[i].w;
 		spotLightMapUV *= float2(0.5f, -0.5f);
 		spotLightMapUV += 0.5f;
 
-		float zInSpotLVP = psIn.posInSpotLVP.z / psIn.posInSpotLVP.w;
+		float zInSpotLVP = posInSpotLVP[i].z / posInSpotLVP[i].w;
 		if (spotLightMapUV.x > 0.0f && spotLightMapUV.x < 1.0f
 			&& spotLightMapUV.y > 0.0f && spotLightMapUV.y < 1.0f)
 		{
-			float zInSpotLightMap = g_spotLightMap.Sample(g_sampler, spotLightMapUV).x;
+			float zInSpotLightMap = spotLightMap[i].Sample(g_sampler, spotLightMapUV).x;
 
 			if (zInSpotLVP < zInSpotLightMap + 0.0001f)// && zInSpotLVP <= 1.0f)
 			{
-				//透視の処理
-				float4 clairvoyanceMap = g_clairvoyanceMap.Sample(g_sampler, spotLightMapUV);
-				if (clairvoyanceMap.x > 0.0f)
-				{	
-					albedoColor.x = zInSpotLightMap * 10.0f;
-					albedoColor.y = 0.0f;
-					albedoColor.z = 0.0f;		
-				}
-				//ここまで透視処理
+				////透視の処理
+				//float4 clairvoyanceMap = g_clairvoyanceMap.Sample(g_sampler, spotLightMapUV);
+				//if (clairvoyanceMap.x > 0.0f)
+				//{
+				//	albedoColor.x = zInSpotLightMap * 10.0f;
+				//	albedoColor.y = 0.0f;
+				//	albedoColor.z = 0.0f;
+				//}
+				////ここまで透視処理
 
 				float3 spotLigDir = psIn.worldPos - spotLigData[i].ligPos;
 				spotLigDir = normalize(spotLigDir);
@@ -441,51 +456,75 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	}
 
 	//環境光
-	float3 ambientLig = 0.2f;
+	//懐中電灯に照らされていない場合は、遠くが暗く見えるようにする。
+	float3 ambientLig = 1 - (length(eyePos - psIn.worldPos) * 0.001f);
+	for (int i = 0; i < spotLigNum; i++)
+	{
+		if (spotLigCameraData[i].isSpotLightSwitchOn == 1)
+		{
+			float3 toPsInDir = psIn.worldPos - spotLigCameraData[i].spotLightCameraPos;
+			toPsInDir = normalize(toPsInDir);
+			float3 spotLigDir = normalize(spotLigCameraData[i].spotLightCameraDir);
+			float toPsInAngle = dot(toPsInDir, spotLigDir);
+			toPsInAngle = acos(toPsInAngle);
+			if (toPsInAngle < 0.0f)
+			{
+				toPsInAngle *= -1.0f;
+			}
+			float spotLigAngle = spotLigCameraData[i].spotLightCameraAngle;
+			spotLigAngle /= 2;
+
+			if (toPsInAngle <= spotLigAngle && ambientLig.r <= 0.3f)
+			{
+				ambientLig = 0.3f;
+			}
+		}
+	}
+
 	finalColor.xyz += ambientLig;
 
 	finalColor *= albedoColor;
 
 	//影
-	float2 shadowMapUV = psIn.posInLVP.xy / psIn.posInLVP.w;
-	shadowMapUV *= float2(0.5f, -0.5f);
-	shadowMapUV += 0.5f;
+	//float2 shadowMapUV = psIn.posInLVP.xy / psIn.posInLVP.w;
+	//shadowMapUV *= float2(0.5f, -0.5f);
+	//shadowMapUV += 0.5f;
 
-	//float zInLVP = psIn.posInLVP.z;
-	float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
+	////float zInLVP = psIn.posInLVP.z;
+	//float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
 
-	if( shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
-	{
-		//シャドウマップからライトからの距離、距離の2乗をサンプリング
-		float2 shadowValue = g_shadowMap.Sample(g_sampler,shadowMapUV).xy;
-		
-		//まずこのピクセルが遮蔽されているか調べる
-		//zInLVPはライトから影が描かれるモデルへの距離、shadowValue.rはライトから影を落とすモデルへの距離
-		//影が描かれるモデルへの距離より影を落とすモデルへの距離が短いなら影が描かれるモデルは遮蔽されている。
-		if(zInLVP > shadowValue.r && zInLVP <= 1.0f)// && zInLVP < shadowValue.r + 0.1f)
-		{
-			//チェビシェフの不等式を使う
-			float depth_sq = shadowValue.x * shadowValue.x;
-			//このグループの分散具合を求める
-			//分散が大きいほど、varianceの値は大きくなる。
-			float variance = min(max(shadowValue.y - depth_sq,0.0001f),1.0f);
-			//このピクセルのライトから見た深度値とシャドウマップの平均の深度値の差を求める。
-			float md = zInLVP - shadowValue.x;
-			//光が届く確率を求める
-			float lit_factor = variance / (variance + md * md);
-			//影の色を求める
-			float3 shadowColor = finalColor.xyz * 0.3f;
-			
-			//光が当たる確率を使って通常カラーとシャドウカラーを線形補間
-			finalColor.xyz = lerp(shadowColor,finalColor.xyz,lit_factor);
-		}
+	//if( shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
+	//{
+	//	//シャドウマップからライトからの距離、距離の2乗をサンプリング
+	//	float2 shadowValue = g_shadowMap.Sample(g_sampler,shadowMapUV).xy;
+	//	
+	//	//まずこのピクセルが遮蔽されているか調べる
+	//	//zInLVPはライトから影が描かれるモデルへの距離、shadowValue.rはライトから影を落とすモデルへの距離
+	//	//影が描かれるモデルへの距離より影を落とすモデルへの距離が短いなら影が描かれるモデルは遮蔽されている。
+	//	if(zInLVP > shadowValue.r && zInLVP <= 1.0f)// && zInLVP < shadowValue.r + 0.1f)
+	//	{
+	//		//チェビシェフの不等式を使う
+	//		float depth_sq = shadowValue.x * shadowValue.x;
+	//		//このグループの分散具合を求める
+	//		//分散が大きいほど、varianceの値は大きくなる。
+	//		float variance = min(max(shadowValue.y - depth_sq,0.0001f),1.0f);
+	//		//このピクセルのライトから見た深度値とシャドウマップの平均の深度値の差を求める。
+	//		float md = zInLVP - shadowValue.x;
+	//		//光が届く確率を求める
+	//		float lit_factor = variance / (variance + md * md);
+	//		//影の色を求める
+	//		float3 shadowColor = finalColor.xyz * 0.3f;
+	//		
+	//		//光が当たる確率を使って通常カラーとシャドウカラーを線形補間
+	//		finalColor.xyz = lerp(shadowColor,finalColor.xyz,lit_factor);
+	//	}
 
-		/*
-		float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
-		if (zInLVP > zInShadowMap) {
-			finalColor.xyz *= 0.5f;
-		}*/
-	}
+	//	/*
+	//	float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
+	//	if (zInLVP > zInShadowMap) {
+	//		finalColor.xyz *= 0.5f;
+	//	}*/
+	//}
 
 	return finalColor;
 }

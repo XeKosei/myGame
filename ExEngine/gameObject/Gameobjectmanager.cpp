@@ -53,20 +53,20 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 
 	//TODO:暫定処理、フラグ含め別の形にしたい(らしい)
 	//影を先に描いてからモデルに描いた影を描き足すので先にシャドウマップを作る。
-	nsHikageri::PostEffectManager::GetInstance()->ShadowRender(rc);
+	//nsHikageri::PostEffectManager::GetInstance()->ShadowRender(rc);
 
-	//shadow
-	if (nsHikageri::PostEffectManager::GetInstance()->GetShadowFlag())
-	{
-		rc.SetStep(RenderContext::eStep_RenderShadowMap);
-		//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
-		for (auto& goList : m_gameObjectListArray) {
-			for (auto& go : goList) {
-				go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetLightCamera());
-			}
-		}
-	}
-	nsHikageri::PostEffectManager::GetInstance()->EndShadowRender(rc);
+	////shadow
+	//if (nsHikageri::PostEffectManager::GetInstance()->GetShadowFlag())
+	//{
+	//	rc.SetStep(RenderContext::eStep_RenderShadowMap);
+	//	//ShadowRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+	//	for (auto& goList : m_gameObjectListArray) {
+	//		for (auto& go : goList) {
+	//			go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetLightCamera());
+	//		}
+	//	}
+	//}
+	//nsHikageri::PostEffectManager::GetInstance()->EndShadowRender(rc);
 
 	//スポットライト用のモデルを描く。
 	nsHikageri::PostEffectManager::GetInstance()->SpotLightRender(rc, 0);
@@ -98,6 +98,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 		}
 	}
 	nsHikageri::PostEffectManager::GetInstance()->EndSpotLightRender(rc, 2);
+	//ここまでスポットライト用
 
 	//透視用のモデルを描く
 	nsHikageri::PostEffectManager::GetInstance()->ClairvoyanceRender(rc);

@@ -68,22 +68,23 @@ namespace nsHikageri
 			m_bokeLuminanceSprite.Init(bokeLuminanceSpriteInitData);
 		}
 
-		if (m_shadowMode)
-		{
-			//シャドウマップの作成
-			float clearColor[4] = { 1.0f,1.0f,1.0f,1.0f };
-			m_shadowMap.Create(
-				2048,
-				2048,
-				1,
-				1,
-				DXGI_FORMAT_R32G32_FLOAT,
-				DXGI_FORMAT_D32_FLOAT,
-				clearColor
-			);
-			//VSM用にテクスチャをぼかす。
-			m_shadowBlur.Init(&m_shadowMap.GetRenderTargetTexture());
-		}
+		//if (m_shadowMode)
+		//{
+		//	//シャドウマップの作成
+		//	float clearColor[4] = { 1.0f,1.0f,1.0f,1.0f };
+		//	m_shadowMap.Create(
+		//		2048,
+		//		2048,
+		//		1,
+		//		1,
+		//		DXGI_FORMAT_R32G32_FLOAT,
+		//		DXGI_FORMAT_D32_FLOAT,
+		//		clearColor
+		//	);
+		//	//VSM用にテクスチャをぼかす。
+		//	m_shadowBlur.Init(&m_shadowMap.GetRenderTargetTexture());
+		//}
+
 		//スポットライト用のマップの作成
 		for (int no = 0; no < 3; no++)
 		{
@@ -119,7 +120,7 @@ namespace nsHikageri
 
 	void PostEffectManager::ShadowRender(RenderContext& rc)
 	{
-		if (m_shadowMode)
+		/*if (m_shadowMode)
 		{
 			rc.WaitUntilToPossibleSetRenderTarget(m_shadowMap);
 			rc.SetRenderTargetAndViewport(m_shadowMap);
@@ -132,11 +133,11 @@ namespace nsHikageri
 			shadowRect.right = 2048;
 			shadowRect.bottom = 2048;
 			rc.SetScissorRect(shadowRect);
-		}
+		}*/
 	}
 	void PostEffectManager::EndShadowRender(RenderContext& rc)
 	{
-		if (m_shadowMode)
+		/*if (m_shadowMode)
 		{
 			rc.WaitUntilFinishDrawingToRenderTarget(m_shadowMap);
 
@@ -148,7 +149,7 @@ namespace nsHikageri
 			normalRect.right = 1280;
 			normalRect.bottom = 720;
 			rc.SetScissorRect(normalRect);
-		}
+		}*/
 	}
 
 	void PostEffectManager::SpotLightRender(RenderContext& rc, int no)

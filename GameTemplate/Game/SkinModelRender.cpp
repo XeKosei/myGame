@@ -17,34 +17,34 @@ namespace nsHikageri
 		//モデルの初期化データ
 		ModelInitData modelInitData;
 		//影の初期化データ
-		ModelInitData shadowModelInitData;
+		//ModelInitData shadowModelInitData;
 		//スポットライト用のモデルの初期化データ
 		ModelInitData spotLightModelInitData[3];
 
 		//モデルのファイルパスを指定
 		modelInitData.m_tkmFilePath = modelPath;
-		shadowModelInitData.m_tkmFilePath = modelPath;
+		//shadowModelInitData.m_tkmFilePath = modelPath;
 		spotLightModelInitData[0].m_tkmFilePath = modelPath;
 		spotLightModelInitData[1].m_tkmFilePath = modelPath;
 		spotLightModelInitData[2].m_tkmFilePath = modelPath;
 
 		//シェーダーパスの指定
 		modelInitData.m_fxFilePath = "Assets/shader/shadowReceiver.fx";
-		shadowModelInitData.m_fxFilePath = "Assets/shader/shadow.fx";
+		//shadowModelInitData.m_fxFilePath = "Assets/shader/shadow.fx";
 		spotLightModelInitData[0].m_fxFilePath = "Assets/shader/GetDepth.fx";
 		spotLightModelInitData[1].m_fxFilePath = "Assets/shader/GetDepth.fx";
 		spotLightModelInitData[2].m_fxFilePath = "Assets/shader/GetDepth.fx";
 
 		//シェーダーの頂点シェーダーのエントリー関数名の指定
 		modelInitData.m_vsEntryPointFunc = "VSMain";
-		shadowModelInitData.m_vsEntryPointFunc = "VSMain";
+		//shadowModelInitData.m_vsEntryPointFunc = "VSMain";
 		spotLightModelInitData[0].m_vsEntryPointFunc = "VSMain";
 		spotLightModelInitData[1].m_vsEntryPointFunc = "VSMain";
 		spotLightModelInitData[2].m_vsEntryPointFunc = "VSMain";
 
 		//シェーダーのピクセルシェーダーのエントリー関数名の指定
 		modelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
-		shadowModelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
+		//shadowModelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
 		spotLightModelInitData[0].m_vsSkinEntryPointFunc = "VSSkinMain";
 		spotLightModelInitData[1].m_vsSkinEntryPointFunc = "VSSkinMain";
 		spotLightModelInitData[2].m_vsSkinEntryPointFunc = "VSSkinMain";
@@ -54,7 +54,7 @@ namespace nsHikageri
 		{
 			m_skeleton.Init(skeletonPath);
 			modelInitData.m_skeleton = &m_skeleton;
-			shadowModelInitData.m_skeleton = &m_skeleton;
+			//shadowModelInitData.m_skeleton = &m_skeleton;
 			spotLightModelInitData[0].m_skeleton = &m_skeleton;
 			spotLightModelInitData[1].m_skeleton = &m_skeleton;
 			spotLightModelInitData[2].m_skeleton = &m_skeleton;
@@ -62,35 +62,35 @@ namespace nsHikageri
 
 		//カラーバッファのフォーマットを指定。
 		modelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
-		shadowModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32_FLOAT;
+		//shadowModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32_FLOAT;
 		spotLightModelInitData[0].m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		spotLightModelInitData[1].m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		spotLightModelInitData[2].m_colorBufferFormat = DXGI_FORMAT_R32G32B32A32_FLOAT;
 
 		//モデルデータの上方向の軸を指定
 		modelInitData.m_modelUpAxis = enModelUpAxisZ;
-		shadowModelInitData.m_modelUpAxis = enModelUpAxisZ;
+		//shadowModelInitData.m_modelUpAxis = enModelUpAxisZ;
 		spotLightModelInitData[0].m_modelUpAxis = enModelUpAxisZ;
 		spotLightModelInitData[1].m_modelUpAxis = enModelUpAxisZ;
 		spotLightModelInitData[2].m_modelUpAxis = enModelUpAxisZ;
 
 		//モデルの影を落とすために影のテクスチャを紐づける。
-		modelInitData.m_expandShaderResoruceView[0] = &PostEffectManager::GetInstance()->GetBlurShadowMap();
-		modelInitData.m_expandShaderResoruceView[1] = &PostEffectManager::GetInstance()->GetClairvoyanceMap();
-		modelInitData.m_expandShaderResoruceView[2] = &PostEffectManager::GetInstance()->GetSpotLightMap(0);
-		modelInitData.m_expandShaderResoruceView[3] = &PostEffectManager::GetInstance()->GetSpotLightMap(1);
-		modelInitData.m_expandShaderResoruceView[4] = &PostEffectManager::GetInstance()->GetSpotLightMap(2);
+		//modelInitData.m_expandShaderResoruceView[0] = &PostEffectManager::GetInstance()->GetBlurShadowMap();
+		modelInitData.m_expandShaderResoruceView[0] = &PostEffectManager::GetInstance()->GetClairvoyanceMap();
+		modelInitData.m_expandShaderResoruceView[1] = &PostEffectManager::GetInstance()->GetSpotLightMap(0);
+		modelInitData.m_expandShaderResoruceView[2] = &PostEffectManager::GetInstance()->GetSpotLightMap(1);
+		modelInitData.m_expandShaderResoruceView[3] = &PostEffectManager::GetInstance()->GetSpotLightMap(2);
 
 		//定数バッファをモデルに紐づける
 		modelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigDataSize();
 		modelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigDatas();
-		modelInitData.m_expandConstantBufferSize[1] = LightManager::GetInstance()->GetLigCameraDataSize();
-		modelInitData.m_expandConstantBuffer[1] = LightManager::GetInstance()->GetLigCameraDatas();
+		//modelInitData.m_expandConstantBufferSize[1] = LightManager::GetInstance()->GetLigCameraDataSize();
+		//modelInitData.m_expandConstantBuffer[1] = LightManager::GetInstance()->GetLigCameraDatas();
 		//modelInitData.m_expandConstantBufferSize[2] = LightManager::GetInstance()->GetSpotLigCameraDataSize();
 		//modelInitData.m_expandConstantBuffer[2] = LightManager::GetInstance()->GetSpotLigCameraDatas();
 
-		shadowModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigCameraDataSize();
-		shadowModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigCameraDatas();
+		//shadowModelInitData.m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetLigCameraDataSize();
+		//shadowModelInitData.m_expandConstantBuffer[0] = LightManager::GetInstance()->GetLigCameraDatas();
 		
 		spotLightModelInitData[0].m_expandConstantBufferSize[0] = LightManager::GetInstance()->GetSpotLigCameraDataSize(0);
 		spotLightModelInitData[0].m_expandConstantBuffer[0] = LightManager::GetInstance()->GetSpotLigCameraDatas(0);
@@ -102,7 +102,7 @@ namespace nsHikageri
 		//モデルの初期化
 		m_model[eModel].Init(modelInitData);
 		//影描画モデルの初期化
-		m_model[eModel_Shadow].Init(shadowModelInitData);
+		//m_model[eModel_Shadow].Init(shadowModelInitData);
 		//スポットライト用のモデルの初期化
 		m_model[eModel_SpotLight00].Init(spotLightModelInitData[0]);
 		m_model[eModel_SpotLight01].Init(spotLightModelInitData[1]);
@@ -163,7 +163,7 @@ namespace nsHikageri
 			//影を作るモデルの時だけ影を描画
 			if (m_isShadowCaster)
 			{
-				m_model[eModel_Shadow].Draw(rc, camera);
+				//m_model[eModel_Shadow].Draw(rc, camera);
 			}
 			break;
 		case RenderContext::eStep_RenderSpotLightMap00:

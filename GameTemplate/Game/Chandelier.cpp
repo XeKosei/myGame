@@ -28,7 +28,7 @@ namespace nsHikageri
 			Vector3 enemyPos = m_enemy->GetEnemyMove()->GetPosition();
 
 			//プレイヤーが近くにいるならば、
-			if ((playerPos - m_position).Length() <= CHANDELIER_LIGHT_RANGE
+			if ((playerPos - m_position).Length() <= CHANDELIER_FORCE_RANGE
 				&& m_enemy->GetEnemyState() != nsEnemy::Enemy::enState_Chase)
 			{
 				//プレイヤーは安心できる。
@@ -36,7 +36,7 @@ namespace nsHikageri
 			}
 
 			//エネミーが近くにいるならば、
-			if ((enemyPos - m_position).Length() <= CHANDELIER_LIGHT_RANGE)
+			if ((enemyPos - m_position).Length() <= CHANDELIER_FORCE_RANGE)
 			{
 				m_enemy->GetEnemyMove()->SetSlowMoveFlag(true);
 				if (m_enemy->GetEnemyState() == nsEnemy::Enemy::enState_Chase)
