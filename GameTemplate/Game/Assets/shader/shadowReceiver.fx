@@ -36,9 +36,19 @@ struct SpotLigData
 	float ligAngle;
 };
 
+struct SpotLigCameraData
+{
+	float4x4 mSpotLVP;
+	float3 spotLightCameraPos;
+	float spotLightCameraAngle;
+	float3 spotLightCameraDir;
+	float isSpotLightSwitchOn;
+};
+
 cbuffer LightDataCb : register(b1)
 {
 	//各配列数はCLightManager.hのMaxLightNumと同じにすること
+	SpotLigCameraData spotLigCameraData[3];
 	DirectionLigData directionLigData[5];
 	PointLigData pointLigData[50];
 	SpotLigData spotLigData[20];
@@ -53,15 +63,6 @@ cbuffer LightCameraCb : register(b2)
 	float4x4 mLVP;
 	float3 lightCameraPos;
 	float3 lightCameraDir;
-};
-
-cbuffer SpotLightCameraCb : register(b3)
-{
-	float4x4 mSpotLVP;
-	float3 spotLightCameraPos;
-	float spotLightCameraAngle;
-	float3 spotLightCameraDir;
-	int isFlashLightSwitchOn;
 };
 
 ////////////////////////////////////////////////
@@ -87,7 +88,9 @@ struct SPSIn {
 	float3 worldPos		: TEXCOORD1;
 	float3 normalInView : TEXCOORD2;
 	float4 posInLVP 	: TEXCOORD3;
-	float4 posInSpotLVP : TEXCOORD4;
+	float4 posInSpotLVP00 : TEXCOORD4;
+	float4 posInSpotLVP01 : TEXCOORD5;
+	float4 posInSpotLVP02 : TEXCOORD6;
 };
 
 ////////////////////////////////////////////////
@@ -95,8 +98,10 @@ struct SPSIn {
 ////////////////////////////////////////////////
 Texture2D<float4> g_albedo : register(t0);				//アルベドマップ
 Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
-Texture2D<float4> g_spotLightMap : register(t11);		//スポットライトマップ
-Texture2D<float4> g_clairvoyanceMap : register(t12);	//透視マップ
+Texture2D<float4> g_clairvoyanceMap : register(t11);	//透視マップ
+Texture2D<float4> g_spotLightMap00 : register(t12);		//スポットライトマップ
+Texture2D<float4> g_spotLightMap01 : register(t13);		//スポットライトマップ
+Texture2D<float4> g_spotLightMap02 : register(t14);		//スポットライトマップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。
 sampler g_sampler : register(s0);	//サンプラステート。
 
@@ -181,7 +186,9 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 	//ここまで平行光源の深度チェックのテスト用。
 
 	//スポットライトビューのスクリーン空間の座標を計算
-	psIn.posInSpotLVP = mul(mSpotLVP, float4(psIn.worldPos, 1.0f));
+	psIn.posInSpotLVP00 = mul(spotLigCameraData[0].mSpotLVP, float4(psIn.worldPos, 1.0f));
+	psIn.posInSpotLVP01 = mul(spotLigCameraData[1].mSpotLVP, float4(psIn.worldPos, 1.0f));
+	psIn.posInSpotLVP02 = mul(spotLigCameraData[2].mSpotLVP, float4(psIn.worldPos, 1.0f));
 
 	////ライトの向きを取得。
 	//cameraDir = spotLightCameraDir;
@@ -333,19 +340,28 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 		finalColor.xyz += finalLig;
 	}
+	Texture2D<float4> spotLightMap[3];
+	spotLightMap[0] = g_spotLightMap00;
+	spotLightMap[1] = g_spotLightMap01;
+	spotLightMap[2] = g_spotLightMap02;
+
+	float4 posInSpotLVP[3];
+	posInSpotLVP[0] = psIn.posInSpotLVP00;
+	posInSpotLVP[1] = psIn.posInSpotLVP01;
+	posInSpotLVP[2] = psIn.posInSpotLVP02;
 
 	//スポットライト
 	for (int i = 0; i < spotLigNum; i++)
 	{
-		float2 spotLightMapUV = psIn.posInSpotLVP.xy / psIn.posInSpotLVP.w;
+		float2 spotLightMapUV = posInSpotLVP[i].xy / posInSpotLVP[i].w;
 		spotLightMapUV *= float2(0.5f, -0.5f);
 		spotLightMapUV += 0.5f;
 
-		float zInSpotLVP = psIn.posInSpotLVP.z / psIn.posInSpotLVP.w;
+		float zInSpotLVP = posInSpotLVP[i].z / posInSpotLVP[i].w;
 		if (spotLightMapUV.x > 0.0f && spotLightMapUV.x < 1.0f
 			&& spotLightMapUV.y > 0.0f && spotLightMapUV.y < 1.0f)
 		{
-			float zInSpotLightMap = g_spotLightMap.Sample(g_sampler, spotLightMapUV).x;
+			float zInSpotLightMap = spotLightMap[i].Sample(g_sampler, spotLightMapUV).x;
 
 			if (zInSpotLVP < zInSpotLightMap + 0.0001f)// && zInSpotLVP <= 1.0f)
 			{
@@ -427,23 +443,26 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	//環境光
 	//懐中電灯に照らされていない場合は、遠くが暗く見えるようにする。
 	float3 ambientLig = 1 - (length(eyePos - psIn.worldPos) * 0.001f);
-	if (isFlashLightSwitchOn == 1)
+	for (int i = 0; i < spotLigNum; i++)
 	{
-		float3 toPsInDir = psIn.worldPos - spotLightCameraPos;
-		toPsInDir = normalize(toPsInDir);
-		float3 spotLigDir = normalize(spotLightCameraDir);
-		float toPsInAngle = dot(toPsInDir, spotLigDir);
-		toPsInAngle = acos(toPsInAngle);
-		if (toPsInAngle < 0.0f)
+		if (spotLigCameraData[i].isSpotLightSwitchOn == 1)
 		{
-			toPsInAngle *= -1.0f;
-		}
-		float spotLigAngle = spotLightCameraAngle;
-		spotLigAngle /= 2;
+			float3 toPsInDir = psIn.worldPos - spotLigCameraData[i].spotLightCameraPos;
+			toPsInDir = normalize(toPsInDir);
+			float3 spotLigDir = normalize(spotLigCameraData[i].spotLightCameraDir);
+			float toPsInAngle = dot(toPsInDir, spotLigDir);
+			toPsInAngle = acos(toPsInAngle);
+			if (toPsInAngle < 0.0f)
+			{
+				toPsInAngle *= -1.0f;
+			}
+			float spotLigAngle = spotLigCameraData[i].spotLightCameraAngle;
+			spotLigAngle /= 2;
 
-		if (toPsInAngle <= spotLigAngle && ambientLig.r <= 0.5f)
-		{
-			ambientLig = 0.5f;
+			if (toPsInAngle <= spotLigAngle && ambientLig.r <= 0.3f)
+			{
+				ambientLig = 0.3f;
+			}
 		}
 	}
 

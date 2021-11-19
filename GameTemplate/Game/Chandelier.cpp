@@ -16,12 +16,7 @@ namespace nsHikageri
 			m_chandelierModel = NewGO<SkinModelRender>(0);
 			m_chandelierModel->Init("Assets/modelData/chandelier.tkm");
 			m_chandelierModel->SetPosition(m_position);
-
-			//ポイントライト
-			m_pointLig = NewGO<PointLight>(0);
-			m_pointLig->SetColor({ 10.0f,10.0f,10.0f });
-			m_pointLig->SetPosition(m_position);
-			m_pointLig->SetRange(CHANDELIER_LIGHT_RANGE);
+			m_chandelierModel->SetSpotLightCasterFlag(false);
 
 			return true;
 		}

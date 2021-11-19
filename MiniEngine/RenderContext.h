@@ -16,7 +16,9 @@ public:
 	enum EnStep {
 		eStep_Render,	// Render to AllScreen
 		eStep_RenderShadowMap,	// Render to shadowMap
-		eStep_RenderSpotLightMap,	// Render to spotLightMap
+		eStep_RenderSpotLightMap00,	// Render to spotLightMap
+		eStep_RenderSpotLightMap01,
+		eStep_RenderSpotLightMap02,
 		eStep_RenderClairvoyanceMap,	//Render to clairvoyanceMap
 	};
 	/// <summary>

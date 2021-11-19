@@ -23,7 +23,7 @@ namespace nsHikageri
 			/// @param falshFlag true 電源ON / false 電源OFF
 			void SetIsFlashLightSwitchOn(bool falshFlag) { 
 				m_isFalshLightSwitchOn = falshFlag; 
-				LightManager::GetInstance()->SetIsFlashLightSwitchOn(falshFlag);
+				LightManager::GetInstance()->SetIsFlashLightSwitchOn(falshFlag, 0);
 			};
 
 			/// @brief 懐中電灯の電源が入っているかどうかのフラグを取得

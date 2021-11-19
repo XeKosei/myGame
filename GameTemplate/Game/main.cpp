@@ -39,11 +39,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsHikageri::LightManager::GetInstance()->SetLightCameraWidth(LIGHTCAMERA_WIDTH);
 	nsHikageri::LightManager::GetInstance()->SetLightCameraHeight(LIGHTCAMERA_HEIGHT);
 
-	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition({ 0.0f,0.0f,100.0f });
-	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget({ 0.0f,0.0f,0.0f });
-	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraUp({ Vector3::AxisY });
-	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective);//enUpdateProjMatrixFunc_Perspective);
-	nsHikageri::LightManager::GetInstance()->SetIsFlashLightSwitchOn(false);
+	for (int no = 0; no < 3; no++)
+	{
+		nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition({ 0.0f,0.0f,100.0f }, no);
+		nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget({ 0.0f,0.0f,0.0f }, no);
+		nsHikageri::LightManager::GetInstance()->SetSpotLightCameraUp({ Vector3::AxisX }, no);
+		nsHikageri::LightManager::GetInstance()->SetSpotLightCameraUpdateProjMatrixFunc(Camera::enUpdateProjMatrixFunc_Perspective, no);//enUpdateProjMatrixFunc_Perspective);
+		nsHikageri::LightManager::GetInstance()->SetIsFlashLightSwitchOn(false, no);
+	}
 
 	nsHikageri::PostEffectManager::CreateInstance();
 	//ブルームフラグ、シャドウフラグの順番
@@ -55,7 +58,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	// シャドウマップを表示するためのスプライトを初期化する
 	SpriteInitData spriteInitData;
-	spriteInitData.m_textures[0] = &nsHikageri::PostEffectManager::GetInstance()->GetClairvoyanceMap();
+	spriteInitData.m_textures[0] = &nsHikageri::PostEffectManager::GetInstance()->GetSpotLightMap(2);
 	spriteInitData.m_fxFilePath = "Assets/shader/sprite.fx";
 	spriteInitData.m_width = 256;
 	spriteInitData.m_height = 256;

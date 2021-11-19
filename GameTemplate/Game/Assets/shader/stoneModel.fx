@@ -36,9 +36,19 @@ struct SpotLigData
 	float ligAngle;
 };
 
+struct SpotLigCameraData
+{
+	float4x4 mSpotLVP;
+	float3 spotLightCameraPos;
+	float spotLightCameraAngle;
+	float3 spotLightCameraDir;
+	float isSpotLightSwitchOn;
+};
+
 cbuffer LightDataCb : register(b1)
 {
 	//各配列数はCLightManager.hのMaxLightNumと同じにすること
+	SpotLigCameraData spotLigCameraData[3];
 	DirectionLigData directionLigData[5];
 	PointLigData pointLigData[50];
 	SpotLigData spotLigData[20];
@@ -53,15 +63,6 @@ cbuffer LightCameraCb : register(b2)
 	float4x4 mLVP;
 	float3 lightCameraPos;
 	float3 lightCameraDir;
-};
-
-cbuffer SpotLightCameraCb : register(b3)
-{
-	float4x4 mSpotLVP;
-	float3 spotLightCameraPos;
-	float spotLightCameraRange;
-	float3 spotLightCameraDir;
-	bool isFlashLightSwitchOn;
 };
 
 ////////////////////////////////////////////////
@@ -95,8 +96,8 @@ struct SPSIn {
 ////////////////////////////////////////////////
 Texture2D<float4> g_albedo : register(t0);				//アルベドマップ
 Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
-Texture2D<float4> g_spotLightMap : register(t11);		//スポットライトマップ
-Texture2D<float4> g_clairvoyanceMap : register(t12);	//透視マップ
+Texture2D<float4> g_clairvoyanceMap : register(t11);	//透視マップ
+Texture2D<float4> g_spotLightMap : register(t12);		//スポットライトマップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。
 sampler g_sampler : register(s0);	//サンプラステート。
 

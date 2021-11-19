@@ -32,7 +32,7 @@ namespace nsHikageri
 			m_spotLight->SetAngle(m_flashLightAngle / 2);//(スポットライトに送るアングルは半径なので、2で割る。
 
 			//スポットライトカメラの設定
-			LightManager::GetInstance()->SetSpotLightCameraAngle(m_flashLightAngle);
+			LightManager::GetInstance()->SetSpotLightCameraAngle(m_flashLightAngle, 0);
 			//LightManager::GetInstance()->SetSpotLightCameraFar(INI_FLASHLIGHT_RANGE);
 			//懐中電灯関係のインスタンスを作成
 			m_flashLightAction = NewGO<FlashLightAction>(0);
@@ -90,7 +90,7 @@ namespace nsHikageri
 			m_direction = g_camera3D->GetForward();
 			m_direction.Normalize();
 			Vector3 spotLigTarget = m_position + m_direction * TO_SPOTLIGHTCAMERA_TARGET_DIS;
-			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget(spotLigTarget);
+			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget(spotLigTarget, 0);
 			m_spotLight->SetDirection({ m_direction });
 
 			//懐中電灯のモデルを回転させる。
@@ -101,7 +101,7 @@ namespace nsHikageri
 			//懐中電灯の位置を計算。※懐中電灯の位置をずらすのは、後でやらないとモデルの回転が上手く行かない。
 			m_flashLightModel->SetPosition(modelPos);
 			m_spotLight->SetPosition(m_position);
-			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_position);
+			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_position, 0);
 		}
 	}
 }

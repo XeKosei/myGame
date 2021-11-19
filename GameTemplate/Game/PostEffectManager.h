@@ -42,7 +42,7 @@ namespace nsHikageri
 
 		Texture& GetBlurShadowMap() { return m_shadowBlur.GetBokeTexture(); };
 
-		Texture& GetSpotLightMap() { return m_spotLightMap.GetRenderTargetTexture(); };
+		Texture& GetSpotLightMap(int no) { return m_spotLightMap[no].GetRenderTargetTexture(); };
 
 		Texture& GetClairvoyanceMap() {return m_clairvoyanceMap.GetRenderTargetTexture();}
 
@@ -54,8 +54,8 @@ namespace nsHikageri
 		void ShadowRender(RenderContext& rc);
 		void EndShadowRender(RenderContext& rc);
 
-		void SpotLightRender(RenderContext& rc);
-		void EndSpotLightRender(RenderContext& rc);
+		void SpotLightRender(RenderContext& rc, int no);
+		void EndSpotLightRender(RenderContext& rc, int no);
 
 		void ClairvoyanceRender(RenderContext& rc);
 		void EndClairvoyanceRender(RenderContext& rc);
@@ -73,7 +73,7 @@ namespace nsHikageri
 
 		bool m_shadowMode = false;	//シャドウが有効かどうか
 		RenderTarget m_shadowMap;
-		RenderTarget m_spotLightMap;
+		RenderTarget m_spotLightMap[3];
 		GaussianBlur m_shadowBlur;
 		RenderTarget m_clairvoyanceMap;
 	};

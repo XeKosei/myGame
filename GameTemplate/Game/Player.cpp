@@ -44,9 +44,6 @@ namespace nsHikageri
 			m_playerPouch->SetPlayer(this);
 			m_playerTarget = NewGO<PlayerTarget>(0);
 			m_playerTarget->SetPlayer(this);
-			//‰ù’†“d“”‚ğ¶¬
-			m_flashLight = NewGO<nsFlashLight::FlashLight>(0);
-			m_flashLight->SetPlayer(this);
 
 			return true;
 		}

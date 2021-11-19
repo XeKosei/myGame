@@ -3,9 +3,10 @@
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
+	namespace nsFlashLight { class FlashLight; }
 	namespace nsBackGround { class BackGround; class SecretRoom;}
 	namespace nsEnemy { class Enemy; }
-	namespace nsGimmick { class Chandelier; class Door;  class EyeWall;}
+	namespace nsGimmick { class ChandelierManager; class Door;  class EyeWall; }
 	namespace nsItem { class ItemKey; class ItemFlashLightParts; class ItemTranquilizer; class ItemBattery; }
 	
 	namespace nsGameScene
@@ -47,14 +48,15 @@ namespace nsHikageri
 			nsBackGround::SecretRoom* m_secretRoom = nullptr;
 			//プレイヤー
 			nsPlayer::Player* m_player = nullptr;
+			//懐中電灯
+			nsFlashLight::FlashLight* m_flashLight = nullptr;
 			//エネミー
 			nsEnemy::Enemy* m_enemy = nullptr;
 			//ディレクションライト
 			DirectionLight* m_dirLig = nullptr;
+
 			//シャンデリア
-			nsGimmick::Chandelier* m_chandelier[10] = {
-				nullptr,nullptr,nullptr,nullptr,nullptr,
-				nullptr,nullptr,nullptr,nullptr,nullptr };
+			nsGimmick::ChandelierManager* m_chandelierManager = nullptr;
 			//ドア
 			nsGimmick::Door* m_door[6] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 			//目の付いた壁

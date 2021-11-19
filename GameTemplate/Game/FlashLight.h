@@ -36,7 +36,7 @@ namespace nsHikageri
 				{
 					m_flashLightAngle = angle;
 					m_spotLight->SetAngle(m_flashLightAngle / 2);
-					nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(m_flashLightAngle);
+					nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(m_flashLightAngle, 0);
 				};
 			}
 

@@ -51,6 +51,10 @@ namespace nsHikageri
 			//無敵中の処理
 			void Invincible();
 
+			/// @brief 懐中電灯を設定
+			/// @param flashLight 懐中電灯
+			void SetFlashLight(nsFlashLight::FlashLight* flashLight) { m_flashLight = flashLight; }
+
 			/// @brief 懐中電灯を取得
 			/// @return 懐中電灯
 			nsFlashLight::FlashLight* GetFlashLight() { return m_flashLight; }

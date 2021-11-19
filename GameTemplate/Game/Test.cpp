@@ -31,7 +31,7 @@ bool Test::Start()
 	m_spotLig[m_spotLigNum]->SetAngle(Math::DegToRad(20.0f));
 	m_spotLigNum++;
 
-	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(Math::DegToRad(20.0f) * 2.0f);
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(Math::DegToRad(20.0f) * 2.0f,0);
 
 	nsHikageri::SkinModelRender* stage = NewGO<nsHikageri::SkinModelRender>(0);
 	stage->Init("Assets/modelData/Stage.tkm");
@@ -260,7 +260,7 @@ void Test::SpotLightMove()
 	m_spotLigPos = { m_skinPos.x + 1.0f, m_skinPos.y + 200.0f, m_skinPos.z };
 
 	m_spotLig[0]->SetPosition(m_spotLigPos);
-	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_spotLigPos);
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_spotLigPos,0);
 
 	//Œü‚«‚ðÝ’è
 	if (g_pad[0]->IsPress(enButtonLB1) == false)
@@ -280,6 +280,6 @@ void Test::SpotLightMove()
 	}
 
 	Vector3 spotLigTarget = m_spotLigPos + m_spotLigDir * 100.0f;
-	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget(spotLigTarget);
+	nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget(spotLigTarget,0);
 	m_spotLig[0]->SetDirection({ m_spotLigDir });
 }

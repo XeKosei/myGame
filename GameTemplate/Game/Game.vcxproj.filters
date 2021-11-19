@@ -446,6 +446,9 @@
     <ClCompile Include="GameClear.cpp">
       <Filter>ソース ファイル\Hikageri\GameScene</Filter>
     </ClCompile>
+    <ClCompile Include="ChandelierManager.cpp">
+      <Filter>ソース ファイル\Hikageri\Gimmick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -843,6 +846,9 @@
     </ClInclude>
     <ClInclude Include="GameOver.h">
       <Filter>ヘッダー ファイル\Hikageri\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ChandelierManager.h">
+      <Filter>ヘッダー ファイル\Hikageri\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

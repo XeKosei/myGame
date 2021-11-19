@@ -22,8 +22,18 @@ namespace nsHikageri
 
 		static LightManager* m_instance;
 
+		struct SpotLigCameraDatas
+		{
+			Matrix lightCameraProjectionMatrix;	//ライトビュープロジェクション行列
+			Vector3 lightCameraPosition;	//ライトカメラの位置
+			float lightCameraAngle;
+			Vector3 lightCameraDirection;	//ライトカメラの向き	
+			float isFlashLightSwitchOn;	//懐中電灯の電源がONかOFFか
+		};
+
 		struct LigDatas
 		{
+			SpotLigCameraDatas m_spotLigCameraData[3];
 			DirLigData directionLight[nsLMConstant::DIRECTIONLIGHT_NUMBER_MAX];	//ディレクションライトのデータの配列	
 			PointLigData pointLight[nsLMConstant::POINTLIGHT_NUMBER_MAX];		//ポイントライトのデータの配列
 			SpotLigData spotLight[nsLMConstant::SPOTLIGHT_NUMBER_MAX];			//スポットライトのデータの配列
@@ -35,6 +45,8 @@ namespace nsHikageri
 		LigDatas m_ligData;					//ライトのデータ
 		int m_size = sizeof(m_ligData);		//ライトのデータのサイズ
 
+		Camera m_spotLightCamera[3];	//スポットライトの光を描画する用のスポットライトの位置のカメラ
+
 		struct LigCameraDatas
 		{
 			Matrix lightCameraProjectionMatrix;	//ライトビュープロジェクション行列
@@ -42,24 +54,10 @@ namespace nsHikageri
 			float pad;
 			Vector3 lightCameraDirection;	//ライトカメラの向き
 		};
-
-		struct SpotLigCameraDatas
-		{
-			Matrix lightCameraProjectionMatrix;	//ライトビュープロジェクション行列
-			Vector3 lightCameraPosition;	//ライトカメラの位置
-			float lightCameraAngle;
-			Vector3 lightCameraDirection;	//ライトカメラの向き	
-			int isFlashLightSwitchOn;	//懐中電灯の電源がONかOFFか
-		};
 		LigCameraDatas m_ligCameraData;
 		int m_ligCameraDataSize = sizeof(m_ligCameraData);
-
 		Camera m_lightCamera;	//シャドウマップ用のライトの位置のカメラ。テスト用
-
-		SpotLigCameraDatas m_spotLigCameraData;
-		int m_spotLigCameraDataSize = sizeof(m_spotLigCameraData);
-		Camera m_spotLightCamera;	//スポットライトの光を描画する用のスポットライトの位置のカメラ
-
+		
 		//ライトの番号を管理するポインタ
 		int* m_dirLigNum[nsLMConstant::DIRECTIONLIGHT_NUMBER_MAX] = { nullptr,nullptr, nullptr, nullptr, nullptr };
 		int* m_pointLigNum[nsLMConstant::POINTLIGHT_NUMBER_MAX] = {
@@ -354,100 +352,100 @@ namespace nsHikageri
 
 		/// @brief スポットライトに使用するライトカメラのデータの塊を取得する(定数バッファに渡す用)
 		/// @return ライトカメラのデータ
-		SpotLigCameraDatas* GetSpotLigCameraDatas() { return &m_spotLigCameraData; };
+		SpotLigCameraDatas* GetSpotLigCameraDatas(int no) { return &m_ligData.m_spotLigCameraData[no]; };
 
 		/// @brief スポットライトに使用するライトカメラのデータの塊のサイズを取得する(定数バッファに渡す用)
 		/// @return 
-		int GetSpotLigCameraDataSize() { return m_spotLigCameraDataSize; };
+		int GetSpotLigCameraDataSize(int no) { return sizeof(m_ligData.m_spotLigCameraData[no]); };
 
 		/// @brief スポットライトに使用するライトカメラを取得
 		/// @return ライトカメラ
-		Camera* GetSpotLightCamera()
+		Camera* GetSpotLightCamera(int no)
 		{
-			return &m_spotLightCamera;
+			return &m_spotLightCamera[no];
 		}
 
 		/// @brief スポットライトに使用するライトカメラの座標を指定する。
 		/// @param pos ライトカメラの座標
-		void SetSpotLightCameraPosition(const Vector3& pos)
+		void SetSpotLightCameraPosition(const Vector3& pos, int no)
 		{
-			m_spotLightCamera.SetPosition(pos);
-			m_spotLightCamera.Update(1.0f);
-			m_spotLigCameraData.lightCameraPosition = pos;
-			m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
+			m_spotLightCamera[no].SetPosition(pos);
+			m_spotLightCamera[no].Update(1.0f);
+			m_ligData.m_spotLigCameraData[no].lightCameraPosition = pos;
+			m_ligData.m_spotLigCameraData[no].lightCameraProjectionMatrix = m_spotLightCamera[no].GetViewProjectionMatrix();
 
-			m_spotLigCameraData.lightCameraDirection = m_spotLightCamera.GetTarget() - m_spotLightCamera.GetPosition();
-			m_spotLigCameraData.lightCameraDirection.Normalize();
+			m_ligData.m_spotLigCameraData[no].lightCameraDirection = m_spotLightCamera[no].GetTarget() - m_spotLightCamera[no].GetPosition();
+			m_ligData.m_spotLigCameraData[no].lightCameraDirection.Normalize();
 		}
 
 		/// @briefスポットライトに使用するライトカメラのターゲットの座標を指定する。
 		/// @param targetPos ライトカメラのターゲットの座標
-		void SetSpotLightCameraTarget(const Vector3& targetPos)
+		void SetSpotLightCameraTarget(const Vector3& targetPos, int no)
 		{
-			m_spotLightCamera.SetTarget(targetPos);
-			m_spotLightCamera.Update(1.0f);
-			m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
+			m_spotLightCamera[no].SetTarget(targetPos);
+			m_spotLightCamera[no].Update(1.0f);
+			m_ligData.m_spotLigCameraData[no].lightCameraProjectionMatrix = m_spotLightCamera[no].GetViewProjectionMatrix();
 
-			m_spotLigCameraData.lightCameraDirection = m_spotLightCamera.GetTarget() - m_spotLightCamera.GetPosition();
-			m_spotLigCameraData.lightCameraDirection.Normalize();
+			m_ligData.m_spotLigCameraData[no].lightCameraDirection = m_spotLightCamera[no].GetTarget() - m_spotLightCamera[no].GetPosition();
+			m_ligData.m_spotLigCameraData[no].lightCameraDirection.Normalize();
 		}
 
-		void SetSpotLightCameraFar(const float& farNum)
+		void SetSpotLightCameraFar(const float& farNum, int no)
 		{
-			m_spotLightCamera.SetFar(farNum);
-			m_spotLightCamera.Update(1.0f);
+			m_spotLightCamera[no].SetFar(farNum);
+			m_spotLightCamera[no].Update(1.0f);
 		}
 
-		void SetSpotLightCameraAngle(const float& angle)
+		void SetSpotLightCameraAngle(const float& angle, int no)
 		{
 
-			m_spotLightCamera.SetViewAngle(angle);
+			m_spotLightCamera[no].SetViewAngle(angle);
 
-			m_spotLightCamera.Update(1.0f);
-			m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
+			m_spotLightCamera[no].Update(1.0f);
+			m_ligData.m_spotLigCameraData[no].lightCameraProjectionMatrix = m_spotLightCamera[no].GetViewProjectionMatrix();
 		
-			m_spotLigCameraData.lightCameraAngle = angle;
+			m_ligData.m_spotLigCameraData[no].lightCameraAngle = angle;
 		}
 
 		/// @brief スポットライトに使用するライトカメラの上方向を指定する。
 		/// @param up カメラの上方向のベクトル
-		void SetSpotLightCameraUp(const Vector3& up)
+		void SetSpotLightCameraUp(const Vector3& up, int no)
 		{
-			m_spotLightCamera.SetUp(up);
-			m_spotLightCamera.Update(1.0f);
-			m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
+			m_spotLightCamera[no].SetUp(up);
+			m_spotLightCamera[no].Update(1.0f);
+			m_ligData.m_spotLigCameraData[no].lightCameraProjectionMatrix = m_spotLightCamera[no].GetViewProjectionMatrix();
 		}
 
 		/// @brief スポットライトに使用するライトカメラの射影行列の更新方法を設定する。
 		/// @param func 射影行列の更新方法
-		void SetSpotLightCameraUpdateProjMatrixFunc(Camera::EnUpdateProjMatrixFunc func)
+		void SetSpotLightCameraUpdateProjMatrixFunc(Camera::EnUpdateProjMatrixFunc func, int no)
 		{
-			m_spotLightCamera.SetUpdateProjMatrixFunc(func);
-			m_spotLightCamera.Update(1.0f);
-			m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
+			m_spotLightCamera[no].SetUpdateProjMatrixFunc(func);
+			m_spotLightCamera[no].Update(1.0f);
+			m_ligData.m_spotLigCameraData[no].lightCameraProjectionMatrix = m_spotLightCamera[no].GetViewProjectionMatrix();
 		}
 
-		void SetIsFlashLightSwitchOn(const bool& switchOn)
+		void SetIsFlashLightSwitchOn(const bool& switchOn, int no)
 		{
-			m_spotLigCameraData.isFlashLightSwitchOn = switchOn;
+			m_ligData.m_spotLigCameraData[no].isFlashLightSwitchOn = switchOn;
 		}
 
 		/// @brief スポットライトに使用するライトカメラの横幅を指定する(並行投影限定)
 		/// @param width ライトカメラの横幅
-		void SetSpotLightCameraWidth(const float& width)
+		void SetSpotLightCameraWidth(const float& width, int no)
 		{
-			m_spotLightCamera.SetWidth(width);
-			m_spotLightCamera.Update(1.0f);
-			m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
+			m_spotLightCamera[no].SetWidth(width);
+			m_spotLightCamera[no].Update(1.0f);
+			m_ligData.m_spotLigCameraData[no].lightCameraProjectionMatrix = m_spotLightCamera[no].GetViewProjectionMatrix();
 		}
 
 		/// @brief 影の描画に使用するライトカメラの高さを指定する(並行投影限定)
 		/// @param height ライトカメラの高さ
-		void SetSpotLightCameraHeight(const float& height)
+		void SetSpotLightCameraHeight(const float& height, int no)
 		{
-			m_spotLightCamera.SetHeight(height);
-			m_spotLightCamera.Update(1.0f);
-			m_spotLigCameraData.lightCameraProjectionMatrix = m_spotLightCamera.GetViewProjectionMatrix();
+			m_spotLightCamera[no].SetHeight(height);
+			m_spotLightCamera[no].Update(1.0f);
+			m_ligData.m_spotLigCameraData[no].lightCameraProjectionMatrix = m_spotLightCamera[no].GetViewProjectionMatrix();
 		}
 
 	};

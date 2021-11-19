@@ -28,9 +28,6 @@ namespace nsHikageri
 
 			Vector3 m_position = Vector3::Zero;
 
-			//ポイントライト
-			PointLight* m_pointLig = nullptr;
-
 			//プレイヤーとエネミー
 			nsPlayer::Player* m_player = nullptr;
 			nsEnemy::Enemy* m_enemy = nullptr;

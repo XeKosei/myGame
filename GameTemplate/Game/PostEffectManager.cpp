@@ -85,14 +85,17 @@ namespace nsHikageri
 			m_shadowBlur.Init(&m_shadowMap.GetRenderTargetTexture());
 		}
 		//スポットライト用のマップの作成
-		m_spotLightMap.Create(
-			1280,
-			720,
-			1,
-			1,
-			DXGI_FORMAT_R32G32_FLOAT,
-			DXGI_FORMAT_D32_FLOAT
-		);
+		for (int no = 0; no < 3; no++)
+		{
+			m_spotLightMap[no].Create(
+				1280,
+				720,
+				1,
+				1,
+				DXGI_FORMAT_R32G32_FLOAT,
+				DXGI_FORMAT_D32_FLOAT
+			);
+		}
 
 		//透視用のマップ
 		m_clairvoyanceMap.Create(
@@ -148,16 +151,16 @@ namespace nsHikageri
 		}
 	}
 
-	void PostEffectManager::SpotLightRender(RenderContext& rc)
+	void PostEffectManager::SpotLightRender(RenderContext& rc, int no)
 	{
-		rc.WaitUntilToPossibleSetRenderTarget(m_spotLightMap);
-		rc.SetRenderTargetAndViewport(m_spotLightMap);
-		rc.ClearRenderTargetView(m_spotLightMap.GetRTVCpuDescriptorHandle(), m_spotLightMap.GetRTVClearColor());
-		rc.ClearDepthStencilView(m_spotLightMap.GetDSVCpuDescriptorHandle(), m_spotLightMap.GetDSVClearValue());
+		rc.WaitUntilToPossibleSetRenderTarget(m_spotLightMap[no]);
+		rc.SetRenderTargetAndViewport(m_spotLightMap[no]);
+		rc.ClearRenderTargetView(m_spotLightMap[no].GetRTVCpuDescriptorHandle(), m_spotLightMap[no].GetRTVClearColor());
+		rc.ClearDepthStencilView(m_spotLightMap[no].GetDSVCpuDescriptorHandle(), m_spotLightMap[no].GetDSVClearValue());
 	}
-	void PostEffectManager::EndSpotLightRender(RenderContext& rc)
+	void PostEffectManager::EndSpotLightRender(RenderContext& rc, int no)
 	{
-		rc.WaitUntilFinishDrawingToRenderTarget(m_spotLightMap);
+		rc.WaitUntilFinishDrawingToRenderTarget(m_spotLightMap[no]);
 	}
 
 	void PostEffectManager::ClairvoyanceRender(RenderContext& rc)

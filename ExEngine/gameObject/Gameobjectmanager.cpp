@@ -69,15 +69,35 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	nsHikageri::PostEffectManager::GetInstance()->EndShadowRender(rc);
 
 	//スポットライト用のモデルを描く。
-	nsHikageri::PostEffectManager::GetInstance()->SpotLightRender(rc);
-	rc.SetStep(RenderContext::eStep_RenderSpotLightMap);
+	nsHikageri::PostEffectManager::GetInstance()->SpotLightRender(rc, 0);
+	rc.SetStep(RenderContext::eStep_RenderSpotLightMap00);
 	//SpotLightRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
-			go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetSpotLightCamera());
+			go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetSpotLightCamera(0));
 		}
 	}
-	nsHikageri::PostEffectManager::GetInstance()->EndSpotLightRender(rc);
+	nsHikageri::PostEffectManager::GetInstance()->EndSpotLightRender(rc, 0);
+
+	nsHikageri::PostEffectManager::GetInstance()->SpotLightRender(rc, 1);
+	rc.SetStep(RenderContext::eStep_RenderSpotLightMap01);
+	//SpotLightRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+	for (auto& goList : m_gameObjectListArray) {
+		for (auto& go : goList) {
+			go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetSpotLightCamera(1));
+		}
+	}
+	nsHikageri::PostEffectManager::GetInstance()->EndSpotLightRender(rc, 1);
+
+	nsHikageri::PostEffectManager::GetInstance()->SpotLightRender(rc, 2);
+	rc.SetStep(RenderContext::eStep_RenderSpotLightMap02);
+	//SpotLightRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
+	for (auto& goList : m_gameObjectListArray) {
+		for (auto& go : goList) {
+			go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetSpotLightCamera(2));
+		}
+	}
+	nsHikageri::PostEffectManager::GetInstance()->EndSpotLightRender(rc, 2);
 
 	//透視用のモデルを描く
 	nsHikageri::PostEffectManager::GetInstance()->ClairvoyanceRender(rc);
@@ -85,7 +105,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	//ClairvoyanceRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
-			go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetSpotLightCamera());
+			go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetSpotLightCamera(0));
 		}
 	}
 	nsHikageri::PostEffectManager::GetInstance()->EndClairvoyanceRender(rc);

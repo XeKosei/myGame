@@ -9,7 +9,9 @@ namespace nsHikageri
 		enum EModel {
 			eModel,	//画面に描画されるモデル
 			eModel_Shadow,	//影を描画する用モデル
-			eModel_SpotLight,	//スポットライトマップに使用するモデル		
+			eModel_SpotLight00,	//スポットライトマップに使用するモデル	
+			eModel_SpotLight01,
+			eModel_SpotLight02,
 			eModel_Num,		//モデルの状態の最低の数
 		};
 		SkinModelRender() :m_position(Vector3::Zero), m_qRot(g_quatIdentity), m_scale(Vector3::One) {}

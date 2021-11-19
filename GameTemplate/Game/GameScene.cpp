@@ -5,6 +5,7 @@
 #include "EnemyInclude.h";
 #include "GimmickInclude.h"
 #include "ItemInclude.h"
+#include "FlashLight.h"
 
 namespace nsHikageri
 {
@@ -18,6 +19,11 @@ namespace nsHikageri
 
 			//プレイヤーを作成
 			m_player = NewGO<nsPlayer::Player>(0);
+			//懐中電灯を生成
+			m_flashLight = NewGO<nsFlashLight::FlashLight>(0);
+			m_player->SetFlashLight(m_flashLight);		
+			m_flashLight->SetPlayer(m_player);
+			
 			//エネミーを作成
 			m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
 			m_enemy->SetPlayer(m_player);
@@ -27,29 +33,11 @@ namespace nsHikageri
 			m_dirLig->SetDirection({ -1.0f, -1.0f, -1.0f });
 			m_dirLig->SetColor({ 1.0f,1.0f,1.0f });*/
 
-			////シャンデリア　テスト
-			//Vector3 chandelierPos[10] = {
-			//	{ 1000.0f,800.0f,0.0f } ,
-			//	{ -1000.0f, 800.0f, 1000.0f},
-			//	{-1400.0f, 800.0f, -3600.0f},
-			//	{-1000.0f, 800.0f, 3400.0f},
-			//	{0.0f, 800.0f, -2000.0f},
-			//	{-4600.0f, 800.0f, 2800.0f},
-			//	{-9000.0f, 800.0f,6000.0f},
-			//	{-4600.0f, 800.0f, 4400.0f},
-			//	{600.0f, 800.0f, 4400.0f,},
-			//	{600.0f, 800.0f, 6000.0f,}
-			//};
+			m_chandelierManager = NewGO<nsGimmick::ChandelierManager>(0);
+			m_chandelierManager->SetPlayer(m_player);
+			m_chandelierManager->SetEnemy(m_enemy);
 
-			//for (int chandelierNum = 0; chandelierNum < 10; chandelierNum++)
-			//{
-			//	m_chandelier[chandelierNum] = NewGO<nsGimmick::Chandelier>(1);
-			//	m_chandelier[chandelierNum]->SetPlayer(m_player);
-			//	m_chandelier[chandelierNum]->SetEnemy(m_enemy);
-			//	m_chandelier[chandelierNum]->SetPosition(chandelierPos[chandelierNum]);
-			//}
-
-			////ドア　テスト
+			//ドア　テスト
 			//Vector3 doorPos[6]
 			//{
 			//	{ 0.0f, 0.0f, -100.0f },
@@ -227,7 +215,7 @@ namespace nsHikageri
 			default:
 				break;
 			}
-
+			
 			GameClear();
 		}
 
