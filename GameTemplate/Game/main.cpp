@@ -53,8 +53,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsHikageri::PostEffectManager::GetInstance()->Init(true, true);
 
 	//Test* testScene = NewGO<Test>(0, "testScene");
-	nsHikageri::nsGameScene::GameScene* gameScene = NewGO<nsHikageri::nsGameScene::GameScene>(0, "gameScene");
-	//nsHikageri::TitleScene* titleScene = NewGO<nsHikageri::TitleScene>(0, "titleScene");
+	//nsHikageri::nsGameScene::GameScene* gameScene = NewGO<nsHikageri::nsGameScene::GameScene>(0, "gameScene");
+	nsHikageri::TitleScene* titleScene = NewGO<nsHikageri::TitleScene>(0, "titleScene");
 
 	// シャドウマップを表示するためのスプライトを初期化する
 	SpriteInitData spriteInitData;
@@ -85,7 +85,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		GameObjectManager::GetInstance()->ExecutePostRender(renderContext);
 
 		sprite.Update({ FRAME_BUFFER_W / -2.04f, FRAME_BUFFER_H / 2.0f,  0.0f }, g_quatIdentity, g_vec3One, { 0.0f, 1.0f });
-		sprite.Draw(renderContext);
+		//sprite.Draw(renderContext);
 
 		//////////////////////////////////////
 		//ここから絵を描くコードを記述する。

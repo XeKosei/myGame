@@ -850,5 +850,11 @@
     <ClInclude Include="ChandelierManager.h">
       <Filter>ヘッダー ファイル\Hikageri\Gimmick</Filter>
     </ClInclude>
+    <ClInclude Include="GameSceneInclude.h">
+      <Filter>ヘッダー ファイル\Hikageri\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSceneConstant.h">
+      <Filter>ヘッダー ファイル\Hikageri\GameScene</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

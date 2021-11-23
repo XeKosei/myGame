@@ -6,6 +6,11 @@ namespace nsHikageri
 {
 	namespace nsPlayer
 	{
+		PlayerTarget::~PlayerTarget()
+		{
+			
+		}
+
 		void PlayerTarget::ExecuteUpdate()
 		{
 			Vector3 targetPos = Vector3::Zero;

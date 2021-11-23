@@ -6,6 +6,7 @@ namespace nsHikageri
 		class SecretRoom : public IGameObject
 		{
 		public:
+			~SecretRoom();
 			bool Start();
 			void Update();
 
@@ -17,7 +18,6 @@ namespace nsHikageri
 			SkinModelRender* m_fakeWallModel = nullptr;
 			//CharaConとの当たり判定に使用する静的物理オブジェクト
 			PhysicsStaticObject m_physicsStaticObject;
-
 		};
 	}
 }

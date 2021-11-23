@@ -7,10 +7,13 @@ namespace nsHikageri
 	namespace nsBackGround { class BackGround; class SecretRoom;}
 	namespace nsEnemy { class Enemy; }
 	namespace nsGimmick { class ChandelierManager; class Door;  class EyeWall; }
-	namespace nsItem { class ItemKey; class ItemFlashLightParts; class ItemTranquilizer; class ItemBattery; }
-	
+	namespace nsItem { class ItemKey; class ItemFlashLightParts; class ItemTranquilizer; class ItemBattery; } 
+
 	namespace nsGameScene
 	{
+		class GameOver;
+		class GameClear;
+
 		class GameScene : public IGameObject
 		{
 		public:
@@ -27,8 +30,11 @@ namespace nsHikageri
 				enGameStep_num
 			};
 
+			~GameScene();
 			bool Start();
 			void Update();
+
+			void GameManagement();
 
 			void ExecuteUpdateStep01();
 			void ExecuteUpdateStep02();
@@ -36,13 +42,18 @@ namespace nsHikageri
 			void ExecuteUpdateStep04();
 			void ExecuteUpdateStep05();
 
-			void GameClear();//(仮)
+			//void GameClear();//(仮)
 
 			/// @brief ゲーム進行を次へ進めるかどうかのフラグ
 			/// @param flag 進める:true 進めない:false
 			void SetCanGoNextStepFlag(bool flag) { m_canGoNextStepFlag = flag; };
 
 		private:
+			//ゲームオーバークラス
+			GameOver* m_gameOver = nullptr;
+			//ゲームクリアクラス
+			GameClear* m_gameClear = nullptr;
+
 			//ステージ
 			nsBackGround::BackGround* m_backGround = nullptr;
 			nsBackGround::SecretRoom* m_secretRoom = nullptr;
@@ -82,7 +93,10 @@ namespace nsHikageri
 			Vector4 m_clearOverFontColor = { 0.0f,0.0f,0.0f,0.0f };
 			Vector4 m_clearOverFontShadowColor = { 0.0f,0.0f,0.0f,0.0f };
 
-			Level m_level;
+			//脱出する通路の先のポイントライト
+			PointLight* m_pointLight = nullptr;
+
+			//Level m_level;
 
 			//ゲームの進行段階
 			EnGameSteps m_gameStep = enGameStep_num;

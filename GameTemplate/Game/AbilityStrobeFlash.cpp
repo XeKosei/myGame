@@ -10,6 +10,11 @@ namespace nsHikageri
 	{
 		using  namespace nsAbilityStrobeFlashConstant;
 
+		AbilityStrobeFlash::~AbilityStrobeFlash()
+		{
+
+		}
+
 		bool AbilityStrobeFlash::Start()
 		{
 			m_backGround = FindGO<nsBackGround::BackGround>("backGround");

@@ -21,6 +21,7 @@ namespace nsHikageri
 				enDoorColor_num
 			};
 
+			~Door();
 			bool Start();
 			void Update();
 

@@ -457,6 +457,8 @@
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GameSceneConstant.h" />
+    <ClInclude Include="GameSceneInclude.h" />
     <ClInclude Include="GaussianBlur.h" />
     <ClInclude Include="geometry\AABB.h" />
     <ClInclude Include="geometry\BSP.h" />

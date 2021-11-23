@@ -7,6 +7,7 @@ namespace nsHikageri
 		class EnemyChase : public IGameObject
 		{
 		public:
+			~EnemyChase();
 			bool Start();
 			void ExecuteUpdate();
 			void Chase();	//’ÇÕˆ—

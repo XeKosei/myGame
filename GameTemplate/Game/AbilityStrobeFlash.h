@@ -11,6 +11,7 @@ namespace nsHikageri
 		class AbilityStrobeFlash : public IGameObject
 		{
 		public:
+			~AbilityStrobeFlash();
 			bool Start();
 			void ExecuteUpdate();
 

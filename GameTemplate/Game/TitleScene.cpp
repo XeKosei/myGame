@@ -13,7 +13,7 @@ namespace nsHikageri
 	bool TitleScene::Start()
 	{
 		m_titleSprite = NewGO<SpriteRender>(0);
-		m_titleSprite->Init("Assets/Image/sample.DDS", 1280, 720);
+		m_titleSprite->Init("Assets/Image/Title01.DDS", 1280, 720);
 		return true;
 	}
 

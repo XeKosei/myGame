@@ -7,6 +7,7 @@ namespace nsHikageri
 		class EnemyStress : public IGameObject
 		{
 		public:
+			~EnemyStress();
 			void ExecuteUpdate();
 
 			/// @brief エネミーにアクセスできるようにする。

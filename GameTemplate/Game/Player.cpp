@@ -12,7 +12,12 @@ namespace nsHikageri
 		{
 			DeleteGO(m_playerModel);
 			DeleteGO(m_playerMove);
-			//DeleteGO(m_playerCamera);
+			DeleteGO(m_playerCamera);
+			DeleteGO(m_playerAction);
+			DeleteGO(m_playerSanity);
+			DeleteGO(m_playerBitten);
+			DeleteGO(m_playerPouch);
+			DeleteGO(m_playerTarget);
 		}
 		bool Player::Start()
 		{

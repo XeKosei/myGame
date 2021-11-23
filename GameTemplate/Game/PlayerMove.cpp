@@ -6,6 +6,11 @@ namespace nsHikageri
 	{
 		using namespace nsPlayerMoveConstant;
 
+		PlayerMove::~PlayerMove()
+		{
+
+		}
+
 		bool PlayerMove::Start()
 		{
 			return true;

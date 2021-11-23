@@ -9,6 +9,11 @@ namespace nsHikageri
 	{
 		using namespace nsEnemyMoveConstant;
 
+		EnemyMove::~EnemyMove()
+		{
+
+		}
+
 		bool EnemyMove::Start()
 		{
 			// ナビメッシュを構築。

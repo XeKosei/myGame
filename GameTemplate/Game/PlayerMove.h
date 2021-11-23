@@ -9,6 +9,7 @@ namespace nsHikageri
 		class PlayerMove : public IGameObject
 		{
 		public:
+			~PlayerMove();
 			bool Start();
 			void ExecuteUpdate();
 			void Move();	//ˆÚ“®ˆ—

@@ -10,6 +10,7 @@ namespace nsHikageri
 		class AbilityManager : public IGameObject
 		{
 		public:
+			~AbilityManager();
 			bool Start();
 			/// @brief フラッシュライトにアクセスできるようにする。
 					/// @param pl フラッシュライトに参照

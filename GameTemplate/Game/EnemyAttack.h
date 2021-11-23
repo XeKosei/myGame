@@ -15,6 +15,7 @@ namespace nsHikageri
 				enBiteStatesNum
 			};
 
+			~EnemyAttack();
 			bool Start();
 			void ExecuteUpdate();
 

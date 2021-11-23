@@ -21,6 +21,7 @@ namespace nsHikageri
 				enItem_num
 			};
 
+			~PlayerPouch();
 			void ExecuteUpdate();
 
 			//アイテムを選択する
@@ -66,7 +67,7 @@ namespace nsHikageri
 			Vector4 m_itemUsedFontColor = {0.0f,0.0f,0.0f,0.0f};*/
 
 			int m_choseItem = enItem_Battery;
-			int m_haveItemNum[enItem_num] = { 10, 10, 0, 0, 0, 0, 0, 0};
+			int m_haveItemNum[enItem_num] = { 1, 1, 0, 0, 0, 0, 0, 0};
 		};
 	}
 }

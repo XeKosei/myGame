@@ -5,6 +5,12 @@ namespace nsHikageri
 	namespace nsEnemy
 	{
 		using namespace nsEnemyStressConstant;
+
+		EnemyStress::~EnemyStress()
+		{
+
+		}
+
 		void EnemyStress::ExecuteUpdate()
 		{
 			//ストレス値が前フレームの値と同じか下回っているとき、ストレスを受けていない。

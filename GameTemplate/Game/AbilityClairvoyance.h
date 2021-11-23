@@ -9,6 +9,7 @@ namespace nsHikageri
 		class AbilityClairvoyance : public IGameObject
 		{
 		public:
+			~AbilityClairvoyance();
 			bool Start();
 			void ExecuteUpdate();
 			/// @brief フラッシュライトにアクセスできるようにする。

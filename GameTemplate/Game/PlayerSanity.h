@@ -7,6 +7,7 @@ namespace nsHikageri
 		class PlayerSanity : public IGameObject
 		{
 		public:
+			~PlayerSanity();
 			bool Start();
 
 			void ExecuteUpdate();
@@ -17,7 +18,8 @@ namespace nsHikageri
 			//スプライトの点滅処理
 			void HazySpriteBlink();
 
-			void GameOver();//仮
+			//死んだとき
+			void DYING();
 
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
@@ -35,6 +37,9 @@ namespace nsHikageri
 			/// @param flag 安心できる:true できない:false
 			void SetReliefFlag(bool flag) { m_reliefFlag = flag; }
 
+			/// @brief SAN値を取得
+			/// @return 現在のSAN値
+			float GetSanityValue() { return m_sanityValue; }
 		private:
 			//プレイヤー
 			Player* m_player = nullptr;
@@ -57,11 +62,6 @@ namespace nsHikageri
 
 			//安心できるかどうか。
 			bool m_reliefFlag = false;
-
-			FontRender* m_gameOverFont = nullptr;
-			Vector4 m_gameOverFontColor = { 0.0f,0.0f,0.0f,0.0f };
-			Vector4 m_gameOverFontShadowColor = { 0.0f,0.0f,0.0f,0.0f };
-			int m_gameOverMoveCount = 250.0f;
 		};
 	}
 }

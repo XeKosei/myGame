@@ -7,6 +7,11 @@ namespace nsHikageri
 	{
 		using namespace nsPlayerBittenConstant;
 
+		PlayerBitten::~PlayerBitten()
+		{
+
+		}
+
 		bool PlayerBitten::Start()
 		{
 			m_bittenStates = enBittenState_PreBitten;

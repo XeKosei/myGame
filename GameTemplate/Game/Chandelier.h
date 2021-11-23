@@ -9,8 +9,8 @@ namespace nsHikageri
 		class Chandelier : public IGameObject
 		{
 		public:
+			~Chandelier();
 			bool Start();
-
 			void Update();
 
 			void SetPosition(Vector3 pos) { m_position = pos; };

@@ -6,6 +6,10 @@ namespace nsHikageri
 {
 	namespace nsEnemy
 	{
+		EnemyFlinch::~EnemyFlinch()
+		{
+
+		}
 		void EnemyFlinch::ExecuteUpdate()
 		{
 			if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)

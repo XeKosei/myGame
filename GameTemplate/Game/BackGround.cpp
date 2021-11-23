@@ -4,6 +4,11 @@ namespace nsHikageri
 {
 	namespace nsBackGround
 	{
+		BackGround::~BackGround()
+		{
+			DeleteGO(m_stageModel);
+		}
+
 		bool BackGround::Start()
 		{
 			m_stageModel = NewGO<SkinModelRender>(0);

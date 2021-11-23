@@ -8,6 +8,12 @@ namespace nsHikageri
 	namespace nsFlashLight
 	{
 		using namespace nsAbilityMedousaEyeConstant;
+
+		AbilityMedousaEye::~AbilityMedousaEye()
+		{
+
+		}
+
 		bool AbilityMedousaEye::Start()
 		{
 			m_medousaEyeChargeCount = INI_MEDOUSAEYEFLASH_CHARGE_COUNT;

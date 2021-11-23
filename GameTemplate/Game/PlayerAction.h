@@ -10,6 +10,7 @@ namespace nsHikageri
 		class PlayerAction : public IGameObject
 		{
 		public:
+			~PlayerAction();
 			bool Start();
 			void ExecuteUpdate();
 

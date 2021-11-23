@@ -10,6 +10,7 @@ namespace nsHikageri
 		class PlayerTarget : public IGameObject
 		{
 		public:
+			~PlayerTarget();
 			void ExecuteUpdate();
 
 			enum EnTarget

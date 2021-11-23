@@ -7,6 +7,11 @@ namespace nsHikageri
 	{
 		using namespace nsPlayerActionConstant;
 
+		PlayerAction::~PlayerAction()
+		{
+
+		}
+
 		bool PlayerAction::Start()
 		{
 			return true;

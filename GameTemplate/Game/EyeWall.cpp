@@ -10,6 +10,7 @@ namespace nsHikageri
 		{
 			DeleteGO(m_eyeWallModel);
 		}
+
 		bool EyeWall::Start()
 		{
 			m_eyeWallModel = NewGO<SkinModelRender>(0);

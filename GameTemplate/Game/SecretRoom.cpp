@@ -4,6 +4,12 @@ namespace nsHikageri
 {
 	namespace nsBackGround
 	{
+		SecretRoom::~SecretRoom()
+		{
+			DeleteGO(m_secretRoomModel);
+			DeleteGO(m_fakeWallModel);
+		}
+
 		bool SecretRoom::Start()
 		{
 			//‰B‚µ•”‰®B

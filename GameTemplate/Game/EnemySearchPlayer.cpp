@@ -9,13 +9,18 @@ namespace nsHikageri
 		using namespace nsEnemySearchPlayerConstant;
 		using namespace nsEnemyConstant;
 
+		EnemySearchPlayer::~EnemySearchPlayer()
+		{
+
+		}
+
 		bool EnemySearchPlayer::Start()
 		{
-			SetSearchPos(enSearchArea_1);
+			SetSearchPos(m_searchArea);
 
 			CalcNextSearchPos();
 
-			int m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+			int m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 
 			//‰ŠúˆÊ’u‚ðŽw’è
 			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
@@ -37,7 +42,7 @@ namespace nsHikageri
 
 				if (m_calcLineHitModelConstant <= 0)
 				{
-					m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+					m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 
 					Vector3 toPlayerDir = toPlayerDis;
 					toPlayerDir.Normalize();
@@ -52,7 +57,7 @@ namespace nsHikageri
 					if (Dot(toPlayerDir, m_enemy->GetEnemyMove()->GetDirection()) >= 0.7f
 						&& m_enemy->GetBackGround()->GetStageModel()->isLineHitModel(startPos, endPos, hitPos) == false)
 					{
-						m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+						m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 
 						startPos.y -= 10.0f;
 						endPos.y -= 10.0f;

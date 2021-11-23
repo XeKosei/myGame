@@ -6,6 +6,11 @@ namespace nsHikageri
 	{
 		using namespace nsEnemyAnimConstant;
 
+		EnemyAnim::~EnemyAnim()
+		{
+
+		}
+
 		bool EnemyAnim::Start()
 		{
 			m_animationClips[enAnimationClip_Idle].Load("Assets/animData/EnemyIdle.tka");

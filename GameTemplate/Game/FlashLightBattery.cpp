@@ -6,6 +6,12 @@ namespace nsHikageri
 	namespace nsFlashLight
 	{
 		using namespace nsFlashLightBatteryConstant;
+
+		FlashLightBattery::~FlashLightBattery()
+		{
+			DeleteGO(m_font);
+		}
+
 		bool FlashLightBattery::Start()
 		{
 			//ìdírécó Çç≈ëÂÇ…ê›íË

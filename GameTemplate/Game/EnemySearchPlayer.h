@@ -14,6 +14,7 @@ namespace nsHikageri
 				enSearchArea_num
 			};
 
+			~EnemySearchPlayer();
 			bool Start();
 			void ExecuteUpdate();
 

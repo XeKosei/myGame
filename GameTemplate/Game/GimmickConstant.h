@@ -12,9 +12,9 @@ namespace nsHikageri
 		namespace nsChandelierManagerConstant
 		{
 			static const int CHANDELIER_NUM = 8;					//シャンデリアの数
-			static const Vector3 CHANDELIER_SPOTLIGHT_COLOR = {5.0f,5.0f,5.0f};	//シャンデリアの光の色
-			static const float CHANDELIER_SPOTLIGHT_RANGE = 3000.0f;	//スポットライトの光の範囲
-			static const float CHANDELIER_SPOTLIGHT_ANGLE = 2.0f;		//シャンデリアの光の射出角度
+			static const Vector3 CHANDELIER_SPOTLIGHT_COLOR = {7.0f,7.0f,7.0f};	//シャンデリアの光の色
+			static const float CHANDELIER_SPOTLIGHT_RANGE = 10000.0f;	//スポットライトの光の範囲
+			static const float CHANDELIER_SPOTLIGHT_ANGLE = 1.5f;		//シャンデリアの光の射出角度
 		}
 
 		namespace nsDoorConstant

@@ -8,6 +8,12 @@ namespace nsHikageri
 	{
 		using namespace nsPlayerPouchConstant;
 
+		PlayerPouch::~PlayerPouch()
+		{
+			DeleteGO(m_itemFont);
+			DeleteGO(m_itemNumFont);
+		}
+
 		bool PlayerPouch::Start()
 		{
 			//‰æ–Ê•\Ž¦

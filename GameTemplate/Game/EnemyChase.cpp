@@ -8,9 +8,15 @@ namespace nsHikageri
 	{
 		using namespace nsEnemyChaseConstant;
 		using namespace nsEnemyConstant;
+
+		EnemyChase::~EnemyChase()
+		{
+
+		}
+
 		bool EnemyChase::Start()
 		{
-			m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+			m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 			return true;
 		}
 
@@ -49,7 +55,7 @@ namespace nsHikageri
 
 			if (m_calcLineHitModelConstant <= 0)
 			{
-				m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+				m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 
 				Vector3 toPlayerDis = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition();
 
@@ -84,7 +90,7 @@ namespace nsHikageri
 
 			if (m_calcLineHitModelConstant <= 0)
 			{
-				m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+				m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 
 				Vector3 startPos = m_enemy->GetEnemyMove()->GetPosition();
 				startPos.y += 10.0f;	//’n–Ê‚Æ‚ÌÚG‚ð‚È‚­‚·‚½‚ß‚É­‚µ•‚‚©‚¹‚é
@@ -107,8 +113,9 @@ namespace nsHikageri
 			if ((m_enemy->GetEnemyMove()->GetTargetPos() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= 5.0f)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_Vigilant);
+				m_enemy->GetEnemyMove()->SetMoveState(EnemyMove::enMoveState_RouteSearch);
 				m_isPlayerHidden = false;
-				m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+				m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 			}
 		}
 	}

@@ -7,6 +7,12 @@ namespace nsHikageri
 	namespace nsEnemy
 	{
 		using namespace nsEnemyAttackConstant;
+
+		EnemyAttack::~EnemyAttack()
+		{
+
+		}
+
 		bool EnemyAttack::Start()
 		{
 			//UŒ‚ƒ‚[ƒVƒ‡ƒ“‚ÌŠÔ‚ğİ’èB

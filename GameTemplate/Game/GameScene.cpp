@@ -1,16 +1,62 @@
 #include "stdafx.h"
-#include "GameScene.h"
+#include "GameSceneInclude.h"
 #include "BackGroundInclude.h"
 #include "PlayerInclude.h"
 #include "EnemyInclude.h";
 #include "GimmickInclude.h"
 #include "ItemInclude.h"
 #include "FlashLight.h"
+#include "TitleScene.h"
 
 namespace nsHikageri
 {
 	namespace nsGameScene
 	{
+		GameScene::~GameScene()
+		{
+			DeleteGO(m_player);
+			DeleteGO(m_enemy);
+			DeleteGO(m_backGround);
+			DeleteGO(m_secretRoom);
+			DeleteGO(m_flashLight);
+			if (m_chandelierManager != nullptr)
+				DeleteGO(m_chandelierManager);
+			for (int i = 0; i < 6; i++)
+			{
+				if (m_door[i] != nullptr)
+					DeleteGO(m_door[i]);
+			}
+			for (int i = 0; i < 3; i++)
+			{
+				if (m_eyeWall[i] != nullptr)
+					DeleteGO(m_eyeWall[i]);
+			}
+			for (int i = 0; i < 5; i++)
+			{
+				if (m_key[i] != nullptr)
+					DeleteGO(m_key[i]);
+			}
+			for (int i = 0; i < 3; i++)
+			{
+				if (m_flashLightParts[i] != nullptr)
+					DeleteGO(m_flashLightParts[i]);
+			}
+			for (int i = 0; i < 10; i++)
+			{
+				if (m_tranquilizer[i] != nullptr)
+					DeleteGO(m_tranquilizer[i]);
+			}
+			for (int i = 0; i < 15; i++)
+			{
+				if (m_battery[i] != nullptr)
+					DeleteGO(m_battery[i]);
+			}
+			if (m_pointLight != nullptr)
+				DeleteGO(m_pointLight);
+
+
+		}
+
 		bool GameScene::Start()
 		{
 			//ステージを作成
@@ -190,6 +236,11 @@ namespace nsHikageri
 			m_clearFont->SetShadowOffset(3.0f);
 			m_clearFont->SetShadowColor({ 0.0f,0.0f,0.0f,0.0f });
 
+			m_pointLight = NewGO<PointLight>(0);
+			m_pointLight->SetColor({500.0f,500.0f,500.0f});
+			m_pointLight->SetRange(2000.0f);
+			m_pointLight->SetPosition({2200.0f,0.0f, -4800.0f});
+
 			return true;
 		}
 
@@ -198,25 +249,47 @@ namespace nsHikageri
 			switch (m_gameStep)
 			{
 			case enGameStep_01:
+				GameManagement();
 				ExecuteUpdateStep01();
 				break;
 			case enGameStep_02:
+				GameManagement();
 				ExecuteUpdateStep02();
 				break;
 			case enGameStep_03:
+				GameManagement();
 				ExecuteUpdateStep03();
 				break;
 			case enGameStep_04:
+				GameManagement();
 				ExecuteUpdateStep04();
 				break;
 			case enGameStep_05:
+				GameManagement();
 				ExecuteUpdateStep05();
 				break;
+			case enGameStep_num:
+				GameManagement();
 			default:
 				break;
 			}
-			
-			GameClear();
+
+			//GameClear();
+		}
+
+		void GameScene::GameManagement()
+		{
+			if (m_player->GetPlayerSanity()->GetSanityValue() <= 0.0f)
+			{
+				m_gameStep = enGameStep_GameOver;
+				m_gameOver = NewGO<GameOver>(0);
+			}
+
+			if (g_pad[0]->IsTrigger(enButtonA))
+			{
+				DeleteGO(this);
+				NewGO<TitleScene>(0);
+			}
 		}
 
 		void GameScene::ExecuteUpdateStep01()
@@ -259,7 +332,7 @@ namespace nsHikageri
 		}
 
 		//仮
-		void GameScene::GameClear()
+		/*void GameScene::GameClear()
 		{
 			if (m_player->GetPlayerMove()->GetPosition().z <= -4500.0f)
 			{
@@ -279,6 +352,6 @@ namespace nsHikageri
 					m_clearFont->SetShadowColor(m_clearOverFontShadowColor);
 				}
 			}
-		}
+		}*/
 	}
 }

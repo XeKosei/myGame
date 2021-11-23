@@ -10,6 +10,11 @@ namespace nsHikageri
 	{
 		using namespace nsChandelierConstant;
 
+		Chandelier::~Chandelier()
+		{
+			DeleteGO(m_chandelierModel);
+		}
+
 		bool Chandelier::Start()
 		{
 			//ƒ‚ƒfƒ‹

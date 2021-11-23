@@ -6,6 +6,7 @@ namespace nsHikageri
 		class BackGround : public IGameObject
 		{
 		public:
+			~BackGround();
 			bool Start();
 			void Update();
 

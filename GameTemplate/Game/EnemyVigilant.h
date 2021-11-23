@@ -7,6 +7,7 @@ namespace nsHikageri
 		class EnemyVigilant : public IGameObject
 		{
 		public:
+			~EnemyVigilant();
 			void ExecuteUpdate();
 
 			/// @brief エネミーにアクセスできるようにする。

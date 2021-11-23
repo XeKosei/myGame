@@ -9,8 +9,8 @@ namespace nsHikageri
 		class AbilityMedousaEye : public IGameObject
 		{
 		public:
+			~AbilityMedousaEye();
 			bool Start();
-
 			void ExecuteUpdate();
 			/// @brief フラッシュライトにアクセスできるようにする。
 			/// @param pl フラッシュライトに参照

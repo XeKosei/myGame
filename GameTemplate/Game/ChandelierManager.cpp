@@ -7,6 +7,18 @@ namespace nsHikageri
 	{
 		using namespace nsChandelierManagerConstant;
 
+		ChandelierManager::~ChandelierManager()
+		{
+			for (int chandelierNum = 0; chandelierNum < CHANDELIER_NUM; chandelierNum++)
+			{
+				DeleteGO(m_chandelier[chandelierNum]);
+			}
+			for (int i = 0; i < 2; i++)
+			{
+				DeleteGO(m_spotLig[i]);
+			}
+		}
+
 		bool ChandelierManager::Start()
 		{
 			////シャンデリア　テスト
@@ -21,7 +33,7 @@ namespace nsHikageri
 			for (int i = 0; i < 2; i++)
 			{
 				//スポットライト
-				m_spotLig[i] = NewGO<SpotLight>(1);
+				m_spotLig[i] = NewGO<SpotLight>(0);
 				m_spotLig[i]->SetColor(CHANDELIER_SPOTLIGHT_COLOR);
 				m_spotLig[i]->SetPosition(m_chandelierPos[i]);
 				m_spotLig[i]->SetRange(CHANDELIER_SPOTLIGHT_RANGE);
@@ -32,9 +44,11 @@ namespace nsHikageri
 				dir.Normalize();
 				m_spotLig[i]->SetDirection(dir);
 
+				//スポットライトの番号1は懐中電灯のスポットライトなので、iに+1する。
 				nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_chandelierPos[i], i + 1);				
 				nsHikageri::LightManager::GetInstance()->SetSpotLightCameraTarget(targetPos, i + 1);
 				nsHikageri::LightManager::GetInstance()->SetSpotLightCameraAngle(CHANDELIER_SPOTLIGHT_ANGLE, i + 1);
+				nsHikageri::LightManager::GetInstance()->SetIsFlashLightSwitchOn(1, i+1);
 			}
 
 			return true;

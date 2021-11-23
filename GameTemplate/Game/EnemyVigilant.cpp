@@ -8,6 +8,11 @@ namespace nsHikageri
 	{
 		using namespace nsEnemyConstant;
 
+		EnemyVigilant::~EnemyVigilant()
+		{
+
+		}
+
 		void EnemyVigilant::ExecuteUpdate()
 		{
 			//エネミーの位置からプレイヤーの位置へのベクトルを求める
@@ -19,7 +24,7 @@ namespace nsHikageri
 
 				if (m_calcLineHitModelConstant <= 0)
 				{
-					m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+					m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 
 					Vector3 toPlayerDir = toPlayerDis;
 					toPlayerDir.Normalize();
@@ -34,7 +39,7 @@ namespace nsHikageri
 					if (Dot(toPlayerDir, m_enemy->GetEnemyMove()->GetDirection()) >= 0.7f
 						&& m_enemy->GetBackGround()->GetStageModel()->isLineHitModel(startPos, endPos, hitPos) == false)
 					{
-						m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+						m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 
 						startPos.y -= 10.0f;
 						endPos.y -= 10.0f;
@@ -47,9 +52,10 @@ namespace nsHikageri
 			if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_SearchPlayer);
-				m_calcLineHitModelConstant = CALC_LINEHITMODEL_COSNTANT;
+				m_enemy->GetEnemyMove()->SetMoveState(EnemyMove::enMoveState_RouteSearch);
+				m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 				m_enemy->GetEnemySearchPlayer()->CalcNextSearchPos();
-				//m_enemy->GetEnemyMove()->RouteSearch(m_enemy->GetEnemyMove()->GetPosition(), m_enemy->GetEnemySearchPlayer()->GetTargetSearchPos());
+				m_enemy->GetEnemyMove()->RouteSearch(m_enemy->GetEnemyMove()->GetPosition(), m_enemy->GetEnemySearchPlayer()->GetTargetSearchPos());
 			}
 		}
 	}

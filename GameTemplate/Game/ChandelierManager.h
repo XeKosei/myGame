@@ -11,6 +11,7 @@ namespace nsHikageri
 		class ChandelierManager : public IGameObject
 		{
 		public:
+			~ChandelierManager();
 			bool Start();
 			void Update();
 			/// @brief プレイヤーにアクセスできるようにする。

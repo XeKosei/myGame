@@ -7,6 +7,11 @@ namespace nsHikageri
 {
 	namespace nsFlashLight
 	{
+		AbilityManager::~AbilityManager()
+		{
+
+		}
+
 		bool AbilityManager::Start()
 		{
 			m_enemy = FindGO<nsEnemy::Enemy>("enemy");

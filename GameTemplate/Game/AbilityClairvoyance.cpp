@@ -8,6 +8,11 @@ namespace nsHikageri
 	{
 		using namespace nsAbilityClairvoyanceConstant;
 
+		AbilityClairvoyance::~AbilityClairvoyance()
+		{
+
+		}
+
 		bool AbilityClairvoyance::Start()
 		{
 			return true;

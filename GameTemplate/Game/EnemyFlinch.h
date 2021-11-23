@@ -8,6 +8,7 @@ namespace nsHikageri
 		class EnemyFlinch : public IGameObject
 		{
 		public:
+			~EnemyFlinch();
 			void ExecuteUpdate();
 
 			//Î‰»

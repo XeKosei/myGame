@@ -6,6 +6,11 @@ namespace nsHikageri
 	{
 		using namespace nsPlayerCameraConstant;
 
+		PlayerCamera::~PlayerCamera()
+		{
+
+		}
+
 		bool PlayerCamera::Start()
 		{
 			m_plEyeHeight = INI_PLAYER_EYE_HEIGHT;

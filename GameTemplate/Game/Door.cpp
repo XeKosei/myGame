@@ -9,6 +9,12 @@ namespace nsHikageri
 	namespace nsGimmick
 	{
 		using namespace nsDoorConstant;
+
+		Door::~Door()
+		{
+			DeleteGO(m_doorModel);
+		}
+
 		bool Door::Start()
 		{
 			m_doorModel = NewGO<SkinModelRender>(0);

@@ -9,6 +9,7 @@ namespace nsHikageri
 		class PlayerCamera : public IGameObject
 		{
 		public:
+			~PlayerCamera();
 			bool Start();
 			void ExecuteUpdate();
 

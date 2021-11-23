@@ -6,6 +6,12 @@ namespace nsHikageri
 	{
 		using namespace nsPlayerSanityConstant;
 
+		PlayerSanity::~PlayerSanity()
+		{
+			DeleteGO(m_hazySprite);
+			DeleteGO(f);
+		}
+
 		bool PlayerSanity::Start()
 		{
 			//最大HPを設定
@@ -22,21 +28,12 @@ namespace nsHikageri
 			f->SetText(L"SAN値:" + std::to_wstring(m_sanityValue));
 			f->SetPosition({300.0f, 200.0f});
 
-			//ゲームオーバー用フォント(仮)
-			m_gameOverFont = NewGO<FontRender>(2);
-			m_gameOverFont->SetText(L"GAME OVER");
-			m_gameOverFont->SetScale(3.0f);
-			m_gameOverFont->SetPosition({ -300.0f, 50.0f });
-			m_gameOverFont->SetColor({ 0.0f,0.0f,0.0f,0.0f });
-			m_gameOverFont->SetShadowFlag(true);
-			m_gameOverFont->SetShadowOffset(3.0f);
-			m_gameOverFont->SetShadowColor({ 0.0f,0.0f,0.0f,0.0f });
-
 			return true;
 		}
 
 		void PlayerSanity::ExecuteUpdate()
 		{
+			//安心できない状況ならば、SAN値減少
 			if (m_reliefFlag == false)
 			{
 				Damage(DARKNESS_SANITY_DAMAGE_SPEED);
@@ -49,26 +46,17 @@ namespace nsHikageri
 				m_damageIntervalCount--;
 			}
 
+			//SAN値が0になったら
+			if (m_sanityValue <= 0)
+			{
+				DYING();
+			}
+
 			//SAN値が半分を切ったら
 			if (m_sanityValue <= MAX_PLAYER_SANITY / 2)
 			{
 				HazySpriteBlink();
-			}
-
-			if (m_sanityValue <= 0)
-			{
-				GameOver();
-			}
-
-			/*if (g_pad[0]->IsTrigger(enButtonX))
-			{
-				m_sanityValue = 100;
-			}
-
-			if (g_pad[0]->IsTrigger(enButtonA))
-			{
-				Damage(5);
-			}*/
+			}		
 		}
 
 		/// @brief プレイヤーのSAN値を指定した値だけ減らす。
@@ -153,7 +141,7 @@ namespace nsHikageri
 				{
 					m_addAlphaFlag = true;
 				}
-			}
+			}			
 
 			//点滅分のa値を加算
 			m_hazyColor = m_hazySprite->GetMulColor();
@@ -161,28 +149,15 @@ namespace nsHikageri
 			m_hazySprite->SetMulColor(m_hazyColor);
 		}
 
-		void PlayerSanity::GameOver()
+		void PlayerSanity::DYING()
 		{
-			//死んだときの演出
-			if (m_player->GetPlayerState() == Player::enState_Dead)
-			{
-				m_addAlpha += MAX_ADD_ALPHA * 1;
-			}
-
-			if (m_gameOverMoveCount > 0)
-			{
-				m_gameOverMoveCount--;
-			}
-
-			if (m_gameOverMoveCount <= 100 && m_gameOverMoveCount > 0)
-			{
-				m_gameOverFontColor.r += 0.01f;
-				m_gameOverFontColor.a += 0.01f;
-				m_gameOverFont->SetColor(m_gameOverFontColor);
-				m_gameOverFontShadowColor.a += 0.01f;
-				m_gameOverFont->SetShadowColor(m_gameOverFontShadowColor);
-			}
+			//スプライトを強く表示する。
+			if (m_addAlpha <= DYING_MAX_ADD_ALPHA)
+				m_addAlpha += DYING_ADD_ALPHA_SPEED;
+			
+			m_hazyColor = m_hazySprite->GetMulColor();
+			m_hazyColor.a += m_addAlpha;
+			m_hazySprite->SetMulColor(m_hazyColor);
 		}
-
 	}
 }

@@ -9,6 +9,7 @@ namespace nsHikageri
 		class PlayerBitten : public IGameObject
 		{
 		public:
+			~PlayerBitten();
 			bool Start();
 
 			enum EnBittenStates

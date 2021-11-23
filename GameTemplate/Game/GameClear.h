@@ -5,6 +5,14 @@ namespace nsHikageri
 	{
 		class GameClear : public IGameObject
 		{
+		public:
+			~GameClear();
+			bool Start();
+			void Update();
+		private:
+
+
+
 		};
 	}
 }

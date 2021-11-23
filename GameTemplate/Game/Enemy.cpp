@@ -11,6 +11,15 @@ namespace nsHikageri
 		Enemy::~Enemy()
 		{
 			DeleteGO(m_enemyModel);
+			DeleteGO(m_enemyMove);
+			DeleteGO(m_enemySearchPlayer);
+			DeleteGO(m_enemyChase);
+			DeleteGO(m_enemyAttack);
+			DeleteGO(m_enemyScream);
+			DeleteGO(m_enemyFlinch);
+			DeleteGO(m_enemyStress);
+			DeleteGO(m_enemyVigilant);
+			DeleteGO(m_enemyAnim);
 		}
 		bool Enemy::Start()
 		{		

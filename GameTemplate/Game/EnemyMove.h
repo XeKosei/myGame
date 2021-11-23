@@ -19,6 +19,7 @@ namespace nsHikageri
 				enMoveState_num
 			};
 
+			~EnemyMove();
 			bool Start();
 			void ExecuteUpdate();
 

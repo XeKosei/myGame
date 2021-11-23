@@ -7,6 +7,7 @@ namespace nsHikageri
 		class FlashLightBattery : public IGameObject
 		{
 		public:
+			~FlashLightBattery();
 			bool Start();
 			void ExecuteUpdate();
 
