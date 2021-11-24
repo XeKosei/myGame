@@ -57,6 +57,10 @@ namespace nsHikageri
 			/// @return 鍵か開いているかどうか
 			bool GetUnlockFlag() { return m_unlockFlag; }
 
+			/// @brief ドアが開いているかどうかを取得
+			/// @return 開いている:true 開いていない:false
+			bool GetOpenFlag() { return m_openFlag; }
+
 			void SetPosition(Vector3 pos) { m_position = pos; };
 			void SetDirection(Vector3 dir) { dir.Normalize(); m_direction = dir; };
 		private:

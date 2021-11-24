@@ -10,10 +10,6 @@ namespace nsHikageri
 	{
 		ItemKey::~ItemKey()
 		{
-			if (m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Key
-				&& m_player->GetPlayerTarget()->GetTargetKey() == this)
-				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_None);
-
 			DeleteGO(m_keyModel);
 		}
 		bool ItemKey::Start()
@@ -50,7 +46,7 @@ namespace nsHikageri
 
 		void ItemKey::Update()
 		{
-			Vector3 dis = m_position - m_player->GetPlayerMove()->GetPosition();
+			Vector3 dis = m_position - m_player->GetPlayerCamera()->GetCameraPos();
 			Vector3 m_toPlayerDir = dis;
 			m_toPlayerDir.Normalize();
 
@@ -92,6 +88,8 @@ namespace nsHikageri
 					break;
 				}	
 				DeleteGO(this);
+				
+				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_None);
 			}
 		}
 	}

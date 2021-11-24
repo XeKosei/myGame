@@ -73,13 +73,27 @@ namespace nsHikageri
 
 		void Door::PlayerTargetSetting()
 		{
-			Vector3 dis = m_position - m_player->GetPlayerMove()->GetPosition();
+			//ドアのセンター位置を求める
+			Vector3 centerPos;
+			if (m_openFlag == false)
+				centerPos = m_position + Cross(m_direction, Vector3::AxisY) * 100.0f;
+			else
+			{
+				if (m_isOpenFromForward)
+					centerPos = m_position + m_direction * 100.0f;
+				else 
+					centerPos = m_position - m_direction * 100.0f;
+			}
+
+			centerPos.y += 200.0f;
+
+			Vector3 dis = centerPos - m_player->GetPlayerCamera()->GetCameraPos();
 			m_toPlayerDir = dis;
 			m_toPlayerDir.Normalize();
 
 			//プレイヤーとの距離が近く、ドアの方を向いていたら
 			if (dis.Length() <= nsPlayer::nsPlayerTargetConstant::CATCH_EYES_DIS
-				&& Dot(m_player->GetPlayerCamera()->GetDirection(), m_toPlayerDir) >= nsPlayer::nsPlayerTargetConstant::CATCH_EYES_DOT)
+				&& Dot(m_player->GetPlayerCamera()->GetDirection(), m_toPlayerDir) >= 0.707f)
 			{
 				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_Door);
 				m_player->GetPlayerTarget()->SetTargetDoor(this);

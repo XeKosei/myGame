@@ -51,6 +51,10 @@ namespace nsHikageri
 				if (m_battery[i] != nullptr)
 					DeleteGO(m_battery[i]);
 			}
+			for (int no = 0; no < 1; no++)
+			{
+				DeleteGO(m_messagePaper[no]);
+			}
 			if (m_pointLight != nullptr)
 				DeleteGO(m_pointLight);
 
@@ -84,61 +88,61 @@ namespace nsHikageri
 			m_chandelierManager->SetEnemy(m_enemy);
 
 			//ドア　テスト
-			//Vector3 doorPos[6]
-			//{
-			//	{ 0.0f, 0.0f, -100.0f },
-			//	{-900.0f, 0.0f, -600.0f},
-			//	{-800.0f, 0.0f, -1900.0f},
-			//	{-7200.0f,0.0f, 1500.0f},
-			//	{-7900.0f, 0.0f, 5400.0f},
-			//	{1600.0f, 0.0f, 6900.0f}
-			//};
+			Vector3 doorPos[6]
+			{
+				{ 0.0f, 0.0f, -100.0f },
+				{-900.0f, 0.0f, -600.0f},
+				{-800.0f, 0.0f, -1900.0f},
+				{-7200.0f,0.0f, 1500.0f},
+				{-7900.0f, 0.0f, 5400.0f},
+				{1600.0f, 0.0f, 6900.0f}
+			};
 
-			//Vector3 doorDir[6]
-			//{
-			//	{1.0f,0.0f,0.0f },
-			//	{0.0f, 0.0f, 1.0f},
-			//	{-1.0f, 0.0f, 0.0f},
-			//	{1.0f,0.0f,0.0f},
-			//	{0.0f,0.0f,-1.0f},
-			//	{-1.0f, 0.0f, 0.0f}
-			//};
+			Vector3 doorDir[6]
+			{
+				{1.0f,0.0f,0.0f },
+				{0.0f, 0.0f, 1.0f},
+				{-1.0f, 0.0f, 0.0f},
+				{1.0f,0.0f,0.0f},
+				{0.0f,0.0f,-1.0f},
+				{-1.0f, 0.0f, 0.0f}
+			};
 
-			//for (int doorNum = 0; doorNum < 6; doorNum++)
-			//{
-			//	m_door[doorNum] = NewGO<nsGimmick::Door>(0);
-			//	m_door[doorNum]->SetPlayer(m_player);
-			//	m_door[doorNum]->SetEnemy(m_enemy);
-			//	m_door[doorNum]->SetPosition(doorPos[doorNum]);
-			//	m_door[doorNum]->SetDirection(doorDir[doorNum]);
-			//}
-			//m_door[0]->SetDoorColor(nsGimmick::Door::enDoorColor_Red);
-			//m_door[1]->SetDoorColor(nsGimmick::Door::enDoorColor_Blue);
-			//m_door[2]->SetDoorColor(nsGimmick::Door::enDoorColor_Green);
-			//m_door[3]->SetDoorColor(nsGimmick::Door::enDoorColor_Yellow);
-			//m_door[4]->SetDoorColor(nsGimmick::Door::enDoorColor_Purple);
-			//m_door[5]->SetDoorColor(nsGimmick::Door::enDoorColor_White);
+			for (int doorNum = 0; doorNum < 6; doorNum++)
+			{
+				m_door[doorNum] = NewGO<nsGimmick::Door>(0);
+				m_door[doorNum]->SetPlayer(m_player);
+				m_door[doorNum]->SetEnemy(m_enemy);
+				m_door[doorNum]->SetPosition(doorPos[doorNum]);
+				m_door[doorNum]->SetDirection(doorDir[doorNum]);
+			}
+			m_door[0]->SetDoorColor(nsGimmick::Door::enDoorColor_Red);
+			m_door[1]->SetDoorColor(nsGimmick::Door::enDoorColor_Blue);
+			m_door[2]->SetDoorColor(nsGimmick::Door::enDoorColor_Green);
+			m_door[3]->SetDoorColor(nsGimmick::Door::enDoorColor_Yellow);
+			m_door[4]->SetDoorColor(nsGimmick::Door::enDoorColor_Purple);
+			m_door[5]->SetDoorColor(nsGimmick::Door::enDoorColor_White);
 
-			////鍵テスト
-			//Vector3 keyPos[5] = {
-			//	{1500.0f, 145.0f, 0.0f},
-			//	{ -2290.0f, 145.0f, 400.0f },
-			//	{110.0f, 145.0f, 2800.0f},
-			//	{-10800.0f,145.0f, 2200.0f},
-			//	{-7000.0f, 145.0f, -1900.0f}
-			//};
+			//鍵テスト
+			Vector3 keyPos[5] = {
+				{1500.0f, 145.0f, 0.0f},
+				{ -2290.0f, 145.0f, 400.0f },
+				{110.0f, 145.0f, 2800.0f},
+				{-10800.0f,145.0f, 2200.0f},
+				{-7000.0f, 145.0f, -1900.0f}
+			};
 
-			//for (int keyNum = 0; keyNum < 5; keyNum++)
-			//{
-			//	m_key[keyNum] = NewGO<nsItem::ItemKey>(0);
-			//	m_key[keyNum]->SetPlayer(m_player);
-			//	m_key[keyNum]->SetPosition(keyPos[keyNum]);
-			//}
-			//m_key[0]->SetKeyColor(nsGimmick::Door::enDoorColor_Red);
-			//m_key[1]->SetKeyColor(nsGimmick::Door::enDoorColor_Blue);
-			//m_key[2]->SetKeyColor(nsGimmick::Door::enDoorColor_Green);
-			//m_key[3]->SetKeyColor(nsGimmick::Door::enDoorColor_Yellow);
-			//m_key[4]->SetKeyColor(nsGimmick::Door::enDoorColor_Purple);
+			for (int keyNum = 0; keyNum < 5; keyNum++)
+			{
+				m_key[keyNum] = NewGO<nsItem::ItemKey>(0);
+				m_key[keyNum]->SetPlayer(m_player);
+				m_key[keyNum]->SetPosition(keyPos[keyNum]);
+			}
+			m_key[0]->SetKeyColor(nsGimmick::Door::enDoorColor_Red);
+			m_key[1]->SetKeyColor(nsGimmick::Door::enDoorColor_Blue);
+			m_key[2]->SetKeyColor(nsGimmick::Door::enDoorColor_Green);
+			m_key[3]->SetKeyColor(nsGimmick::Door::enDoorColor_Yellow);
+			m_key[4]->SetKeyColor(nsGimmick::Door::enDoorColor_Purple);
 
 			////懐中電灯のパーツテスト
 			//Vector3 partsPos[3] = {
@@ -226,15 +230,17 @@ namespace nsHikageri
 			//	m_battery[no]->SetPosition(batteryPos[no]);
 			//}
 
-			//クリアフォント(仮)
-			m_clearFont = NewGO<FontRender>(2);
-			m_clearFont->SetText(L"GAME CLEAR");
-			m_clearFont->SetScale(3.0f);
-			m_clearFont->SetPosition({ -320.0f, 50.0f });
-			m_clearFont->SetColor({ 0.0f,0.0f,0.0f,0.0f });
-			m_clearFont->SetShadowFlag(true);
-			m_clearFont->SetShadowOffset(3.0f);
-			m_clearFont->SetShadowColor({ 0.0f,0.0f,0.0f,0.0f });
+			Vector3 messagePaperPos[1] = {
+				{-1490.0f, 145.0f, 1200.0f}
+			};
+
+			//メッセージペーパー
+			for (int no = 0; no < 1; no++)
+			{
+				m_messagePaper[no] = NewGO<nsItem::ItemMessagePaper>(0);
+				m_messagePaper[no]->SetPlayer(m_player);
+				m_messagePaper[no]->SetPosition(messagePaperPos[no]);
+			}
 
 			m_pointLight = NewGO<PointLight>(0);
 			m_pointLight->SetColor({500.0f,500.0f,500.0f});

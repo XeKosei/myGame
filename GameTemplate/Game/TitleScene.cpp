@@ -14,6 +14,7 @@ namespace nsHikageri
 	{
 		m_titleSprite = NewGO<SpriteRender>(0);
 		m_titleSprite->Init("Assets/Image/Title01.DDS", 1280, 720);
+
 		return true;
 	}
 

@@ -68,6 +68,7 @@ namespace nsHikageri
 
 		namespace nsPlayerPouchConstant
 		{
+			//アイテム名
 			static const std::wstring ITEM_NAME[PlayerPouch::enItem_num] = { L"電池", L"精神安定剤" , L"赤色の鍵", L"青色の鍵", L"緑色の鍵", L"黄色の鍵", L"紫色の鍵", L"最後の鍵"};
 
 			static const int TRANQUILIZER_RECOVERY_NUM = 50.0f;	//精神安定剤を使った時の回復量
@@ -75,8 +76,18 @@ namespace nsHikageri
 
 		namespace nsPlayerTargetConstant
 		{
-			static const int CATCH_EYES_DIS = 300.0f;	//オブジェクトがプレイヤーの目を引く距離
-			static const int CATCH_EYES_DOT = 0.8f;		//オブジェクトがプレイヤーの目を引く内積
+			static const float CATCH_EYES_DIS = 400.0f;	//オブジェクトがプレイヤーの目を引く距離
+			static const float CATCH_EYES_DOT = 0.95f;	//オブジェクトがプレイヤーの目を引く内積
+			static const Vector2 ITEMNAME_FONT_POS = {-50.0f,-200.0f};	//アイテム名の表示位置
+			static const float ITEMNAME_FONT_SCALE = 0.8f;	//アイテム名のフォントの大きさ
+			
+			//ターゲットの名前
+			static const std::wstring TARGET_NAME[PlayerTarget::enTarget_num] = { L"", L"ドア", L"鍵", L"懐中電灯のパーツ", L"精神安定剤",L"電池", L"紙"};
+			
+			//コマンド表示
+			static const std::wstring COMMAND_TEXT[PlayerTarget::enCommand_num] = {L"", L"A:拾う",L"A:開ける",L"A:閉める", L"A:読む"};
+			
+			static const Vector2 COMMAND_FONT_POS = { 400.0f, -250.0f };	//コマンドフォントの位置
 		}
 	}
 }

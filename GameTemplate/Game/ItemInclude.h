@@ -4,3 +4,4 @@
 #include "ItemFlashLightParts.h"
 #include "ItemTranquilizer.h"
 #include "ItemBattery.h"
+#include "ItemMessagePaper.h"

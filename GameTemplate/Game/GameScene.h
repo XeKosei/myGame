@@ -7,7 +7,8 @@ namespace nsHikageri
 	namespace nsBackGround { class BackGround; class SecretRoom;}
 	namespace nsEnemy { class Enemy; }
 	namespace nsGimmick { class ChandelierManager; class Door;  class EyeWall; }
-	namespace nsItem { class ItemKey; class ItemFlashLightParts; class ItemTranquilizer; class ItemBattery; } 
+	namespace nsItem { class ItemKey; class ItemFlashLightParts; class ItemTranquilizer; 
+	class ItemBattery; class ItemMessagePaper;}
 
 	namespace nsGameScene
 	{
@@ -85,11 +86,10 @@ namespace nsHikageri
 				nullptr,nullptr,nullptr,nullptr,nullptr,
 				nullptr,nullptr,nullptr,nullptr,nullptr };
 
-			//クリアフォント(仮)
-			FontRender* m_clearFont = nullptr;
-			int m_clearFontMoveCount = 100;
-			Vector4 m_clearOverFontColor = { 0.0f,0.0f,0.0f,0.0f };
-			Vector4 m_clearOverFontShadowColor = { 0.0f,0.0f,0.0f,0.0f };
+			//メッセージペーパー
+			nsItem::ItemMessagePaper* m_messagePaper[1] = {
+				nullptr
+			};
 
 			//脱出する通路の先のポイントライト
 			PointLight* m_pointLight = nullptr;

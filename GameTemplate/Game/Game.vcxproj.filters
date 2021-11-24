@@ -449,6 +449,9 @@
     <ClCompile Include="ChandelierManager.cpp">
       <Filter>ソース ファイル\Hikageri\Gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="ItemMessagePaper.cpp">
+      <Filter>ソース ファイル\Hikageri\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -855,6 +858,9 @@
     </ClInclude>
     <ClInclude Include="GameSceneConstant.h">
       <Filter>ヘッダー ファイル\Hikageri\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemMessagePaper.h">
+      <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

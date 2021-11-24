@@ -41,7 +41,7 @@ namespace nsHikageri
 
 		void ItemFlashLightParts::Update()
 		{
-			Vector3 dis = m_position - m_player->GetPlayerMove()->GetPosition();
+			Vector3 dis = m_position - m_player->GetPlayerCamera()->GetCameraPos();
 			Vector3 m_toPlayerDir = dis;
 			m_toPlayerDir.Normalize();
 
