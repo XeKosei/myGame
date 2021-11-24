@@ -42,8 +42,6 @@ namespace nsHikageri
 			void ExecuteUpdateStep04();
 			void ExecuteUpdateStep05();
 
-			//void GameClear();//(仮)
-
 			/// @brief ゲーム進行を次へ進めるかどうかのフラグ
 			/// @param flag 進める:true 進めない:false
 			void SetCanGoNextStepFlag(bool flag) { m_canGoNextStepFlag = flag; };

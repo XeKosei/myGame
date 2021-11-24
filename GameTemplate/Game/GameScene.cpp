@@ -273,8 +273,6 @@ namespace nsHikageri
 			default:
 				break;
 			}
-
-			//GameClear();
 		}
 
 		void GameScene::GameManagement()
@@ -283,12 +281,13 @@ namespace nsHikageri
 			{
 				m_gameStep = enGameStep_GameOver;
 				m_gameOver = NewGO<GameOver>(0);
+				m_gameOver->SetGameScene(this);
 			}
-
-			if (g_pad[0]->IsTrigger(enButtonA))
+			if (m_player->GetPlayerMove()->GetPosition().z <= -4000.0f)
 			{
-				DeleteGO(this);
-				NewGO<TitleScene>(0);
+				m_gameStep = enGameStep_GameClear;
+				m_gameClear = NewGO<GameClear>(0);
+				m_gameClear->SetGameScene(this);
 			}
 		}
 
@@ -330,28 +329,5 @@ namespace nsHikageri
 		{
 
 		}
-
-		//‰¼
-		/*void GameScene::GameClear()
-		{
-			if (m_player->GetPlayerMove()->GetPosition().z <= -4500.0f)
-			{
-				if (m_clearFontMoveCount > 0)
-				{
-					m_clearFontMoveCount--;
-				}
-
-				if (m_clearFontMoveCount <= 100 && m_clearFontMoveCount > 0)
-				{
-					m_clearOverFontColor.r += 0.01f;
-					m_clearOverFontColor.g += 0.01f;
-					m_clearOverFontColor.b += 0.01f;
-					m_clearOverFontColor.a += 0.01f;
-					m_clearFont->SetColor(m_clearOverFontColor);
-					m_clearOverFontShadowColor.a += 0.01f;
-					m_clearFont->SetShadowColor(m_clearOverFontShadowColor);
-				}
-			}
-		}*/
 	}
 }

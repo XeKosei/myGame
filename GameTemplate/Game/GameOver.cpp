@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameSceneInclude.h"
+#include "TitleScene.h"
 namespace nsHikageri
 {
 	namespace nsGameScene
@@ -39,9 +40,8 @@ namespace nsHikageri
 			if (m_gameOverExecuteCount <= 0)
 			{
 				DeleteGO(this);
-
-				
-
+				DeleteGO(m_gameScene);
+				NewGO<TitleScene>(0);		
 			}
 			else if (m_gameOverExecuteCount <= DELETE_SPRITE_TIMING)
 			{

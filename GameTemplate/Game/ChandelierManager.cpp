@@ -24,7 +24,7 @@ namespace nsHikageri
 			////シャンデリア　テスト
 			for (int chandelierNum = 0; chandelierNum < CHANDELIER_NUM; chandelierNum++)
 			{
-				m_chandelier[chandelierNum] = NewGO<nsGimmick::Chandelier>(1);
+				m_chandelier[chandelierNum] = NewGO<nsGimmick::Chandelier>(1);	//懐中電灯のスポットライトより後に作りたいので、優先順位は1にする。
 				m_chandelier[chandelierNum]->SetPlayer(m_player);
 				m_chandelier[chandelierNum]->SetEnemy(m_enemy);
 				m_chandelier[chandelierNum]->SetPosition(m_chandelierPos[chandelierNum]);

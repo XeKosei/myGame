@@ -29,7 +29,7 @@ namespace nsHikageri
 			m_flashLightModel->SetSpotLightCasterFlag(false);
 
 			//スポットライトを生成
-			m_spotLight = NewGO<nsHikageri::SpotLight>(1);
+			m_spotLight = NewGO<nsHikageri::SpotLight>(0);//シャンデリアのスポットライトより先に作りたいので、優先順位は0にする。
 			m_spotLight->SetPosition(m_player->GetPlayerMove()->GetPosition());
 			m_spotLight->SetDirection(m_direction);
 			m_spotLight->SetColor(INI_FLASHLIGHT_COLOR);
