@@ -7,4 +7,5 @@
 #include "PlayerBitten.h"
 #include "PlayerPouch.h"
 #include "PlayerTarget.h"
+#include "PlayerRead.h"
 #include "PlayerConstant.h"

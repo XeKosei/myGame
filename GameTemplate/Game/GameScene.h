@@ -81,14 +81,14 @@ namespace nsHikageri
 				nullptr,nullptr,nullptr,nullptr,nullptr };
 
 			//電池
-			nsItem::ItemBattery* m_battery[15] = {
+			nsItem::ItemBattery* m_battery[13] = {
 				nullptr,nullptr,nullptr,nullptr,nullptr,
 				nullptr,nullptr,nullptr,nullptr,nullptr,
-				nullptr,nullptr,nullptr,nullptr,nullptr };
+				nullptr,nullptr,nullptr };
 
 			//メッセージペーパー
-			nsItem::ItemMessagePaper* m_messagePaper[1] = {
-				nullptr
+			nsItem::ItemMessagePaper* m_messagePaper[3] = {
+				nullptr, nullptr, nullptr
 			};
 
 			//脱出する通路の先のポイントライト

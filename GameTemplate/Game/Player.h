@@ -12,6 +12,7 @@ namespace nsHikageri
 		class PlayerBitten;
 		class PlayerPouch;
 		class PlayerTarget;
+		class PlayerRead;
 
 		class Player : public IGameObject
 		{
@@ -22,6 +23,7 @@ namespace nsHikageri
 				enState_Bitten,
 				enState_Dead,
 				enState_Stop,
+				enState_Read,
 				enStatesNum,
 				enState_Invincible,
 			};
@@ -67,6 +69,7 @@ namespace nsHikageri
 			PlayerBitten* GetPlayerBitten() { return m_playerBitten; }
 			PlayerPouch* GetPlayerPouch() { return m_playerPouch; }
 			PlayerTarget* GetPlayerTarget() { return m_playerTarget; };
+			PlayerRead* GetPlayerRead() { return m_playerRead; }
 		private:
 			//ƒ‚ƒfƒ‹
 			SkinModelRender* m_playerModel = nullptr;
@@ -84,6 +87,7 @@ namespace nsHikageri
 			PlayerBitten* m_playerBitten = nullptr;
 			PlayerPouch* m_playerPouch = nullptr;
 			PlayerTarget* m_playerTarget = nullptr;
+			PlayerRead* m_playerRead = nullptr;
 
 			EnPlayerStates m_playerState = enState_Normal;
 

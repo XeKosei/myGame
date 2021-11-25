@@ -6,6 +6,8 @@ namespace nsHikageri
 {
 	namespace nsItem
 	{
+		using namespace nsItemMessagePaperConstant;
+
 		ItemMessagePaper::~ItemMessagePaper()
 		{
 			DeleteGO(m_paperModel);
@@ -15,7 +17,7 @@ namespace nsHikageri
 		{
 			m_paperModel = NewGO<SkinModelRender>(0);
 
-			m_paperModel->Init("Assets/modelData/Key.tkm");
+			m_paperModel->Init("Assets/modelData/Paper.tkm");
 			m_paperModel->SetPosition(m_position);
 
 			return true;
@@ -40,7 +42,10 @@ namespace nsHikageri
 				&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Paper
 				&& m_player->GetPlayerTarget()->GetTargetMessagePaper() == this)
 			{
-				
+				//プレイヤーを読む状態にする。
+				m_player->SetPlayerState(nsPlayer::Player::enState_Read);
+				//読むテキストを送る。
+				m_player->GetPlayerRead()->SetMessage(MESSAGEPAPAER_TEXT[m_kind]);
 			}
 		}
 	}

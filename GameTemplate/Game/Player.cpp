@@ -49,6 +49,8 @@ namespace nsHikageri
 			m_playerPouch->SetPlayer(this);
 			m_playerTarget = NewGO<PlayerTarget>(0);
 			m_playerTarget->SetPlayer(this);
+			m_playerRead = NewGO<PlayerRead>(0);
+			m_playerRead->SetPlayer(this);
 
 			return true;
 		}
@@ -73,6 +75,9 @@ namespace nsHikageri
 			case enState_Dead:
 				m_playerSanity->ExecuteUpdate();
 			case enState_Stop:			
+				break;
+			case enState_Read:
+				m_playerRead->ExecuteUpdate();
 				break;
 			case enState_Invincible:
 				m_playerMove->ExecuteUpdate();

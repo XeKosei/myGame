@@ -6,7 +6,7 @@ namespace nsHikageri
 	{
 		namespace nsPlayerConstant
 		{
-			static const Vector3 INI_PLAYER_POSITION = { 1000, 0.0f,0.0f };	//プレイヤーの初期位置
+			static const Vector3 INI_PLAYER_POSITION = { -1500, 0.0f,-2000.0f };	//プレイヤーの初期位置
 			static const float PLAYER_MODEL_WIDTH = 50.0f;	//プレイヤーのモデルの横幅
 			static const float PLAYER_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
 			static const Vector3 INI_PLAYER_SCALE = { 1.0f, 1.0f, 1.0f };	//プレイヤーのモデルの大きさの初期値
@@ -82,12 +82,18 @@ namespace nsHikageri
 			static const float ITEMNAME_FONT_SCALE = 0.8f;	//アイテム名のフォントの大きさ
 			
 			//ターゲットの名前
-			static const std::wstring TARGET_NAME[PlayerTarget::enTarget_num] = { L"", L"ドア", L"鍵", L"懐中電灯のパーツ", L"精神安定剤",L"電池", L"紙"};
+			static const std::wstring TARGET_NAME[PlayerTarget::enTarget_num] = { L"", L"A ドア", L"A 鍵", L"A 懐中電灯のパーツ", L"A 精神安定剤",L"A 電池", L"A 紙"};
 			
 			//コマンド表示
 			static const std::wstring COMMAND_TEXT[PlayerTarget::enCommand_num] = {L"", L"A:拾う",L"A:開ける",L"A:閉める", L"A:読む"};
 			
 			static const Vector2 COMMAND_FONT_POS = { 400.0f, -250.0f };	//コマンドフォントの位置
+		}
+
+		namespace nsPlayerReadConstant
+		{
+			static const float ADD_BLACKSPRITE_COLOR_SPEED = 0.05f;	//画面を暗くする速さ
+			static const float MAX_BLACKSPRITE_COLOR = 0.5f;	//黒スプライトの最大カラー
 		}
 	}
 }

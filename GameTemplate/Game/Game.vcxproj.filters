@@ -452,6 +452,9 @@
     <ClCompile Include="ItemMessagePaper.cpp">
       <Filter>ソース ファイル\Hikageri\Item</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerRead.cpp">
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -860,6 +863,12 @@
       <Filter>ヘッダー ファイル\Hikageri\GameScene</Filter>
     </ClInclude>
     <ClInclude Include="ItemMessagePaper.h">
+      <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRead.h">
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemConstant.h">
       <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
     </ClInclude>
   </ItemGroup>

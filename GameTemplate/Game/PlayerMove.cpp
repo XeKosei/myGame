@@ -48,10 +48,6 @@ namespace nsHikageri
 			m_velocity.x -= m_velocity.x * PLAYER_MOVE_FRICTION;
 			m_velocity.z -= m_velocity.z * PLAYER_MOVE_FRICTION;
 
-			//プレイヤーを上に動かす(仮)
-			/*if (g_pad[0]->IsTrigger(enButtonY))
-				m_velocity.y += 30.0f;*/
-
 			//重力
 			if (m_player->GetCharaCon()->IsOnGround() == false) 
 			{	//地面についていなかったら

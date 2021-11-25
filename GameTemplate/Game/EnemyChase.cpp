@@ -37,12 +37,13 @@ namespace nsHikageri
 				&& m_enemy->GetPlayer()->GetPlayerState() == nsPlayer::Player::enState_Normal
 				&& m_isPlayerHidden == false)
 			{
-				//エネミーを噛みつき状態にする
+				//エネミーを噛みつき状態にする		
 				m_enemy->SetEnemyState(Enemy::enState_Attack);
 				//プレイヤーを噛みつかれ状態にする
 				m_enemy->GetPlayer()->SetPlayerState(nsPlayer::Player::enState_Bitten);
 				//プレイヤーが噛みつかれている相手を、このエネミーに設定
 				m_enemy->GetPlayer()->GetPlayerBitten()->SetEnemy(m_enemy);
+				m_enemy->GetEnemyAttack()->Reset();
 			}
 		}
 

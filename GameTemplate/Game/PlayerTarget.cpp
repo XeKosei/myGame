@@ -20,10 +20,10 @@ namespace nsHikageri
 			m_itemNameFont->SetShadowFlag(true);
 			m_itemNameFont->SetShadowColor(Vector4::Black);
 			m_itemNameFont->SetShadowOffset(ITEMNAME_FONT_SCALE);
-			m_commandFont = NewGO<FontRender>(0);
+			/*m_commandFont = NewGO<FontRender>(0);
 			m_commandFont->SetPosition(COMMAND_FONT_POS);
 			m_commandFont->SetShadowFlag(true);
-			m_commandFont->SetShadowColor(Vector4::Black);
+			m_commandFont->SetShadowColor(Vector4::Black);*/
 			//m_commandFont->SetShadowOffset();
 
 			return true;
@@ -38,34 +38,34 @@ namespace nsHikageri
 			switch (m_target)
 			{
 			case enTarget_None:
-				m_commandFont->SetText(COMMAND_TEXT[enCommand_None]);
+				//m_commandFont->SetText(COMMAND_TEXT[enCommand_None]);
 				return;
 				break;
 			case enTarget_Door:
-				if (m_targetDoor->GetOpenFlag())
+				/*if (m_targetDoor->GetOpenFlag())
 					m_commandFont->SetText(COMMAND_TEXT[enCommand_Close]);
 				else
-					m_commandFont->SetText(COMMAND_TEXT[enCommand_Open]);
+					m_commandFont->SetText(COMMAND_TEXT[enCommand_Open]);*/
 				targetPos = m_targetDoor->GetPosition();
 				break;
 			case enTarget_Key:
-				m_commandFont->SetText(COMMAND_TEXT[enCommand_Get]);
+				//m_commandFont->SetText(COMMAND_TEXT[enCommand_Get]);
 				targetPos = m_targetKey->GetPosition();
 				break;
 			case enTarget_FlashLightParts:
-				m_commandFont->SetText(COMMAND_TEXT[enCommand_Get]);
+				//m_commandFont->SetText(COMMAND_TEXT[enCommand_Get]);
 				targetPos = m_targetFlashLightParts->GetPosition();
 				break;
 			case enTarget_Tranquilizer:
-				m_commandFont->SetText(COMMAND_TEXT[enCommand_Get]);
+				//m_commandFont->SetText(COMMAND_TEXT[enCommand_Get]);
 				targetPos = m_targetTranquilizer->GetPosition();
 				break;
 			case enTarget_Battery:
-				m_commandFont->SetText(COMMAND_TEXT[enCommand_Get]);
+				//m_commandFont->SetText(COMMAND_TEXT[enCommand_Get]);
 				targetPos = m_targetBattery->GetPosition();
 				break;
 			case enTarget_Paper:
-				m_commandFont->SetText(COMMAND_TEXT[enCommand_Read]);
+				//m_commandFont->SetText(COMMAND_TEXT[enCommand_Read]);
 				targetPos = m_targetMessagePaper->GetPosition();
 				break;
 			default:

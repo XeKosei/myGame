@@ -19,6 +19,8 @@ namespace nsHikageri
 			bool Start();
 			void ExecuteUpdate();
 
+			void Reset();
+
 			void Attack();
 
 			void PreBite();

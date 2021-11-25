@@ -5,3 +5,4 @@
 #include "ItemTranquilizer.h"
 #include "ItemBattery.h"
 #include "ItemMessagePaper.h"
+#include "ItemConstant.h"

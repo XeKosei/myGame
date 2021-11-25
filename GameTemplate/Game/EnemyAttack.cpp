@@ -122,11 +122,17 @@ namespace nsHikageri
 			if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)
 			{
 				//エネミーを追跡状態に移行して、リセット
-				m_biteState = enBiteState_PreBite;
+				Reset();
 				m_enemy->SetEnemyState(Enemy::enState_Scream);
-				m_enemyBiteCount = BITING_TIME;
-				m_enemyBiteAnimCount = 0;
 			}
+		}
+
+		//リセット
+		void EnemyAttack::Reset()
+		{
+			m_biteState = enBiteState_PreBite;
+			m_enemyBiteCount = BITING_TIME;
+			m_enemyBiteAnimCount = 0;
 		}
 	}
 }

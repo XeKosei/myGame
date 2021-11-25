@@ -262,6 +262,8 @@ float3 CalcPhongSpecular(float3 ligDir, float3 ligColor, float3 worldPos, float3
 		t = 0;
 	}
 
+	t /= 3.1415926;
+
 	t = pow(t, 5.0f);
 
 	return ligColor * t;
@@ -366,12 +368,15 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 			if (zInSpotLVP < zInSpotLightMap + 0.0001f)// && zInSpotLVP <= 1.0f)
 			{
 				//透視の処理
-				float4 clairvoyanceMap = g_clairvoyanceMap.Sample(g_sampler, spotLightMapUV);
-				if (clairvoyanceMap.x > 0.0f)
-				{	
-					albedoColor.x = zInSpotLightMap * 10.0f;
-					albedoColor.y = 0.0f;
-					albedoColor.z = 0.0f;		
+				if (i == 0)	//懐中電灯のスポットライトのときのみ
+				{
+					float4 clairvoyanceMap = g_clairvoyanceMap.Sample(g_sampler, spotLightMapUV);
+					if (clairvoyanceMap.x > 0.0f)
+					{
+						albedoColor.x = zInSpotLightMap * 10.0f;
+						albedoColor.y = 0.0f;
+						albedoColor.z = 0.0f;
+					}
 				}
 				//ここまで透視処理
 
