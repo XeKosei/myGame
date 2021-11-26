@@ -184,7 +184,7 @@ namespace nsHikageri
 			//}
 			
 			//精神安定剤
-			Vector3 tranquilizerPos[10] = {
+			Vector3 tranquilizerPos[9] = {
 				{-1200.0f, 145.0f, -3500.0f},
 				{-2900.0f, 145.0f, 3600.0f},
 				{-1300.0f,145.0f, 3500.0f},
@@ -194,10 +194,9 @@ namespace nsHikageri
 				{-5930.0f, 145.0f, -1780.0f},
 				{-4300.0, 145.0f, 4500.0f},
 				{1110.0f, 145.0f, 7600.0f},
-				{1040.0f, 145.0f, 5400.0f},
 			};
 
-			for (int no = 0; no < 10; no++)
+			for (int no = 0; no < 9; no++)
 			{
 				m_tranquilizer[no] = NewGO<nsItem::ItemTranquilizer>(0);
 				m_tranquilizer[no]->SetPlayer(m_player);
@@ -205,7 +204,7 @@ namespace nsHikageri
 			}
 
 			//電池
-			Vector3 batteryPos[13] = {
+			Vector3 batteryPos[12] = {
 				{-600.0f,145.0f, 700.0f},	
 				{-1200.0f, 145.0f,3500.0f },
 				{-300.0f, 145.0f,-1500.0f },
@@ -218,25 +217,25 @@ namespace nsHikageri
 				{-7040.0f, 145.0f, -2900.0f},
 				{-4900.0f, 145.0f, 4600.0f},
 				{160.0f, 145.0f, 6200.0f},
-				{60.0f, 145.0f, 3800.0f}
 			};
 
-			for (int no = 0; no < 13; no++)
+			for (int no = 0; no < 12; no++)
 			{
 				m_battery[no] = NewGO<nsItem::ItemBattery>(0);
 				m_battery[no]->SetPlayer(m_player);
 				m_battery[no]->SetPosition(batteryPos[no]);
 			}
 
-			Vector3 messagePaperPos[4] = {
+			Vector3 messagePaperPos[5] = {
 				{-1490.0f, 145.0f, 1200.0f},
 				{-1700.0f, 145.0f, -3300.0f},
 				{-200.0f, 145.0f,-1500.0f },
 				{-7900.0f, 145.0f,1700.0f },
+				{260.0f, 145.0f, 3800.0f}
 			};
 
 			//メッセージペーパー
-			for (int no = 0; no < 4; no++)
+			for (int no = 0; no < 5; no++)
 			{
 				m_messagePaper[no] = NewGO<nsItem::ItemMessagePaper>(0);
 				m_messagePaper[no]->SetPlayer(m_player);
@@ -246,7 +245,7 @@ namespace nsHikageri
 			m_messagePaper[1]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_01);
 			m_messagePaper[2]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_02);
 			m_messagePaper[3]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_03);
-			//m_messagePaper[4]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_04);
+			m_messagePaper[4]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_04);
 			//m_messagePaper[5]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_05);
 			//m_messagePaper[6]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_06);
 			//m_messagePaper[7]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_07);

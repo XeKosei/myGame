@@ -76,15 +76,15 @@ namespace nsHikageri
 			//懐中電灯のパーツ
 			nsItem::ItemFlashLightParts* m_flashLightParts[3] = { nullptr, nullptr, nullptr };
 			//精神安定剤
-			nsItem::ItemTranquilizer* m_tranquilizer[10] = {
+			nsItem::ItemTranquilizer* m_tranquilizer[9] = {
 				nullptr,nullptr,nullptr,nullptr,nullptr,
-				nullptr,nullptr,nullptr,nullptr,nullptr };
+				nullptr,nullptr,nullptr,nullptr };
 
 			//電池
-			nsItem::ItemBattery* m_battery[13] = {
+			nsItem::ItemBattery* m_battery[12] = {
 				nullptr,nullptr,nullptr,nullptr,nullptr,
 				nullptr,nullptr,nullptr,nullptr,nullptr,
-				nullptr,nullptr,nullptr };
+				nullptr,nullptr };
 
 			//メッセージペーパー
 			nsItem::ItemMessagePaper* m_messagePaper[8] = {
