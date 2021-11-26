@@ -87,7 +87,8 @@ namespace nsHikageri
 				nullptr,nullptr,nullptr };
 
 			//メッセージペーパー
-			nsItem::ItemMessagePaper* m_messagePaper[3] = {
+			nsItem::ItemMessagePaper* m_messagePaper[8] = {
+				nullptr, nullptr, nullptr, nullptr, nullptr,
 				nullptr, nullptr, nullptr
 			};
 

@@ -228,14 +228,15 @@ namespace nsHikageri
 				m_battery[no]->SetPosition(batteryPos[no]);
 			}
 
-			Vector3 messagePaperPos[3] = {
+			Vector3 messagePaperPos[4] = {
 				{-1490.0f, 145.0f, 1200.0f},
 				{-1700.0f, 145.0f, -3300.0f},
 				{-200.0f, 145.0f,-1500.0f },
+				{-7900.0f, 145.0f,1700.0f },
 			};
 
 			//メッセージペーパー
-			for (int no = 0; no < 3; no++)
+			for (int no = 0; no < 4; no++)
 			{
 				m_messagePaper[no] = NewGO<nsItem::ItemMessagePaper>(0);
 				m_messagePaper[no]->SetPlayer(m_player);
@@ -244,6 +245,11 @@ namespace nsHikageri
 			m_messagePaper[0]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_00);
 			m_messagePaper[1]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_01);
 			m_messagePaper[2]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_02);
+			m_messagePaper[3]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_03);
+			//m_messagePaper[4]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_04);
+			//m_messagePaper[5]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_05);
+			//m_messagePaper[6]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_06);
+			//m_messagePaper[7]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_07);
 
 			//出口の明かり
 			m_pointLight = NewGO<PointLight>(0);

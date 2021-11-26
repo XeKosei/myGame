@@ -14,6 +14,11 @@ namespace nsHikageri
 				enMessagePaperKind_00,
 				enMessagePaperKind_01,
 				enMessagePaperKind_02,
+				enMessagePaperKind_03,
+				enMessagePaperKind_04,
+				enMessagePaperKind_05,
+				enMessagePaperKind_06,
+				enMessagePaperKind_07,
 				enMessagePaperKind_num
 			};
 

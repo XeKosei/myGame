@@ -8,7 +8,7 @@ namespace nsHikageri
 	{
 		ItemFlashLightParts::~ItemFlashLightParts()
 		{
-			if (m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Key
+			if (m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_FlashLightParts
 				&& m_player->GetPlayerTarget()->GetTargetFlashLightParts() == this)
 				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_None);
 
