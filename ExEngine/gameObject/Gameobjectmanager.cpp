@@ -106,7 +106,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	//ClairvoyanceRenderでビューポートを設定しているのでここでビューポート設定しなくてOK(たぶん)
 	for (auto& goList : m_gameObjectListArray) {
 		for (auto& go : goList) {
-			go->RenderWrapper(rc, nsHikageri::LightManager::GetInstance()->GetSpotLightCamera(0));
+			go->RenderWrapper(rc, g_camera3D);
 		}
 	}
 	nsHikageri::PostEffectManager::GetInstance()->EndClairvoyanceRender(rc);

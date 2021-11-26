@@ -91,6 +91,7 @@ struct SPSIn {
 	float4 posInSpotLVP00 : TEXCOORD4;
 	float4 posInSpotLVP01 : TEXCOORD5;
 	float4 posInSpotLVP02 : TEXCOORD6;
+	float4 posInView	:TEXCOORD7;
 };
 
 ////////////////////////////////////////////////
@@ -190,6 +191,11 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 	psIn.posInSpotLVP01 = mul(spotLigCameraData[1].mSpotLVP, float4(psIn.worldPos, 1.0f));
 	psIn.posInSpotLVP02 = mul(spotLigCameraData[2].mSpotLVP, float4(psIn.worldPos, 1.0f));
 
+	//セマンティクスが原因で、psIn.posはピクセルシェーダーにちゃんと値が渡されていないので、
+	//代わりにpsIn.posInViewに値を代入。
+	psIn.posInView = psIn.pos;
+
+	//psIn.posInView = mul(mProj, psIn.pos);
 	////ライトの向きを取得。
 	//cameraDir = spotLightCameraDir;
 	////正規化されてるはずだけど、念の為。
@@ -370,7 +376,12 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 				//透視の処理
 				if (i == 0)	//懐中電灯のスポットライトのときのみ
 				{
-					float4 clairvoyanceMap = g_clairvoyanceMap.Sample(g_sampler, spotLightMapUV);
+					float2 uv = psIn.posInView.xy / psIn.posInView.w;
+					uv *= float2(0.5f, -0.5f);
+					uv += 0.5f;
+
+					float4 clairvoyanceMap = g_clairvoyanceMap.Sample(g_sampler, uv);
+					
 					if (clairvoyanceMap.x > 0.0f)
 					{
 						albedoColor.x = zInSpotLightMap * 10.0f;
