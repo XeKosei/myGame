@@ -455,6 +455,9 @@
     <ClCompile Include="PlayerRead.cpp">
       <Filter>ソース ファイル\Hikageri\Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -870,6 +873,9 @@
     </ClInclude>
     <ClInclude Include="ItemConstant.h">
       <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUI.h">
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

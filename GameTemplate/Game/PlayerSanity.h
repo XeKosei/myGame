@@ -9,17 +9,7 @@ namespace nsHikageri
 		public:
 			~PlayerSanity();
 			bool Start();
-
-			void ExecuteUpdate();
-
-			//Hazyスプライトを設定する
-			void SetHazySprite();
-
-			//スプライトの点滅処理
-			void HazySpriteBlink();
-
-			//死んだとき
-			void DYING();
+			void ExecuteUpdate();		
 
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
@@ -46,22 +36,12 @@ namespace nsHikageri
 			//プレイヤーのSAN値
 			float m_sanityValue = 0.0f;
 			//次にダメージを受けることができるようになるまでの間隔
-			int m_damageIntervalCount = 0;
-			//ダメージを受けた際の画面の周りのスプライト
-			SpriteRender* m_hazySprite = nullptr;
-
-			//hazyスプライト関連
-			//スプライトの色
-			Vector4 m_hazyColor = { 0.0f,0.0f,0.0f,0.0f };
-			//スプライトの点滅
-			float m_addAlpha = 0.0f;
-			bool m_addAlphaFlag = true;
+			int m_damageIntervalCount = 0;	
+			//安心できるかどうか。
+			bool m_reliefFlag = false;
 
 			//HP表示(デバッグ用)
 			FontRender* f = nullptr;
-
-			//安心できるかどうか。
-			bool m_reliefFlag = false;
 		};
 	}
 }

@@ -341,6 +341,7 @@
     <ClCompile Include="PlayerMove.cpp" />
     <ClCompile Include="PlayerPouch.cpp" />
     <ClCompile Include="PlayerTarget.cpp" />
+    <ClCompile Include="PlayerUI.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PostEffectManager.cpp" />
     <ClCompile Include="SecretRoom.cpp" />
@@ -487,6 +488,7 @@
     <ClInclude Include="PlayerMove.h" />
     <ClInclude Include="PlayerPouch.h" />
     <ClInclude Include="PlayerTarget.h" />
+    <ClInclude Include="PlayerUI.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PostEffectManager.h" />
     <ClInclude Include="SecretRoom.h" />

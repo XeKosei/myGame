@@ -6,8 +6,8 @@ namespace nsHikageri
 	{
 		namespace nsPlayerConstant
 		{
-			static const Vector3 INI_PLAYER_POSITION = { 0.0f, 0.0f,7000.0f };	//プレイヤーの初期位置
-			static const float PLAYER_MODEL_WIDTH = 50.0f;	//プレイヤーのモデルの横幅
+			static const Vector3 INI_PLAYER_POSITION = { 1000.0f, 0.0f,0.0f };	//プレイヤーの初期位置
+			static const float PLAYER_MODEL_WIDTH = 50.0f;	///:プレイヤーのモデルの横幅
 			static const float PLAYER_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
 			static const Vector3 INI_PLAYER_SCALE = { 1.0f, 1.0f, 1.0f };	//プレイヤーのモデルの大きさの初期値
 		}
@@ -43,18 +43,8 @@ namespace nsHikageri
 		{
 			static const float MAX_PLAYER_SANITY = 100.0f;	//プレイヤーのSAN値の最大値
 			static const int DAMAGE_INTERVAL = 200;	//次にダメージを受けられるようになるまでの間隔
-			static const Vector4 INI_HAZYSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 0.0f };	//Hazyスプライトの初期カラー
-			static const Vector4 DAMAGED_HAZYSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };	//ダメージを受けた際のHazyスプライトのカラー
-			static const float HAZYSPRITE_MUL_COLOR_PINCH = 20.0f;	//ピンチ時にHazyスプライトのカラーに掛ける値
-
+			
 			static const float BIG_DAMAGE_LINE = MAX_PLAYER_SANITY / 3;	//大ダメージを受けていると判断されるライン
-
-			static const float ADD_ALPHA_SPEED = 0.001f;	//スプライトが点滅する速さ
-			static const float MAX_ADD_ALPHA = 0.02f;		//点滅の最大加算値
-			static const float MIN_ADD_ALPHA = -0.02f;		//点滅の最小加算値
-
-			static const float DYING_ADD_ALPHA_SPEED = 0.02f;	//死んだときのアルファ値加算の速さ
-			static const float DYING_MAX_ADD_ALPHA = 5.0f;	//死んだときのアルファ値の最大加算値
 
 			static const float DARKNESS_SANITY_DAMAGE_SPEED = 0.05f;	//暗い時にSAN値がじわじわと減っていくスピード
 		}
@@ -94,6 +84,22 @@ namespace nsHikageri
 		{
 			static const float ADD_BLACKSPRITE_COLOR_SPEED = 0.05f;	//画面を暗くする速さ
 			static const float MAX_BLACKSPRITE_COLOR = 0.5f;	//黒スプライトの最大カラー
+		}
+
+		namespace nsPlayerUIConstant
+		{
+			static const Vector4 INI_HAZYSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 0.0f };	//Hazyスプライトの初期カラー
+			static const Vector4 DAMAGED_HAZYSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };	//ダメージを受けた際のHazyスプライトのカラー
+			static const float HAZYSPRITE_MUL_COLOR_PINCH = 20.0f;	//ピンチ時にHazyスプライトのカラーに掛ける値
+
+			static const float ADD_ALPHA_SPEED = 0.001f;	//スプライトが点滅する速さ
+			static const float MAX_ADD_ALPHA = 0.02f;		//点滅の最大加算値
+			static const float MIN_ADD_ALPHA = -0.02f;		//点滅の最小加算値
+
+			static const float DYING_ADD_ALPHA_SPEED = 0.02f;	//死んだときのアルファ値加算の速さ
+			static const float DYING_MAX_ADD_ALPHA = 5.0f;	//死んだときのアルファ値の最大加算値
+			
+			static const float MUL_HAZYSPRITE_COLOR_VALUE = 1.5f;	//HazySpriteのカラーにかける値
 		}
 	}
 }

@@ -18,6 +18,8 @@ namespace nsHikageri
 			DeleteGO(m_playerBitten);
 			DeleteGO(m_playerPouch);
 			DeleteGO(m_playerTarget);
+			DeleteGO(m_playerRead);
+			DeleteGO(m_playerUI);
 		}
 		bool Player::Start()
 		{
@@ -51,7 +53,8 @@ namespace nsHikageri
 			m_playerTarget->SetPlayer(this);
 			m_playerRead = NewGO<PlayerRead>(0);
 			m_playerRead->SetPlayer(this);
-
+			m_playerUI = NewGO<PlayerUI>(0);
+			m_playerUI->SetPlayer(this);
 			return true;
 		}
 
@@ -66,14 +69,16 @@ namespace nsHikageri
 				m_playerSanity->ExecuteUpdate();
 				m_playerPouch->ExecuteUpdate();
 				m_playerTarget->ExecuteUpdate();
+				m_playerUI->ExecuteUpdate();
 				break;
 			case enState_Bitten:
 				m_playerBitten->ExecuteUpdate();
 				m_playerCamera->ExecuteUpdate();
 				m_playerSanity->ExecuteUpdate();
+				m_playerUI->ExecuteUpdate();
 				break;
 			case enState_Dead:
-				m_playerSanity->ExecuteUpdate();
+				m_playerUI->ExecuteUpdate();
 			case enState_Stop:			
 				break;
 			case enState_Read:
@@ -86,6 +91,7 @@ namespace nsHikageri
 				m_playerSanity->ExecuteUpdate();
 				m_playerPouch->ExecuteUpdate();
 				m_playerTarget->ExecuteUpdate();
+				m_playerUI->ExecuteUpdate();
 				Invincible();
 				break;
 			}		

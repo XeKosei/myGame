@@ -8,7 +8,6 @@ namespace nsHikageri
 
 		PlayerSanity::~PlayerSanity()
 		{
-			DeleteGO(m_hazySprite);
 			DeleteGO(f);
 		}
 
@@ -16,12 +15,6 @@ namespace nsHikageri
 		{
 			//最大HPを設定
 			m_sanityValue = MAX_PLAYER_SANITY;
-
-			//ダメージのスプライト
-			m_hazySprite = NewGO<SpriteRender>(1);
-			m_hazySprite->Init("Assets/Image/Hazy.DDS", 1280, 720);
-			m_hazySprite->SetMulColor(INI_HAZYSPRITE_COLOR);
-			m_hazySprite->SetScale({ 1.0f,1.0f,1.0f });
 
 			//デバッグ用
 			f = NewGO<FontRender>(3);
@@ -44,19 +37,7 @@ namespace nsHikageri
 			if (m_damageIntervalCount != 0)
 			{
 				m_damageIntervalCount--;
-			}
-
-			//SAN値が0になったら
-			if (m_sanityValue <= 0)
-			{
-				DYING();
-			}
-
-			//SAN値が半分を切ったら
-			if (m_sanityValue <= MAX_PLAYER_SANITY / 2)
-			{
-				HazySpriteBlink();
-			}		
+			}	
 		}
 
 		/// @brief プレイヤーのSAN値を指定した値だけ減らす。
@@ -78,7 +59,7 @@ namespace nsHikageri
 				}
 
 				//スプライトを設定
-				SetHazySprite();
+				m_player->GetPlayerUI()->SetHazySprite();
 
 				//次にダメージを受けられるようになるまでのインターバルを設定。
 				m_damageIntervalCount = DAMAGE_INTERVAL;
@@ -103,61 +84,11 @@ namespace nsHikageri
 				}
 
 				//スプライトを設定
-				SetHazySprite();
+				m_player->GetPlayerUI()->SetHazySprite();
 
 				//HP表示(仮)
 				f->SetText(L"SAN値:" + std::to_wstring(m_sanityValue));
 			}
-		}
-
-		void PlayerSanity::SetHazySprite()
-		{	
-			//残HPの比率から、スプライトの色を決定
-			float color = (1 - m_sanityValue / MAX_PLAYER_SANITY) * 1.5f;
-			//Rだけ色を強めることで、ブルームを起こす。。
-			m_hazySprite->SetMulColor({ color, color, color, color });
-			
-			//スプライトの大きさを設定する(1～2の範囲)
-			//float scale = 1 + m_sanityValue / MAX_PLAYER_SANITY;
-			//m_hazySprite->SetScale({ scale,scale,scale });
-		}
-
-		//Hazyスプライトの点滅処理
-		void PlayerSanity::HazySpriteBlink()
-		{
-			//スプライトの点滅
-			if (m_addAlphaFlag == true)
-			{
-				m_addAlpha += ADD_ALPHA_SPEED;
-				if (m_addAlpha >= MAX_ADD_ALPHA)
-				{
-					m_addAlphaFlag = false;
-				}
-			}
-			else if (m_addAlphaFlag == false)
-			{
-				m_addAlpha -= ADD_ALPHA_SPEED;
-				if (m_addAlpha <= MIN_ADD_ALPHA)
-				{
-					m_addAlphaFlag = true;
-				}
-			}			
-
-			//点滅分のa値を加算
-			m_hazyColor = m_hazySprite->GetMulColor();
-			m_hazyColor.a += m_addAlpha;
-			m_hazySprite->SetMulColor(m_hazyColor);
-		}
-
-		void PlayerSanity::DYING()
-		{
-			//スプライトを強く表示する。
-			if (m_addAlpha <= DYING_MAX_ADD_ALPHA)
-				m_addAlpha += DYING_ADD_ALPHA_SPEED;
-			
-			m_hazyColor = m_hazySprite->GetMulColor();
-			m_hazyColor.a += m_addAlpha;
-			m_hazySprite->SetMulColor(m_hazyColor);
 		}
 	}
 }
