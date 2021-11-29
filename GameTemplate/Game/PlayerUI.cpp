@@ -18,6 +18,11 @@ namespace nsHikageri
 			{
 				DeleteGO(m_batterySprite[no]);
 			}
+
+			for (int no = 0; no < PlayerPouch::enItem_num; no++)
+			{
+				DeleteGO(m_itemSprite[no]);
+			}
 		}
 
 		bool PlayerUI::Start()
@@ -31,7 +36,7 @@ namespace nsHikageri
 			//ポーチアイテムの画面表示
 			m_itemFont = NewGO<FontRender>(2);
 			m_itemFont->SetText(L"");
-			m_itemFont->SetScale(1.0f);
+			m_itemFont->SetScale(INI_ITEMFONT_SCALE);
 			m_itemFont->SetPosition(INI_ITEMFONT_POS);
 			m_itemFont->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 			m_itemFont->SetShadowFlag(true);
@@ -40,12 +45,22 @@ namespace nsHikageri
 
 			m_itemNumFont = NewGO<FontRender>(2);
 			m_itemNumFont->SetText(L"");
-			m_itemNumFont->SetScale(1.0f);
+			m_itemNumFont->SetScale(INI_ITEMNUMFONT_SCALE);
 			m_itemNumFont->SetPosition(INI_ITEMNUMFONT_POS);
 			m_itemNumFont->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 			m_itemNumFont->SetShadowFlag(true);
 			m_itemNumFont->SetShadowOffset(1.0f);
 			m_itemNumFont->SetShadowColor({ 0.0f,0.0f,0.0f,1.0f });
+
+			for (int no = 0; no < PlayerPouch::enItem_num; no++)
+			{
+				m_itemSprite[no] = NewGO<SpriteRender>(2);
+				m_itemSprite[no]->Init(ITEMSPRITE_FILEPATH[no],500,500 );
+				m_itemSprite[no]->SetPosition(INI_ITEMSPRITE_POS);
+				m_itemSprite[no]->SetScale({0.0f,0.0f,0.0f});
+			}
+
+			SetItemFont(0, 0);
 
 			//バッテリー表示
 			for (int no = 0; no < enBatteryDispTypes_num; no++)
@@ -121,8 +136,12 @@ namespace nsHikageri
 		//ポーチアイテムの表示
 		void PlayerUI::SetItemFont(int itemKind, int itemNum)
 		{
+			m_itemSprite[m_itemSpriteNum]->SetScale({0.0f,0.0f,0.0f});
+			m_itemSpriteNum = itemKind;
+
 			m_itemFont->SetText(ITEM_NAME[itemKind]);
-			m_itemNumFont->SetText(std::to_wstring(itemNum));
+			m_itemNumFont->SetText(L" x " + std::to_wstring(itemNum));
+			m_itemSprite[itemKind]->SetScale(INI_ITEMSPRITE_SCALE);			
 		}
 
 		//バッテリー残量の設定

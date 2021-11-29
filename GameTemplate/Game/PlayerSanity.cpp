@@ -20,7 +20,7 @@ namespace nsHikageri
 			f = NewGO<FontRender>(3);
 			f->SetText(L"SAN’l:" + std::to_wstring(m_sanityValue));
 			f->SetPosition({300.0f, 200.0f});
-
+			f->SetScale(0.0f);
 			return true;
 		}
 

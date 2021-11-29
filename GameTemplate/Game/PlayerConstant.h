@@ -99,15 +99,32 @@ namespace nsHikageri
 			static const float MUL_HAZYSPRITE_COLOR_VALUE = 1.5f;	//HazySpriteのカラーにかける値
 			
 			///////////////////////////////ポーチアイテム関連
-			static const Vector2 INI_ITEMFONT_POS = { -600.0f, -200.0f };	//ポーチアイテムのフォントの位置
+			static const Vector2 INI_ITEMFONT_POS = { -500.0f, -200.0f };	//ポーチアイテムのフォントの位置
+			static const float INI_ITEMFONT_SCALE = 0.7f;	//ポーチアイテムのフォントのスケール
 			static const Vector2 INI_ITEMNUMFONT_POS = { -500.0f, -250.0f };	//ポーチアイテムの数の表示位置
+			static const float INI_ITEMNUMFONT_SCALE = 0.7f;	//アイテム数のフォントのスケール
+
 			//アイテム名
 			static const std::wstring ITEM_NAME[PlayerPouch::enItem_num] = {
 				L"電池", L"精神安定剤" , L"赤色の鍵", L"青色の鍵", L"緑色の鍵",
 				L"黄色の鍵", L"紫色の鍵", L"最後の鍵" };
 
+			//アイテムアイコンのスプライトのファイルパス
+			static const char* ITEMSPRITE_FILEPATH[PlayerPouch::enItem_num] = {
+				"Assets/Image/BatteryIcon.DDS",
+				"Assets/Image/TranquilizerIcon.DDS",
+				"Assets/Image/RedKeyIcon.DDS",
+				"Assets/Image/BlueKeyIcon.DDS",
+				"Assets/Image/GreenKeyIcon.DDS",
+				"Assets/Image/YellowKeyIcon.DDS",
+				"Assets/Image/PurpleKeyIcon.DDS",
+				"Assets/Image/WhiteKeyIcon.DDS"
+			};
+			static const Vector3 INI_ITEMSPRITE_POS = {-550.0f, -250.0f, 0.0f};	//アイテムアイコンの位置
+			static const Vector3 INI_ITEMSPRITE_SCALE = {0.2f,0.2f,0.2f};	//アイテムアイコンの大きさ
+
 			///////////////////////////////バッテリー関連
-			static const Vector3 INI_BATTERYSPRITE_POS = { 300.0f, -300.0f , 0.0f };	//バッテリー表示の位置
+			static const Vector3 INI_BATTERYSPRITE_POS = { 500.0f, 250.0f , 0.0f };	//バッテリー表示の位置
 			static const Vector3 INI_BATTERYSPRITE_SCALE = { 0.3f,0.3f,0.3f };	//バッテリー表示の初期スケール
 			
 			//バッテリー表示を変えるライン

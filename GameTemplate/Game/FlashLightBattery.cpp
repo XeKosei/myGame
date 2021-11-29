@@ -22,6 +22,7 @@ namespace nsHikageri
 			m_font->SetText(L"バッテリー:" + std::to_wstring(m_batteryLevel));
 			m_font->SetColor({0.5f, 0.5f, 0.0f, 1.0f});
 			m_font->SetPosition({250.0f, 250.0f});
+			m_font->SetScale(0.0f);
 
 			m_flashLight->GetPlayer()->GetPlayerUI()->SetBatterySprite(m_batteryLevel);
 

@@ -26,6 +26,7 @@ namespace nsHikageri
 			m_flashLightModel = NewGO<SkinModelRender>(0);
 			m_flashLightModel->Init("Assets/modelData/FlashLight.tkm");
 			m_flashLightModel->SetPosition(m_position);
+			m_flashLightModel->SetScale(INI_FLASHLIGHT_MODEL_SCALE);
 			m_flashLightModel->SetSpotLightCasterFlag(false);
 
 			//スポットライトを生成

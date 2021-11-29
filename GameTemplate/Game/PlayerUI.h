@@ -5,7 +5,7 @@ namespace nsHikageri
 	namespace nsPlayer
 	{
 		class Player;
-
+		class PlayerPouch;
 		class PlayerUI : public IGameObject
 		{
 		public:
@@ -62,6 +62,10 @@ namespace nsHikageri
 			//ポーチアイテムの画面表示
 			FontRender* m_itemFont = nullptr;
 			FontRender* m_itemNumFont = nullptr;
+			SpriteRender* m_itemSprite[PlayerPouch::enItem_num] = { 
+				nullptr,nullptr,nullptr,nullptr,nullptr,
+				nullptr, nullptr, nullptr};
+			int m_itemSpriteNum = 0;
 
 			//バッテリー表示
 			SpriteRender* m_batterySprite[enBatteryDispTypes_num] = { nullptr, nullptr, nullptr, nullptr, nullptr };
