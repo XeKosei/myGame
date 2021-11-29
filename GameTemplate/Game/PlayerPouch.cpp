@@ -10,42 +10,11 @@ namespace nsHikageri
 
 		PlayerPouch::~PlayerPouch()
 		{
-			DeleteGO(m_itemFont);
-			DeleteGO(m_itemNumFont);
+			
 		}
 
 		bool PlayerPouch::Start()
 		{
-			//画面表示
-			m_itemFont = NewGO<FontRender>(2);
-			m_itemFont->SetText(ITEM_NAME[m_choseItem]);
-			m_itemFont->SetScale(1.0f);
-			m_itemFont->SetPosition({ -600.0f, -200.0f });
-			m_itemFont->SetColor({ 1.0f,1.0f,1.0f,1.0f });
-			m_itemFont->SetShadowFlag(true);
-			m_itemFont->SetShadowOffset(1.0f);
-			m_itemFont->SetShadowColor({ 0.0f,0.0f,0.0f,1.0f });
-
-			m_itemNumFont = NewGO<FontRender>(2);
-			m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
-			m_itemNumFont->SetScale(1.0f);
-			m_itemNumFont->SetPosition({ -500.0f, -250.0f });
-			m_itemNumFont->SetColor({ 1.0f,1.0f,1.0f,1.0f });
-			m_itemNumFont->SetShadowFlag(true);
-			m_itemNumFont->SetShadowOffset(1.0f);
-			m_itemNumFont->SetShadowColor({ 0.0f,0.0f,0.0f,1.0f });
-
-			/*m_itemUsedFont = NewGO<FontRender>(2);
-			m_itemUsedFont->SetText(L"使用できない。");
-			m_itemUsedFont->SetScale(1.0f);
-			m_itemUsedFont->SetPosition({ -200.0f, -225.0f });
-			m_itemUsedFontColor = {1.0f,1.0f,1.0f,0.0f};
-			m_itemUsedFont->SetColor(m_itemUsedFontColor);
-			m_itemUsedFont->SetShadowFlag(true);
-			m_itemUsedFont->SetShadowOffset(1.0f);
-			m_itemUsedFont->SetShadowColor({ 0.0f,0.0f,0.0f,0.0f });
-			m_itemUsedFontCount = 300;*/
-
 			return true;
 		}
 
@@ -116,10 +85,8 @@ namespace nsHikageri
 						break;
 					}
 				}
-
 				//テキストを設定
-				m_itemFont->SetText(ITEM_NAME[m_choseItem]);
-				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
+				m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
 			}
 			//左ボタンを押すと
 			if (g_pad[0]->IsTrigger(enButtonLeft))
@@ -139,18 +106,29 @@ namespace nsHikageri
 						break;
 					}
 				}
-
 				//テキストを設定
-				m_itemFont->SetText(ITEM_NAME[m_choseItem]);
-				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
+				m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
 			}
 		}
+
+		//アイテムの追加
+		void PlayerPouch::AddItem(EnPlayerItems item)
+		{ 
+			m_choseItem = item;
+			//アイテムの数を増やす
+			m_haveItemNum[m_choseItem]++;
+			//UI更新
+			m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
+		}
+
 		//電池を使用したときの処理
 		void PlayerPouch::UseBattery()
 		{
 			//アイテムの数を1減らす
 			m_haveItemNum[m_choseItem]--;
-			m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
+			//UIの更新
+			m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
+			//バッテリー回復
 			m_player->GetFlashLight()->GetFlashLightBattery()->SetBatteryLevel(nsFlashLight::nsFlashLightBatteryConstant::MAX_BATTERY_LEVEL);
 		}
 
@@ -159,7 +137,9 @@ namespace nsHikageri
 		{
 			//アイテムの数を1減らす
 			m_haveItemNum[m_choseItem]--;
-			m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
+			//UIの更新
+			m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
+			//SAN値回復
 			m_player->GetPlayerSanity()->Recovery(TRANQUILIZER_RECOVERY_NUM);
 		}
 
@@ -233,30 +213,11 @@ namespace nsHikageri
 			{
 				//アイテムの数を1減らす
 				m_haveItemNum[m_choseItem]--;
-				m_itemNumFont->SetText(std::to_wstring(m_haveItemNum[m_choseItem]));
+				//UI更新
+				m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
 				//鍵を解除
 				m_player->GetPlayerTarget()->GetTargetDoor()->SetUnlockFlag(true);
 			}
 		}
-
-		//void PlayerPouch::CannotUse()
-		//{
-		//	if (m_itemUsedFontCount == 300)
-		//	{
-		//		m_itemUsedFontColor.a = 1.0f;
-		//	}
-		//	if (m_itemUsedFontCount > 0)
-		//	{
-		//		m_itemUsedFontCount--;
-		//	}
-
-		//	if (m_itemUsedFontCount <= 100 && m_itemUsedFontCount > 0)
-		//	{
-		//		m_itemUsedFontColor.a -= 0.01f;
-		//		m_itemUsedFont->SetColor(m_itemUsedFontColor);
-		//		//m_gameOverFontShadowColor.a += 0.01f;
-		//		//m_gameOverFont->SetShadowColor(m_gameOverFontShadowColor);
-		//	}
-		//}
 	}
 }

@@ -17,14 +17,11 @@ namespace nsHikageri
 
 			/// @brief バッテリー残量を設定
 			/// @param batteryLevel 設定する値
-			void SetBatteryLevel(float batteryLevel) { m_batteryLevel = batteryLevel; m_font->SetText(L"バッテリー:" + std::to_wstring(m_batteryLevel));
-			}
+			void SetBatteryLevel(float batteryLevel);
 
 			/// @brief 指定した値分、バッテリー残量を消費する
 			/// @param consumNum 消費する値
-			void ConsumBatteryLevel(float consumNum) { m_batteryLevel -= consumNum; m_font->SetText(L"バッテリー:" + std::to_wstring(m_batteryLevel));
-			}
-
+			void ConsumBatteryLevel(float consumNum); 
 
 			/// @brief フラッシュライトにアクセスできるようにする。
 			/// @param pl フラッシュライトに参照

@@ -23,6 +23,8 @@ namespace nsHikageri
 			m_font->SetColor({0.5f, 0.5f, 0.0f, 1.0f});
 			m_font->SetPosition({250.0f, 250.0f});
 
+			m_flashLight->GetPlayer()->GetPlayerUI()->SetBatterySprite(m_batteryLevel);
+
 			return true;
 		}
 		void FlashLightBattery::ExecuteUpdate()
@@ -46,6 +48,22 @@ namespace nsHikageri
 					m_flashLight->GetFlashLightAction()->SwitchOnOff();
 				}
 			}
+		}
+
+		void FlashLightBattery::ConsumBatteryLevel(float consumNum)
+		{
+			m_batteryLevel -= consumNum; 
+			m_flashLight->GetPlayer()->GetPlayerUI()->SetBatterySprite(m_batteryLevel);
+
+			m_font->SetText(L"バッテリー:" + std::to_wstring(m_batteryLevel));
+		}
+
+		void FlashLightBattery::SetBatteryLevel(float batteryLevel)
+		{
+			m_batteryLevel = batteryLevel; 
+			m_flashLight->GetPlayer()->GetPlayerUI()->SetBatterySprite(m_batteryLevel);
+
+			m_font->SetText(L"バッテリー:" + std::to_wstring(m_batteryLevel));
 		}
 	}
 }

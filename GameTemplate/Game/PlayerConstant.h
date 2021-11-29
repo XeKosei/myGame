@@ -1,5 +1,4 @@
 #pragma once
-
 namespace nsHikageri
 {
 	namespace nsPlayer
@@ -58,9 +57,6 @@ namespace nsHikageri
 
 		namespace nsPlayerPouchConstant
 		{
-			//アイテム名
-			static const std::wstring ITEM_NAME[PlayerPouch::enItem_num] = { L"電池", L"精神安定剤" , L"赤色の鍵", L"青色の鍵", L"緑色の鍵", L"黄色の鍵", L"紫色の鍵", L"最後の鍵"};
-
 			static const int TRANQUILIZER_RECOVERY_NUM = 50.0f;	//精神安定剤を使った時の回復量
 		}
 
@@ -88,6 +84,7 @@ namespace nsHikageri
 
 		namespace nsPlayerUIConstant
 		{
+			/////////////////////////////HazySprite関連
 			static const Vector4 INI_HAZYSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 0.0f };	//Hazyスプライトの初期カラー
 			static const Vector4 DAMAGED_HAZYSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };	//ダメージを受けた際のHazyスプライトのカラー
 			static const float HAZYSPRITE_MUL_COLOR_PINCH = 20.0f;	//ピンチ時にHazyスプライトのカラーに掛ける値
@@ -100,6 +97,31 @@ namespace nsHikageri
 			static const float DYING_MAX_ADD_ALPHA = 5.0f;	//死んだときのアルファ値の最大加算値
 			
 			static const float MUL_HAZYSPRITE_COLOR_VALUE = 1.5f;	//HazySpriteのカラーにかける値
+			
+			///////////////////////////////ポーチアイテム関連
+			static const Vector2 INI_ITEMFONT_POS = { -600.0f, -200.0f };	//ポーチアイテムのフォントの位置
+			static const Vector2 INI_ITEMNUMFONT_POS = { -500.0f, -250.0f };	//ポーチアイテムの数の表示位置
+			//アイテム名
+			static const std::wstring ITEM_NAME[PlayerPouch::enItem_num] = {
+				L"電池", L"精神安定剤" , L"赤色の鍵", L"青色の鍵", L"緑色の鍵",
+				L"黄色の鍵", L"紫色の鍵", L"最後の鍵" };
+
+			///////////////////////////////バッテリー関連
+			static const Vector3 INI_BATTERYSPRITE_POS = { 300.0f, -300.0f , 0.0f };	//バッテリー表示の位置
+			static const Vector3 INI_BATTERYSPRITE_SCALE = { 0.3f,0.3f,0.3f };	//バッテリー表示の初期スケール
+			
+			//バッテリー表示を変えるライン
+			static const float BATTERYSPRITE_CHANGE_LINE[PlayerUI::enBatteryDispTypes_num] = 
+			{0.0f,0.0f,25.0f,50.0f,75.0f};
+
+			//バッテリースプライトのファイルパス
+			static const char* BATTERYSPRITE_FILEPATH[PlayerUI::enBatteryDispTypes_num] = {
+				"Assets/Image/Battery0.DDS",
+				"Assets/Image/Battery1.DDS",
+				"Assets/Image/Battery2.DDS",
+				"Assets/Image/Battery3.DDS",
+				"Assets/Image/Battery4.DDS"
+			};
 		}
 	}
 }
