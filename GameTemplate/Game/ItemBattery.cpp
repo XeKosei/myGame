@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "ItemBattery.h"
-#include "ItemBase.h"
 #include "PlayerInclude.h"
 
 namespace nsHikageri

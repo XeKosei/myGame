@@ -68,7 +68,9 @@ namespace nsHikageri
 			static const float ITEMNAME_FONT_SCALE = 0.8f;	//アイテム名のフォントの大きさ
 			
 			//ターゲットの名前
-			static const std::wstring TARGET_NAME[PlayerTarget::enTarget_num] = { L"", L"A ドア", L"A 鍵", L"A 懐中電灯のパーツ", L"A 精神安定剤",L"A 電池", L"A 紙"};
+			static const std::wstring TARGET_NAME[PlayerTarget::enTarget_num] = { 
+				L"", L"A ドア", L"A 鍵", L"A 懐中電灯の部品", 
+				L"A 精神安定剤",L"A 電池", L"A 紙"};
 			
 			//コマンド表示
 			static const std::wstring COMMAND_TEXT[PlayerTarget::enCommand_num] = {L"", L"A:拾う",L"A:開ける",L"A:閉める", L"A:読む"};
