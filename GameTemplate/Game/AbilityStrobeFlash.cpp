@@ -23,6 +23,10 @@ namespace nsHikageri
 			m_strobeFlashColor = INI_STROBEFLASH_COLOR;
 			//ストロボフラッシュのカウントを設定
 			m_strobeChargeCount = INI_STROBEFLASH_CHARGE_COUNT;
+
+			m_chargingEff.Init(u"Assets/effect/StrobeFlashEff.efk");
+			m_chargingEff.SetScale({ 0.7f,0.7f,0.7f });
+
 			return true;
 		}
 
@@ -58,6 +62,13 @@ namespace nsHikageri
 		{
 			if (g_pad[0]->IsPress(enButtonRB2))
 			{
+				if (g_pad[0]->IsTrigger(enButtonRB2))
+				{
+					m_chargingEff.Play();
+				}
+				m_chargingEff.SetPosition(m_flashLight->GetModelPos());
+				m_chargingEff.Update();
+				
 				//カウントが終わるまでデクリメント
 				if (m_strobeChargeCount > 0)
 				{
@@ -66,6 +77,7 @@ namespace nsHikageri
 			}
 			else
 			{
+				m_chargingEff.Stop();
 				//ボタンを放したときにカウントが終わっていたら
 				if (m_strobeChargeCount <= 0)
 				{

@@ -58,6 +58,9 @@ namespace nsHikageri
 
 			//アビリティが解放されているかどうか
 			bool m_abilityAcitveFlag = true;
+			
+			//エフェクト
+			Effect m_chargingEff;
 		};
 	}
 }

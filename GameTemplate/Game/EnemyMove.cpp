@@ -38,6 +38,7 @@ namespace nsHikageri
 
 		void EnemyMove::Move()
 		{
+		
 			//ターゲットとエネミーとのベクトルを計算。
 			m_direction = m_targetPos - m_position;
 			m_direction.Normalize();

@@ -3,6 +3,12 @@ namespace nsHikageri
 {
 	namespace nsItem
 	{
+		namespace nsItemConstant
+		{
+			static const int ITEMEFF_INTERVAL = 150;	//アイテムのエフェクトの間隔
+			static const int ITEMEFF_POS_HEIGHT = 25;	//アイテムのエフェクトの位置の高さ
+		}
+
 		namespace nsItemMessagePaperConstant
 		{
 			static const std::wstring MESSAGEPAPAER_TEXT[ItemMessagePaper::enMessagePaperKind_num] = 

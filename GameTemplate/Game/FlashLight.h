@@ -56,6 +56,8 @@ namespace nsHikageri
 
 			Vector3 GetPosition() { return m_position; }
 
+			Vector3 GetModelPos() { return m_modelPos; }
+
 			//懐中電灯関係のインスタンスにアクセスする
 			FlashLightAction* GetFlashLightAction() { return m_flashLightAction; }
 			FlashLightBattery* GetFlashLightBattery() { return m_flashLightBattery; }
@@ -69,8 +71,10 @@ namespace nsHikageri
 			SpotLight* m_spotLight = nullptr;
 			//向き
 			Vector3 m_direction = { 0.0f, 0.0f, 0.0 };
-			//位置
+			//スポットライトの位置
 			Vector3 m_position = Vector3::Zero;
+			//モデルの位置
+			Vector3 m_modelPos = Vector3::Zero;
 			//プレイヤー
 			nsPlayer::Player* m_player = nullptr;
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ItemKey.h"
 #include "ItemBase.h"
+#include "ItemInclude.h"
 #include "PlayerInclude.h"
 
 namespace nsHikageri
@@ -8,6 +9,8 @@ namespace nsHikageri
 	using namespace nsGimmick;
 	namespace nsItem
 	{
+		using namespace nsItemConstant;
+
 		ItemKey::~ItemKey()
 		{
 			DeleteGO(m_keyModel);

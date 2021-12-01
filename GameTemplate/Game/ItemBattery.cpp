@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ItemBattery.h"
+#include "ItemInclude.h"
 #include "PlayerInclude.h"
 
 namespace nsHikageri
@@ -7,6 +7,8 @@ namespace nsHikageri
 	using namespace nsGimmick;
 	namespace nsItem
 	{
+		using namespace nsItemConstant;
+
 		ItemBattery::~ItemBattery()
 		{
 			if (m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Battery

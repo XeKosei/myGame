@@ -79,6 +79,11 @@ public:
 	{
 		return EffectEngine::GetInstance()->IsPlay(m_handle);
 	}
+
+	void Stop() const
+	{
+		EffectEngine::GetInstance()->Stop(m_handle);
+	}
 	/*!
 	 *@brief	XVB
 	 */

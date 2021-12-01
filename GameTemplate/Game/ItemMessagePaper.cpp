@@ -7,6 +7,7 @@ namespace nsHikageri
 	namespace nsItem
 	{
 		using namespace nsItemMessagePaperConstant;
+		using namespace nsItemConstant;
 
 		ItemMessagePaper::~ItemMessagePaper()
 		{

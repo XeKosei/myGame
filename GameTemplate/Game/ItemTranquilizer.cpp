@@ -1,13 +1,16 @@
 #include "stdafx.h"
-#include "ItemTranquilizer.h"
+#include "ItemInclude.h"
 #include "ItemBase.h"
 #include "PlayerInclude.h"
 
 namespace nsHikageri
 {
 	using namespace nsGimmick;
+
 	namespace nsItem
 	{
+		using namespace nsItemConstant;
+
 		ItemTranquilizer::~ItemTranquilizer()
 		{
 			if (m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Tranquilizer

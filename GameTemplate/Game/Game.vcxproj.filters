@@ -102,6 +102,9 @@
     <Filter Include="ヘッダー ファイル\Hikageri\GameScene">
       <UniqueIdentifier>{50756db2-db9c-46ef-8376-a2ac3e0ea6d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ExEngine\effect">
+      <UniqueIdentifier>{6f3714e1-86c9-417e-885c-4548586748cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -457,6 +460,12 @@
     </ClCompile>
     <ClCompile Include="PlayerUI.cpp">
       <Filter>ソース ファイル\Hikageri\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\effect\EffectEngine.cpp">
+      <Filter>ExEngine\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\effect\Effect.cpp">
+      <Filter>ExEngine\effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -876,6 +885,12 @@
     </ClInclude>
     <ClInclude Include="PlayerUI.h">
       <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\effect\Effect.h">
+      <Filter>ExEngine\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\effect\EffectEngine.h">
+      <Filter>ExEngine\effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

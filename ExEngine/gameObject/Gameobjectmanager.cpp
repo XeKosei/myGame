@@ -125,9 +125,9 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 	}
 
 	// 1画面オンリーのエフェクト更新
-	//EffectEngine::GetInstance()->Update(GameTime::GetInstance().GetFrameDeltaTime());
+	EffectEngine::GetInstance()->Update(GameTime::GetInstance().GetFrameDeltaTime());
 	//1画面オンリーのエフェクト描画
-	//EffectEngine::GetInstance()->Draw();
+	EffectEngine::GetInstance()->Draw();
 
 	//Level2D用　
 	//レベル2Dは全部スプライトなのでExecuteRenderにはいらないのでは?
@@ -146,6 +146,7 @@ void GameObjectManager::ExecuteRender(RenderContext& rc)
 
 	//ポストエフェクト用。Render後の処理
 	nsHikageri::PostEffectManager::GetInstance()->AfterRender(rc);
+
 }
 
 void GameObjectManager::ExecutePostRender(RenderContext& rc)

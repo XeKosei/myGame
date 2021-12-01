@@ -12,6 +12,9 @@
 //#include "ResourceBankManager.h"
 #include "PostEffectManager.h"
 
+#include "effect/Effect.h"
+#include "effect/EffectEngine.h"
+
 #include "SkinModelRender.h"
 #include "SkinModelRenderEX.h"
 

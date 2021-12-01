@@ -1,11 +1,13 @@
 #include "stdafx.h"
-#include "ItemFlashLightParts.h"
+#include "ItemInclude.h"
 #include "PlayerInclude.h"
 #include "FlashLightInclude.h"
 namespace nsHikageri
 {
 	namespace nsItem
 	{
+		using namespace nsItemConstant;
+
 		ItemFlashLightParts::~ItemFlashLightParts()
 		{
 			if (m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_FlashLightParts

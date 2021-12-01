@@ -56,6 +56,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsHikageri::nsGameScene::GameScene* gameScene = NewGO<nsHikageri::nsGameScene::GameScene>(0, "gameScene");
 	//nsHikageri::TitleScene* titleScene = NewGO<nsHikageri::TitleScene>(0, "titleScene");
 
+	EffectEngine::CreateInstance();
+
 	// シャドウマップを表示するためのスプライトを初期化する
 	SpriteInitData spriteInitData;
 	spriteInitData.m_textures[0] = &nsHikageri::PostEffectManager::GetInstance()->GetSpotLightMap(2);

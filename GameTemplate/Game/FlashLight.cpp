@@ -65,24 +65,13 @@ namespace nsHikageri
 
 		void FlashLight::Update()
 		{
-			//懐中電灯関係の処理
-			//if (m_player->GetPlayerState() == nsPlayer::Player::enState_Normal ||
-			//	m_player->GetPlayerState() == nsPlayer::Player::enState_Invincible )
-			{
-				m_flashLightAction->ExecuteUpdate();
-				m_flashLightBattery->ExecuteUpdate();
-				m_abilityStrobeFlash->ExecuteUpdate();
-				m_abilityClairvoyance->ExecuteUpdate();
-				m_abilityMedousaEye->ExecuteUpdate();
-			}
-
 			// モデル用の嘘座標を計算する
 			Vector3 spotLightUp = Cross(g_camera3D->GetForward(), g_camera3D->GetRight());
-			Vector3 modelPos;
-			modelPos = g_camera3D->GetPosition();
-			modelPos += g_camera3D->GetRight() * FLASHLIGHT_MODEL_POS_APPLY_VALUE.x;
-			modelPos += g_camera3D->GetForward() * FLASHLIGHT_MODEL_POS_APPLY_VALUE.z;
-			modelPos += spotLightUp * FLASHLIGHT_MODEL_POS_APPLY_VALUE.y;
+
+			m_modelPos = g_camera3D->GetPosition();
+			m_modelPos += g_camera3D->GetRight() * FLASHLIGHT_MODEL_POS_APPLY_VALUE.x;
+			m_modelPos += g_camera3D->GetForward() * FLASHLIGHT_MODEL_POS_APPLY_VALUE.z;
+			m_modelPos += Cross(g_camera3D->GetForward(), g_camera3D->GetRight()) * FLASHLIGHT_MODEL_POS_APPLY_VALUE.y;
 
 			//実際の懐中電灯の座標
 
@@ -106,9 +95,20 @@ namespace nsHikageri
 			m_flashLightModel->SetRotation(qRotMat);
 
 			//懐中電灯の位置を計算。※懐中電灯の位置をずらすのは、後でやらないとモデルの回転が上手く行かない。
-			m_flashLightModel->SetPosition(modelPos);
+			m_flashLightModel->SetPosition(m_modelPos);
 			m_spotLight->SetPosition(m_position);
 			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_position, 0);
+		
+			//懐中電灯関係の処理
+			//if (m_player->GetPlayerState() == nsPlayer::Player::enState_Normal ||
+			//	m_player->GetPlayerState() == nsPlayer::Player::enState_Invincible )
+			{
+				m_flashLightAction->ExecuteUpdate();
+				m_flashLightBattery->ExecuteUpdate();
+				m_abilityStrobeFlash->ExecuteUpdate();
+				m_abilityClairvoyance->ExecuteUpdate();
+				m_abilityMedousaEye->ExecuteUpdate();
+			}
 		}
 	}
 }

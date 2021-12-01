@@ -59,7 +59,7 @@ namespace nsHikageri
 		}
 
 		void Player::Update()
-		{
+		{				
 			switch (m_playerState)
 			{
 			case enState_Normal:
