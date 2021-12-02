@@ -9,4 +9,5 @@
 #include "PlayerTarget.h"
 #include "PlayerRead.h"
 #include "PlayerUI.h"
+#include "PlayerDispMessage.h"
 #include "PlayerConstant.h"

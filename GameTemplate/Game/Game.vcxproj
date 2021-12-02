@@ -338,6 +338,7 @@
     <ClCompile Include="PlayerAction.cpp" />
     <ClCompile Include="PlayerBitten.cpp" />
     <ClCompile Include="PlayerCamera.cpp" />
+    <ClCompile Include="PlayerDispMessage.cpp" />
     <ClCompile Include="PlayerRead.cpp" />
     <ClCompile Include="PlayerSanity.cpp" />
     <ClCompile Include="PlayerMove.cpp" />
@@ -486,6 +487,7 @@
     <ClInclude Include="PlayerAction.h" />
     <ClInclude Include="PlayerBitten.h" />
     <ClInclude Include="PlayerCamera.h" />
+    <ClInclude Include="PlayerDispMessage.h" />
     <ClInclude Include="PlayerRead.h" />
     <ClInclude Include="PlayerSanity.h" />
     <ClInclude Include="PlayerInclude.h" />

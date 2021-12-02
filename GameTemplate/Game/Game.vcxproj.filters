@@ -467,6 +467,9 @@
     <ClCompile Include="..\..\ExEngine\effect\Effect.cpp">
       <Filter>ExEngine\effect</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerDispMessage.cpp">
+      <Filter>ソース ファイル\Hikageri\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -891,6 +894,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\effect\EffectEngine.h">
       <Filter>ExEngine\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDispMessage.h">
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

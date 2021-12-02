@@ -55,6 +55,9 @@ namespace nsHikageri
 			m_playerRead->SetPlayer(this);
 			m_playerUI = NewGO<PlayerUI>(0);
 			m_playerUI->SetPlayer(this);
+			m_playerDispMessage = NewGO<PlayerDispMessage>(0);
+			m_playerDispMessage->SetPlayer(this);
+
 			return true;
 		}
 
@@ -70,6 +73,7 @@ namespace nsHikageri
 				m_playerPouch->ExecuteUpdate();
 				m_playerTarget->ExecuteUpdate();
 				m_playerUI->ExecuteUpdate();
+				m_playerDispMessage->ExecuteUpdate();
 				break;
 			case enState_Bitten:
 				m_playerBitten->ExecuteUpdate();

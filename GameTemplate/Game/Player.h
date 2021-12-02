@@ -14,6 +14,7 @@ namespace nsHikageri
 		class PlayerTarget;
 		class PlayerRead;
 		class PlayerUI;
+		class PlayerDispMessage;
 
 		class Player : public IGameObject
 		{
@@ -72,6 +73,7 @@ namespace nsHikageri
 			PlayerTarget* GetPlayerTarget() { return m_playerTarget; };
 			PlayerRead* GetPlayerRead() { return m_playerRead; }
 			PlayerUI* GetPlayerUI() { return m_playerUI; }
+			PlayerDispMessage* GetPlayerDispMessage() { return m_playerDispMessage; }
 		private:
 			//ƒ‚ƒfƒ‹
 			SkinModelRender* m_playerModel = nullptr;
@@ -91,6 +93,7 @@ namespace nsHikageri
 			PlayerTarget* m_playerTarget = nullptr;
 			PlayerRead* m_playerRead = nullptr;
 			PlayerUI* m_playerUI = nullptr;
+			PlayerDispMessage* m_playerDispMessage = nullptr;
 
 			EnPlayerStates m_playerState = enState_Normal;
 
