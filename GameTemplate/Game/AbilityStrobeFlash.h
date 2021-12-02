@@ -15,6 +15,8 @@ namespace nsHikageri
 			bool Start();
 			void ExecuteUpdate();
 
+			void Reset();
+
 			/// @brief フラッシュライトにアクセスできるようにする。
 			/// @param pl フラッシュライトに参照
 			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };

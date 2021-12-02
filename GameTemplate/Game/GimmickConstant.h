@@ -20,10 +20,11 @@ namespace nsHikageri
 		namespace nsDoorConstant
 		{
 			static const float DOOR_OPEN_SPEED = 0.05f;	//ドアが開閉する速さ
-			static const float MAX_DOOR_OPNE_ANGLE = 3.141592 / 2;	//ドアが開く最大角度(90度)
+			static const float MAX_DOOR_OPNE_ANGLE = 1.4;	//ドアが開く最大角度
 
-
-
+			static const int INI_DOOR_CANNOTOPEN_EXECUTECOUNT = 30;	//ドアが開かない処理のカウント
+			static const float DOOR_CANNOTOPNE_MOVESPEED = 0.01f;	//開かない動きの速さ
+			static const float MAX_CANNOTOPEN_ADDANGLE = 0.02f;	//開かない動きの最大角度
 		}
 		namespace nsEyeWallConstant
 		{

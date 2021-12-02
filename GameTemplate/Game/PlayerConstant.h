@@ -65,7 +65,7 @@ namespace nsHikageri
 			static const float CATCH_EYES_DIS = 400.0f;	//オブジェクトがプレイヤーの目を引く距離
 			static const float CATCH_EYES_DOT = 0.95f;	//オブジェクトがプレイヤーの目を引く内積
 			static const Vector2 ITEMNAME_FONT_POS = {-50.0f,-200.0f};	//アイテム名の表示位置
-			static const float ITEMNAME_FONT_SCALE = 0.8f;	//アイテム名のフォントの大きさ
+			static const float ITEMNAME_FONT_SCALE = 0.65f;	//アイテム名のフォントの大きさ
 			
 			//ターゲットの名前
 			static const std::wstring TARGET_NAME[PlayerTarget::enTarget_num] = { 
@@ -91,20 +91,20 @@ namespace nsHikageri
 			static const Vector4 DAMAGED_HAZYSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };	//ダメージを受けた際のHazyスプライトのカラー
 			static const float HAZYSPRITE_MUL_COLOR_PINCH = 20.0f;	//ピンチ時にHazyスプライトのカラーに掛ける値
 
+			static const float MUL_HAZYSPRITE_COLOR_VALUE = 1.0f;	//HazySpriteのカラーにかける値
+
 			static const float ADD_ALPHA_SPEED = 0.001f;	//スプライトが点滅する速さ
 			static const float MAX_ADD_ALPHA = 0.02f;		//点滅の最大加算値
 			static const float MIN_ADD_ALPHA = -0.02f;		//点滅の最小加算値
 
 			static const float DYING_ADD_ALPHA_SPEED = 0.02f;	//死んだときのアルファ値加算の速さ
 			static const float DYING_MAX_ADD_ALPHA = 5.0f;	//死んだときのアルファ値の最大加算値
-			
-			static const float MUL_HAZYSPRITE_COLOR_VALUE = 1.5f;	//HazySpriteのカラーにかける値
-			
+				
 			///////////////////////////////ポーチアイテム関連
-			static const Vector2 INI_ITEMFONT_POS = { -500.0f, -200.0f };	//ポーチアイテムのフォントの位置
-			static const float INI_ITEMFONT_SCALE = 0.7f;	//ポーチアイテムのフォントのスケール
-			static const Vector2 INI_ITEMNUMFONT_POS = { -500.0f, -250.0f };	//ポーチアイテムの数の表示位置
-			static const float INI_ITEMNUMFONT_SCALE = 0.7f;	//アイテム数のフォントのスケール
+			static const Vector2 INI_ITEMFONT_POS = { -480.0f, -220.0f };	//ポーチアイテムのフォントの位置
+			static const float INI_ITEMFONT_SCALE = 0.65f;	//ポーチアイテムのフォントのスケール
+			static const Vector2 INI_ITEMNUMFONT_POS = { -480.0f, -260.0f };	//ポーチアイテムの数の表示位置
+			static const float INI_ITEMNUMFONT_SCALE = 0.65f;	//アイテム数のフォントのスケール
 
 			//アイテム名
 			static const std::wstring ITEM_NAME[PlayerPouch::enItem_num] = {
@@ -122,11 +122,11 @@ namespace nsHikageri
 				"Assets/Image/PurpleKeyIcon.DDS",
 				"Assets/Image/WhiteKeyIcon.DDS"
 			};
-			static const Vector3 INI_ITEMSPRITE_POS = {-550.0f, -250.0f, 0.0f};	//アイテムアイコンの位置
+			static const Vector3 INI_ITEMSPRITE_POS = {-540.0f, -260.0f, 0.0f};	//アイテムアイコンの位置
 			static const Vector3 INI_ITEMSPRITE_SCALE = {0.2f,0.2f,0.2f};	//アイテムアイコンの大きさ
 
 			///////////////////////////////バッテリー関連
-			static const Vector3 INI_BATTERYSPRITE_POS = { 500.0f, 250.0f , 0.0f };	//バッテリー表示の位置
+			static const Vector3 INI_BATTERYSPRITE_POS = { 540.0f, 285.0f , 0.0f };	//バッテリー表示の位置
 			static const Vector3 INI_BATTERYSPRITE_SCALE = { 0.3f,0.3f,0.3f };	//バッテリー表示の初期スケール
 			
 			//バッテリー表示を変えるライン

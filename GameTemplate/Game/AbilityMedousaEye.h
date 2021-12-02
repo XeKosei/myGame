@@ -12,6 +12,9 @@ namespace nsHikageri
 			~AbilityMedousaEye();
 			bool Start();
 			void ExecuteUpdate();
+
+			void Reset();
+
 			/// @brief フラッシュライトにアクセスできるようにする。
 			/// @param pl フラッシュライトに参照
 			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
@@ -31,7 +34,10 @@ namespace nsHikageri
 			int m_medousaEyeChargeCount = 0;
 
 			//アビリティが解放されているかどうか
-			bool m_abilityAcitveFlag = true;
+			bool m_abilityAcitveFlag = false;
+
+			//エフェクト
+			Effect m_chargingEff;
 		};
 	}
 }

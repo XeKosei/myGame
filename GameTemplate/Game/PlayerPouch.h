@@ -56,7 +56,7 @@ namespace nsHikageri
 			Player* m_player = nullptr;
 
 			int m_choseItem = enItem_Battery;
-			int m_haveItemNum[enItem_num] = { 5, 0, 0, 0, 0, 0, 0, 0};
+			int m_haveItemNum[enItem_num] = { 5, 1, 1, 1, 1, 1, 1, 1};
 		};
 	}
 }

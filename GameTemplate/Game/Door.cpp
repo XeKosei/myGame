@@ -57,6 +57,8 @@ namespace nsHikageri
 			//静的物理オブジェクトの位置と回転を設定
 			m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
 
+			m_executeCannotOpenCount = INI_DOOR_CANNOTOPEN_EXECUTECOUNT;
+
 			return true;
 		}
 
@@ -68,6 +70,10 @@ namespace nsHikageri
 			{
 				//ドアの処理
 				Execute();
+			}
+			else
+			{
+				CannotOpen();
 			}
 		}
 
@@ -214,6 +220,56 @@ namespace nsHikageri
 			m_qRot.SetRotation(Vector3::AxisY, m_defaultAngle + m_addAngle);
 			m_doorModel->SetRotation(m_qRot);
 			m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
+		}
+
+		void Door::CannotOpen()
+		{
+			//プレイヤーのターゲットがこのドアで、Aボタンが押されたら、フラグをtrueに。
+			if (g_pad[0]->IsTrigger(enButtonA)
+				&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Door
+				&& m_player->GetPlayerTarget()->GetTargetDoor() == this)
+			{
+				m_executeCannotOpenFlag = true;
+			}
+
+			//フラグがtrueなら、ガチャガチャする。
+			if (m_executeCannotOpenFlag)
+			{
+				//ガチャガチャし続ける時間をカウント
+				m_executeCannotOpenCount--;
+
+				//前に動く
+				if (m_cannotOpenMoveForward)
+				{
+					m_addAngle += DOOR_CANNOTOPNE_MOVESPEED;
+					if (m_addAngle >= MAX_CANNOTOPEN_ADDANGLE)
+					{
+						m_cannotOpenMoveForward = false;
+					}
+				}
+				//後ろに動く
+				else
+				{
+					m_addAngle -= DOOR_CANNOTOPNE_MOVESPEED;
+					if (m_addAngle <= -MAX_CANNOTOPEN_ADDANGLE)
+					{
+						m_cannotOpenMoveForward = true;
+					}
+				}
+
+				//カウントが終わったらリセット
+				if (m_executeCannotOpenCount <= 0)
+				{
+					m_executeCannotOpenCount = INI_DOOR_CANNOTOPEN_EXECUTECOUNT;
+					m_executeCannotOpenFlag = false;
+					m_cannotOpenMoveForward = false;
+					m_addAngle = 0.0f;
+				}
+
+				//回転を設定
+				m_qRot.SetRotation(Vector3::AxisY, m_defaultAngle + m_addAngle);
+				m_doorModel->SetRotation(m_qRot);
+			}
 		}
 	}
 }

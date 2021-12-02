@@ -29,7 +29,7 @@ namespace nsHikageri
 		spotLightModelInitData[2].m_tkmFilePath = modelPath;
 
 		//シェーダーパスの指定
-		modelInitData.m_fxFilePath = "Assets/shader/shadowReceiver.fx";
+		modelInitData.m_fxFilePath = "Assets/shader/PBR.fx";
 		//shadowModelInitData.m_fxFilePath = "Assets/shader/shadow.fx";
 		spotLightModelInitData[0].m_fxFilePath = "Assets/shader/GetDepth.fx";
 		spotLightModelInitData[1].m_fxFilePath = "Assets/shader/GetDepth.fx";

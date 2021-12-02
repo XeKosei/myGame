@@ -24,8 +24,9 @@ namespace nsHikageri
 			//ストロボフラッシュのカウントを設定
 			m_strobeChargeCount = INI_STROBEFLASH_CHARGE_COUNT;
 
+			//エフェクト
 			m_chargingEff.Init(u"Assets/effect/StrobeFlashEff.efk");
-			m_chargingEff.SetScale({ 0.7f,0.7f,0.7f });
+			m_chargingEff.SetScale(INI_STROBEFLASH_EFF_SCALE);
 
 			return true;
 		}
@@ -50,11 +51,22 @@ namespace nsHikageri
 			//懐中電灯が消えたらリセット
 			else
 			{
-				m_strobeChargeCount = INI_STROBEFLASH_CHARGE_COUNT;
-				m_flashLight->GetSpotLight()->SetColor(nsFlashLightConstant::INI_FLASHLIGHT_COLOR);
-				m_strobeFlashColor = INI_STROBEFLASH_COLOR;
-				m_useAbility = false;
+				Reset();
 			}
+		}
+
+		void AbilityStrobeFlash::Reset()
+		{
+			//チャージのカウントを初期値に
+			m_strobeChargeCount = INI_STROBEFLASH_CHARGE_COUNT;
+			//スポットライトのカラーを初期値に
+			m_flashLight->GetSpotLight()->SetColor(nsFlashLightConstant::INI_FLASHLIGHT_COLOR);
+			//ストロボフラッシュのカラーを初期値に
+			m_strobeFlashColor = INI_STROBEFLASH_COLOR;
+			//フラグを、アビリティを使っていない状態に。
+			m_useAbility = false;
+			//エフェクトを停止
+			m_chargingEff.Stop();
 		}
 
 		/// @brief ストロボフラッシュを発動する準備の処理
@@ -62,7 +74,7 @@ namespace nsHikageri
 		{
 			if (g_pad[0]->IsPress(enButtonRB2))
 			{
-				if (g_pad[0]->IsTrigger(enButtonRB2))
+				if (m_chargingEff.IsPlay() == false)
 				{
 					m_chargingEff.Play();
 				}
@@ -77,7 +89,6 @@ namespace nsHikageri
 			}
 			else
 			{
-				m_chargingEff.Stop();
 				//ボタンを放したときにカウントが終わっていたら
 				if (m_strobeChargeCount <= 0)
 				{
@@ -86,6 +97,8 @@ namespace nsHikageri
 				}
 				//カウントをリセット
 				m_strobeChargeCount = INI_STROBEFLASH_CHARGE_COUNT;
+				//エフェクトを停止
+				m_chargingEff.Stop();
 			}
 		}
 
@@ -143,9 +156,7 @@ namespace nsHikageri
 			//カラーが初期値に戻ったら、ストロボフラッシュの処理を終了
 			if (m_strobeFlashColor.x <= nsFlashLightConstant::INI_FLASHLIGHT_COLOR.x)
 			{
-				m_flashLight->GetSpotLight()->SetColor(nsFlashLightConstant::INI_FLASHLIGHT_COLOR);
-				m_strobeFlashColor = INI_STROBEFLASH_COLOR;
-				m_useAbility = false;
+				Reset();
 			}
 		}
 

@@ -27,10 +27,12 @@ namespace nsHikageri
 
 		namespace nsAbilityStrobeFlashConstant
 		{
-			static const int INI_STROBEFLASH_CHARGE_COUNT = 100;	//ストロボフラッシュのチャージ時間の初期値
+			static const int INI_STROBEFLASH_CHARGE_COUNT = 60;	//ストロボフラッシュのチャージ時間の初期値
 			static const Vector3 INI_STROBEFLASH_COLOR = {50.0f,50.0f,50.0f};	//ストロボフラッシュの明るさの初期値
 			static const Vector3 STROBEFLASH_COLOR_DECREASE_SPEED = {1.0f,1.0f,1.0f};	//ストロボフラッシュの明るさが下がる速さ
 			static const float INI_STROBEFLASH_BATTERY_COST = 20.0f;	//ストロボフラッシュで消費するバッテリーのコスト
+			
+			static const Vector3 INI_STROBEFLASH_EFF_SCALE = {0.5f,0.5f,0.5f};	//エフェクトの大きさ
 		}
 
 		namespace nsAbilityClairvoyanceConstant
@@ -40,9 +42,10 @@ namespace nsHikageri
 
 		namespace nsAbilityMedousaEyeConstant
 		{
-			static const int INI_MEDOUSAEYEFLASH_CHARGE_COUNT = 50;	//メドゥーサアイのチャージ時間の初期値
+			static const int INI_MEDOUSAEYEFLASH_CHARGE_COUNT = 75;	//メドゥーサアイのチャージ時間の初期値
 			static const Vector3 INI_MEDOUSAEYEFLASH_COLOR = { 50.0f,50.0f,50.0f };	//ストロボフラッシュの明るさの初期値
 			static const float  INI_MEDOUSAEYEFLASH_BATTERY_COST = 20.0f;	//メドゥーサアイで消費するバッテリーのコスト
+			static const Vector3 INI_MEDOUSAEYEFLASH_EFF_SCALE = { 0.8f,0.8f,0.8f };	//エフェクトの大きさ
 		}
 	}
 }

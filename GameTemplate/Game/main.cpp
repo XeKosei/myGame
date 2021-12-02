@@ -11,7 +11,7 @@ namespace
 	const Vector3 LIGHTCAMERA_UP = { 1.0f,0.0f,0.0f };
 	const float LIGHTCAMERA_WIDTH = 3000.0f;
 	const float LIGHTCAMERA_HEIGHT = 3000.0f;
-	const int CAMERA_FAR = 1000000;
+	const int CAMERA_FAR = 5000000;
 }
 
 ///////////////////////////////////////////////////////////////////

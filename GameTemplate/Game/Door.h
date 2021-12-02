@@ -29,6 +29,9 @@ namespace nsHikageri
 
 			void PlayerTargetSetting();
 
+			//開かないとき
+			void CannotOpen();
+
 			//開閉
 			void Open();
 			void Close();
@@ -98,6 +101,13 @@ namespace nsHikageri
 
 			//CharaConとの当たり判定に使用する静的物理オブジェクト
 			PhysicsStaticObject m_physicsStaticObject;
+
+			//開けられない処理を実行するフラグ
+			bool m_executeCannotOpenFlag = false;
+			//開けられない処理を実行する時間
+			int m_executeCannotOpenCount = 0;
+			//開けられない処理中のドアのガチャガチャする動き(前に動くか後ろに動くか)
+			bool m_cannotOpenMoveForward = false;
 		};
 	}
 }
