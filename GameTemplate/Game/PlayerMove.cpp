@@ -11,9 +11,9 @@ namespace nsHikageri
 
 		}
 
-		bool PlayerMove::Start()
+		void PlayerMove::Init(Player* pl)
 		{
-			return true;
+			m_player = pl;
 		}
 
 		//Player.cpp‚ÌUpdate()‚ÅŒÄ‚Ño‚·ˆ—

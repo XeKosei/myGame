@@ -12,12 +12,12 @@ namespace nsHikageri
 
 		}
 
-		bool PlayerBitten::Start()
+		void PlayerBitten::Init(Player* pl)
 		{
+			m_player = pl;
 			m_bittenStates = enBittenState_PreBitten;
 			//動けるようになるまでのインターバルを設定。
 			m_canMoveInterval = INI_CAN_MOVE_INTERVAL;
-			return true;
 		}
 		void PlayerBitten::ExecuteUpdate()
 		{

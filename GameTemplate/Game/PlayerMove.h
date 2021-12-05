@@ -4,22 +4,17 @@ namespace nsHikageri
 	namespace nsPlayer
 	{
 		class Player;
-		//class PlayerConstant;
 
-		class PlayerMove : public IGameObject
+		class PlayerMove
 		{
 		public:
 			~PlayerMove();
-			bool Start();
+			void Init(Player* pl);
 			void ExecuteUpdate();
 			void Move();	//移動処理
 			void Turn();	//回転処理
 
 			Vector3 GetVelocity() { return m_velocity; };
-
-			/// @brief プレイヤーにアクセスできるようにする。
-			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
 
 			/// @brief プレイヤーのモデルの位置を取得
 			/// @return プレイヤーの位置

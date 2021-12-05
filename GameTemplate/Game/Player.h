@@ -1,21 +1,20 @@
 #pragma once
+#include "PlayerAction.h"
+#include "PlayerMove.h"
+#include "PlayerCamera.h"
+#include "PlayerSanity.h"
+#include "PlayerBitten.h"
+#include "PlayerPouch.h"
+#include "PlayerTarget.h"
+#include "PlayerRead.h"
+#include "PlayerUI.h"
+#include "PlayerDispMessage.h"
 namespace nsHikageri
 {
 	namespace nsFlashLight { class FlashLight; }
 
 	namespace nsPlayer
-	{
-		class PlayerMove;
-		class PlayerCamera;		
-		class PlayerAction;
-		class PlayerSanity;
-		class PlayerBitten;
-		class PlayerPouch;
-		class PlayerTarget;
-		class PlayerRead;
-		class PlayerUI;
-		class PlayerDispMessage;
-
+	{	
 		class Player : public IGameObject
 		{
 		public:
@@ -29,7 +28,6 @@ namespace nsHikageri
 				enStatesNum,
 				enState_Invincible,
 			};
-
 
 			~Player();
 			bool Start();
@@ -64,16 +62,16 @@ namespace nsHikageri
 			nsFlashLight::FlashLight* GetFlashLight() { return m_flashLight; }
 
 			//プレイヤー関係のインスタンスにアクセスする
-			PlayerMove* GetPlayerMove() { return m_playerMove; };
-			PlayerCamera* GetPlayerCamera() { return m_playerCamera; };
-			PlayerAction* GetPlayerAction() { return m_playerAction; };
-			PlayerSanity* GetPlayerSanity() { return m_playerSanity; };
-			PlayerBitten* GetPlayerBitten() { return m_playerBitten; }
-			PlayerPouch* GetPlayerPouch() { return m_playerPouch; }
-			PlayerTarget* GetPlayerTarget() { return m_playerTarget; };
-			PlayerRead* GetPlayerRead() { return m_playerRead; }
-			PlayerUI* GetPlayerUI() { return m_playerUI; }
-			PlayerDispMessage* GetPlayerDispMessage() { return m_playerDispMessage; }
+			PlayerMove* GetPlayerMove() { return &m_playerMove; };
+			PlayerCamera* GetPlayerCamera() { return &m_playerCamera; };
+			PlayerAction* GetPlayerAction() { return &m_playerAction; };
+			PlayerSanity* GetPlayerSanity() { return &m_playerSanity; };
+			PlayerBitten* GetPlayerBitten() { return &m_playerBitten; }
+			PlayerPouch* GetPlayerPouch() { return &m_playerPouch; }
+			PlayerTarget* GetPlayerTarget() { return &m_playerTarget; };
+			PlayerRead* GetPlayerRead() { return &m_playerRead; }
+			PlayerUI* GetPlayerUI() { return &m_playerUI; }
+			PlayerDispMessage* GetPlayerDispMessage() { return &m_playerDispMessage; }
 		private:
 			//モデル
 			SkinModelRender* m_playerModel = nullptr;
@@ -84,16 +82,16 @@ namespace nsHikageri
 			int m_invincibleTime = 0;
 
 			//プレイヤー関係のクラス
-			PlayerMove* m_playerMove = nullptr;
-			PlayerCamera* m_playerCamera = nullptr;
-			PlayerAction* m_playerAction = nullptr;
-			PlayerSanity* m_playerSanity = nullptr;
-			PlayerBitten* m_playerBitten = nullptr;
-			PlayerPouch* m_playerPouch = nullptr;
-			PlayerTarget* m_playerTarget = nullptr;
-			PlayerRead* m_playerRead = nullptr;
-			PlayerUI* m_playerUI = nullptr;
-			PlayerDispMessage* m_playerDispMessage = nullptr;
+			PlayerMove m_playerMove;
+			PlayerCamera m_playerCamera;
+			PlayerAction m_playerAction;
+			PlayerSanity m_playerSanity;
+			PlayerBitten m_playerBitten;
+			PlayerPouch m_playerPouch;
+			PlayerTarget m_playerTarget;
+			PlayerRead m_playerRead;
+			PlayerUI m_playerUI;
+			PlayerDispMessage m_playerDispMessage;
 
 			EnPlayerStates m_playerState = enState_Normal;
 

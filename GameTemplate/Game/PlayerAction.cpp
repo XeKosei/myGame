@@ -12,14 +12,14 @@ namespace nsHikageri
 
 		}
 
-		bool PlayerAction::Start()
+		void PlayerAction::Init(Player* pl)
 		{
-			return true;
+			m_player = pl;
 		}
 
 		void PlayerAction::ExecuteUpdate()
 		{
-			CrouchDown();
+			//CrouchDown();
 		}
 
 		//‹ü‚ÞƒAƒNƒVƒ‡ƒ“

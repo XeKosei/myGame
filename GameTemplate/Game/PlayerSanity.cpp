@@ -11,8 +11,10 @@ namespace nsHikageri
 			DeleteGO(f);
 		}
 
-		bool PlayerSanity::Start()
+		void PlayerSanity::Init(Player* pl)
 		{
+			m_player = pl;
+
 			//Å‘åHP‚ðÝ’è
 			m_sanityValue = MAX_PLAYER_SANITY;
 
@@ -21,7 +23,7 @@ namespace nsHikageri
 			f->SetText(L"SAN’l:" + std::to_wstring(m_sanityValue));
 			f->SetPosition({300.0f, 200.0f});
 			f->SetScale(0.0f);
-			return true;
+
 		}
 
 		void PlayerSanity::ExecuteUpdate()

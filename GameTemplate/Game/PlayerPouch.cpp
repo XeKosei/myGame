@@ -13,9 +13,9 @@ namespace nsHikageri
 			
 		}
 
-		bool PlayerPouch::Start()
+		void PlayerPouch::Init(Player* pl)
 		{
-			return true;
+			m_player = pl;
 		}
 
 		void PlayerPouch::ExecuteUpdate()

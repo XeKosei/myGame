@@ -10,8 +10,10 @@ namespace nsHikageri
 		{
 			DeleteGO(m_blackSprite);
 		}
-		bool PlayerRead::Start()
+		void PlayerRead::Init(Player* pl)
 		{
+			m_player = pl;
+
 			m_blackSprite = NewGO<SpriteRender>(0);
 			m_blackSprite->Init("Assets/Image/Black.DDS", 1280, 720);
 			m_blackSprite->SetMulColor({ 0.0f,0.0f,0.0f,0.0f });
@@ -22,7 +24,6 @@ namespace nsHikageri
 			m_messageFont->SetScale(0.6f);
 			m_messageFont->SetShadowFlag(true);
 			m_messageFont->SetShadowColor({0.0f,0.0f,0.0f,1.0f});
-			return true;
 		}
 		void PlayerRead::ExecuteUpdate()
 		{

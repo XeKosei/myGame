@@ -9,11 +9,11 @@ namespace nsHikageri
 	{
 		class Player;
 
-		class PlayerTarget : public IGameObject
+		class PlayerTarget
 		{
 		public:
 			~PlayerTarget();
-			bool Start();
+			void Init(Player* pl);
 			void ExecuteUpdate();
 
 			enum EnTarget
@@ -59,10 +59,6 @@ namespace nsHikageri
 
 			void SetTargetMessagePaper(nsItem::ItemMessagePaper* messagePaper) { m_targetMessagePaper = messagePaper; };
 			nsItem::ItemMessagePaper* GetTargetMessagePaper() { return m_targetMessagePaper; }
-
-			/// @brief プレイヤーにアクセスできるようにする。
-			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
 
 		private:
 			//プレイヤー

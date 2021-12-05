@@ -4,16 +4,12 @@ namespace nsHikageri
 	namespace nsPlayer
 	{
 		class Player;
-		class PlayerRead : public IGameObject
+		class PlayerRead
 		{
 		public:
 			~PlayerRead();
-			bool Start();
+			void Init(Player* pl);
 			void ExecuteUpdate();
-
-			/// @brief プレイヤーにアクセスできるようにする。
-			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
 
 			/// @brief テキストを設定
 			/// @param message テキスト

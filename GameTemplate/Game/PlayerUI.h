@@ -6,7 +6,7 @@ namespace nsHikageri
 	{
 		class Player;
 		class PlayerPouch;
-		class PlayerUI : public IGameObject
+		class PlayerUI
 		{
 		public:
 			//バッテリーの表示の種類
@@ -22,7 +22,7 @@ namespace nsHikageri
 
 
 			~PlayerUI();
-			bool Start();
+			void Init(Player* pl);
 			void ExecuteUpdate();
 
 			//Hazyスプライトを設定する
@@ -33,10 +33,6 @@ namespace nsHikageri
 
 			//死んだとき
 			void DyingHazySprite();
-
-			/// @brief プレイヤーにアクセスできるようにする。
-			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
 
 			/// @brief ポーチアイテム表示を設定
 			/// @param item アイテムの種類

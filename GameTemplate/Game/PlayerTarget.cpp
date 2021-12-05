@@ -12,8 +12,10 @@ namespace nsHikageri
 			
 		}
 
-		bool PlayerTarget::Start()
+		void PlayerTarget::Init(Player* pl)
 		{
+			m_player = pl;
+
 			m_itemNameFont = NewGO<FontRender>(0);
 			m_itemNameFont->SetPosition(ITEMNAME_FONT_POS);
 			m_itemNameFont->SetScale(ITEMNAME_FONT_SCALE);
@@ -26,7 +28,6 @@ namespace nsHikageri
 			m_commandFont->SetShadowColor(Vector4::Black);*/
 			//m_commandFont->SetShadowOffset();
 
-			return true;
 		}
 
 		void PlayerTarget::ExecuteUpdate()

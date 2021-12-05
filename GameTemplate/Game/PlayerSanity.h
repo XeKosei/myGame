@@ -4,16 +4,12 @@ namespace nsHikageri
 	namespace nsPlayer
 	{
 		class Player;
-		class PlayerSanity : public IGameObject
+		class PlayerSanity
 		{
 		public:
 			~PlayerSanity();
-			bool Start();
+			void Init(Player* pl);
 			void ExecuteUpdate();		
-
-			/// @brief プレイヤーにアクセスできるようにする。
-			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
 
 			/// @brief プレイヤーのSAN値を指定した値だけ減らす。
 			/// @param damageNum 与えるダメージ

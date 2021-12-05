@@ -7,16 +7,13 @@ namespace nsHikageri
 		class PlayerMove;
 		class PlayerCamera;
 		class PlayerAction;
-		class PlayerAction : public IGameObject
+
+		class PlayerAction
 		{
 		public:
 			~PlayerAction();
-			bool Start();
+			void Init(Player* pl);
 			void ExecuteUpdate();
-
-			/// @brief プレイヤーにアクセスできるようにする。
-			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
 
 			//屈んでいるかどうか
 			bool GetCrouchDownFlag() { return m_crouchDownFlag; }

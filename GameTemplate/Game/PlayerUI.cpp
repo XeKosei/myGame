@@ -25,8 +25,9 @@ namespace nsHikageri
 			}
 		}
 
-		bool PlayerUI::Start()
+		void PlayerUI::Init(Player* pl)
 		{
+			m_player = pl;
 			//ダメージのスプライト
 			m_hazySprite = NewGO<SpriteRender>(1);
 			m_hazySprite->Init("Assets/Image/Hazy.DDS", 1280, 720);
@@ -71,7 +72,6 @@ namespace nsHikageri
 				m_batterySprite[no]->SetScale({ 0.0f, 0.0f, 0.0f });
 			}
 
-			return true;
 		}
 
 		void PlayerUI::ExecuteUpdate()

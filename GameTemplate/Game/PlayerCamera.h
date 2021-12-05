@@ -6,11 +6,11 @@ namespace nsHikageri
 		class Player;
 		//class PlayerConstant;
 
-		class PlayerCamera : public IGameObject
+		class PlayerCamera
 		{
 		public:
 			~PlayerCamera();
-			bool Start();
+			void Init(Player* pl);
 			void ExecuteUpdate();
 
 			//目の高さの設定で使用する変数
@@ -22,10 +22,6 @@ namespace nsHikageri
 			/// @brief カメラの向きを取得
 			/// @return カメラの向き
 			Vector3 GetDirection() { return g_camera3D->GetForward(); }
-
-			/// @brief プレイヤーにアクセスできるようにする。
-			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
 
 			/// @brief プレイヤーの目の高さを設定
 			/// @param height 設定する高さ。

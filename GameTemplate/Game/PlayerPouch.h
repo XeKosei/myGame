@@ -4,7 +4,7 @@ namespace nsHikageri
 	namespace nsPlayer
 	{
 		class Player;
-		class PlayerPouch : public IGameObject
+		class PlayerPouch
 		{
 		public:
 			//アイテムの種類
@@ -22,6 +22,7 @@ namespace nsHikageri
 			};
 
 			~PlayerPouch();
+			void Init(Player* pl);
 			void ExecuteUpdate();
 
 			//アイテムを選択する
@@ -45,11 +46,6 @@ namespace nsHikageri
 			/// @brief 指定したアイテムを一つポーチに追加する
 			/// @param item 追加するアイテム
 			void AddItem(EnPlayerItems item); 
-
-			bool Start();
-			/// @brief プレイヤーにアクセスできるようにする。
-			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
 
 		private:
 			//プレイヤー

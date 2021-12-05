@@ -8,14 +8,11 @@ namespace nsHikageri
 		class PlayerDispMessage : public IGameObject
 		{
 		public:
-			bool Start();
+			void Init(Player* pl);
 			void ExecuteUpdate();
 
 			void SetMessage(std::wstring message);
 
-			/// @brief プレイヤーにアクセスできるようにする。
-			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
 		private:
 			//プレイヤー
 			Player* m_player = nullptr;

@@ -6,11 +6,11 @@ namespace nsHikageri
 	namespace nsPlayer
 	{
 		class Player;
-		class PlayerBitten : public IGameObject
+		class PlayerBitten
 		{
 		public:
 			~PlayerBitten();
-			bool Start();
+			void Init(Player* pl);
 
 			enum EnBittenStates
 			{
@@ -28,10 +28,6 @@ namespace nsHikageri
 
 			//噛みつかれ状態を遷移
 			void SetBittenState(EnBittenStates state) { m_bittenStates = state; };
-
-			/// @brief プレイヤーにアクセスできるようにする。
-			/// @param pl プレイヤーの参照
-			void SetPlayer(Player* pl) { m_player = pl; };
 
 			//掴んできたエネミーを設定
 			void SetEnemy(nsEnemy::Enemy* enemy) { m_enemy = enemy; }

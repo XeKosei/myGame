@@ -11,10 +11,11 @@ namespace nsHikageri
 
 		}
 
-		bool PlayerCamera::Start()
+		void PlayerCamera::Init(Player* pl)
 		{
+			m_player = pl;
+
 			m_plEyeHeight = INI_PLAYER_EYE_HEIGHT;
-			return true;
 		}
 
 		//Player.cpp‚ÌUpdate()‚ÅŒÄ‚Ño‚·ˆ—
@@ -108,8 +109,6 @@ namespace nsHikageri
 					speed = m_player->GetPlayerMove()->GetVelocity().Length();
 					m_plEyeHeight = INI_PLAYER_EYE_HEIGHT;
 				}
-
-
 			}
 		}
 	}

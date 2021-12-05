@@ -5,8 +5,10 @@ namespace nsHikageri
 {
 	namespace nsPlayer
 	{
-		bool PlayerDispMessage::Start()
+		void PlayerDispMessage::Init(Player* pl)
 		{
+			m_player = pl;
+
 			m_messageFont = NewGO<FontRender>(0);
 			m_messageFont->SetText(L"");
 			m_messageFont->SetScale(0.7f);
@@ -14,7 +16,6 @@ namespace nsHikageri
 			m_messageFont->SetShadowColor(m_messageFontColor);
 			m_messageFont->SetShadowOffset(0.7f);
 
-			return true;
 		}
 
 		void PlayerDispMessage::ExecuteUpdate()
