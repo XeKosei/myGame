@@ -13,6 +13,11 @@ namespace nsHikageri
 
 		}
 
+		void EnemyVigilant::Init(Enemy* enemy)
+		{
+			m_enemy = enemy;
+		}
+
 		void EnemyVigilant::ExecuteUpdate()
 		{
 			//エネミーの位置からプレイヤーの位置へのベクトルを求める

@@ -10,6 +10,12 @@ namespace nsHikageri
 		{
 
 		}
+
+		void EnemyFlinch::Init(Enemy* enemy)
+		{
+			m_enemy = enemy;
+		}
+
 		void EnemyFlinch::ExecuteUpdate()
 		{
 			if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)

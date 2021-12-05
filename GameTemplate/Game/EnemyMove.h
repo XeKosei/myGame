@@ -3,13 +3,14 @@
 #include "AI/PathFinding/Path.h"
 #include "AI/PathFinding/PathFinding.h"
 #include "TknFile.h"
+
 namespace nsHikageri
 {
 	namespace nsAI { class NaviMesh; class Path; class PathFinding; };
 	namespace nsEnemy
 	{
 		class Enemy;
-		class EnemyMove : public IGameObject
+		class EnemyMove
 		{
 		public:
 			enum EnMoveStates
@@ -20,7 +21,7 @@ namespace nsHikageri
 			};
 
 			~EnemyMove();
-			bool Start();
+			void Init(Enemy* enemy);
 			void ExecuteUpdate();
 
 			void Move();
@@ -33,15 +34,7 @@ namespace nsHikageri
 
 			void Turn();
 
-			/// @brief エネミーにアクセスできるようにする。
-			/// @param pl エネミーの参照
-			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };
-
-			void SetPosition(Vector3 pos) { 
-				m_position = pos;
-				m_enemy->GetCharaCon()->SetPosition(m_position);
-				m_enemy->GetEnemyModel()->SetPosition(m_position);
-			}
+			void SetPosition(Vector3 pos);
 
 			/// @brief Enemyのm_positionを取得
 			/// @return エネミーの位置

@@ -13,15 +13,14 @@ namespace nsHikageri
 
 		}
 
-		bool EnemyAttack::Start()
+		void EnemyAttack::Init(Enemy* enemy)
 		{
+			m_enemy = enemy;
 			//攻撃モーションの時間を設定。
 			m_attackMotionCount = ATTACKMOTION_TIME;
 
 			//エネミーに噛みつかれ続ける時間
 			m_enemyBiteCount = BITING_TIME;
-
-			return true;
 		}
 		void EnemyAttack::ExecuteUpdate()
 		{

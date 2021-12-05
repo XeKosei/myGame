@@ -3,7 +3,7 @@ namespace nsHikageri
 {
 	namespace nsEnemy
 	{
-		class EnemySearchPlayer : public IGameObject
+		class EnemySearchPlayer
 		{
 		public:
 			enum EnSearchArea
@@ -15,7 +15,7 @@ namespace nsHikageri
 			};
 
 			~EnemySearchPlayer();
-			bool Start();
+			void Init(Enemy* enemy);
 			void ExecuteUpdate();
 
 			void Search();
@@ -26,10 +26,6 @@ namespace nsHikageri
 			void PushSearchPos(Vector3 pos) { m_searchPos.push_back(pos); }
 
 			void SetSearchPos(EnSearchArea searchArea);
-
-			/// @brief エネミーにアクセスできるようにする。
-			/// @param pl エネミーの参照
-			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };
 
 			/// @brief 次に向かうsearchPosの番号を設定
 			/// @param no 設定する番号

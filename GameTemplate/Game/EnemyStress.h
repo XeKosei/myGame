@@ -8,11 +8,8 @@ namespace nsHikageri
 		{
 		public:
 			~EnemyStress();
+			void Init(Enemy* enemy);
 			void ExecuteUpdate();
-
-			/// @brief エネミーにアクセスできるようにする。
-			/// @param pl エネミーの参照
-			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };
 
 			/// @brief 苦しむ
 			void Suffer();

@@ -14,11 +14,11 @@ namespace nsHikageri
 
 		}
 
-		bool EnemyMove::Start()
+		void EnemyMove::Init(Enemy* enemy)
 		{
+			m_enemy = enemy;
 			// ナビメッシュを構築。
 			m_nvmMesh.Init("Assets/nvm/nvmTest.tkn");
-			return true;
 		}
 
 		void EnemyMove::ExecuteUpdate()
@@ -34,6 +34,12 @@ namespace nsHikageri
 			};		
 
 			Turn();
+		}
+
+		void EnemyMove::SetPosition(Vector3 pos) {
+			m_position = pos;
+			m_enemy->GetEnemyModel()->SetPosition(m_position);
+			m_enemy->GetCharaCon()->SetPosition(m_position);
 		}
 
 		void EnemyMove::Move()

@@ -11,8 +11,10 @@ namespace nsHikageri
 
 		}
 
-		bool EnemyAnim::Start()
+		void EnemyAnim::Init(Enemy* enemy)
 		{
+			m_enemy = enemy;
+
 			m_animationClips[enAnimationClip_Idle].Load("Assets/animData/EnemyIdle.tka");
 			m_animationClips[enAnimationClip_Idle].SetLoopFlag(false);
 			m_animationClips[enAnimationClip_Walk].Load("Assets/animData/EnemyWalk.tka");
@@ -38,7 +40,6 @@ namespace nsHikageri
 			m_animationClips[enAnimationClip_EndBite].Load("Assets/animData/EnemyBite03.tka");
 			m_animationClips[enAnimationClip_EndBite].SetLoopFlag(false);	
 
-			return true;
 		}
 		void EnemyAnim::ExecuteUpdate()
 		{

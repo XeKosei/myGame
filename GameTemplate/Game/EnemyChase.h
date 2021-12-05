@@ -4,18 +4,14 @@ namespace nsHikageri
 	namespace nsEnemy
 	{
 		class Enemy;
-		class EnemyChase : public IGameObject
+		class EnemyChase
 		{
 		public:
 			~EnemyChase();
-			bool Start();
+			void Init(Enemy* enemy);
 			void ExecuteUpdate();
 			void Chase();	//追跡処理
 			void GoHiddenPos();	//隠れた場所へ向かう
-
-			/// @brief エネミーにアクセスできるようにする。
-			/// @param pl エネミーの参照
-			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };
 
 		private:
 			//エネミー

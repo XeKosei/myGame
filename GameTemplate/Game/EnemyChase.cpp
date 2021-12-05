@@ -14,10 +14,10 @@ namespace nsHikageri
 
 		}
 
-		bool EnemyChase::Start()
+		void EnemyChase::Init(Enemy* enemy)
 		{
+			m_enemy = enemy;
 			m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
-			return true;
 		}
 
 		//Enemy.cpp‚ÌUpdate()‚ÅŒÄ‚Ño‚·ˆ—

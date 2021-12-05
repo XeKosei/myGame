@@ -10,6 +10,10 @@ namespace nsHikageri
 
 		}
 
+		void EnemyScream::Init(Enemy* enemy)
+		{
+			m_enemy = enemy;
+		}
 		void EnemyScream::ExecuteUpdate()
 		{
 			if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)

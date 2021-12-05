@@ -4,7 +4,7 @@ namespace nsHikageri
 	namespace nsEnemy
 	{
 		class Enemy;
-		class EnemyAttack : public IGameObject
+		class EnemyAttack
 		{
 		public:
 			enum EnEnemyBiteStates
@@ -16,7 +16,7 @@ namespace nsHikageri
 			};
 
 			~EnemyAttack();
-			bool Start();
+			void Init(Enemy* enemy);
 			void ExecuteUpdate();
 
 			void Reset();
@@ -31,10 +31,6 @@ namespace nsHikageri
 
 			//噛みつきに抵抗する。
 			void RegistToBite(int registNum) { m_enemyBiteCount -= registNum; };
-
-			/// @brief エネミーにアクセスできるようにする。
-			/// @param pl エネミーの参照
-			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };
 
 		private:
 			//エネミー

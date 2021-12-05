@@ -25,16 +25,12 @@ namespace nsHikageri
 			};
 
 			~EnemyAnim();
-			bool Start();
+			void Init(Enemy* enemy);
 			void ExecuteUpdate();
 
 			//アニメーションクリップに関する情報を取得する関数
 			AnimationClip* GetAnimationClip() { return m_animationClips; };
 			int GetAnimationClipNum() { return enAnimationClip_num; };
-
-			/// @brief エネミーにアクセスできるようにする。
-			/// @param pl エネミーの参照
-			void SetEnemy(Enemy* enemy) { m_enemy = enemy; };
 
 		private:
 			//エネミー

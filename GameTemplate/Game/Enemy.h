@@ -1,5 +1,13 @@
 #pragma once
-
+#include "EnemyMove.h"
+#include "EnemySearchPlayer.h"
+#include "EnemyChase.h"
+#include "EnemyAttack.h"
+#include "EnemyAnim.h"
+#include "EnemyScream.h"
+#include "EnemyFlinch.h"
+#include "EnemyStress.h"
+#include "EnemyVigilant.h"
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
@@ -7,16 +15,6 @@ namespace nsHikageri
 
 	namespace nsEnemy
 	{
-		class EnemyMove;
-		class EnemySearchPlayer;
-		class EnemyChase;
-		class EnemyAttack;
-		class EnemyAnim;
-		class EnemyScream;
-		class EnemyFlinch;
-		class EnemyStress;
-		class EnemyVigilant;
-
 		class Enemy : public IGameObject
 		{
 		public:
@@ -63,15 +61,15 @@ namespace nsHikageri
 			void SetEnemyState(EnEnemyStates enState) { if (m_enemyState != enState_Petrifaction) { m_enemyState = enState; } };
 
 			//エネミー関係のインスタンスにアクセスする
-			EnemyMove* GetEnemyMove() { return m_enemyMove; }
-			EnemySearchPlayer* GetEnemySearchPlayer() { return m_enemySearchPlayer; };
-			EnemyChase* GetEnemyChase() { return m_enemyChase; }
-			EnemyAttack* GetEnemyAttack() { return m_enemyAttack; };
-			EnemyScream* GetEnemyScream() { return m_enemyScream; }
-			EnemyFlinch* GetEnemyFlinch() { return m_enemyFlinch; }
-			EnemyStress* GetEnemyStress() { return m_enemyStress; }
-			EnemyVigilant* GetEnemyVigilant() { return m_enemyVigilant; }
-			EnemyAnim* GetEnemyAnim() { return m_enemyAnim; };
+			EnemyMove* GetEnemyMove() { return &m_enemyMove; }
+			EnemySearchPlayer* GetEnemySearchPlayer() { return &m_enemySearchPlayer; };
+			EnemyChase* GetEnemyChase() { return &m_enemyChase; }
+			EnemyAttack* GetEnemyAttack() { return &m_enemyAttack; };
+			EnemyScream* GetEnemyScream() { return &m_enemyScream; }
+			EnemyFlinch* GetEnemyFlinch() { return &m_enemyFlinch; }
+			EnemyStress* GetEnemyStress() { return &m_enemyStress; }
+			EnemyVigilant* GetEnemyVigilant() { return &m_enemyVigilant; }
+			EnemyAnim* GetEnemyAnim() { return &m_enemyAnim; };
 		private:
 			//モデル
 			SkinModelRender* m_enemyModel = nullptr;
@@ -89,15 +87,15 @@ namespace nsHikageri
 			EnEnemyStates m_enemyState = enState_SearchPlayer;
 
 			//エネミー関連
-			EnemyMove* m_enemyMove = nullptr;
-			EnemySearchPlayer* m_enemySearchPlayer = nullptr;
-			EnemyChase* m_enemyChase = nullptr;
-			EnemyAttack* m_enemyAttack = nullptr;
-			EnemyScream* m_enemyScream = nullptr;
-			EnemyFlinch* m_enemyFlinch = nullptr;
-			EnemyStress* m_enemyStress = nullptr;
-			EnemyVigilant* m_enemyVigilant = nullptr;
-			EnemyAnim* m_enemyAnim = nullptr;
+			EnemyMove m_enemyMove;
+			EnemySearchPlayer m_enemySearchPlayer;
+			EnemyChase m_enemyChase;
+			EnemyAttack m_enemyAttack;
+			EnemyScream m_enemyScream;
+			EnemyFlinch m_enemyFlinch;
+			EnemyStress m_enemyStress;
+			EnemyVigilant m_enemyVigilant;
+			EnemyAnim m_enemyAnim ;
 		};
 	}
 }

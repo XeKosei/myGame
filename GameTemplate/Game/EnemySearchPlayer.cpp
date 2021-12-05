@@ -14,8 +14,10 @@ namespace nsHikageri
 
 		}
 
-		bool EnemySearchPlayer::Start()
+		void EnemySearchPlayer::Init(Enemy* enemy)
 		{
+			m_enemy = enemy;
+
 			SetSearchPos(m_searchArea);
 
 			CalcNextSearchPos();
@@ -24,8 +26,6 @@ namespace nsHikageri
 
 			//‰ŠúˆÊ’u‚ðŽw’è
 			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
-
-			return true;
 		}
 
 		void EnemySearchPlayer::ExecuteUpdate()

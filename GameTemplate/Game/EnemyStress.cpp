@@ -11,6 +11,11 @@ namespace nsHikageri
 
 		}
 
+		void EnemyStress::Init(Enemy* enemy)
+		{
+			m_enemy = enemy;
+		}
+
 		void EnemyStress::ExecuteUpdate()
 		{
 			//ストレス値が前フレームの値と同じか下回っているとき、ストレスを受けていない。
