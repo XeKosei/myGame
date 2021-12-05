@@ -88,7 +88,7 @@ namespace nsHikageri
 			//m_chandelierManager->SetEnemy(m_enemy);
 
 			////ドア　テスト
-			Vector3 doorPos[6]
+			/*Vector3 doorPos[6]
 			{
 				{ 0.0f, 0.0f, -100.0f },
 				{-900.0f, 0.0f, -600.0f},
@@ -121,7 +121,7 @@ namespace nsHikageri
 			m_door[2]->SetDoorColor(nsGimmick::Door::enDoorColor_Green);
 			m_door[3]->SetDoorColor(nsGimmick::Door::enDoorColor_Yellow);
 			m_door[4]->SetDoorColor(nsGimmick::Door::enDoorColor_Purple);
-			m_door[5]->SetDoorColor(nsGimmick::Door::enDoorColor_White);
+			m_door[5]->SetDoorColor(nsGimmick::Door::enDoorColor_White);*/
 
 			////鍵テスト
 			//Vector3 keyPos[5] = {

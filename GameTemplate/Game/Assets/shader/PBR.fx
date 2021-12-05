@@ -2,6 +2,8 @@
  * @brief	シンプルなモデルシェーダー。
  */
 
+//定数
+static const float PI = 3.1415926f;         // π
 
  ////////////////////////////////////////////////
  // 定数バッファ。
@@ -58,13 +60,6 @@ cbuffer LightDataCb : register(b1)
 	int spotLigNum;
 };
 
-//cbuffer LightCameraCb : register(b2)
-//{
-//	float4x4 mLVP;
-//	float3 lightCameraPos;
-//	float3 lightCameraDir;
-//};
-
 ////////////////////////////////////////////////
 // 構造体
 ////////////////////////////////////////////////
@@ -79,6 +74,10 @@ struct SVSIn {
 	float3 normal	: NORMAL;		//法線
 	float2 uv 		: TEXCOORD0;	//UV座標。
 	SSkinVSIn skinVert;				//スキン用のデータ。
+
+	//頂点シェーダーの入力に接ベクトルと従ベクトルを追加
+	float3 tangent : TANGENT;
+	float3 biNormal : BINORMAL;
 };
 //ピクセルシェーダーへの入力。
 struct SPSIn {
@@ -92,13 +91,18 @@ struct SPSIn {
 	float4 posInSpotLVP01 : TEXCOORD5;
 	float4 posInSpotLVP02 : TEXCOORD6;
 	float4 posInView	:TEXCOORD7;
+	//ピクセルシェーダーの入力に接ベクトルと従ベクトルを追加
+	float3 tangent  : TANGENT;      // 接ベクトル
+	float3 biNormal : BINORMAL;     // 従ベクトル
 };
 
 ////////////////////////////////////////////////
 // グローバル変数。
 ////////////////////////////////////////////////
 Texture2D<float4> g_albedo : register(t0);				//アルベドマップ
-//Texture2D<float4> g_shadowMap : register(t10);			//シャドウマップ
+Texture2D<float4> g_normalMap : register(t1);			//法線マップ
+Texture2D<float4> g_specularMap : register(t2);			//スペキュラマップ
+
 Texture2D<float4> g_clairvoyanceMap : register(t10);	//透視マップ
 Texture2D<float4> g_spotLightMap00 : register(t11);		//スポットライトマップ
 Texture2D<float4> g_spotLightMap01 : register(t12);		//スポットライトマップ
@@ -153,38 +157,11 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 
 	psIn.normalInView = mul(mView, psIn.normal);
 
+	//接ベクトルと従ベクトルをワールド空間に変換する
+	psIn.tangent = normalize(mul(mWorld, vsIn.tangent));
+	psIn.biNormal = normalize(mul(mWorld, vsIn.biNormal));
+
 	psIn.uv = vsIn.uv;
-
-	//psIn.posInLVP = mul(mLVP,float4(psIn.worldPos, 1.0f));
-
-	//////本来の比較用の距離はこっち
-	////psIn.posInLVP.z = length(psIn.worldPos - lightCameraPos) / 1000.0f;
-	////ここから平行光源の深度チェックのテスト用。
-	////ライトの向きを取得。
-	//float3 cameraDir = lightCameraDir;
-	////正規化されてるはずだけど、念の為。
-	//cameraDir = normalize(cameraDir);
-	//float3 axisX = {1.0f,0.0f,0.0f};
-	//float3 lightCameraAnotherAxis = cross(axisX,cameraDir);
-	////axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
-	//float3 start = psIn.worldPos;
-	////スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
-	//float3 end = psIn.worldPos + -100 * cameraDir;
-	////ポリゴンと線分の交差判定を参考に、
-	////仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
-	////3点でできる平面との交点を求めていく。
-	//float3 toStart = start - lightCameraPos;
-	//float3 toEnd = end - lightCameraPos;
-	//float a = dot(cameraDir,toStart);
-	//float3 cameraDirRev = -cameraDir;
-	//float b = dot(cameraDirRev,toEnd);
-	////crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
-	//float3 crossPoint = toStart - toEnd;
-	//crossPoint *= b / (a+b);
-	//crossPoint += end;
-
-	//psIn.posInLVP.z = length(psIn.worldPos - crossPoint)/2000.0f;
-	//ここまで平行光源の深度チェックのテスト用。
 
 	//スポットライトビューのスクリーン空間の座標を計算
 	psIn.posInSpotLVP00 = mul(spotLigCameraData[0].mSpotLVP, float4(psIn.worldPos, 1.0f));
@@ -194,31 +171,6 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 	//セマンティクスが原因で、psIn.posはピクセルシェーダーにちゃんと値が渡されていないので、
 	//代わりにpsIn.posInViewに値を代入。
 	psIn.posInView = psIn.pos;
-
-	//psIn.posInView = mul(mProj, psIn.pos);
-	////ライトの向きを取得。
-	//cameraDir = spotLightCameraDir;
-	////正規化されてるはずだけど、念の為。
-	//cameraDir = normalize(cameraDir);
-	//lightCameraAnotherAxis = cross(axisX, cameraDir);
-	////axisX,lightCameraAnotherAxisで構成される平面にpsIn.worldPosから垂線をおろす。
-	//start = psIn.worldPos;
-	////スタート地点からカメラの向きをプラスして仮想の垂線をつくる。
-	//end = psIn.worldPos + -100 * cameraDir;
-	////ポリゴンと線分の交差判定を参考に、
-	////仮想の垂線とlightCameraPos,lightCameraPos+axisX,lightCameraPos+lightCameraAnotherAxisの
-	////3点でできる平面との交点を求めていく。
-	//toStart = start - spotLightCameraPos;
-	//toEnd = end - spotLightCameraPos;
-	//a = dot(cameraDir, toStart);
-	//cameraDirRev = -cameraDir;
-	//b = dot(cameraDirRev, toEnd);
-	////crosspointは交点 = 3点でできる平面と垂線の交点。depthの開始点になる。
-	//crossPoint = toStart - toEnd;
-	//crossPoint *= b / (a + b);
-	//crossPoint += end;
-
-	//psIn.posInSpotLVP.z = length(psIn.worldPos - crossPoint) / 2000.0f;
 
 	return psIn;
 }
@@ -238,6 +190,22 @@ SPSIn VSSkinMain(SVSIn vsIn)
 	return VSMainCore(vsIn, true);
 }
 
+/// フレネル反射を考慮した拡散反射を計算
+float CalcDiffuseFromFresnel(float3 normal, float3 ligDir, float3 toEyeDir)
+{
+	// step-4 フレネル反射を考慮した拡散反射光を求める
+
+	// 法線と光源に向かうベクトルがどれだけ似ているかを内積で求める
+	float dotNL = saturate(dot(normal, ligDir));
+
+	// 法線と視線に向かうベクトルがどれだけ似ているかを内積で求める
+	float dotNV = saturate(dot(normal, toEyeDir));
+
+	// 法線と光源への方向に依存する拡散反射率と、法線と視点ベクトルに依存する拡散反射率を
+	// 乗算して最終的な拡散反射率を求めている。PIで除算しているのは正規化を行うため
+	return (dotNL * dotNV);
+}
+
 //ランバート拡散反射を計算する。
 float3 CalcLambertDiffuse(float3 ligDir, float3 ligColor,float3 normal )
 {
@@ -248,31 +216,61 @@ float3 CalcLambertDiffuse(float3 ligDir, float3 ligColor,float3 normal )
 		t = 0;
 	}
 
-	t /= 3.1415926;
+	t /= PI;
 
 	return ligColor * t;
 }
 
-//フォン鏡面反射を計算する。
-float3 CalcPhongSpecular(float3 ligDir, float3 ligColor, float3 worldPos, float3 normal)
+// ベックマン分布を計算する
+float Beckmann(float m, float t)
 {
-	float3 toEye = eyePos - worldPos;
-	toEye = normalize(toEye);
+	float t2 = t * t;
+	float t4 = t * t * t * t;
+	float m2 = m * m;
+	float D = 1.0f / (4.0f * m2 * t4);
+	D *= exp((-1.0f / m2) * (1.0f - t2) / t2);
+	return D;
+}
 
-	float3 refVec = reflect(ligDir, normal);
+// フレネルを計算。Schlick近似を使用
+float SpcFresnel(float f0, float u)
+{
+	// from Schlick
+	return f0 + (1 - f0) * pow(1 - u, 5);
+}
 
-	float t = dot(toEye, refVec);
-	
-	if (t < 0)
-	{
-		t = 0;
-	}
+/// Cook-Torranceモデルの鏡面反射を計算
+float CookTorranceSpecular(float3 ligDir, float3 toEyeDir, float3 normal, float specPower)
+{
+	float microfacet = 0.76f;
 
-	t /= 3.1415926;
+	// 金属度を垂直入射の時のフレネル反射率として扱う
+	// 金属度が高いほどフレネル反射は大きくなる
+	float f0 = specPower;
 
-	t = pow(t, 5.0f);
+	// ライトに向かうベクトルと視線に向かうベクトルのハーフベクトルを求める
+	float3 H = normalize(ligDir + toEyeDir);
 
-	return ligColor * t;
+	// 各種ベクトルがどれくらい似ているかを内積を利用して求める
+	float NdotH = saturate(dot(normal, H));
+	float VdotH = saturate(dot(toEyeDir, H));
+	float NdotL = saturate(dot(normal, ligDir));
+	float NdotV = saturate(dot(normal, toEyeDir));
+
+	// D項をベックマン分布を用いて計算する
+	float D = Beckmann(microfacet, NdotH);
+
+	// F項をSchlick近似を用いて計算する
+	float F = SpcFresnel(f0, VdotH);
+
+	// G項を求める
+	float G = min(1.0f, min(2 * NdotH * NdotV / VdotH, 2 * NdotH * NdotL / VdotH));
+
+	// m項を求める
+	float m = PI * NdotV * NdotH;
+
+	// ここまで求めた、値を利用して、Cook-Torranceモデルの鏡面反射を求める
+	return max(F * D * G / m, 0.0);
 }
 
 float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView,float3 normal)
@@ -298,18 +296,45 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	float4 finalColor = 0.0f;
 	finalColor.a = 1.0f;
 
+	float3 specColor = g_specularMap.SampleLevel(g_sampler, psIn.uv, 0).rgb;
+	//return float4(specColor, 1.0f);
+	///////////法線マップ
+	float3 normal = psIn.normal;
+	//法線マップからタンジェントスペースの法線をサンプリングする
+	float3 localNormal = g_normalMap.Sample(g_sampler, psIn.uv).xyz;
+	// タンジェントスペースの法線を0～1の範囲から-1～1の範囲に復元する
+	localNormal = (localNormal - 0.5f) * 2.0f;
+	//タンジェントスペースの法線をワールドスペースに変換する
+	normal = psIn.tangent * localNormal.x + psIn.biNormal * localNormal.y + normal * localNormal.z;
+
+	///////////スペキュラマップ
+	//スペキュラマップからスペキュラ反射の強さをサンプリング
+	float specPower = g_specularMap.Sample(g_sampler, psIn.uv).r;
+
+	// 視線に向かって伸びるベクトルを計算する
+	float3 toEye = normalize(eyePos - psIn.worldPos);
 
 	//ディレクションライト
 	for (int i = 0;i < directionLigNum;i++)
 	{
+		// フレネル反射を考慮した拡散反射を計算
+		float diffuseFromFresnel = CalcDiffuseFromFresnel(normal, -directionLigData[i].ligDir, toEye);
+		
 		//ランバート拡散反射
-		float3 diffuseLig = CalcLambertDiffuse(directionLigData[i].ligDir, directionLigData[i].ligColor,psIn.normal);
+		float3 lambertDiffuse = CalcLambertDiffuse(directionLigData[i].ligDir, directionLigData[i].ligColor, normal);
+
+		// 最終的な拡散反射光を計算する
+		float3 diffuseLig = albedoColor * diffuseFromFresnel * lambertDiffuse;
 
 		//フォン鏡面反射
-		float3 specularLig = CalcPhongSpecular(directionLigData[i].ligDir, directionLigData[i].ligColor, psIn.worldPos, psIn.normal);
+		float3 specularLig = CookTorranceSpecular(
+			-directionLigData[i].ligDir, toEye, normal, specPower)
+			* directionLigData[i].ligColor;
 
 		//リムライト
-		//float3 limLig = CalcLimLight(directionLigData[i].ligDir, directionLigData[i].ligColor, psIn.normalInView, psIn.normal);
+		//float3 limLig = CalcLimLight(directionLigData[i].ligDir, directionLigData[i].ligColor, psIn.normalInView,normal);
+
+		specularLig *= lerp(float3(1.0f, 1.0f, 1.0f), specColor, specPower);
 
 		float3 finalLig = diffuseLig + specularLig;
 
@@ -322,14 +347,24 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		float3 pointLigDir = psIn.worldPos - pointLigData[i].ligPos;
 		pointLigDir = normalize(pointLigDir);
 
+		// フレネル反射を考慮した拡散反射を計算
+		float diffuseFromFresnel = CalcDiffuseFromFresnel(normal, pointLigDir, toEye);
+
 		//ランバート拡散反射
-		float3 diffuseLig = CalcLambertDiffuse(pointLigDir, pointLigData[i].ligColor, psIn.normal);
+		float3 lambertDiffuse = CalcLambertDiffuse(pointLigDir, pointLigData[i].ligColor, normal);
+
+		// 最終的な拡散反射光を計算する
+		float3 diffuseLig = albedoColor * diffuseFromFresnel * lambertDiffuse;
 
 		//フォン鏡面反射
-		float3 specularLig = CalcPhongSpecular(pointLigDir,pointLigData[i].ligColor,psIn.worldPos,psIn.normal);
+		float3 specularLig = CookTorranceSpecular(
+			-pointLigDir, toEye, normal, specPower)
+			* pointLigData[i].ligColor;
+
+		specularLig *= lerp(float3(1.0f, 1.0f, 1.0f), specColor, specPower);
 
 		//リムライト
-		//float3 limLig = CalcLimLight(pointLigDir, pointLigData[i].ligColor, psIn.normalInView, psIn.normal);
+		//float3 limLig = CalcLimLight(pointLigDir, pointLigData[i].ligColor, psIn.normalInView,normal);
 
 		float3 finalLig = diffuseLig +specularLig;
 
@@ -394,16 +429,28 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 				float3 spotLigDir = psIn.worldPos - spotLigData[i].ligPos;
 				spotLigDir = normalize(spotLigDir);
 
-				//ランバート拡散反射
-				float3 diffuseLig = CalcLambertDiffuse(spotLigDir, spotLigData[i].ligColor, psIn.normal);
+				// フレネル反射を考慮した拡散反射を計算
+				float diffuseFromFresnel = CalcDiffuseFromFresnel(normal, -spotLigDir, toEye);
 
+				//ランバート拡散反射
+				float3 lambertDiffuse = CalcLambertDiffuse(spotLigDir, spotLigData[i].ligColor, normal);
+
+				// 最終的な拡散反射光を計算する
+				float3 diffuseLig = albedoColor * diffuseFromFresnel * lambertDiffuse;
+
+				
 				//フォン鏡面反射
-				float3 specularLig = CalcPhongSpecular(spotLigDir, spotLigData[i].ligColor, psIn.worldPos, psIn.normal);
+				float3 specularLig = CookTorranceSpecular(
+					-spotLigDir, toEye, normal, specPower)
+					* spotLigData[i].ligColor;
+
+				float specTerm = length(specColor.xyz);
+				specularLig *= lerp(float3(specTerm, specTerm, specTerm), specColor, specPower);
 
 				//リムライト
-				//float3 limLig = CalcLimLight(spotLigDir, spotLigData[i].ligColor, psIn.normalInView, psIn.normal);
+				//float3 limLig = CalcLimLight(spotLigDir, spotLigData[i].ligColor, psIn.normalInView,normal);
 
-				float3 finalLig = diffuseLig + specularLig;
+				float3 finalLig = diffuseLig * (1.0 - specTerm) + specularLig;
 
 				//距離による減衰
 
@@ -458,7 +505,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 	//環境光
 	//懐中電灯に照らされていない場合は、遠くが暗く見えるようにする。
-	float3 ambientLig = 1 - (length(eyePos - psIn.worldPos) * 0.001f);
+	float3 ambientLig = 0.2f;
+	/*float3 ambientLig = 1 - (length(eyePos - psIn.worldPos) * 0.001f);
 	for (int i = 0; i < spotLigNum; i++)
 	{
 		if (spotLigCameraData[i].isSpotLightSwitchOn == 1)
@@ -480,52 +528,11 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 				ambientLig = 0.3f;
 			}
 		}
-	}
+	}*/
 
 	finalColor.xyz += ambientLig;
 	
 	finalColor *= albedoColor;
-
-	//影
-	//float2 shadowMapUV = psIn.posInLVP.xy / psIn.posInLVP.w;
-	//shadowMapUV *= float2(0.5f, -0.5f);
-	//shadowMapUV += 0.5f;
-
-	////float zInLVP = psIn.posInLVP.z;
-	//float zInLVP = psIn.posInLVP.z / psIn.posInLVP.w;
-
-	//if( shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f)
-	//{
-	//	//シャドウマップからライトからの距離、距離の2乗をサンプリング
-	//	float2 shadowValue = g_shadowMap.Sample(g_sampler,shadowMapUV).xy;
-	//	
-	//	//まずこのピクセルが遮蔽されているか調べる
-	//	//zInLVPはライトから影が描かれるモデルへの距離、shadowValue.rはライトから影を落とすモデルへの距離
-	//	//影が描かれるモデルへの距離より影を落とすモデルへの距離が短いなら影が描かれるモデルは遮蔽されている。
-	//	if(zInLVP > shadowValue.r && zInLVP <= 1.0f)// && zInLVP < shadowValue.r + 0.1f)
-	//	{
-	//		//チェビシェフの不等式を使う
-	//		float depth_sq = shadowValue.x * shadowValue.x;
-	//		//このグループの分散具合を求める
-	//		//分散が大きいほど、varianceの値は大きくなる。
-	//		float variance = min(max(shadowValue.y - depth_sq,0.0001f),1.0f);
-	//		//このピクセルのライトから見た深度値とシャドウマップの平均の深度値の差を求める。
-	//		float md = zInLVP - shadowValue.x;
-	//		//光が届く確率を求める
-	//		float lit_factor = variance / (variance + md * md);
-	//		//影の色を求める
-	//		float3 shadowColor = finalColor.xyz * 0.3f;
-	//		
-	//		//光が当たる確率を使って通常カラーとシャドウカラーを線形補間
-	//		finalColor.xyz = lerp(shadowColor,finalColor.xyz,lit_factor);
-	//	}
-
-	//	/*
-	//	float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV).r;
-	//	if (zInLVP > zInShadowMap) {
-	//		finalColor.xyz *= 0.5f;
-	//	}*/
-	//}
 
 	return finalColor;
 }

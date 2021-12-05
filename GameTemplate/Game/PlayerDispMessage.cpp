@@ -7,6 +7,7 @@ namespace nsHikageri
 	{
 		bool PlayerDispMessage::Start()
 		{
+			m_messageFont = NewGO<FontRender>(0);
 			m_messageFont->SetText(L"");
 			m_messageFont->SetScale(0.7f);
 			m_messageFont->SetShadowFlag(true);
