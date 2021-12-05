@@ -13,9 +13,9 @@ namespace nsHikageri
 
 		}
 
-		bool AbilityClairvoyance::Start()
+		void AbilityClairvoyance::Init(FlashLight* flashLight)
 		{
-			return true;
+			m_flashLight = flashLight;
 		}
 
 		void AbilityClairvoyance::ExecuteUpdate()

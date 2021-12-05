@@ -27,7 +27,7 @@ namespace nsHikageri
 				INI_PLAYER_POSITION//初期位置
 			);
 
-			//プレイヤー関係のインスタンスを作成
+			//プレイヤー関係のクラスの初期化
 			m_playerMove.Init(this);
 			m_playerCamera.Init(this);
 			m_playerAction.Init(this);

@@ -12,12 +12,13 @@ namespace nsHikageri
 
 		}
 
-		bool AbilityManager::Start()
+		void AbilityManager::Init(FlashLight* flashLight)
 		{
+			m_flashLight = flashLight;
+
 			m_enemy = FindGO<nsEnemy::Enemy>("enemy");
 			m_secretRoom = FindGO<nsBackGround::SecretRoom>("secretRoom");
 
-			return true;
 		}
 	}
 }

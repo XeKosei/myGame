@@ -10,14 +10,10 @@ namespace nsHikageri
 		{
 		public:
 			~AbilityMedousaEye();
-			bool Start();
+			void Init(FlashLight* flashLight);
 			void ExecuteUpdate();
 
 			void Reset();
-
-			/// @brief フラッシュライトにアクセスできるようにする。
-			/// @param pl フラッシュライトに参照
-			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
 
 			/// @brief アビリティマネージャーを設定
 			/// @param abilityManager アビリティマネージャー

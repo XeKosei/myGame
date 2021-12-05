@@ -6,11 +6,11 @@ namespace nsHikageri
 		class FlashLight;
 		class AbilityManager;
 		//透視能力(クレアボヤンス)
-		class AbilityClairvoyance : public IGameObject
+		class AbilityClairvoyance
 		{
 		public:
 			~AbilityClairvoyance();
-			bool Start();
+			void Init(FlashLight* flashLight);
 			void ExecuteUpdate();
 			/// @brief フラッシュライトにアクセスできるようにする。
 			/// @param pl フラッシュライトに参照

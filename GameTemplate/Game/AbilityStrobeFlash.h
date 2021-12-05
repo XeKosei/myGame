@@ -8,18 +8,14 @@ namespace nsHikageri
 		class FlashLight;
 		class AbilityManager;
 		//ストロボのようなフラッシュ
-		class AbilityStrobeFlash : public IGameObject
+		class AbilityStrobeFlash
 		{
 		public:
 			~AbilityStrobeFlash();
-			bool Start();
+			void Init(FlashLight* flashLight);
 			void ExecuteUpdate();
 
 			void Reset();
-
-			/// @brief フラッシュライトにアクセスできるようにする。
-			/// @param pl フラッシュライトに参照
-			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
 
 			/// @brief ストロボフラッシュを発動する準備の処理
 			void StrobeFlashPrepare();

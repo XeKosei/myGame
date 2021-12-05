@@ -7,14 +7,11 @@ namespace nsHikageri
 	namespace nsFlashLight
 	{
 		class FlashLight;
-		class AbilityManager : public IGameObject
+		class AbilityManager
 		{
 		public:
 			~AbilityManager();
-			bool Start();
-			/// @brief フラッシュライトにアクセスできるようにする。
-					/// @param pl フラッシュライトに参照
-			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
+			void Init(FlashLight* flashLight);
 
 			nsEnemy::Enemy* GetEnemy() { return m_enemy; }
 			nsBackGround::SecretRoom* GetSecretRoom() { return m_secretRoom; }

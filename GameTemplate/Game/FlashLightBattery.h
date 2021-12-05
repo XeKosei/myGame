@@ -8,7 +8,7 @@ namespace nsHikageri
 		{
 		public:
 			~FlashLightBattery();
-			bool Start();
+			void Init(FlashLight* flashLight);
 			void ExecuteUpdate();
 
 			/// @brief バッテリー残量を取得
@@ -22,10 +22,6 @@ namespace nsHikageri
 			/// @brief 指定した値分、バッテリー残量を消費する
 			/// @param consumNum 消費する値
 			void ConsumBatteryLevel(float consumNum); 
-
-			/// @brief フラッシュライトにアクセスできるようにする。
-			/// @param pl フラッシュライトに参照
-			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
 
 		private:
 			//フラッシュライト

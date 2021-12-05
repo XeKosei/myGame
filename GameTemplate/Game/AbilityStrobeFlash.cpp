@@ -15,8 +15,10 @@ namespace nsHikageri
 
 		}
 
-		bool AbilityStrobeFlash::Start()
+		void AbilityStrobeFlash::Init(FlashLight* flashLight)
 		{
+			m_flashLight = flashLight;
+
 			m_backGround = FindGO<nsBackGround::BackGround>("backGround");
 
 			//ストロボフラッシュの明るさを設定
@@ -28,7 +30,6 @@ namespace nsHikageri
 			m_chargingEff.Init(u"Assets/effect/StrobeFlashEff.efk");
 			m_chargingEff.SetScale(INI_STROBEFLASH_EFF_SCALE);
 
-			return true;
 		}
 
 		void AbilityStrobeFlash::ExecuteUpdate()

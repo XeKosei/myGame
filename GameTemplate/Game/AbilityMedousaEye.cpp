@@ -14,15 +14,16 @@ namespace nsHikageri
 
 		}
 
-		bool AbilityMedousaEye::Start()
+		void AbilityMedousaEye::Init(FlashLight* flashLight)
 		{
+			m_flashLight = flashLight;
+
 			m_medousaEyeChargeCount = INI_MEDOUSAEYEFLASH_CHARGE_COUNT;
 
 			//エフェクト
 			m_chargingEff.Init(u"Assets/effect/StrobeFlashEff.efk");
 			m_chargingEff.SetScale(INI_MEDOUSAEYEFLASH_EFF_SCALE);
 
-			return true;
 		}
 		void AbilityMedousaEye::ExecuteUpdate()
 		{

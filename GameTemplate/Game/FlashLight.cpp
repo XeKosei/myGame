@@ -12,12 +12,6 @@ namespace nsHikageri
 		{
 			DeleteGO(m_flashLightModel);
 			DeleteGO(m_spotLight);
-			DeleteGO(m_flashLightAction);
-			DeleteGO(m_flashLightBattery);
-			DeleteGO(m_abilityManager);
-			DeleteGO(m_abilityStrobeFlash);
-			DeleteGO(m_abilityClairvoyance);
-			DeleteGO(m_abilityMedousaEye);
 		}
 
 		bool FlashLight::Start()
@@ -41,24 +35,18 @@ namespace nsHikageri
 			//スポットライトカメラの設定
 			LightManager::GetInstance()->SetSpotLightCameraAngle(m_flashLightAngle, 0);
 			//LightManager::GetInstance()->SetSpotLightCameraFar(INI_FLASHLIGHT_RANGE);
-			//懐中電灯関係のインスタンスを作成
-			m_flashLightAction = NewGO<FlashLightAction>(0);
-			m_flashLightAction->SetFlashLight(this);
-			m_flashLightBattery = NewGO<FlashLightBattery>(0);
-			m_flashLightBattery->SetFlashLight(this);
+			//懐中電灯関係のクラスの初期化
+			m_flashLightAction.Init(this);
+			m_flashLightBattery.Init(this);
 
 			//アビリティ関連
-			m_abilityManager = NewGO<AbilityManager>(0);
-			m_abilityManager->SetFlashLight(this);
-			m_abilityStrobeFlash = NewGO<AbilityStrobeFlash>(0);
-			m_abilityStrobeFlash->SetFlashLight(this);
-			m_abilityStrobeFlash->SetAbilityManager(m_abilityManager);
-			m_abilityClairvoyance = NewGO<AbilityClairvoyance>(0);
-			m_abilityClairvoyance->SetFlashLight(this);
-			m_abilityClairvoyance->SetAbilityManager(m_abilityManager);
-			m_abilityMedousaEye = NewGO<AbilityMedousaEye>(0);
-			m_abilityMedousaEye->SetFlashLight(this);
-			m_abilityMedousaEye->SetAbilityManager(m_abilityManager);
+			m_abilityManager.Init(this);
+			m_abilityStrobeFlash.Init(this);
+			m_abilityStrobeFlash.SetAbilityManager(&m_abilityManager);
+			m_abilityClairvoyance.Init(this);
+			m_abilityClairvoyance.SetAbilityManager(&m_abilityManager);
+			m_abilityMedousaEye.Init(this);
+			m_abilityMedousaEye.SetAbilityManager(&m_abilityManager);
 
 			return true;
 		}
@@ -103,11 +91,11 @@ namespace nsHikageri
 			//if (m_player->GetPlayerState() == nsPlayer::Player::enState_Normal ||
 			//	m_player->GetPlayerState() == nsPlayer::Player::enState_Invincible )
 			{
-				m_flashLightAction->ExecuteUpdate();
-				m_flashLightBattery->ExecuteUpdate();
-				m_abilityStrobeFlash->ExecuteUpdate();
-				m_abilityClairvoyance->ExecuteUpdate();
-				m_abilityMedousaEye->ExecuteUpdate();
+				m_flashLightAction.ExecuteUpdate();
+				m_flashLightBattery.ExecuteUpdate();
+				m_abilityStrobeFlash.ExecuteUpdate();
+				m_abilityClairvoyance.ExecuteUpdate();
+				m_abilityMedousaEye.ExecuteUpdate();
 			}
 		}
 	}

@@ -1,17 +1,16 @@
 #pragma once
+#include "FlashLightAction.h"
+#include "FlashLightBattery.h"
+#include "AbilityManager.h"
+#include "AbilityStrobeFlash.h"
+#include "AbilityClairvoyance.h"
+#include "AbilityMedousaEye.h"
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
 
 	namespace nsFlashLight
 	{
-		class FlashLightAction;
-		class FlashLightBattery;
-		class AbilityManager;
-		class AbilityStrobeFlash;
-		class AbilityClairvoyance;
-		class AbilityMedousaEye;
-
 		//懐中電灯
 		class FlashLight : public IGameObject
 		{
@@ -59,12 +58,12 @@ namespace nsHikageri
 			Vector3 GetModelPos() { return m_modelPos; }
 
 			//懐中電灯関係のインスタンスにアクセスする
-			FlashLightAction* GetFlashLightAction() { return m_flashLightAction; }
-			FlashLightBattery* GetFlashLightBattery() { return m_flashLightBattery; }
-			AbilityManager* GetAbilityManager() { return m_abilityManager; }
-			AbilityStrobeFlash* GetAbilityStrobeFlash() { return m_abilityStrobeFlash; }
-			AbilityClairvoyance* GetAbilityClairvoyance() { return m_abilityClairvoyance; }
-			AbilityMedousaEye* GetAbilityMedousaEye() { return m_abilityMedousaEye; }
+			FlashLightAction* GetFlashLightAction() { return &m_flashLightAction; }
+			FlashLightBattery* GetFlashLightBattery() { return &m_flashLightBattery; }
+			AbilityManager* GetAbilityManager() { return &m_abilityManager; }
+			AbilityStrobeFlash* GetAbilityStrobeFlash() { return &m_abilityStrobeFlash; }
+			AbilityClairvoyance* GetAbilityClairvoyance() { return &m_abilityClairvoyance; }
+			AbilityMedousaEye* GetAbilityMedousaEye() { return &m_abilityMedousaEye; }
 		private:
 			SkinModelRender* m_flashLightModel = nullptr;
 			//スポットライト
@@ -82,12 +81,12 @@ namespace nsHikageri
 			float m_flashLightAngle = 0.0f;
 
 			//フラッシュライト関連
-			FlashLightAction* m_flashLightAction = nullptr;
-			FlashLightBattery* m_flashLightBattery = nullptr;
-			AbilityManager* m_abilityManager = nullptr;
-			AbilityStrobeFlash* m_abilityStrobeFlash = nullptr;
-			AbilityClairvoyance* m_abilityClairvoyance = nullptr;
-			AbilityMedousaEye* m_abilityMedousaEye = nullptr;
+			FlashLightAction m_flashLightAction;
+			FlashLightBattery m_flashLightBattery;
+			AbilityManager m_abilityManager;
+			AbilityStrobeFlash m_abilityStrobeFlash;
+			AbilityClairvoyance m_abilityClairvoyance;
+			AbilityMedousaEye m_abilityMedousaEye;
 		};
 	}
 }

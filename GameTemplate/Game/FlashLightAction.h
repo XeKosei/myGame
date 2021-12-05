@@ -5,19 +5,15 @@ namespace nsHikageri
 	{
 		class FlashLight;
 
-		class FlashLightAction : public IGameObject
+		class FlashLightAction
 		{
 		public:
 			~FlashLightAction();
-			bool Start();
+			void Init(FlashLight* flashLight);
 			void ExecuteUpdate();
 
 			/// @brief 懐中電灯の電源をON/OFFする。
 			void SwitchOnOff();
-
-			/// @brief フラッシュライトにアクセスできるようにする。
-			/// @param pl フラッシュライトに参照
-			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
 
 			/// @brief 懐中電灯の電源のON/OFFをセットする。
 			/// @param falshFlag true 電源ON / false 電源OFF

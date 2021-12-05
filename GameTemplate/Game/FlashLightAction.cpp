@@ -11,9 +11,9 @@ namespace nsHikageri
 		{
 
 		}
-		bool FlashLightAction::Start()
+		void FlashLightAction::Init(FlashLight* flashLight)
 		{
-			return true;
+			m_flashLight = flashLight;
 		}
 
 		//FlashLight.cpp‚Å–ˆƒtƒŒ[ƒ€ŒÄ‚Î‚ê‚éˆ—

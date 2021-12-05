@@ -12,8 +12,10 @@ namespace nsHikageri
 			DeleteGO(m_font);
 		}
 
-		bool FlashLightBattery::Start()
+		void FlashLightBattery::Init(FlashLight* flashLight)
 		{
+			m_flashLight = flashLight;
+
 			//“d’rŽc—Ê‚ðÅ‘å‚ÉÝ’è
 			m_batteryLevel = MAX_BATTERY_LEVEL;
 
@@ -25,8 +27,6 @@ namespace nsHikageri
 			m_font->SetScale(0.0f);
 
 			m_flashLight->GetPlayer()->GetPlayerUI()->SetBatterySprite(m_batteryLevel);
-
-			return true;
 		}
 		void FlashLightBattery::ExecuteUpdate()
 		{
