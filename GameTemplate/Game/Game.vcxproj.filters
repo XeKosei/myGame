@@ -470,6 +470,21 @@
     <ClCompile Include="PlayerDispMessage.cpp">
       <Filter>ソース ファイル\Hikageri\Player</Filter>
     </ClCompile>
+    <ClCompile Include="SoundEngine.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSource.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveFile.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveFileBank.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="NameKey.cpp">
+      <Filter>ソース ファイル\prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -897,6 +912,24 @@
     </ClInclude>
     <ClInclude Include="PlayerDispMessage.h">
       <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEngine.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSource.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveFile.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveFileBank.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="NameKey.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="CUtil.h">
+      <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

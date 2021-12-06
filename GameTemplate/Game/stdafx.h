@@ -8,6 +8,8 @@
 #include <x3daudio.h>
 #include <xaudio2fx.h>
 
+#include "SoundEngine.h"
+#include "SoundSource.h"
 #include "LightManager.h"
 //#include "ResourceBankManager.h"
 #include "PostEffectManager.h"
@@ -23,5 +25,6 @@
 
 #include "time/Stopwatch.h"
 #include "time/GameTime.h"
+#include "NameKey.h"
 
 #include "Level.h"

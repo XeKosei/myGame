@@ -15,6 +15,7 @@ namespace nsHikageri
 		}
 		bool Enemy::Start()
 		{		
+			//モデル生成より先に初期化が必要なクラス
 			m_enemyAnim.Init(this);
 
 			//モデルを作成

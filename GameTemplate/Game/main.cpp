@@ -56,6 +56,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsHikageri::nsGameScene::GameScene* gameScene = NewGO<nsHikageri::nsGameScene::GameScene>(0, "gameScene");
 	//nsHikageri::TitleScene* titleScene = NewGO<nsHikageri::TitleScene>(0, "titleScene");
 
+	// サウンドエンジンのインスタンスを作成する。
+	nsHikageri::SoundEngine::CreateInstance();
+	nsHikageri::SoundEngine::GetInstance()->Init();
+
 	EffectEngine::CreateInstance();
 
 	// シャドウマップを表示するためのスプライトを初期化する
