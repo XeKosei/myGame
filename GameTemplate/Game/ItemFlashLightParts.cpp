@@ -76,6 +76,11 @@ namespace nsHikageri
 					break;
 				}
 				DeleteGO(this);
+
+				//SE
+				SoundSource* ss = NewGO<SoundSource>(0);
+				ss->Init(L"Assets/sound/GetFlashLightParts.wav");
+				ss->Play(false);
 			}
 		}
 	}

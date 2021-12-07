@@ -300,13 +300,13 @@ namespace nsHikageri
 					break;
 				case enDoorSound_Open:
 					m_ss = NewGO<SoundSource>(0);
-					m_ss->Init(L"Assets/sound/DoorOpen2.wav");
+					m_ss->Init(L"Assets/sound/DoorOpen.wav");
 					m_ss->Play(false);
 					m_canPlaySS = false;
 					break;
 				case enDoorSound_Close:
 					m_ss = NewGO<SoundSource>(0);
-					m_ss->Init(L"Assets/sound/DoorClose2.wav");
+					m_ss->Init(L"Assets/sound/DoorClose.wav");
 					m_ss->Play(false);
 					m_canPlaySS = false;				
 					break;

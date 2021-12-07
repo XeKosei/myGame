@@ -24,6 +24,9 @@ namespace nsHikageri
 			{
 				//懐中電灯の電源のスイッチを切り替える。
 				SwitchOnOff();
+				SoundSource* ss = NewGO<SoundSource>(0);
+				ss->Init(L"Assets/sound/FlashLightSwitch.wav");
+				ss->Play(false);
 			}
 
 			if (GetIsFlashLightSwitchOn() == true)

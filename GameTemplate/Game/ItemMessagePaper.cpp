@@ -47,6 +47,10 @@ namespace nsHikageri
 				m_player->SetPlayerState(nsPlayer::Player::enState_Read);
 				//読むテキストを送る。
 				m_player->GetPlayerRead()->SetMessage(MESSAGEPAPAER_TEXT[m_kind]);
+				//SE
+				SoundSource* ss = NewGO<SoundSource>(0);
+				ss->Init(L"Assets/sound/ReadStart.wav");
+				ss->Play(false);
 			}
 		}
 	}

@@ -130,6 +130,8 @@ namespace nsHikageri
 			m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
 			//バッテリー回復
 			m_player->GetFlashLight()->GetFlashLightBattery()->SetBatteryLevel(nsFlashLight::nsFlashLightBatteryConstant::MAX_BATTERY_LEVEL);
+			//SE
+			UseItemSE(enUseItemSounds_Battery);
 		}
 
 		//精神安定剤を使用したとき
@@ -141,6 +143,8 @@ namespace nsHikageri
 			m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
 			//SAN値回復
 			m_player->GetPlayerSanity()->Recovery(TRANQUILIZER_RECOVERY_NUM);
+			//SE
+			UseItemSE(enUseItemSounds_Tranquilizer);
 		}
 
 		void PlayerPouch::UseKey()
@@ -217,6 +221,36 @@ namespace nsHikageri
 				m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
 				//鍵を解除
 				m_player->GetPlayerTarget()->GetTargetDoor()->SetUnlockFlag(true);
+				//SE
+				UseItemSE(enUseItemSounds_Key);
+			}
+		}
+
+		void PlayerPouch::UseItemSE(EnUseItemSounds soundKind)
+		{
+			if (m_useItemSS != nullptr)
+			{
+				DeleteGO(m_useItemSS);
+				m_useItemSS = nullptr;
+			}
+
+			switch (soundKind)
+			{
+			case enUseItemSounds_Battery:
+				m_useItemSS = NewGO<SoundSource>(0);
+				m_useItemSS->Init(L"Assets/sound/UseItemBattery.wav");
+				m_useItemSS->Play(false);
+				break;
+			case enUseItemSounds_Tranquilizer:
+				m_useItemSS = NewGO<SoundSource>(0);
+				m_useItemSS->Init(L"Assets/sound/UseItemTranquilizer.wav");
+				m_useItemSS->Play(false);
+				break;
+			case enUseItemSounds_Key:
+				m_useItemSS = NewGO<SoundSource>(0);
+				m_useItemSS->Init(L"Assets/sound/UseItemKey.wav");
+				m_useItemSS->Play(false);
+				break;
 			}
 		}
 	}

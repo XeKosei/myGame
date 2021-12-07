@@ -48,6 +48,9 @@ namespace nsHikageri
 				&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Tranquilizer
 				&& m_player->GetPlayerTarget()->GetTargetTranquilizer() == this)
 			{
+				SoundSource* ss = NewGO<SoundSource>(0);
+				ss->Init(L"Assets/sound/GetItemTranquilizer.wav");
+				ss->Play(false);
 				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_Tranquilizer);		
 				DeleteGO(this);
 			}

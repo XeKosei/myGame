@@ -69,7 +69,8 @@ namespace nsHikageri
 			m_position += g_camera3D->GetRight() * FLASHLIGHT_POS_APPLY_VALUE.x;
 			//‰ù’†“d“”‚ÌˆÊ’u‚ðc‚É‚¸‚ç‚·
 			m_position += spotLightUp * FLASHLIGHT_POS_APPLY_VALUE.y;
-	
+			m_position += g_camera3D->GetForward() * FLASHLIGHT_POS_APPLY_VALUE.z;
+
 			//Œü‚«‚ðÝ’è
 			m_direction = g_camera3D->GetForward();
 			m_direction.Normalize();

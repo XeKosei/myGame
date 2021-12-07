@@ -23,7 +23,8 @@ namespace nsHikageri
 		//Enemy.cpp‚ÌUpdate()‚ÅŒÄ‚Ño‚·ˆ—
 		void EnemyChase::ExecuteUpdate()
 		{
-
+			m_enemy->SetEnemyState(Enemy::enState_SearchPlayer);
+			return;
 			if (m_isPlayerHidden == false)
 			{
 				Chase();

@@ -44,6 +44,10 @@ namespace nsHikageri
 					{
 						m_blackOutFlag = false;
 						m_messageFont->SetText(L"");
+						//SE
+						SoundSource* ss = NewGO<SoundSource>(0);
+						ss->Init(L"Assets/sound/ReadEnd.wav");
+						ss->Play(false);
 					}
 				}
 			}

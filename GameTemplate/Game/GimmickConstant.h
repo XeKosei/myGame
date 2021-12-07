@@ -19,7 +19,7 @@ namespace nsHikageri
 
 		namespace nsDoorConstant
 		{
-			static const float DOOR_OPEN_SPEED = 0.04f;	//ドアが開閉する速さ
+			static const float DOOR_OPEN_SPEED = 0.03f;	//ドアが開閉する速さ
 			static const float MAX_DOOR_OPNE_ANGLE = 1.4;	//ドアが開く最大角度
 			static const float DOOR_CENTER_POS_X = 100.0f;	//ドアの真ん中の位置の横座標
 			static const float DOOR_CENTER_POS_Y = 200.0f;	//ドアの真ん中の位置の高さ座標

@@ -190,20 +190,47 @@ SPSIn VSSkinMain(SVSIn vsIn)
 	return VSMainCore(vsIn, true);
 }
 
+/// <summary>
 /// フレネル反射を考慮した拡散反射を計算
-float CalcDiffuseFromFresnel(float3 normal, float3 ligDir, float3 toEyeDir)
+/// </summary>
+/// <remark>
+/// この関数はフレネル反射を考慮した拡散反射率を計算します
+/// フレネル反射は、光が物体の表面で反射する現象のとこで、鏡面反射の強さになります
+/// 一方拡散反射は、光が物体の内部に入って、内部錯乱を起こして、拡散して反射してきた光のことです
+/// つまりフレネル反射が弱いときには、拡散反射が大きくなり、フレネル反射が強いときは、拡散反射が小さくなります
+///
+/// </remark>
+/// <param name="N">法線</param>
+/// <param name="L">光源に向かうベクトル。光の方向と逆向きのベクトル。</param>
+/// <param name="V">視線に向かうベクトル。</param>
+/// <param name="roughness">粗さ。0～1の範囲。</param>
+float CalcDiffuseFromFresnel(float3 N, float3 L, float3 V, float roughness)
 {
-	//フレネル反射を考慮した拡散反射光を求める
+	// ディズニーベースのフレネル反射による拡散反射を真面目に実装する。
+	// 光源に向かうベクトルと視線に向かうベクトルのハーフベクトルを求める
+	float3 H = normalize(L + V);
 
-	// 法線と光源に向かうベクトルがどれだけ似ているかを内積で求める
-	float dotNL = saturate(dot(normal, ligDir));
+	float energyBias = lerp(0.0f, 0.5f, roughness);
+	float energyFactor = lerp(1.0, 1.0 / 1.51, roughness);
 
-	// 法線と視線に向かうベクトルがどれだけ似ているかを内積で求める
-	float dotNV = saturate(dot(normal, toEyeDir));
+	// 光源に向かうベクトルとハーフベクトルがどれだけ似ているかを内積で求める
+	float dotLH = saturate(dot(L, H));
+
+	// 光源に向かうベクトルとハーフベクトル、
+	// 光が平行に入射したときの拡散反射量を求めている
+	float Fd90 = energyBias + 2.0 * dotLH * dotLH * roughness;
+
+	// 法線と光源に向かうベクトルwを利用して拡散反射率を求める
+	float dotNL = saturate(dot(N, L));
+	float FL = (1 + (Fd90 - 1) * pow(1 - dotNL, 5));
+
+	// 法線と視点に向かうベクトルを利用して拡散反射率を求める
+	float dotNV = saturate(dot(N, V));
+	float FV = (1 + (Fd90 - 1) * pow(1 - dotNV, 5));
 
 	// 法線と光源への方向に依存する拡散反射率と、法線と視点ベクトルに依存する拡散反射率を
 	// 乗算して最終的な拡散反射率を求めている。PIで除算しているのは正規化を行うため
-	return (dotNL * dotNV);
+	return (FL * FV * energyFactor);
 }
 
 //ランバート拡散反射を計算する。
@@ -240,22 +267,24 @@ float SpcFresnel(float f0, float u)
 }
 
 /// Cook-Torranceモデルの鏡面反射を計算
-float CookTorranceSpecular(float3 ligDir, float3 toEyeDir, float3 normal, float specPower)
+float CookTorranceSpecular(float3 ligDir, float3 toEyeDir, float3 normal, float smooth)
 {
-	float microfacet = 0.76f;
+	// マイクロファセットは粗さなので、
+	// smoothから計算する。
+	float microfacet = 1.0f - smooth;
 
-	// 金属度を垂直入射の時のフレネル反射率として扱う
-	// 金属度が高いほどフレネル反射は大きくなる
-	float f0 = specPower;
+	// 滑らかさを垂直入射の時のフレネル反射率として扱う
+	// 滑らかさが高いほどフレネル反射は大きくなる
+	float f0 = smooth;
 
 	// ライトに向かうベクトルと視線に向かうベクトルのハーフベクトルを求める
 	float3 H = normalize(ligDir + toEyeDir);
 
 	// 各種ベクトルがどれくらい似ているかを内積を利用して求める
-	float NdotH = saturate(dot(normal, H));
-	float VdotH = saturate(dot(toEyeDir, H));
-	float NdotL = saturate(dot(normal, ligDir));
-	float NdotV = saturate(dot(normal, toEyeDir));
+	float NdotH = max(0.001f, saturate(dot(normal, H)));
+	float VdotH = max(0.001f, saturate(dot(toEyeDir, H)));
+	float NdotL = max(0.001f, saturate(dot(normal, ligDir)));
+	float NdotV = max(0.001f, saturate(dot(normal, toEyeDir)));
 
 	// D項をベックマン分布を用いて計算する
 	float D = Beckmann(microfacet, NdotH);
@@ -308,41 +337,38 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	// タンジェントスペースの法線を0～1の範囲から-1～1の範囲に復元する
 	localNormal = (localNormal - 0.5f) * 2.0f;
 	//タンジェントスペースの法線をワールドスペースに変換する
-	normal = psIn.tangent * localNormal.x + psIn.biNormal * localNormal.y + normal * localNormal.z;
-
+	normal = normalize(psIn.tangent * localNormal.x + psIn.biNormal * localNormal.y + normal * localNormal.z);
+	
 	
 	///////////スペキュラマップ
 	//スペキュラマップからスペキュラ反射の強さをサンプリング
 	float smooth = g_specularMap.Sample(g_sampler, psIn.uv).r;
 	
-	float metallic = 0.0f;
+	float metallic = g_specularMap.Sample(g_sampler, psIn.uv).g;
 
 	// 視線に向かって伸びるベクトルを計算する
 	float3 toEye = normalize(eyePos - psIn.worldPos);
 
 	//ディレクションライト
-	/*for (int i = 0;i < directionLigNum;i++)
+	for (int i = 0;i < directionLigNum;i++)
 	{
 		// フレネル反射を考慮した拡散反射を計算
-		float diffuseFromFresnel = CalcDiffuseFromFresnel(normal, -directionLigData[i].ligDir, toEye);
-		
-		//ランバート拡散反射
-		float3 lambertDiffuse = CalcLambertDiffuse(directionLigData[i].ligDir, directionLigData[i].ligColor, normal);
+		float diffuseFromFresnel = CalcDiffuseFromFresnel(normal, -directionLigData[i].ligDir, toEye, 1.0f - smooth);
 
 		// 最終的な拡散反射光を計算する
-		float3 diffuseLig = albedoColor * diffuseFromFresnel * lambertDiffuse;
+		float3 diffuseLig = albedoColor * diffuseFromFresnel * directionLigData[i].ligColor / PI;
 
 		//フォン鏡面反射
 		float3 specularLig = CookTorranceSpecular(
 			-directionLigData[i].ligDir, toEye, normal, smooth)
 			* directionLigData[i].ligColor;
 
-		//リムライト
-		//float3 limLig = CalcLimLight(directionLigData[i].ligDir, directionLigData[i].ligColor, psIn.normalInView,normal);
-
 		specularLig *= lerp(float3(1.0f, 1.0f, 1.0f), specColor, metallic);
 
-		float3 finalLig = diffuseLig + specularLig;
+		//リムライト
+		//float3 limLig = CalcLimLight(spotLigDir, spotLigData[i].ligColor, psIn.normalInView,normal);
+
+		float3 finalLig = diffuseLig * (1.0 - smooth) + specularLig;
 
 		finalColor.xyz +=  finalLig;
 	}
@@ -354,13 +380,13 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		pointLigDir = normalize(pointLigDir);
 
 		// フレネル反射を考慮した拡散反射を計算
-		float diffuseFromFresnel = CalcDiffuseFromFresnel(normal, pointLigDir, toEye);
+		float diffuseFromFresnel = CalcDiffuseFromFresnel(normal, -pointLigDir, toEye, 1.0f - smooth);
 
 		//ランバート拡散反射
 		float3 lambertDiffuse = CalcLambertDiffuse(pointLigDir, pointLigData[i].ligColor, normal);
 
 		// 最終的な拡散反射光を計算する
-		float3 diffuseLig = albedoColor * diffuseFromFresnel * lambertDiffuse;
+		float3 diffuseLig = albedoColor * diffuseFromFresnel * pointLigData[i].ligColor / PI;
 
 		//フォン鏡面反射
 		float3 specularLig = CookTorranceSpecular(
@@ -370,9 +396,9 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		specularLig *= lerp(float3(1.0f, 1.0f, 1.0f), specColor, metallic);
 
 		//リムライト
-		//float3 limLig = CalcLimLight(pointLigDir, pointLigData[i].ligColor, psIn.normalInView,normal);
+		//float3 limLig = CalcLimLight(spotLigDir, spotLigData[i].ligColor, psIn.normalInView,normal);
 
-		float3 finalLig = diffuseLig +specularLig;
+		float3 finalLig = diffuseLig * (1.0 - smooth) + specularLig;
 
 		//距離による減衰
 
@@ -388,7 +414,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		finalLig *= affect;
 
 		finalColor.xyz += finalLig;
-	}*/
+	}
 
 	Texture2D<float4> spotLightMap[3];
 	spotLightMap[0] = g_spotLightMap00;
@@ -437,14 +463,14 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 				spotLigDir = normalize(spotLigDir);
 
 				// フレネル反射を考慮した拡散反射を計算
-				float diffuseFromFresnel = CalcDiffuseFromFresnel(normal, -spotLigDir, toEye);
+				float diffuseFromFresnel = CalcDiffuseFromFresnel(normal, -spotLigDir, toEye, 1.0f - smooth);
 
 				//ランバート拡散反射
 				float3 lambertDiffuse = CalcLambertDiffuse(spotLigDir, spotLigData[i].ligColor, normal);
-				float t = max( 0.0f, dot(-spotLigDir, normal) );
+				
 				
 				// 最終的な拡散反射光を計算する
-				float3 diffuseLig = albedoColor * diffuseFromFresnel * lambertDiffuse;
+				float3 diffuseLig = albedoColor * diffuseFromFresnel * spotLigData[i].ligColor / PI;
 				
 				//フォン鏡面反射
 				float3 specularLig = CookTorranceSpecular(
@@ -512,8 +538,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 	//環境光
 	//懐中電灯に照らされていない場合は、遠くが暗く見えるようにする。
-	float3 ambientLig = 0.2f;
-	/*float3 ambientLig = 1 - (length(eyePos - psIn.worldPos) * 0.001f);
+	//float3 ambientLig = 0.3f;
+	float3 ambientLig = 1 - (length(eyePos - psIn.worldPos) * 0.001f);
 	for (int i = 0; i < spotLigNum; i++)
 	{
 		if (spotLigCameraData[i].isSpotLightSwitchOn == 1)
@@ -535,9 +561,9 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 				ambientLig = 0.3f;
 			}
 		}
-	}*/
+	}
 
-	finalColor.xyz += albedoColor * ambientLig;
+	finalColor.xyz += albedoColor * ambientLig * 0.8f;
 
 
 	return finalColor;

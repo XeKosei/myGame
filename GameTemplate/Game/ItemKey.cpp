@@ -93,6 +93,11 @@ namespace nsHikageri
 				DeleteGO(this);
 				
 				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_None);
+
+				//SE
+				SoundSource* ss = NewGO<SoundSource>(0);
+				ss->Init(L"Assets/sound/GetItemKey.wav");
+				ss->Play(false);
 			}
 		}
 	}

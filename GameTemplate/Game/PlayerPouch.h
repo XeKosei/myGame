@@ -21,6 +21,14 @@ namespace nsHikageri
 				enItem_num
 			};
 
+			enum EnUseItemSounds
+			{
+				enUseItemSounds_Battery,
+				enUseItemSounds_Tranquilizer,
+				enUseItemSounds_Key,
+				enUseItemSounds_num,
+			};
+
 			~PlayerPouch();
 			void Init(Player* pl);
 			void ExecuteUpdate();
@@ -40,6 +48,8 @@ namespace nsHikageri
 			//鍵を使用したとき
 			void UseKey();
 
+			//アイテム使用時のSE 
+			void UseItemSE(EnUseItemSounds soundKind);
 			//
 			//void CannotUse();
 
@@ -53,6 +63,8 @@ namespace nsHikageri
 
 			int m_choseItem = enItem_Battery;
 			int m_haveItemNum[enItem_num] = { 5, 1, 1, 1, 1, 1, 1, 1};
+
+			SoundSource* m_useItemSS = nullptr;
 		};
 	}
 }
