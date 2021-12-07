@@ -21,11 +21,22 @@ namespace nsHikageri
 				enDoorColor_num
 			};
 
+			//ドアのSEの種類
+			enum EnDoorSounds
+			{
+				enDoorSound_Locked,
+				enDoorSound_Open,
+				enDoorSound_Close,
+				enDoorSound_num
+			};
+
 			~Door();
 			bool Start();
 			void Update();
 
 			void Execute();
+
+			void SEManage(EnDoorSounds soundKind);
 
 			void PlayerTargetSetting();
 
@@ -108,6 +119,10 @@ namespace nsHikageri
 			int m_executeCannotOpenCount = 0;
 			//開けられない処理中のドアのガチャガチャする動き(前に動くか後ろに動くか)
 			bool m_cannotOpenMoveForward = false;
+
+			//SE
+			SoundSource* m_ss = nullptr;
+			bool m_canPlaySS = true;
 		};
 	}
 }

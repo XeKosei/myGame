@@ -193,7 +193,7 @@ SPSIn VSSkinMain(SVSIn vsIn)
 /// フレネル反射を考慮した拡散反射を計算
 float CalcDiffuseFromFresnel(float3 normal, float3 ligDir, float3 toEyeDir)
 {
-	// step-4 フレネル反射を考慮した拡散反射光を求める
+	//フレネル反射を考慮した拡散反射光を求める
 
 	// 法線と光源に向かうベクトルがどれだけ似ているかを内積で求める
 	float dotNL = saturate(dot(normal, ligDir));
@@ -291,31 +291,37 @@ float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView,float3 n
 /// </summary>
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
-	float4 albedoColor = g_albedo.Sample(g_sampler, psIn.uv);
+	
 
+	float4 albedoColor = g_albedo.Sample(g_sampler, psIn.uv);
+	
 	float4 finalColor = 0.0f;
 	finalColor.a = 1.0f;
 
-	float3 specColor = g_specularMap.SampleLevel(g_sampler, psIn.uv, 0).rgb;
+	float3 specColor = albedoColor;
 	//return float4(specColor, 1.0f);
 	///////////法線マップ
 	float3 normal = psIn.normal;
 	//法線マップからタンジェントスペースの法線をサンプリングする
 	float3 localNormal = g_normalMap.Sample(g_sampler, psIn.uv).xyz;
+
 	// タンジェントスペースの法線を0～1の範囲から-1～1の範囲に復元する
 	localNormal = (localNormal - 0.5f) * 2.0f;
 	//タンジェントスペースの法線をワールドスペースに変換する
 	normal = psIn.tangent * localNormal.x + psIn.biNormal * localNormal.y + normal * localNormal.z;
 
+	
 	///////////スペキュラマップ
 	//スペキュラマップからスペキュラ反射の強さをサンプリング
-	float specPower = g_specularMap.Sample(g_sampler, psIn.uv).r;
+	float smooth = g_specularMap.Sample(g_sampler, psIn.uv).r;
+	
+	float metallic = 0.0f;
 
 	// 視線に向かって伸びるベクトルを計算する
 	float3 toEye = normalize(eyePos - psIn.worldPos);
 
 	//ディレクションライト
-	for (int i = 0;i < directionLigNum;i++)
+	/*for (int i = 0;i < directionLigNum;i++)
 	{
 		// フレネル反射を考慮した拡散反射を計算
 		float diffuseFromFresnel = CalcDiffuseFromFresnel(normal, -directionLigData[i].ligDir, toEye);
@@ -328,13 +334,13 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 		//フォン鏡面反射
 		float3 specularLig = CookTorranceSpecular(
-			-directionLigData[i].ligDir, toEye, normal, specPower)
+			-directionLigData[i].ligDir, toEye, normal, smooth)
 			* directionLigData[i].ligColor;
 
 		//リムライト
 		//float3 limLig = CalcLimLight(directionLigData[i].ligDir, directionLigData[i].ligColor, psIn.normalInView,normal);
 
-		specularLig *= lerp(float3(1.0f, 1.0f, 1.0f), specColor, specPower);
+		specularLig *= lerp(float3(1.0f, 1.0f, 1.0f), specColor, metallic);
 
 		float3 finalLig = diffuseLig + specularLig;
 
@@ -358,10 +364,10 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 		//フォン鏡面反射
 		float3 specularLig = CookTorranceSpecular(
-			-pointLigDir, toEye, normal, specPower)
+			-pointLigDir, toEye, normal, smooth)
 			* pointLigData[i].ligColor;
 
-		specularLig *= lerp(float3(1.0f, 1.0f, 1.0f), specColor, specPower);
+		specularLig *= lerp(float3(1.0f, 1.0f, 1.0f), specColor, metallic);
 
 		//リムライト
 		//float3 limLig = CalcLimLight(pointLigDir, pointLigData[i].ligColor, psIn.normalInView,normal);
@@ -382,7 +388,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		finalLig *= affect;
 
 		finalColor.xyz += finalLig;
-	}
+	}*/
+
 	Texture2D<float4> spotLightMap[3];
 	spotLightMap[0] = g_spotLightMap00;
 	spotLightMap[1] = g_spotLightMap01;
@@ -434,23 +441,22 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 				//ランバート拡散反射
 				float3 lambertDiffuse = CalcLambertDiffuse(spotLigDir, spotLigData[i].ligColor, normal);
-
+				float t = max( 0.0f, dot(-spotLigDir, normal) );
+				
 				// 最終的な拡散反射光を計算する
 				float3 diffuseLig = albedoColor * diffuseFromFresnel * lambertDiffuse;
-
 				
 				//フォン鏡面反射
 				float3 specularLig = CookTorranceSpecular(
-					-spotLigDir, toEye, normal, specPower)
+					-spotLigDir, toEye, normal, smooth)
 					* spotLigData[i].ligColor;
 
-				float specTerm = length(specColor.xyz);
-				specularLig *= lerp(float3(specTerm, specTerm, specTerm), specColor, specPower);
+				specularLig *= lerp(float3(1.0f, 1.0f, 1.0f), specColor, metallic);
 
 				//リムライト
 				//float3 limLig = CalcLimLight(spotLigDir, spotLigData[i].ligColor, psIn.normalInView,normal);
 
-				float3 finalLig = diffuseLig * (1.0 - specTerm) + specularLig;
+				float3 finalLig = diffuseLig *(1.0 - smooth) + specularLig;
 
 				//距離による減衰
 
@@ -499,6 +505,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 				finalLig *= affect;
 
 				finalColor.xyz += finalLig;
+				//return finalColor;
 			}
 		}
 	}
@@ -530,9 +537,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		}
 	}*/
 
-	finalColor.xyz += ambientLig;
-	
-	finalColor *= albedoColor;
+	finalColor.xyz += albedoColor * ambientLig;
+
 
 	return finalColor;
 }

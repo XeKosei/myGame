@@ -5,7 +5,7 @@ namespace nsHikageri
 	{
 		namespace nsFlashLightConstant
 		{
-			static const Vector3 INI_FLASHLIGHT_COLOR = { 10.0f,10.0f,10.0f };	//懐中電灯の初期カラー
+			static const Vector3 INI_FLASHLIGHT_COLOR = { 5.0f,5.0f,5.0f };	//懐中電灯の初期カラー
 			static const float INI_FLASHLIGHT_RANGE = 10000.0f;					//懐中電灯の初期影響範囲
 			static const float INI_FLASHLIGHT_ANGLE = 1.0f;					//懐中電灯の初期射出角度
 			static const Vector3 INI_FLASHLIGHT_MODEL_SCALE = { 1.5f,1.5f,1.5f };	//懐中電灯のモデルのスケール
@@ -28,7 +28,7 @@ namespace nsHikageri
 		namespace nsAbilityStrobeFlashConstant
 		{
 			static const int INI_STROBEFLASH_CHARGE_COUNT = 60;	//ストロボフラッシュのチャージ時間の初期値
-			static const Vector3 INI_STROBEFLASH_COLOR = {50.0f,50.0f,50.0f};	//ストロボフラッシュの明るさの初期値
+			static const Vector3 INI_STROBEFLASH_COLOR = {100.0f,100.0f,100.0f};	//ストロボフラッシュの明るさの初期値
 			static const Vector3 STROBEFLASH_COLOR_DECREASE_SPEED = {1.0f,1.0f,1.0f};	//ストロボフラッシュの明るさが下がる速さ
 			static const float INI_STROBEFLASH_BATTERY_COST = 20.0f;	//ストロボフラッシュで消費するバッテリーのコスト
 			
@@ -43,7 +43,7 @@ namespace nsHikageri
 		namespace nsAbilityMedousaEyeConstant
 		{
 			static const int INI_MEDOUSAEYEFLASH_CHARGE_COUNT = 75;	//メドゥーサアイのチャージ時間の初期値
-			static const Vector3 INI_MEDOUSAEYEFLASH_COLOR = { 50.0f,50.0f,50.0f };	//ストロボフラッシュの明るさの初期値
+			static const Vector3 INI_MEDOUSAEYEFLASH_COLOR = { 50.0f,50.0f,50.0f };	//メドゥーサアイの明るさの初期値
 			static const float  INI_MEDOUSAEYEFLASH_BATTERY_COST = 20.0f;	//メドゥーサアイで消費するバッテリーのコスト
 			static const Vector3 INI_MEDOUSAEYEFLASH_EFF_SCALE = { 0.8f,0.8f,0.8f };	//エフェクトの大きさ
 		}

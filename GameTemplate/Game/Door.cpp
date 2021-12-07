@@ -186,6 +186,9 @@ namespace nsHikageri
 			m_qRot.SetRotation(Vector3::AxisY, m_defaultAngle + m_addAngle);
 			m_doorModel->SetRotation(m_qRot);
 			m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
+
+			//SE
+			SEManage(enDoorSound_Open);
 		}
 
 		void Door::Close()
@@ -220,6 +223,9 @@ namespace nsHikageri
 			m_qRot.SetRotation(Vector3::AxisY, m_defaultAngle + m_addAngle);
 			m_doorModel->SetRotation(m_qRot);
 			m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
+
+			//SE
+			SEManage(enDoorSound_Close);
 		}
 
 		void Door::CannotOpen()
@@ -269,6 +275,64 @@ namespace nsHikageri
 				//‰ñ“]‚ðÝ’è
 				m_qRot.SetRotation(Vector3::AxisY, m_defaultAngle + m_addAngle);
 				m_doorModel->SetRotation(m_qRot);
+
+				//SE
+				SEManage(enDoorSound_Locked);
+			}
+		}
+
+		void Door::SEManage(EnDoorSounds soundKind)
+		{
+			if (m_canPlaySS == true)
+			{
+				if (m_ss != nullptr)
+				{
+					DeleteGO(m_ss);
+					m_ss = nullptr;
+				}
+				switch (soundKind)
+				{
+				case enDoorSound_Locked:
+					m_ss = NewGO<SoundSource>(0);
+					m_ss->Init(L"Assets/sound/DoorLocked.wav");
+					m_ss->Play(false);
+					m_canPlaySS = false;
+					break;
+				case enDoorSound_Open:
+					m_ss = NewGO<SoundSource>(0);
+					m_ss->Init(L"Assets/sound/DoorOpen2.wav");
+					m_ss->Play(false);
+					m_canPlaySS = false;
+					break;
+				case enDoorSound_Close:
+					m_ss = NewGO<SoundSource>(0);
+					m_ss->Init(L"Assets/sound/DoorClose2.wav");
+					m_ss->Play(false);
+					m_canPlaySS = false;				
+					break;
+				default:
+					break;
+				}
+			}
+			else
+			{
+				switch (soundKind)
+				{
+				case enDoorSound_Locked:
+					if (m_executeCannotOpenFlag == false)
+						m_canPlaySS = true;
+					break;
+				case enDoorSound_Open:
+					if (m_openFlag == true)
+						m_canPlaySS = true;
+					break;
+				case enDoorSound_Close:
+					if (m_openFlag == false)
+						m_canPlaySS = true;
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
