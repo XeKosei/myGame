@@ -19,7 +19,7 @@ namespace nsHikageri
 			m_blackSprite->SetMulColor({ 0.0f,0.0f,0.0f,0.0f });
 			m_blackOutFlag = true;
 
-			m_messageFont = NewGO<FontRender>(0);
+			m_messageFont = NewGO<FontRender>(3);
 			m_messageFont->SetPosition({-300.0f, 200.0f});
 			m_messageFont->SetScale(0.6f);
 			m_messageFont->SetShadowFlag(true);

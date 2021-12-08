@@ -28,6 +28,12 @@ namespace nsHikageri
 			/// @return 当たっていたかどうか
 			bool CheckHitFlash(Vector3 chackPos);
 
+			/// @brief チャージSEの再生
+			void PlayChargeSE();
+
+			/// @brief チャージ完了後のSE
+			void PlayChargedSE();
+
 			/// @brief アビリティマネージャーを設定
 			/// @param abilityManager アビリティマネージャー
 			void SetAbilityManager(AbilityManager* abilityManager) { m_abilityManager = abilityManager; }
@@ -59,6 +65,12 @@ namespace nsHikageri
 			
 			//エフェクト
 			Effect m_chargingEff;
+
+			//チャージSE 
+			SoundSource* m_chargeSS = nullptr;
+			bool m_canPlayChargeSS = true;
+			SoundSource* m_chargedSS = nullptr;
+			bool m_canPlayChargedSS = true;
 		};
 	}
 }

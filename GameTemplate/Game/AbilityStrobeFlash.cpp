@@ -68,6 +68,19 @@ namespace nsHikageri
 			m_useAbility = false;
 			//エフェクトを停止
 			m_chargingEff.Stop();
+			//SE
+			if (m_chargeSS != nullptr)
+			{
+				DeleteGO(m_chargeSS);
+				m_chargeSS = nullptr;
+			}
+			m_canPlayChargeSS = true;
+			if (m_chargedSS != nullptr)
+			{
+				DeleteGO(m_chargedSS);
+				m_chargedSS = nullptr;
+			}
+			m_canPlayChargedSS = true;
 		}
 
 		/// @brief ストロボフラッシュを発動する準備の処理
@@ -75,6 +88,10 @@ namespace nsHikageri
 		{
 			if (g_pad[0]->IsPress(enButtonRB2))
 			{
+				//チャージSE
+				PlayChargeSE();
+
+				//エフェクト
 				if (m_chargingEff.IsPlay() == false)
 				{
 					m_chargingEff.Play();
@@ -83,9 +100,18 @@ namespace nsHikageri
 				m_chargingEff.Update();
 				
 				//カウントが終わるまでデクリメント
-				if (m_strobeChargeCount > 0)
+				if (m_strobeChargeCount > -20)
 				{
 					m_strobeChargeCount--;
+				}
+				//チャージ完了したら
+				if (m_strobeChargeCount == -10)
+				{
+					SoundSource* ss = NewGO<SoundSource>(0);
+					ss->Init(L"Assets/sound/StrobeFlashCharged.wav");
+					ss->Play(false);
+					//SE
+					PlayChargedSE();
 				}
 			}
 			else
@@ -95,11 +121,19 @@ namespace nsHikageri
 				{
 					m_flashLight->GetFlashLightBattery()->ConsumBatteryLevel(INI_STROBEFLASH_BATTERY_COST);
 					m_useAbility = true;
+					//SE
+					PlayChargedSE();			
 				}
 				//カウントをリセット
 				m_strobeChargeCount = INI_STROBEFLASH_CHARGE_COUNT;
 				//エフェクトを停止
 				m_chargingEff.Stop();
+				//チャージSEの停止
+				if (m_chargeSS != nullptr)
+				{
+					DeleteGO(m_chargeSS);
+					m_chargeSS = nullptr;
+				}
 			}
 		}
 
@@ -111,6 +145,11 @@ namespace nsHikageri
 
 			if (m_strobeFlashColor.x == INI_STROBEFLASH_COLOR.x)
 			{
+				//発射SE
+				SoundSource* flashSS = NewGO<SoundSource>(0);
+				flashSS->Init(L"Assets/sound/StrobeFlashShot.wav");
+				flashSS->Play(false);
+
 				//懐中電灯の向き
 				Vector3 strobeDir = m_flashLight->GetFlashLightDir();
 				strobeDir.Normalize();
@@ -201,6 +240,61 @@ namespace nsHikageri
 			{
 				return false;
 			}
+		}
+		void AbilityStrobeFlash::PlayChargeSE()
+		{
+			if (m_canPlayChargeSS == true)
+			{
+				if (m_chargeSS != nullptr)
+				{
+					DeleteGO(m_chargeSS);
+					m_chargeSS = nullptr;
+				}
+
+				m_chargeSS = NewGO<SoundSource>(0);
+				m_chargeSS->Init(L"Assets/sound/StrobeFlashCharge.wav");
+				m_chargeSS->Play(false);
+
+				m_canPlayChargeSS = false;
+			}
+			else
+			{
+				if (m_strobeChargeCount == INI_STROBEFLASH_CHARGE_COUNT)
+				{
+					m_canPlayChargeSS = true;
+				}
+			}
+		}
+
+		void AbilityStrobeFlash::PlayChargedSE()
+		{
+			if (m_canPlayChargedSS == true)
+			{
+				if (m_chargedSS != nullptr)
+				{
+					DeleteGO(m_chargedSS);
+					m_chargedSS = nullptr;
+				}
+
+				m_chargedSS = NewGO<SoundSource>(0);
+				m_chargedSS->Init(L"Assets/sound/StrobeFlashWaitShot.wav");
+				m_chargedSS->Play(false);
+
+				m_canPlayChargedSS = false;
+			}
+			else
+			{
+				if (g_pad[0]->IsPress(enButtonRB2) == false)
+				{
+					m_canPlayChargedSS = true;
+
+					if (m_chargedSS != nullptr)
+					{
+						DeleteGO(m_chargedSS);
+						m_chargedSS = nullptr;
+					}
+				}
+			}	
 		}
 	}
 }

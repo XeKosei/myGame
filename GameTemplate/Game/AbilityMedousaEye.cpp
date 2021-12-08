@@ -59,6 +59,7 @@ namespace nsHikageri
 				//ストロボフラッシュのチャージが完了していたら、
 				if (m_flashLight->GetAbilityStrobeFlash()->GetIsFinishStrobeCharge())
 				{
+					PlayChargeSE();
 					//エフェクトの再生
 					if (m_chargingEff.IsPlay() == false)
 					{
@@ -68,9 +69,18 @@ namespace nsHikageri
 					m_chargingEff.Update();
 
 					//メドゥーサアイのチャージを行う。
-					if (m_medousaEyeChargeCount > 0)
+					if (m_medousaEyeChargeCount > -20)
 					{
 						m_medousaEyeChargeCount--;
+					}
+					//チャージ完了したら
+					if (m_medousaEyeChargeCount == 0)
+					{
+						SoundSource* ss = NewGO<SoundSource>(0);
+						ss->Init(L"Assets/sound/StrobeFlashCharged.wav");
+						ss->Play(false);
+
+						PlayChargedSE();
 					}
 				}
 				else
@@ -90,6 +100,73 @@ namespace nsHikageri
 			m_chargingEff.Stop();
 			//メドゥーサアイのカウントを0に。
 			m_medousaEyeChargeCount = INI_MEDOUSAEYEFLASH_CHARGE_COUNT;
+			//SE
+			if (m_chargeSS != nullptr)
+			{
+				DeleteGO(m_chargeSS);
+				m_chargeSS = nullptr;
+			}
+			m_canPlayChargeSS = true;
+			if (m_chargedSS != nullptr)
+			{
+				DeleteGO(m_chargedSS);
+				m_chargedSS = nullptr;
+			}
+			m_canPlayChargedSS = true;
+		}
+		void AbilityMedousaEye::PlayChargeSE()
+		{
+			if (m_canPlayChargeSS == true)
+			{
+				if (m_chargeSS != nullptr)
+				{
+					DeleteGO(m_chargeSS);
+					m_chargeSS = nullptr;
+				}
+
+				m_chargeSS = NewGO<SoundSource>(0);
+				m_chargeSS->Init(L"Assets/sound/MedousaEyeCharge.wav");
+				m_chargeSS->Play(false);
+
+				m_canPlayChargeSS = false;
+			}
+			else
+			{
+				if (m_flashLight->GetAbilityStrobeFlash()->GetIsFinishStrobeCharge() == false)
+				{
+					m_canPlayChargeSS = true;
+				}
+			}
+		}
+
+		void AbilityMedousaEye::PlayChargedSE()
+		{
+			if (m_canPlayChargedSS == true)
+			{
+				if (m_chargedSS != nullptr)
+				{
+					DeleteGO(m_chargedSS);
+					m_chargedSS = nullptr;
+				}
+
+				m_chargedSS = NewGO<SoundSource>(0);
+				m_chargedSS->Init(L"Assets/sound/MedousaEyeWaitShot.wav");
+				m_chargedSS->Play(false);
+
+				m_canPlayChargedSS = false;
+			}
+			else
+			{
+				if (g_pad[0]->IsPress(enButtonRB2) == false)
+				{
+					if (m_chargedSS != nullptr)
+					{
+						DeleteGO(m_chargedSS);
+						m_chargedSS = nullptr;
+					}
+					m_canPlayChargedSS = true;
+				}
+			}
 		}
 	}
 }

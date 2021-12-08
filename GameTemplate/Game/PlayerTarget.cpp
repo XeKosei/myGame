@@ -16,7 +16,7 @@ namespace nsHikageri
 		{
 			m_player = pl;
 
-			m_itemNameFont = NewGO<FontRender>(0);
+			m_itemNameFont = NewGO<FontRender>(3);
 			m_itemNameFont->SetPosition(ITEMNAME_FONT_POS);
 			m_itemNameFont->SetScale(ITEMNAME_FONT_SCALE);
 			m_itemNameFont->SetShadowFlag(true);

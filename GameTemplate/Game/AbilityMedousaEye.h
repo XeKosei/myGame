@@ -15,6 +15,12 @@ namespace nsHikageri
 
 			void Reset();
 
+			/// @brief チャージSEの再生
+			void PlayChargeSE();
+
+			/// @brief チャージ完了後のSE
+			void PlayChargedSE();
+
 			/// @brief アビリティマネージャーを設定
 			/// @param abilityManager アビリティマネージャー
 			void SetAbilityManager(AbilityManager* abilityManager) { m_abilityManager = abilityManager; }
@@ -30,10 +36,16 @@ namespace nsHikageri
 			int m_medousaEyeChargeCount = 0;
 
 			//アビリティが解放されているかどうか
-			bool m_abilityAcitveFlag = false;
+			bool m_abilityAcitveFlag = true;
 
 			//エフェクト
 			Effect m_chargingEff;
+
+			//チャージSE 
+			SoundSource* m_chargeSS = nullptr;
+			bool m_canPlayChargeSS = true;
+			SoundSource* m_chargedSS = nullptr;
+			bool m_canPlayChargedSS = true;
 		};
 	}
 }
