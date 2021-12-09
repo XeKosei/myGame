@@ -32,9 +32,9 @@ namespace nsHikageri
 		}
 		namespace nsEyeWallConstant
 		{
-			static const int INI_DESAPPER_INTERVAL = 30;	//消え始めるまでのインターバル
-			static const float DISAPPER_SPEED = 0.000001f;	//消える速さ
-			static const float DISAPPER_SPEED_MUL_VALUE = 0.3f;	//消える速さにかける値	
+			static const int INI_DESAPPER_INTERVAL = 80;	//消え始めるまでのインターバル
+			static const float DISAPPER_SPEED = 0.0001f;	//消える速さ
+			static const float DISAPPER_SPEED_MUL_VALUE = 0.4f;	//消える速さにかける値	
 		}
 	}
 }

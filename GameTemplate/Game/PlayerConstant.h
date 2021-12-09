@@ -5,7 +5,7 @@ namespace nsHikageri
 	{
 		namespace nsPlayerConstant
 		{
-			static const Vector3 INI_PLAYER_POSITION = { 1000.0f, 0.0f,0.0f };	//プレイヤーの初期位置
+			static const Vector3 INI_PLAYER_POSITION = { -2000.0f, 0.0f,-2000.0f };	//プレイヤーの初期位置
 			static const float PLAYER_MODEL_WIDTH = 50.0f;	///:プレイヤーのモデルの横幅
 			static const float PLAYER_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
 			static const Vector3 INI_PLAYER_SCALE = { 1.0f, 1.0f, 1.0f };	//プレイヤーのモデルの大きさの初期値
@@ -19,6 +19,8 @@ namespace nsHikageri
 			static const float PLAYER_MOVE_FRICTION = 0.2f;	//プレイヤーが動くときの摩擦
 			static const float GRAVITY_SPEED = 9.8f * 0.1f;		//落下スピード
 			static const float GRAVITY_INDEX = 1.2f;		//落下スピードにかける指数
+
+			static const float FOOTSTEP_SE_INTERVAL = 200;	//足音の間隔
 		}
 
 		namespace nsPlayerCameraConstant

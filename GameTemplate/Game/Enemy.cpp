@@ -42,6 +42,7 @@ namespace nsHikageri
 			m_enemyFlinch.Init(this);
 			m_enemyStress.Init(this);
 			m_enemyVigilant.Init(this);
+			m_enemyVoice.Init(this);
 
 			//m_enemyStates = enState_SearchPlayer;
 

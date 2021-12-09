@@ -9,7 +9,10 @@ namespace nsHikageri
 		public:
 			~PlayerSanity();
 			void Init(Player* pl);
-			void ExecuteUpdate();		
+			void ExecuteUpdate();	
+
+			//心音
+			void Heartbeat();
 
 			/// @brief プレイヤーのSAN値を指定した値だけ減らす。
 			/// @param damageNum 与えるダメージ
@@ -38,6 +41,10 @@ namespace nsHikageri
 
 			//HP表示(デバッグ用)
 			FontRender* f = nullptr;
+
+			//心音関連
+			int m_heartbeatInterval = 0;
+			int m_heartbeatIntervalCount = 0;
 		};
 	}
 }

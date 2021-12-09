@@ -1,13 +1,13 @@
 #pragma once
 namespace nsHikageri
 {
-	namespace nsEnemy 
+	namespace nsEnemy
 	{
 		class Enemy;
-		class EnemyScream
+		class EnemyVoice
 		{
 		public:
-			~EnemyScream();
+			~EnemyVoice();
 			void Init(Enemy* enemy);
 			void ExecuteUpdate();
 
@@ -17,4 +17,3 @@ namespace nsHikageri
 		};
 	}
 }
-

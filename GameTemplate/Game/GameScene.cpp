@@ -161,28 +161,28 @@ namespace nsHikageri
 			//m_flashLightParts[0]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_StrobeFlash);
 			//m_flashLightParts[1]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_Clairvoyance);
 			//m_flashLightParts[2]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_MedousaEye);
-
-			Vector3 eyeWallPos[3] = 
-			{
-				{ -4400.0f, 200.0f,-400.0f },
-				{-5800.0f, 200.0f, -1000.0f},
-				{-10400.0f, 200.0f,2000.0f}
-			};
-			
-			Vector3 eyeWalDir[3] = 
-			{
-				{ 1.0f,0.0f,0.0f },
-				{0.0f,0.0f,1.0f},
-				{ 1.0f,0.0f,0.0f },
-			};
-				
-			
-			for (int eyeWallNum = 0; eyeWallNum < 3; eyeWallNum++)
-			{
-				m_eyeWall[eyeWallNum] = NewGO<nsGimmick::EyeWall>(0, "eyeWall");
-				m_eyeWall[eyeWallNum]->SetPosition(eyeWallPos[eyeWallNum]);
-				m_eyeWall[eyeWallNum]->SetDirection(eyeWalDir[eyeWallNum]);
-			}
+			//
+			//Vector3 eyeWallPos[3] = 
+			//{
+			//	{ -4400.0f, 200.0f,-400.0f },
+			//	{-5800.0f, 200.0f, -1000.0f},
+			//	{-10400.0f, 200.0f,2000.0f}
+			//};
+			//
+			//Vector3 eyeWalDir[3] = 
+			//{
+			//	{ 1.0f,0.0f,0.0f },
+			//	{0.0f,0.0f,1.0f},
+			//	{ 1.0f,0.0f,0.0f },
+			//};
+			//	
+			//
+			//for (int eyeWallNum = 0; eyeWallNum < 3; eyeWallNum++)
+			//{
+			//	m_eyeWall[eyeWallNum] = NewGO<nsGimmick::EyeWall>(0, "eyeWall");
+			//	m_eyeWall[eyeWallNum]->SetPosition(eyeWallPos[eyeWallNum]);
+			//	m_eyeWall[eyeWallNum]->SetDirection(eyeWalDir[eyeWallNum]);
+			//}
 			//
 			////ê∏ê_à¿íËç‹
 			//Vector3 tranquilizerPos[9] = {

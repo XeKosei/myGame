@@ -12,6 +12,9 @@ namespace nsHikageri
 			~AbilityClairvoyance();
 			void Init(FlashLight* flashLight);
 			void ExecuteUpdate();
+
+			void PlaySE();
+
 			/// @brief フラッシュライトにアクセスできるようにする。
 			/// @param pl フラッシュライトに参照
 			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
@@ -33,6 +36,10 @@ namespace nsHikageri
 
 			//アビリティが解放されているかどうか
 			bool m_abilityAcitveFlag = true;
+
+			//SE関連
+			bool m_canPlaySSFlag = true;
+			int m_canPlaySSCount = 0;
 		};
 	}
 }

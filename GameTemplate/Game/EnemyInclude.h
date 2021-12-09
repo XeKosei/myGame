@@ -9,5 +9,6 @@
 #include "EnemyStress.h"
 #include "EnemyVigilant.h"
 
+#include "EnemyVoice.h"
 #include "EnemyAnim.h"
 #include "EnemyConstant.h"

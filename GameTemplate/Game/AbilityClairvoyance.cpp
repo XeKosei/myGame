@@ -29,12 +29,16 @@ namespace nsHikageri
 				//バッテリー消費
 				if (m_useAbility)
 				{
-					m_flashLight->GetFlashLightBattery()->ConsumBatteryLevel(INI_CRAIRVOYANCE_BATTERY_COST);
+					PlaySE();
+
+					m_flashLight->GetFlashLightBattery()->ConsumBatteryLevel(INI_CLAIRVOYANCE_BATTERY_COST);
 				}
 
 				//ボタンが押されたとき、透視可能に。
 				if (m_useAbility == false && g_pad[0]->IsTrigger(enButtonLB2))
 				{
+					PlaySE();
+
 					m_abilityManager->GetEnemy()->GetEnemyModel()->SetClairvoyanceCasterFlag(true);
 					m_abilityManager->GetSecretRoom()->GetSecretRoomModel()->SetClairvoyanceCasterFlag(true);
 
@@ -54,6 +58,36 @@ namespace nsHikageri
 				m_abilityManager->GetEnemy()->GetEnemyModel()->SetClairvoyanceCasterFlag(false);
 				m_abilityManager->GetSecretRoom()->GetSecretRoomModel()->SetClairvoyanceCasterFlag(false);
 				m_useAbility = false;
+			}
+		}
+
+		void AbilityClairvoyance::PlaySE()
+		{
+			if (m_canPlaySSFlag == true)
+			{
+				m_canPlaySSCount--;
+				if (m_canPlaySSCount <= 0)
+				{
+					SoundSource* ss = NewGO<SoundSource>(0);
+					ss->Init(L"Assets/sound/Clairvoyance.wav");
+					ss->Play(false);
+
+					m_canPlaySSCount = PLAY_CLAIRVOYANCE_SE_INTERVAL;
+				}
+
+				if (g_pad[0]->IsPress(enButtonLB2) == false)
+				{
+					m_canPlaySSFlag = false;
+					m_canPlaySSCount = 0;
+				}
+			}
+
+			if (m_canPlaySSFlag == false)
+			{
+				if (g_pad[0]->IsTrigger(enButtonLB2))
+				{
+					m_canPlaySSFlag = true;
+				}
 			}
 		}
 	}

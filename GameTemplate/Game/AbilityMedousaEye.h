@@ -36,7 +36,7 @@ namespace nsHikageri
 			int m_medousaEyeChargeCount = 0;
 
 			//アビリティが解放されているかどうか
-			bool m_abilityAcitveFlag = true;
+			bool m_abilityAcitveFlag = false;
 
 			//エフェクト
 			Effect m_chargingEff;

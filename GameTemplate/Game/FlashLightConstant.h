@@ -37,7 +37,8 @@ namespace nsHikageri
 
 		namespace nsAbilityClairvoyanceConstant
 		{
-			static const float INI_CRAIRVOYANCE_BATTERY_COST = 0.05f;	//クレアボヤンスで消費するバッテリー(発動中毎フレーム)
+			static const float INI_CLAIRVOYANCE_BATTERY_COST = 0.05f;	//クレアボヤンスで消費するバッテリー(発動中毎フレーム)
+			static const int PLAY_CLAIRVOYANCE_SE_INTERVAL = 80;	//SEを再生する間隔
 		}
 
 		namespace nsAbilityMedousaEyeConstant

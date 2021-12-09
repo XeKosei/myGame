@@ -21,6 +21,7 @@ namespace nsHikageri
 		{
 			Move();
 			Turn();
+			FootStepsSE();
 		}
 
 		void PlayerMove::Move()
@@ -83,6 +84,43 @@ namespace nsHikageri
 				//SetRotationDegではなくSetRotationを使用する。
 				m_qRot.SetRotation(Vector3::AxisY, angle);
 				m_player->GetPlayerModel()->SetRotation(m_qRot);
+			}
+		}
+
+		void PlayerMove::FootStepsSE()
+		{
+			//足音の間隔
+			m_footStepInterval -= m_velocity.Length();
+			
+			if (m_footStepInterval < 0.0f)
+			{
+				SoundSource* ss = NewGO<SoundSource>(0);
+
+				//再生する足音にランダム性を持たせる。
+				int num = rand() % 3;
+
+				switch (num)
+				{
+				case 0:
+					ss->Init(L"Assets/sound/FootStep0.wav");
+					break;
+				case 1:
+					ss->Init(L"Assets/sound/FootStep1.wav");
+					break;
+				case 2:
+					ss->Init(L"Assets/sound/FootStep2.wav");
+					break;
+				default:
+					ss->Init(L"Assets/sound/FootStep0.wav");
+					break;
+				}
+				ss->Play(false);
+				m_footStepInterval = FOOTSTEP_SE_INTERVAL;
+			}
+
+			if (m_velocity.Length() == 0.0f)
+			{
+				m_footStepInterval = 0;
 			}
 		}
 	}

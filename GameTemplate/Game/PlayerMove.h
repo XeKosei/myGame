@@ -13,6 +13,7 @@ namespace nsHikageri
 			void ExecuteUpdate();
 			void Move();	//ˆÚ“®ˆ—
 			void Turn();	//‰ñ“]ˆ—
+			void FootStepsSE();	//‘«‰¹
 
 			Vector3 GetVelocity() { return m_velocity; };
 
@@ -31,6 +32,9 @@ namespace nsHikageri
 			Quaternion m_qRot = { 0.0f,0.0f,0.0f,0.0f };
 			//ƒvƒŒƒCƒ„[
 			Player* m_player = nullptr;
+
+			//‘«‰¹
+			float m_footStepInterval = 0;
 		};
 	}
 }

@@ -48,12 +48,15 @@ namespace nsHikageri
 		}
 		void EyeWall::Disapper()
 		{
-			if (m_disapperMoveCount > 0)
-			{
-				m_disapperMoveCount--;
-			}
+			m_disapperMoveCount--;
 
 			if (m_disapperMoveCount == 0)
+			{
+				SoundSource* ss = NewGO<SoundSource>(0);
+				ss->Init(L"Assets/sound/EyeWall.wav");
+				ss->Play(false);
+			}
+			if (m_disapperMoveCount <= 0)
 			{
 				m_disapperSpeed += m_disapperSpeed * DISAPPER_SPEED_MUL_VALUE;
 				m_scale.y -= m_disapperSpeed;
