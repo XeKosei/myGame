@@ -9,7 +9,7 @@ namespace nsHikageri
 		using namespace nsPlayerTargetConstant;
 		PlayerTarget::~PlayerTarget()
 		{
-			
+			DeleteGO(m_itemNameFont);
 		}
 
 		void PlayerTarget::Init(Player* pl)

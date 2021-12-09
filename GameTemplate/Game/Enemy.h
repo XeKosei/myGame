@@ -8,6 +8,7 @@
 #include "EnemyFlinch.h"
 #include "EnemyStress.h"
 #include "EnemyVigilant.h"
+#include "EnemyVoice.h"
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
@@ -70,6 +71,7 @@ namespace nsHikageri
 			EnemyStress* GetEnemyStress() { return &m_enemyStress; }
 			EnemyVigilant* GetEnemyVigilant() { return &m_enemyVigilant; }
 			EnemyAnim* GetEnemyAnim() { return &m_enemyAnim; };
+			EnemyVoice* GetEnemyVoice() { return &m_enemyVoice; }
 		private:
 			//ƒ‚ƒfƒ‹
 			SkinModelRender* m_enemyModel = nullptr;
@@ -96,6 +98,7 @@ namespace nsHikageri
 			EnemyStress m_enemyStress;
 			EnemyVigilant m_enemyVigilant;
 			EnemyAnim m_enemyAnim ;
+			EnemyVoice m_enemyVoice;
 		};
 	}
 }

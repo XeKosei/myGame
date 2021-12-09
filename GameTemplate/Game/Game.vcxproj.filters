@@ -485,6 +485,9 @@
     <ClCompile Include="NameKey.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyVoice.cpp">
+      <Filter>ソース ファイル\Hikageri\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -930,6 +933,9 @@
     </ClInclude>
     <ClInclude Include="CUtil.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyVoice.h">
+      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

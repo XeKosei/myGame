@@ -87,6 +87,8 @@ namespace nsHikageri
 			}
 			//アニメーション再生
 			m_enemyAnim.ExecuteUpdate();
+			//声
+			m_enemyVoice.ExecuteUpdate();
 		}
 	}
 }

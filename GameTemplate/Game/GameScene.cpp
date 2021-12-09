@@ -58,6 +58,7 @@ namespace nsHikageri
 			if (m_pointLight != nullptr)
 				DeleteGO(m_pointLight);
 
+			DeleteGO(m_dirLig);
 
 		}
 
@@ -70,7 +71,7 @@ namespace nsHikageri
 			//ディレクションライトを作成
 			m_dirLig = NewGO<DirectionLight>(0);
 			m_dirLig->SetDirection({ 0.0f, 0.0f, -1.0f });
-			m_dirLig->SetColor({ 0.0f,0.0f,0.0f });
+			m_dirLig->SetColor({ 1.0f,1.0f,1.0f });
 
 			//プレイヤーを作成
 			m_player = NewGO<nsPlayer::Player>(0);
@@ -83,11 +84,11 @@ namespace nsHikageri
 			m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
 			m_enemy->SetPlayer(m_player);
 
-			////シャンデリア
-			//m_chandelierManager = NewGO<nsGimmick::ChandelierManager>(0);
-			//m_chandelierManager->SetPlayer(m_player);
-			//m_chandelierManager->SetEnemy(m_enemy);
-			//
+			//シャンデリア
+			m_chandelierManager = NewGO<nsGimmick::ChandelierManager>(0);
+			m_chandelierManager->SetPlayer(m_player);
+			m_chandelierManager->SetEnemy(m_enemy);
+			
 			//////ドア　テスト
 			//Vector3 doorPos[6]
 			//{
@@ -145,23 +146,23 @@ namespace nsHikageri
 			//m_key[3]->SetKeyColor(nsGimmick::Door::enDoorColor_Yellow);
 			//m_key[4]->SetKeyColor(nsGimmick::Door::enDoorColor_Purple);
 
-			////懐中電灯のパーツテスト
-			//Vector3 partsPos[3] = {
-			//	{700.0f, 145.0f, -2000.0f},
-			//	{ -7900.0f, 145.0f, 1600.0f },
-			//	{600.0f, 145.0f, 3480.0f},
-			//};
+			//懐中電灯のパーツテスト
+			Vector3 partsPos[3] = {
+				{700.0f, 145.0f, -2000.0f},
+				{ -7900.0f, 145.0f, 1600.0f },
+				{600.0f, 145.0f, 3480.0f},
+			};
 
-			//for (int partsNum = 0; partsNum < 3; partsNum++)
-			//{
-			//	m_flashLightParts[partsNum] = NewGO<nsItem::ItemFlashLightParts>(0);
-			//	m_flashLightParts[partsNum]->SetPlayer(m_player);
-			//	m_flashLightParts[partsNum]->SetPosition(partsPos[partsNum]);
-			//}
-			//m_flashLightParts[0]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_StrobeFlash);
-			//m_flashLightParts[1]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_Clairvoyance);
-			//m_flashLightParts[2]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_MedousaEye);
-			//
+			for (int partsNum = 0; partsNum < 3; partsNum++)
+			{
+				m_flashLightParts[partsNum] = NewGO<nsItem::ItemFlashLightParts>(0);
+				m_flashLightParts[partsNum]->SetPlayer(m_player);
+				m_flashLightParts[partsNum]->SetPosition(partsPos[partsNum]);
+			}
+			m_flashLightParts[0]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_StrobeFlash);
+			m_flashLightParts[1]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_Clairvoyance);
+			m_flashLightParts[2]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_MedousaEye);
+			
 			//Vector3 eyeWallPos[3] = 
 			//{
 			//	{ -4400.0f, 200.0f,-400.0f },
@@ -203,7 +204,7 @@ namespace nsHikageri
 			//	m_tranquilizer[no]->SetPlayer(m_player);
 			//	m_tranquilizer[no]->SetPosition(tranquilizerPos[no]);
 			//}
-
+			//
 			////電池
 			//Vector3 batteryPos[12] = {
 			//	{-600.0f,145.0f, 700.0f},	
@@ -219,14 +220,15 @@ namespace nsHikageri
 			//	{-4900.0f, 145.0f, 4600.0f},
 			//	{160.0f, 145.0f, 6200.0f},
 			//};
-
+			//
 			//for (int no = 0; no < 12; no++)
 			//{
 			//	m_battery[no] = NewGO<nsItem::ItemBattery>(0);
 			//	m_battery[no]->SetPlayer(m_player);
 			//	m_battery[no]->SetPosition(batteryPos[no]);
 			//}
-
+			//
+			////メッセージペーパー
 			//Vector3 messagePaperPos[5] = {
 			//	{-1490.0f, 145.0f, 1200.0f},
 			//	{-1700.0f, 145.0f, -3300.0f},
@@ -235,7 +237,6 @@ namespace nsHikageri
 			//	{260.0f, 145.0f, 3800.0f}
 			//};
 
-			////メッセージペーパー
 			//for (int no = 0; no < 5; no++)
 			//{
 			//	m_messagePaper[no] = NewGO<nsItem::ItemMessagePaper>(0);
@@ -247,7 +248,7 @@ namespace nsHikageri
 			//m_messagePaper[2]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_02);
 			//m_messagePaper[3]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_03);
 			//m_messagePaper[4]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_04);
-			
+			//
 			////出口の明かり
 			//m_pointLight = NewGO<PointLight>(0);
 			//m_pointLight->SetColor({500.0f,500.0f,500.0f});
