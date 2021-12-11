@@ -11,9 +11,18 @@ namespace nsHikageri
 			void Init(Enemy* enemy);
 			void ExecuteUpdate();
 
+			void PlayVoice();
+
+
 		private:
 			//エネミー
 			Enemy* m_enemy = nullptr;
+			//声
+			SoundSource* m_voiceSS = nullptr;
+
+			bool m_canPlayVoiceSS = true;
+
+			int m_oldEnemyState = 0;
 		};
 	}
 }

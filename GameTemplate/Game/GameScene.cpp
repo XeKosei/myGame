@@ -89,7 +89,7 @@ namespace nsHikageri
 			m_chandelierManager->SetPlayer(m_player);
 			m_chandelierManager->SetEnemy(m_enemy);
 			
-			//////ドア　テスト
+			////ドア　テスト
 			//Vector3 doorPos[6]
 			//{
 			//	{ 0.0f, 0.0f, -100.0f },
@@ -146,23 +146,23 @@ namespace nsHikageri
 			//m_key[3]->SetKeyColor(nsGimmick::Door::enDoorColor_Yellow);
 			//m_key[4]->SetKeyColor(nsGimmick::Door::enDoorColor_Purple);
 
-			//懐中電灯のパーツテスト
-			Vector3 partsPos[3] = {
-				{700.0f, 145.0f, -2000.0f},
-				{ -7900.0f, 145.0f, 1600.0f },
-				{600.0f, 145.0f, 3480.0f},
-			};
+			////懐中電灯のパーツテスト
+			//Vector3 partsPos[3] = {
+			//	{700.0f, 145.0f, -2000.0f},
+			//	{ -7900.0f, 145.0f, 1600.0f },
+			//	{600.0f, 145.0f, 3480.0f},
+			//};
 
-			for (int partsNum = 0; partsNum < 3; partsNum++)
-			{
-				m_flashLightParts[partsNum] = NewGO<nsItem::ItemFlashLightParts>(0);
-				m_flashLightParts[partsNum]->SetPlayer(m_player);
-				m_flashLightParts[partsNum]->SetPosition(partsPos[partsNum]);
-			}
-			m_flashLightParts[0]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_StrobeFlash);
-			m_flashLightParts[1]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_Clairvoyance);
-			m_flashLightParts[2]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_MedousaEye);
-			
+			//for (int partsNum = 0; partsNum < 3; partsNum++)
+			//{
+			//	m_flashLightParts[partsNum] = NewGO<nsItem::ItemFlashLightParts>(0);
+			//	m_flashLightParts[partsNum]->SetPlayer(m_player);
+			//	m_flashLightParts[partsNum]->SetPosition(partsPos[partsNum]);
+			//}
+			//m_flashLightParts[0]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_StrobeFlash);
+			//m_flashLightParts[1]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_Clairvoyance);
+			//m_flashLightParts[2]->SetPartsType(nsItem::ItemFlashLightParts::enFlashLightPartsTypes_MedousaEye);
+			//
 			//Vector3 eyeWallPos[3] = 
 			//{
 			//	{ -4400.0f, 200.0f,-400.0f },
