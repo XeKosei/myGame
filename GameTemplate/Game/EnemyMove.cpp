@@ -34,6 +34,7 @@ namespace nsHikageri
 			};		
 
 			Turn();
+			FootStepsSE();
 		}
 
 		void EnemyMove::SetPosition(Vector3 pos) {
@@ -174,6 +175,47 @@ namespace nsHikageri
 				//SetRotationDegではなくSetRotationを使用する。
 				m_qRot.SetRotation(Vector3::AxisY, angle);
 				m_enemy->GetEnemyModel()->SetRotation(m_qRot);
+			}
+		}
+
+		void EnemyMove::FootStepsSE()
+		{
+			//足音の間隔
+			m_footStepInterval--;
+
+			if (m_footStepInterval < 0)
+			{
+				SoundSource* ss = NewGO<SoundSource>(0);
+				ss->Init(L"Assets/sound/EnemyFootStep.wav");	
+				//プレイヤーとの距離から、音量を設定
+				float dis = (m_enemy->GetEnemyMove()->GetPosition() - m_enemy->GetPlayer()->GetPlayerMove()->GetPosition()).Length();
+				m_footStepVolume = max(0.01f, 1.0f - dis * 0.0003f);
+				ss->SetVolume(m_footStepVolume);
+				ss->Play(false);
+
+				if (m_slowMoveFlag)
+				{
+					m_footStepInterval = ENEMY_SLOWWALK_FOOTSTEP_INTERVAL;
+				}
+				else if (m_enemy->GetEnemyState() == Enemy::enState_SearchPlayer)
+				{
+					m_footStepInterval = ENEMY_WALK_FOOTSTEP_INTERVAL;
+				}
+				else if (m_enemy->GetEnemyState() == Enemy::enState_Chase)
+				{
+					m_footStepInterval = ENEMY_DASH_FOOTSTEP_INTERVAL;
+				}
+				else
+				{
+					m_footStepInterval = ENEMY_SLOWWALK_FOOTSTEP_INTERVAL;
+				}
+
+
+			}
+
+			if (m_velocity.Length() == 0.0f)
+			{
+				m_footStepInterval = ENEMY_SLOWWALK_FOOTSTEP_INTERVAL;
 			}
 		}
 	}

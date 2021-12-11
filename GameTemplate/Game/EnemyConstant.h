@@ -22,6 +22,10 @@ namespace nsHikageri
 			static const float GRAVITY_INDEX = 1.2f;		//落下スピードにかける指数
 		
 			static const int PATH_FINDING_INTERVAL = 5;	//経路探索を行う間隔
+
+			static const int ENEMY_WALK_FOOTSTEP_INTERVAL = 45;	//エネミーの歩行時の足音の間隔
+			static const int ENEMY_SLOWWALK_FOOTSTEP_INTERVAL = 140;	//エネミーの遅い歩きの足音の間隔
+			static const int ENEMY_DASH_FOOTSTEP_INTERVAL = 20; //エネミーの走行時の足音の間隔
 		}
 
 		namespace nsEnemySearchPlayerConstant
@@ -43,7 +47,7 @@ namespace nsHikageri
 		
 			static const int BITING_TIME = 1000; //エネミーに噛みつかれた続ける時間
 			static const int BITEANIM_BITE_TIMING = 20; //アニメーションでエネミーが噛みつくタイミング
-			static const int BITE_DAMAGE = 20;			//噛みつきのダメージ(連続ヒットする)
+			static const int BITE_DAMAGE = 40;			//噛みつきのダメージ
 		}
 
 		namespace nsEnemyAnimConstant

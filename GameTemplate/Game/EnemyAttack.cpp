@@ -97,10 +97,14 @@ namespace nsHikageri
 			if (m_enemyBiteAnimCount == BITEANIM_BITE_TIMING)
 			{
 				m_enemy->GetPlayer()->GetPlayerSanity()->Damage(BITE_DAMAGE);
+				SoundSource* ss = NewGO<SoundSource>(0);
+				ss->Init(L"Assets/sound/EnemyBite.wav");
+				ss->Play(false);
 			}
 			//アニメーションが1ループしたら
 			else if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)
 			{
+				m_biteState = enBiteState_EndBite;
 				//アニメーションをカウントリセット
 				m_enemyBiteAnimCount = 0;
 				//アニメーションをリセットするために、一度別のアニメーションを挟む(上書きされるのでこれは再生されない。)

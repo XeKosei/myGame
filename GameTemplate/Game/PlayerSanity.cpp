@@ -8,6 +8,7 @@ namespace nsHikageri
 
 		PlayerSanity::~PlayerSanity()
 		{
+			DeleteGO(m_bloodSprite);
 			DeleteGO(f);
 		}
 
@@ -18,12 +19,15 @@ namespace nsHikageri
 			//最大HPを設定
 			m_sanityValue = MAX_PLAYER_SANITY;
 
+			m_bloodSprite = NewGO<SpriteRender>(10);
+			m_bloodSprite->Init("Assets/image/BloodSprite.DDS",1000, 1000);
+			m_bloodSprite->SetMulColor(m_bloodSpriteColor);
+
 			//デバッグ用
 			f = NewGO<FontRender>(3);
 			f->SetText(L"SAN値:" + std::to_wstring(m_sanityValue));
 			f->SetPosition({300.0f, 200.0f});
 			f->SetScale(0.0f);
-
 		}
 
 		void PlayerSanity::ExecuteUpdate()
@@ -42,7 +46,9 @@ namespace nsHikageri
 			}	
 		
 			//心音
-			Heartbeat();		
+			Heartbeat();
+			//血のスプライト
+			BloodSprite();
 		}
 
 		/// @brief プレイヤーのSAN値を指定した値だけ減らす。
@@ -65,6 +71,12 @@ namespace nsHikageri
 
 				//スプライトを設定
 				m_player->GetPlayerUI()->SetHazySprite();
+
+				//ダメージが大きければ
+				if (damageNum >= 1.0f)
+				{
+					m_bloodSpriteFlag = true;
+				}
 
 				//次にダメージを受けられるようになるまでのインターバルを設定。
 				m_damageIntervalCount = DAMAGE_INTERVAL;
@@ -144,6 +156,27 @@ namespace nsHikageri
 				m_heartbeatIntervalCount = 0;
 				m_heartbeatInterval = 60;
 			}
+		}
+
+		void PlayerSanity::BloodSprite()
+		{
+			if (m_bloodSpriteFlag)
+			{
+				m_bloodSpriteColor = { MAX_BLOODSPRITE_COLOR,MAX_BLOODSPRITE_COLOR,MAX_BLOODSPRITE_COLOR,MAX_BLOODSPRITE_COLOR };
+				m_bloodSpriteFlag = false;
+			}
+
+			m_bloodSpriteColor.r -= BLOODSPRITE_DEC_SPEED;
+			m_bloodSpriteColor.g -= BLOODSPRITE_DEC_SPEED;
+			m_bloodSpriteColor.b -= BLOODSPRITE_DEC_SPEED;
+			m_bloodSpriteColor.a -= BLOODSPRITE_DEC_SPEED;
+
+
+			if (m_bloodSpriteColor.x <= 0.0f)
+			{
+				m_bloodSpriteColor = { 0.0f,0.0f, 0.0f, 0.0f };
+			}
+			m_bloodSprite->SetMulColor(m_bloodSpriteColor);
 		}
 	}
 }

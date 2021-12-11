@@ -48,6 +48,9 @@ namespace nsHikageri
 			static const float BIG_DAMAGE_LINE = MAX_PLAYER_SANITY / 3;	//大ダメージを受けていると判断されるライン
 
 			static const float DARKNESS_SANITY_DAMAGE_SPEED = 0.05f;	//暗い時にSAN値がじわじわと減っていくスピード
+		
+			static const float BLOODSPRITE_DEC_SPEED = 0.02f;	//ダメージ時のスプライトの消える速さ
+			static const float MAX_BLOODSPRITE_COLOR = 2.0f;	//ダメージ時のスプライトの最大カラー
 		}
 
 		namespace nsPlayerBittenConstant
@@ -93,7 +96,7 @@ namespace nsHikageri
 			static const Vector4 DAMAGED_HAZYSPRITE_COLOR = { 1.0f, 1.0f, 1.0f, 1.0f };	//ダメージを受けた際のHazyスプライトのカラー
 			static const float HAZYSPRITE_MUL_COLOR_PINCH = 20.0f;	//ピンチ時にHazyスプライトのカラーに掛ける値
 
-			static const float MUL_HAZYSPRITE_COLOR_VALUE = 1.0f;	//HazySpriteのカラーにかける値
+			static const float MUL_HAZYSPRITE_COLOR_VALUE = 1.5f;	//HazySpriteのカラーにかける値
 
 			static const float ADD_ALPHA_SPEED = 0.001f;	//スプライトが点滅する速さ
 			static const float MAX_ADD_ALPHA = 0.02f;		//点滅の最大加算値

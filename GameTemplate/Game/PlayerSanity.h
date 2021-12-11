@@ -22,6 +22,9 @@ namespace nsHikageri
 			/// @param recoveryNum 回復量
 			void Recovery(int recoveryNum);
 
+			/// @brief 血のスプライト
+			void BloodSprite();
+
 			/// @brief プレイヤーが安心できる状態かを設定
 			/// @param flag 安心できる:true できない:false
 			void SetReliefFlag(bool flag) { m_reliefFlag = flag; }
@@ -45,6 +48,10 @@ namespace nsHikageri
 			//心音関連
 			int m_heartbeatInterval = 0;
 			int m_heartbeatIntervalCount = 0;
+
+			SpriteRender* m_bloodSprite = nullptr;
+			Vector4 m_bloodSpriteColor = {0.0f,0.0f,0.0f,0.0f};
+			bool m_bloodSpriteFlag = false;
 		};
 	}
 }

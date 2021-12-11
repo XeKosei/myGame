@@ -24,6 +24,8 @@ namespace nsHikageri
 			void Init(Enemy* enemy);
 			void ExecuteUpdate();
 
+
+
 			void Move();
 			/// @brief 経路探索で道を検索する処理
 			/// @param pos 開始座標
@@ -33,6 +35,8 @@ namespace nsHikageri
 			void RouteSearchMove();
 
 			void Turn();
+
+			void FootStepsSE();	//足音
 
 			void SetPosition(Vector3 pos);
 
@@ -96,6 +100,10 @@ namespace nsHikageri
 			nsAI::PathFinding m_pathFiding;
 			TknFile m_tknFile;
 			int m_pathFindingInterval = 0;
+
+			//足音
+			int m_footStepInterval = 0;
+			float m_footStepVolume = 0.0f;
 		};
 
 	}

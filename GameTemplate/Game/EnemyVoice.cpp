@@ -30,7 +30,7 @@ namespace nsHikageri
 				PlayVoice();
 				break;
 			case Enemy::enState_Attack:
-
+				PlayVoice();
 				break;
 			case Enemy::enState_Scream:
 				PlayVoice();
@@ -81,13 +81,19 @@ namespace nsHikageri
 				switch (m_enemy->GetEnemyState())
 				{
 				case Enemy::enState_SearchPlayer:
-					m_voiceSS->Init(L"Assets/sound/EnemyDefault.wav");
+					if (m_enemy->GetEnemyMove()->GetSlowMoveFlag())
+						m_voiceSS->Init(L"Assets/sound/EnemySlowMove.wav");
+					else
+						m_voiceSS->Init(L"Assets/sound/EnemyDefault.wav");
 					break;
 				case Enemy::enState_Chase:
-					m_voiceSS->Init(L"Assets/sound/EnemyChase.wav");
+					if (m_enemy->GetEnemyMove()->GetSlowMoveFlag())
+						m_voiceSS->Init(L"Assets/sound/EnemySlowMove.wav");
+					else
+						m_voiceSS->Init(L"Assets/sound/EnemyChase.wav");
 					break;
 				case Enemy::enState_Attack:
-
+					m_voiceSS->Init(L"Assets/sound/EnemyAttack.wav");
 					break;
 				case Enemy::enState_Scream:
 					m_voiceSS->Init(L"Assets/sound/EnemyScream.wav");
