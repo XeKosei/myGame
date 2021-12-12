@@ -102,8 +102,8 @@ namespace nsHikageri
 			static const float MAX_ADD_ALPHA = 0.02f;		//点滅の最大加算値
 			static const float MIN_ADD_ALPHA = -0.02f;		//点滅の最小加算値
 
-			static const float DYING_ADD_ALPHA_SPEED = 0.02f;	//死んだときのアルファ値加算の速さ
-			static const float DYING_MAX_ADD_ALPHA = 5.0f;	//死んだときのアルファ値の最大加算値
+			static const float DYING_ADD_ALPHA_SPEED = 0.5f;	//死んだときのアルファ値加算の速さ
+			static const float DYING_MAX_ADD_ALPHA = 100.0f;	//死んだときのアルファ値の最大加算値
 				
 			///////////////////////////////ポーチアイテム関連
 			static const Vector2 INI_ITEMFONT_POS = { -480.0f, -220.0f };	//ポーチアイテムのフォントの位置

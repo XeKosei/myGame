@@ -30,8 +30,8 @@ namespace nsHikageri
 			{
 				m_plMoveSpeed = PLAYER_CROUCHDOWN_WALK_SPEED;
 			}
-			//Bボタンが押されていたら、前方にのみダッシュできる。
-			else if (g_pad[0]->IsPress(enButtonB) && g_pad[0]->GetLStickYF() >= 0.77f)
+			//Lボタンが押されていたら、前方にのみダッシュできる。
+			else if (g_pad[0]->IsPress(enButtonLB1) && g_pad[0]->GetLStickYF() >= 0.77f)
 			{
 				m_plMoveSpeed = PLAYER_DASH_SPEED;
 			}

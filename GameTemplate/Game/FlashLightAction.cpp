@@ -29,18 +29,18 @@ namespace nsHikageri
 				ss->Play(false);
 			}
 
-			if (GetIsFlashLightSwitchOn() == true)
-			{
-				//十字ボタンの上下で、懐中電灯の射出角度を調節できる。
-				if (g_pad[0]->IsPress(enButtonUp))
-				{
-					m_flashLight->SetFlashLightAngle(m_flashLight->GetFlashLightAngle() + FLASHLIGHT_ANGLE_ADJUST_SPEED);
-				}
-				if (g_pad[0]->IsPress(enButtonDown))
-				{
-					m_flashLight->SetFlashLightAngle(m_flashLight->GetFlashLightAngle() - FLASHLIGHT_ANGLE_ADJUST_SPEED);
-				}
-			}
+			//if (GetIsFlashLightSwitchOn() == true)
+			//{
+			//	//十字ボタンの上下で、懐中電灯の射出角度を調節できる。
+			//	if (g_pad[0]->IsPress(enButtonUp))
+			//	{
+			//		m_flashLight->SetFlashLightAngle(m_flashLight->GetFlashLightAngle() + FLASHLIGHT_ANGLE_ADJUST_SPEED);
+			//	}
+			//	if (g_pad[0]->IsPress(enButtonDown))
+			//	{
+			//		m_flashLight->SetFlashLightAngle(m_flashLight->GetFlashLightAngle() - FLASHLIGHT_ANGLE_ADJUST_SPEED);
+			//	}
+			//}
 		}
 
 		void FlashLightAction::SwitchOnOff()

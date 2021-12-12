@@ -13,7 +13,8 @@ namespace nsHikageri
 
 			void SetGameScene(GameScene* gameScene) { m_gameScene = gameScene; }
 		private:
-			FontRender* m_gameOverFont = nullptr;
+			//FontRender* m_gameOverFont = nullptr;
+			SpriteRender* m_blackSprite = nullptr;
 			GameScene* m_gameScene = nullptr;
 			Vector4 m_gameOverFontColor = { 0.0f,0.0f,0.0f,0.0f };
 			Vector4 m_gameOverFontShadowColor = { 0.0f,0.0f,0.0f,0.0f };
