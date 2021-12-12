@@ -519,6 +519,7 @@
     <ClInclude Include="Test.h" />
     <ClInclude Include="PlayerConstant.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="TitleSceneConstant.h" />
     <ClInclude Include="tklFile.h" />
     <ClInclude Include="TknFile.h" />
     <ClInclude Include="WaveFile.h" />

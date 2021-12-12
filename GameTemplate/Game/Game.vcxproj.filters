@@ -105,6 +105,12 @@
     <Filter Include="ExEngine\effect">
       <UniqueIdentifier>{6f3714e1-86c9-417e-885c-4548586748cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Hikageri\TitleScene">
+      <UniqueIdentifier>{c750338e-9456-466b-a542-06eacceed874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Hikageri\TitleScene">
+      <UniqueIdentifier>{0ab51407-cc23-4c41-8296-3d90e0cef442}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -437,9 +443,6 @@
     <ClCompile Include="ItemBattery.cpp">
       <Filter>ソース ファイル\Hikageri\Item</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>ソース ファイル\Hikageri</Filter>
-    </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル\Hikageri\GameScene</Filter>
     </ClCompile>
@@ -487,6 +490,9 @@
     </ClCompile>
     <ClCompile Include="EnemyVoice.cpp">
       <Filter>ソース ファイル\Hikageri\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>ソース ファイル\Hikageri\TitleScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -874,9 +880,6 @@
     <ClInclude Include="ItemBattery.h">
       <Filter>ヘッダー ファイル\Hikageri\Item</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>ヘッダー ファイル\Hikageri</Filter>
-    </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>ヘッダー ファイル\Hikageri\GameScene</Filter>
     </ClInclude>
@@ -936,6 +939,12 @@
     </ClInclude>
     <ClInclude Include="EnemyVoice.h">
       <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>ヘッダー ファイル\Hikageri\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleSceneConstant.h">
+      <Filter>ヘッダー ファイル\Hikageri\TitleScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

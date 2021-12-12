@@ -41,7 +41,7 @@ namespace nsHikageri
 			{
 				DeleteGO(this);
 				DeleteGO(m_gameScene);
-				NewGO<TitleScene>(0);		
+				NewGO<nsTitleScene::TitleScene>(0);
 			}
 			else if (m_gameOverExecuteCount <= DELETE_SPRITE_TIMING)
 			{

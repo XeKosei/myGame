@@ -27,7 +27,7 @@ namespace nsHikageri
 			{
 				DeleteGO(m_clearFont);
 				DeleteGO(this);
-				NewGO<TitleScene>(0);
+				NewGO<nsTitleScene::TitleScene>(0);
 			}
 			//クリアメッセージをじわじわ消す。
 			else if (m_gameClearExecuteCount <= DELETE_CLEARFONT_TIMING)
