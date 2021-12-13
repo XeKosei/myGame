@@ -39,7 +39,8 @@ namespace nsHikageri
 				PlayVoice();
 				break;
 			case Enemy::enState_Petrifaction:
-				PlayVoice();
+				PetrifactionVoice();
+				return;
 				break;
 			case Enemy::enState_Suffer:
 				PlayVoice();
@@ -116,6 +117,29 @@ namespace nsHikageri
 				}
 				
 				m_voiceSS->Play(true);
+				m_canPlayVoiceSS = false;
+			}
+		}
+
+		void EnemyVoice::PetrifactionVoice()
+		{
+			if (m_oldEnemyState != m_enemy->GetEnemyState())
+			{
+				m_canPlayVoiceSS = true;
+			}
+			m_oldEnemyState = m_enemy->GetEnemyState();
+
+			if (m_canPlayVoiceSS)
+			{
+				if (m_voiceSS != nullptr)
+				{
+					DeleteGO(m_voiceSS);
+					m_voiceSS = nullptr;
+				}
+
+				m_voiceSS = NewGO<SoundSource>(0);
+				m_voiceSS->Init(L"Assets/sound/EnemyFlinch.wav");
+				m_voiceSS->Play(false);
 				m_canPlayVoiceSS = false;
 			}
 		}

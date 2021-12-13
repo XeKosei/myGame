@@ -97,6 +97,10 @@ namespace nsHikageri
 			if (m_gameClearExecuteCount == DELETE_GAMESCENE_TIMING)
 			{
 				DeleteGO(m_gameScene);
+				//SE
+				SoundSource* ss = NewGO<SoundSource>(0);
+				ss->Init(L"Assets/sound/GameClear.wav");
+				ss->Play(false);
 			}
 
 			//ƒJƒEƒ“ƒg

@@ -34,6 +34,7 @@ namespace nsHikageri
 
 			//スポットライトカメラの設定
 			LightManager::GetInstance()->SetSpotLightCameraAngle(m_flashLightAngle, 0);
+			LightManager::GetInstance()->SetIsFlashLightSwitchOn(false, 0);
 			//LightManager::GetInstance()->SetSpotLightCameraFar(INI_FLASHLIGHT_RANGE);
 			//懐中電灯関係のクラスの初期化
 			m_flashLightAction.Init(this);

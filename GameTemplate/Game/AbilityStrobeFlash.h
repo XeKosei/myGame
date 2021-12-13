@@ -59,9 +59,6 @@ namespace nsHikageri
 
 			//ストロボフラッシュを発動するフラグ
 			bool m_useAbility = false;
-
-			//アビリティが解放されているかどうか
-			bool m_abilityAcitveFlag = true;
 			
 			//エフェクト
 			Effect m_chargingEff;
@@ -71,6 +68,9 @@ namespace nsHikageri
 			bool m_canPlayChargeSS = true;
 			SoundSource* m_chargedSS = nullptr;
 			bool m_canPlayChargedSS = true;
+
+			//アビリティが解放されているかどうか
+			bool m_abilityAcitveFlag = false;
 		};
 	}
 }

@@ -51,6 +51,10 @@ namespace nsHikageri
 						m_enemy->SetEnemyState(Enemy::enState_Scream);
 						m_enemy->GetEnemyMove()->RouteSearch(startPos, endPos);
 						m_enemy->GetEnemyMove()->SetMoveState(EnemyMove::enMoveState_Straight);
+
+						SoundSource* ss = NewGO<SoundSource>(0);
+						ss->Init(L"Assets/sound/EnemyFoundPlayer.wav");
+						ss->Play(false);
 					}
 				}
 			}

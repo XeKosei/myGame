@@ -30,7 +30,7 @@ namespace nsHikageri
 			m_titleFont->SetScale(TITLEFONT_SCALE);
 
 			m_synopsisFont = NewGO<FontRender>(7);
-			m_synopsisFont->SetText(L"あらすじ");
+			m_synopsisFont->SetText(SYNOPSIS);
 			m_synopsisFont->SetPosition(SYNOPSISFONT_POS);
 			m_synopsisFont->SetColor(m_synopsisFontColor);
 			m_synopsisFont->SetScale(SYNOPSISFONT_SCALE);
@@ -137,17 +137,24 @@ namespace nsHikageri
 
 		void TitleScene::DeleteMove()
 		{
-			//タイトル画面を消す
-			if (g_pad[0]->IsTrigger(enButtonA))
+			if (m_blinkingFlag == true && m_deleteMoveFlag == false)
 			{
-				m_firstMoveFlag = false;
-				m_secondMoveFlag = false;
-				m_blinkingFlag = false;
-				m_deleteMoveFlag = true;
-				m_titleSpriteColor = { TITLESPRITE_DELETE_MAX_COLOR,TITLESPRITE_DELETE_MAX_COLOR,TITLESPRITE_DELETE_MAX_COLOR,TITLESPRITE_DELETE_MAX_COLOR };
-				m_titleFont->SetColor({ 0.0f,0.0f,0.0f,0.0f });
-			}
+				//タイトル画面を消す
+				if (g_pad[0]->IsTrigger(enButtonA))
+				{
+					m_firstMoveFlag = false;
+					m_secondMoveFlag = false;
+					m_blinkingFlag = false;
+					m_deleteMoveFlag = true;
+					m_titleSpriteColor = { TITLESPRITE_DELETE_MAX_COLOR,TITLESPRITE_DELETE_MAX_COLOR,TITLESPRITE_DELETE_MAX_COLOR,TITLESPRITE_DELETE_MAX_COLOR };
+					m_titleFont->SetColor({ 0.0f,0.0f,0.0f,0.0f });
 
+					//SE
+					SoundSource* ss = NewGO<SoundSource>(0);
+					ss->Init(L"Assets/sound/TitleGameStart.wav");
+					ss->Play(false);
+				}
+			}
 			if (m_deleteMoveFlag)
 			{
 				m_titleSpriteColor.r -= TITLESPRITE_DELETE_SPEED;
@@ -159,9 +166,11 @@ namespace nsHikageri
 
 				if (m_titleSpriteColor.r <= 0.0f)
 				{
+					m_titleSpriteColor = {0.0f,0.0f,0.0f,0.0f};
+					m_titleSprite->SetMulColor(m_titleSpriteColor);
 					m_deleteMoveFlag = false;
 					m_synopsisFlag = true;	
-
+					
 					//黒背景の表示
 					m_blackSprite = NewGO<SpriteRender>(6);
 					m_blackSprite->Init("Assets/image/Black.DDS", 1280, 720);

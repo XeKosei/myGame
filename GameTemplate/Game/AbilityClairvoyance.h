@@ -34,12 +34,12 @@ namespace nsHikageri
 			//アビリティを発動中かどうか
 			bool m_useAbility = false;
 
-			//アビリティが解放されているかどうか
-			bool m_abilityAcitveFlag = true;
-
 			//SE関連
 			bool m_canPlaySSFlag = true;
 			int m_canPlaySSCount = 0;
+
+			//アビリティが解放されているかどうか
+			bool m_abilityAcitveFlag = false;
 		};
 	}
 }

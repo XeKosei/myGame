@@ -35,9 +35,6 @@ namespace nsHikageri
 
 			int m_medousaEyeChargeCount = 0;
 
-			//アビリティが解放されているかどうか
-			bool m_abilityAcitveFlag = false;
-
 			//エフェクト
 			Effect m_chargingEff;
 
@@ -46,6 +43,9 @@ namespace nsHikageri
 			bool m_canPlayChargeSS = true;
 			SoundSource* m_chargedSS = nullptr;
 			bool m_canPlayChargedSS = true;
+
+			//アビリティが解放されているかどうか
+			bool m_abilityAcitveFlag = false;
 		};
 	}
 }

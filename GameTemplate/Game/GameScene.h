@@ -98,7 +98,7 @@ namespace nsHikageri
 			//Level m_level;
 
 			//ゲームの進行段階
-			EnGameSteps m_gameStep = enGameStep_num;
+			EnGameSteps m_gameStep = enGameStep_01;
 			bool m_canGoNextStepFlag = false;
 		};
 	}

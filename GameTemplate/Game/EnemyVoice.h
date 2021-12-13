@@ -13,6 +13,7 @@ namespace nsHikageri
 
 			void PlayVoice();
 
+			void PetrifactionVoice();
 
 		private:
 			//エネミー

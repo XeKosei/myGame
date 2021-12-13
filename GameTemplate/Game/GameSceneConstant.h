@@ -8,10 +8,10 @@ namespace nsHikageri
 		namespace nsGameOverConstant
 		{
 			static const int INI_GAMEOVER_EXECUTE_COUNT = 250;	//ゲームオーバー画面実行中のカウント初期値
-			static const int DISPLAY_SPRITE_TIMING = 100;	//スプライトを画面に表示するタイミング。
-			//static const int DELETE_SPRITE_TIMING = 100;	//スプライトの表示を消すタイミング
+			static const int DISPLAY_SPRITE_TIMING = 150;	//スプライトを画面に表示するタイミング。
+			static const int DELETE_SPRITE_TIMING = 50;	//スプライトの表示を消すタイミング
 			
-			//static const float ADD_ALPHA_SPEED = 0.01f;	//スプライトのカラーにアルファ値を加算する速さ
+			static const float GAMEOVER_SPRITE_DELETE_SPEED = 0.05f;	//スプライトを消す速さ
 			//static const float MAX_GAMEOVER_SPRITE_ALPHA = 1.0f;	//ゲームオーバー表示のカラーの最大アルファ値
 		
 		}
@@ -19,7 +19,7 @@ namespace nsHikageri
 		namespace nsGameClearConstant
 		{
 			static const int INI_GAMECLEAR_EXECUTE_COUNT = 1300;	//ゲームクリア画面実行中のカウント初期値
-			static const int DISPLAY_TITLENAME_TIMING = 1050;	//タイトル名を画面に表示するタイミング。
+			static const int DISPLAY_TITLENAME_TIMING = 1105;	//タイトル名を画面に表示するタイミング。
 			static const int DELETE_TITLENAME_TIMING = 700;	//タイトル名の表示を消すタイミング
 			static const int DISPLAY_CLEARFONT_TIMING = 600;	//クリアフォントを表示するタイミング
 			static const int DELETE_CLEARFONT_TIMING = 300;	//クリアフォントを消すタイミング
