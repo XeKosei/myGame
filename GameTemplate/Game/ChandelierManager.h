@@ -35,7 +35,7 @@ namespace nsHikageri
 
 			//シャンデリアの位置
 			Vector3 m_chandelierPos[CHANDELIER_NUM] = {
-				{ -1000.0f, 800.0f, 1000.0f},
+				{ 1000.0f, 800.0f, 0.0f},
 				{-1400.0f, 800.0f, -3600.0f},
 				{-1000.0f, 800.0f, 3400.0f},
 				{-4600.0f, 800.0f, 2800.0f},

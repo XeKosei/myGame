@@ -8,7 +8,7 @@ namespace nsHikageri
 		namespace nsGameOverConstant
 		{
 			static const int INI_GAMEOVER_EXECUTE_COUNT = 250;	//ゲームオーバー画面実行中のカウント初期値
-			static const int DISPLAY_SPRITE_TIMING = 150;	//スプライトを画面に表示するタイミング。
+			static const int DISPLAY_SPRITE_TIMING = 155;	//スプライトを画面に表示するタイミング。
 			static const int DELETE_SPRITE_TIMING = 50;	//スプライトの表示を消すタイミング
 			
 			static const float GAMEOVER_SPRITE_DELETE_SPEED = 0.05f;	//スプライトを消す速さ
