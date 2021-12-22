@@ -60,6 +60,13 @@ namespace nsHikageri
 
 			DeleteGO(m_dirLig);
 
+			if (m_canSpawnFinalEnemy == false)
+			{
+				for (int no = 0; no < 5; no++)
+				{
+					DeleteGO(m_finalEnemy[no]);
+				}
+			}
 		}
 
 		bool GameScene::Start()
@@ -344,7 +351,21 @@ namespace nsHikageri
 		}
 		void GameScene::ExecuteUpdateStep05()
 		{
-
+			if (m_canSpawnFinalEnemy)
+			{
+				/*Vector3 plPos = m_player->GetPlayerMove()->GetPosition();
+				if (plPos.x >= 2000.0f
+					&& plPos.z > 4000.0f)
+				{
+					for (int no = 0; no < 5; no++)
+					{
+						m_finalEnemy[no] = NewGO<nsEnemy::Enemy>(0);
+						m_finalEnemy[no]->SetIniPos({ 2200.0f,0.0f, 6800.0f });
+						m_finalEnemy[no]->SetEnemyState(nsEnemy::Enemy::enState_Chase);
+					}
+					m_canSpawnFinalEnemy = false;
+				}*/
+			}
 		}
 	}
 }

@@ -37,6 +37,8 @@ namespace nsHikageri
 				enStatesNum
 			};
 
+			void SetIniPos(Vector3 iniPos) { m_iniPos = iniPos; }
+
 			SkinModelRender* GetEnemyModel() { return m_enemyModel; }
 
 			/// @brief エネミーのキャラコンを取得する。(EnemyChaseクラスで利用)
@@ -73,6 +75,9 @@ namespace nsHikageri
 			EnemyAnim* GetEnemyAnim() { return &m_enemyAnim; };
 			EnemyVoice* GetEnemyVoice() { return &m_enemyVoice; }
 		private:
+			//初期位置
+			Vector3 m_iniPos = Vector3::Zero;
+
 			//モデル
 			SkinModelRender* m_enemyModel = nullptr;
 			SkinModelRenderEX* m_enemyModelEX = nullptr;

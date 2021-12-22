@@ -763,9 +763,6 @@
     <ClInclude Include="EnemyAnim.h">
       <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerBitten.h">
-      <Filter>ヘッダー ファイル\Hikageri\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteRender.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
     </ClInclude>
@@ -945,6 +942,9 @@
     </ClInclude>
     <ClInclude Include="TitleSceneConstant.h">
       <Filter>ヘッダー ファイル\Hikageri\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBitten.h">
+      <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

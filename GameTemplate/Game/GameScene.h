@@ -100,6 +100,10 @@ namespace nsHikageri
 			//ゲームの進行段階
 			EnGameSteps m_gameStep = enGameStep_01;
 			bool m_canGoNextStepFlag = false;
+
+			//最後の逃走劇関連
+			bool m_canSpawnFinalEnemy = true;
+			nsEnemy::Enemy* m_finalEnemy[5] = {nullptr,nullptr,nullptr,nullptr,nullptr};
 		};
 	}
 }
