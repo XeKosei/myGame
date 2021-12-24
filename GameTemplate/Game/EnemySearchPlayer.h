@@ -11,11 +11,18 @@ namespace nsHikageri
 				enSearchArea_1,
 				enSearchArea_2,
 				enSearchArea_3,
+				enSearchArea_4,
+				enSearchArea_5,
+				enSearchArea_6,
 				enSearchArea_num
 			};
 
 			~EnemySearchPlayer();
 			void Init(Enemy* enemy);
+
+			//‰Šú’Tõ”ÍˆÍ‚ğİ’è
+			void SetIniSearchArea(EnSearchArea area) { m_searchArea = area; };
+
 			void ExecuteUpdate();
 
 			void Search();

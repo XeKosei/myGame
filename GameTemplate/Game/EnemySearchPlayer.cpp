@@ -20,12 +20,13 @@ namespace nsHikageri
 
 			SetSearchPos(m_searchArea);
 
+			//初期位置を指定
+			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
+
 			CalcNextSearchPos();
 
 			int m_calcLineHitModelConstant = CALC_LINEHITMODEL_INTERVAL;
 
-			//初期位置を指定
-			m_enemy->GetEnemyMove()->SetPosition(m_searchPos[0]);
 		}
 
 		void EnemySearchPlayer::ExecuteUpdate()
@@ -129,17 +130,35 @@ namespace nsHikageri
 				PushSearchPos({ -7000.0f,0.0f,2400.0f });
 				PushSearchPos({ -8600.0f,0.0f,2400.0f });
 				PushSearchPos({ -7000.0f,0.0f,800.0f });
-				PushSearchPos({ -8600.0f,0.0f,800.0f });
+				PushSearchPos({ -8600.0f,0.0f,800.0f });	
+				break;
+			case enSearchArea_3:	
+				PushSearchPos({ -9400.0f,0.0f,3600.0f });
 				PushSearchPos({ -9400.0f,0.0f,4800.0f });
 				PushSearchPos({ -6600.0f,0.0f,4800.0f });
-				PushSearchPos({ -6200.0f,0.0f,4400.0f });
+				PushSearchPos({ -6200.0f,0.0f,3600.0f });
+				PushSearchPos({ -5800.0f,0.0f,5200.0f });
 				break;
-			case enSearchArea_3:
-				PushSearchPos({ -4600,0.0f,6000.0f });
-				PushSearchPos({ -4600,0.0f,7200.0f });
-				PushSearchPos({ -1400,0.0f,6000.0f });
-				PushSearchPos({ -1400,0.0f,7200.0f });
-				PushSearchPos({ -3000,0.0f,6600.0f });
+			case enSearchArea_4:
+				PushSearchPos({ -5800.0f,0.0f,6000.0f });
+				PushSearchPos({ -4200.0f,0.0f,6000.0f });
+				PushSearchPos({ -4200.0f,0.0f,8000.0f });
+				PushSearchPos({ -5800.0f,0.0f,8000.0f });
+				PushSearchPos({ -5000.0f,0.0f,6800.0f });
+				break;
+			case enSearchArea_5:
+				PushSearchPos({ -3000.0f,0.0f,6000.0f });
+				PushSearchPos({ -3400.0f,0.0f,8000.0f });
+				PushSearchPos({ -2200.0f,0.0f,8000.0f });
+				PushSearchPos({ -1800.0f,0.0f,6000.0f });
+				PushSearchPos({ -2600.0f,0.0f,6800.0f });
+				break;
+			case enSearchArea_6:
+				PushSearchPos({ -1000.0f,0.0f,6000.0f });
+				PushSearchPos({ -1400.0f,0.0f,8000.0f });
+				PushSearchPos({ 600.0f,0.0f,7600.0f });
+				PushSearchPos({ 600.0f,0.0f,6400.0f });
+				PushSearchPos({ -200.0f,0.0f,7200.0f });
 				break;
 			default:
 				break;

@@ -36,7 +36,8 @@ namespace nsHikageri
 			m_backGround = FindGO<nsBackGround::BackGround>("backGround");
 			//エネミー関連のインスタンスを作成
 			m_enemyMove.Init(this);
-			m_enemySearchPlayer.Init(this);
+			m_enemySearchPlayer.SetIniSearchArea(m_iniArea);
+			m_enemySearchPlayer.Init(this);		
 			m_enemyChase.Init(this);
 			m_enemyAttack.Init(this);
 			m_enemyScream.Init(this);

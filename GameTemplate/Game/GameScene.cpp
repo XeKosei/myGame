@@ -15,7 +15,10 @@ namespace nsHikageri
 		GameScene::~GameScene()
 		{
 			DeleteGO(m_player);
-			DeleteGO(m_enemy);
+			for (int no = 0; no < 3; no++)
+			{
+				DeleteGO(m_enemy[no]);
+			}
 			DeleteGO(m_backGround);
 			DeleteGO(m_secretRoom);
 			DeleteGO(m_flashLight);
@@ -84,8 +87,13 @@ namespace nsHikageri
 			m_flashLight->SetPlayer(m_player);
 			
 			//エネミーを作成
-			m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
-			m_enemy->SetPlayer(m_player);
+			for (int no = 0; no < 3; no++)
+			{
+				m_enemy[no] = NewGO<nsEnemy::Enemy>(0, "enemy");
+				m_enemy[no]->SetPlayer(m_player);
+			}
+			m_enemy[1]->SetIniSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_3);
+			m_enemy[2]->SetIniSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_6);
 
 			//ステージを作成
 			m_backGround = NewGO<nsBackGround::BackGround>(0, "backGround");
@@ -93,9 +101,9 @@ namespace nsHikageri
 			m_secretRoom->Init(m_player);
 
 			//シャンデリア
-			m_chandelierManager = NewGO<nsGimmick::ChandelierManager>(0);
+			/*m_chandelierManager = NewGO<nsGimmick::ChandelierManager>(0);
 			m_chandelierManager->SetPlayer(m_player);
-			m_chandelierManager->SetEnemy(m_enemy);
+			m_chandelierManager->SetEnemy(m_enemy);*/
 			
 			//ドア　テスト
 			Vector3 doorPos[6]
@@ -105,7 +113,7 @@ namespace nsHikageri
 				{-800.0f, 0.0f, -1900.0f},
 				{-7200.0f,0.0f, 1500.0f},
 				{-7900.0f, 0.0f, 5400.0f},
-				{1600.0f, 0.0f, 6900.0f}
+				{2400.0f, 0.0f, 6200.0f}
 			};
 
 			Vector3 doorDir[6]
@@ -115,14 +123,14 @@ namespace nsHikageri
 				{-1.0f, 0.0f, 0.0f},
 				{1.0f,0.0f,0.0f},
 				{0.0f,0.0f,-1.0f},
-				{-1.0f, 0.0f, 0.0f}
+				{0.0f, 0.0f, 1.0f}
 			};
 
 			for (int doorNum = 0; doorNum < 6; doorNum++)
 			{
 				m_door[doorNum] = NewGO<nsGimmick::Door>(0);
 				m_door[doorNum]->SetPlayer(m_player);
-				m_door[doorNum]->SetEnemy(m_enemy);
+				//m_door[doorNum]->SetEnemy(m_enemy);
 				m_door[doorNum]->SetPosition(doorPos[doorNum]);
 				m_door[doorNum]->SetDirection(doorDir[doorNum]);
 			}
@@ -158,7 +166,7 @@ namespace nsHikageri
 			Vector3 partsPos[3] = {
 				{700.0f, 145.0f, -2000.0f},
 				{ -7900.0f, 145.0f, 1600.0f },
-				{600.0f, 145.0f, 3480.0f},
+				{2200.0f, 145.0f, 10520.0f},
 			};
 
 			for (int partsNum = 0; partsNum < 3; partsNum++)
@@ -194,7 +202,7 @@ namespace nsHikageri
 			}
 			
 			//精神安定剤
-			Vector3 tranquilizerPos[9] = {
+			Vector3 tranquilizerPos[10] = {
 				{-1200.0f, 145.0f, -3500.0f},
 				{-2900.0f, 145.0f, 3600.0f},
 				{-1300.0f,145.0f, 3500.0f},
@@ -202,11 +210,12 @@ namespace nsHikageri
 				{-4700.0f, 145.0f,3000.0f},
 				{-6300.0f, 145.0f,4870.0f },
 				{-5930.0f, 145.0f, -1780.0f},
-				{-4300.0, 145.0f, 4500.0f},
-				{1110.0f, 145.0f, 7600.0f},
+				{-4300.0, 145.0f, 4900.0f},
+				{-2700.0f, 145.0f, 7300.0f},
+				{2700.0f, 145.0f, 6500.0f}
 			};
 
-			for (int no = 0; no < 9; no++)
+			for (int no = 0; no < 10; no++)
 			{
 				m_tranquilizer[no] = NewGO<nsItem::ItemTranquilizer>(0);
 				m_tranquilizer[no]->SetPlayer(m_player);
@@ -214,7 +223,7 @@ namespace nsHikageri
 			}
 			
 			//電池
-			Vector3 batteryPos[12] = {
+			Vector3 batteryPos[13] = {
 				{-600.0f,145.0f, 700.0f},	
 				{-1200.0f, 145.0f,3500.0f },
 				{-300.0f, 145.0f,-1500.0f },
@@ -225,11 +234,12 @@ namespace nsHikageri
 				{-5710.0f, 145.0f, -1700.0f},
 				{-5610.0f, 145.0f, -1700.0f},
 				{-7040.0f, 145.0f, -2900.0f},
-				{-4900.0f, 145.0f, 4600.0f},
-				{160.0f, 145.0f, 6200.0f},
+				{-6000, 145.0f, 7400.0f},
+				{-1500.0f, 145.0f, 9200.0f},
+				{2600.0f, 145.0f, 10200.0f}
 			};
 			
-			for (int no = 0; no < 12; no++)
+			for (int no = 0; no < 13; no++)
 			{
 				m_battery[no] = NewGO<nsItem::ItemBattery>(0);
 				m_battery[no]->SetPlayer(m_player);
@@ -242,7 +252,7 @@ namespace nsHikageri
 				{-1700.0f, 145.0f, -3300.0f},
 				{-200.0f, 145.0f,-1500.0f },
 				{-7900.0f, 145.0f,1700.0f },
-				{260.0f, 145.0f, 3800.0f}
+				{1800.0f, 145.0f, 10200.0f}
 			};
 
 			for (int no = 0; no < 5; no++)
@@ -334,9 +344,10 @@ namespace nsHikageri
 		{
 			if (m_eyeWall[0]->GetDisapperFlag())
 			{
-				m_enemy->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_2);
-				m_enemy->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
-				m_enemy->GetEnemySearchPlayer()->CalcNextSearchPos();
+				m_enemy[0]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_2);
+				m_enemy[0]->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
+				m_enemy[0]->GetEnemySearchPlayer()->CalcNextSearchPos();			
+
 				m_gameStep = enGameStep_04;
 			}
 		}
@@ -344,9 +355,12 @@ namespace nsHikageri
 		{
 			if (m_door[4]->GetUnlockFlag())
 			{
-				m_enemy->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_3);
-				m_enemy->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
-				m_enemy->GetEnemySearchPlayer()->CalcNextSearchPos();
+				m_enemy[0]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_4);
+				m_enemy[0]->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
+				m_enemy[0]->GetEnemySearchPlayer()->CalcNextSearchPos();
+				m_enemy[1]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_5);
+				m_enemy[1]->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
+				m_enemy[1]->GetEnemySearchPlayer()->CalcNextSearchPos();
 				m_gameStep = enGameStep_05;
 			}
 		}

@@ -37,7 +37,9 @@ namespace nsHikageri
 				enStatesNum
 			};
 
-			void SetIniPos(Vector3 iniPos) { m_iniPos = iniPos; }
+			/// @brief 初期探索範囲を設定
+			/// @param area 設定する範囲
+			void SetIniSearchPos(EnemySearchPlayer::EnSearchArea area) { m_iniArea = area; }
 
 			SkinModelRender* GetEnemyModel() { return m_enemyModel; }
 
@@ -95,6 +97,9 @@ namespace nsHikageri
 
 			//エネミーの状態
 			EnEnemyStates m_enemyState = enState_SearchPlayer;
+
+			//エネミーの初期探索エリア
+			EnemySearchPlayer::EnSearchArea m_iniArea = EnemySearchPlayer::enSearchArea_1;
 
 			//エネミー関連
 			EnemyMove m_enemyMove;
