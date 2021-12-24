@@ -3,7 +3,7 @@
 #include "ItemBase.h"
 #include "ItemInclude.h"
 #include "PlayerInclude.h"
-
+#include "FlashLightInclude.h"
 namespace nsHikageri
 {
 	using namespace nsGimmick;
@@ -18,6 +18,7 @@ namespace nsHikageri
 		bool ItemKey::Start()
 		{
 			m_keyModel = NewGO<SkinModelRender>(0);
+			m_keyModel->SetMakeSkinModelRenderEX(true);
 			switch (m_keyColor)
 			{
 			case Door::enDoorColor_Red:
@@ -98,6 +99,22 @@ namespace nsHikageri
 				SoundSource* ss = NewGO<SoundSource>(0);
 				ss->Init(L"Assets/sound/GetItemKey.wav");
 				ss->Play(false);
+			}
+
+			//“§Ž‹
+			ExecuteClairvoyance();
+		}
+
+		//“§Ž‹‚Ìˆ—
+		void ItemKey::ExecuteClairvoyance()
+		{
+			if (m_player->GetFlashLight()->GetAbilityClairvoyance()->GetUseAbilityFlag())
+			{
+				m_keyModel->SetClairvoyanceCasterFlag(true);
+			}
+			else
+			{
+				m_keyModel->SetClairvoyanceCasterFlag(false);
 			}
 		}
 	}

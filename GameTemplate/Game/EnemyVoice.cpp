@@ -49,6 +49,7 @@ namespace nsHikageri
 				
 				break;
 			default:
+				PlayVoice();
 				break;
 			}
 
@@ -70,12 +71,9 @@ namespace nsHikageri
 			m_oldEnemyState = m_enemy->GetEnemyState();
 
 			if (m_canPlayVoiceSS)
-			{
-				if (m_voiceSS != nullptr)
-				{
-					DeleteGO(m_voiceSS);
-					m_voiceSS = nullptr;
-				}
+			{		
+				DeleteGO(m_voiceSS);
+				m_voiceSS = nullptr;	
 
 				m_voiceSS = NewGO<SoundSource>(0);
 

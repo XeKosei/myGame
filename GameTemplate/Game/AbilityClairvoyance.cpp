@@ -38,17 +38,12 @@ namespace nsHikageri
 				if (m_useAbility == false && g_pad[0]->IsTrigger(enButtonLB2))
 				{
 					PlaySE();
-
-					m_abilityManager->GetEnemy()->GetEnemyModel()->SetClairvoyanceCasterFlag(true);
-					m_abilityManager->GetSecretRoom()->GetSecretRoomModel()->SetClairvoyanceCasterFlag(true);
-
+				
 					m_useAbility = true;
 				}
 				//ボタンが離されたとき、透視不可能に。
 				else if (m_useAbility == true && g_pad[0]->IsPress(enButtonLB2) == false)
 				{
-					m_abilityManager->GetEnemy()->GetEnemyModel()->SetClairvoyanceCasterFlag(false);
-					m_abilityManager->GetSecretRoom()->GetSecretRoomModel()->SetClairvoyanceCasterFlag(false);
 					m_useAbility = false;
 				}
 			}

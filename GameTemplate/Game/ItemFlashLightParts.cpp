@@ -35,6 +35,7 @@ namespace nsHikageri
 				m_partsModel->Init("Assets/modelData/Door.tkm");
 				break;
 			};*/
+			m_partsModel->SetMakeSkinModelRenderEX(true);
 			m_partsModel->Init("Assets/modelData/FlashLightParts.tkm");
 			m_partsModel->SetPosition(m_position);
 
@@ -81,6 +82,21 @@ namespace nsHikageri
 				SoundSource* ss = NewGO<SoundSource>(0);
 				ss->Init(L"Assets/sound/GetFlashLightParts.wav");
 				ss->Play(false);
+			}
+
+			ExecuteClairvoyance();
+		}
+
+		//“§Ž‹‚Ìˆ—
+		void ItemFlashLightParts::ExecuteClairvoyance()
+		{
+			if (m_player->GetFlashLight()->GetAbilityClairvoyance()->GetUseAbilityFlag())
+			{
+				m_partsModel->SetClairvoyanceCasterFlag(true);
+			}
+			else
+			{
+				m_partsModel->SetClairvoyanceCasterFlag(false);
 			}
 		}
 	}

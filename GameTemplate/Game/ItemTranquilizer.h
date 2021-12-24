@@ -16,6 +16,9 @@ namespace nsHikageri
 			Vector3 GetPosition() { return m_position; }
 			void SetPosition(Vector3 pos) { m_position = pos; }
 
+			//透視
+			void ExecuteClairvoyance();
+
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
 			void SetPlayer(nsPlayer::Player* pl) { m_player = pl; };

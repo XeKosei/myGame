@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ItemInclude.h"
 #include "PlayerInclude.h"
+#include "FlashLightInclude.h"
 
 namespace nsHikageri
 {
@@ -20,7 +21,7 @@ namespace nsHikageri
 		bool ItemBattery::Start()
 		{
 			m_batteryModel = NewGO<SkinModelRender>(0);
-
+			m_batteryModel->SetMakeSkinModelRenderEX(true);
 			m_batteryModel->Init("Assets/modelData/Battery.tkm");
 			m_batteryModel->SetPosition(m_position);
 
@@ -51,6 +52,22 @@ namespace nsHikageri
 				ss->Play(false);
 				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_Battery);
 				DeleteGO(this);
+			}
+
+			//“§Ž‹
+			ExecuteClairvoyance();
+		}
+
+		//“§Ž‹‚Ìˆ—
+		void ItemBattery::ExecuteClairvoyance()
+		{
+			if (m_player->GetFlashLight()->GetAbilityClairvoyance()->GetUseAbilityFlag())
+			{
+				m_batteryModel->SetClairvoyanceCasterFlag(true);
+			}
+			else
+			{
+				m_batteryModel->SetClairvoyanceCasterFlag(false);
 			}
 		}
 	}

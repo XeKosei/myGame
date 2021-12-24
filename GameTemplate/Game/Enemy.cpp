@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EnemyInclude.h"
 #include "PlayerInclude.h"
+#include "FlashLightInclude.h"
 #include "BackGround.h"
 namespace nsHikageri
 {
@@ -89,6 +90,22 @@ namespace nsHikageri
 			m_enemyAnim.ExecuteUpdate();
 			//º
 			m_enemyVoice.ExecuteUpdate();
+
+			//“§Ž‹‚Ìˆ—
+			ExecuteClairvoyance();
+		}
+
+		//“§Ž‹‚Ìˆ—
+		void Enemy::ExecuteClairvoyance()
+		{
+			if (m_player->GetFlashLight()->GetAbilityClairvoyance()->GetUseAbilityFlag())
+			{
+				m_enemyModel->SetClairvoyanceCasterFlag(true);
+			}
+			else
+			{
+				m_enemyModel->SetClairvoyanceCasterFlag(false);
+			}
 		}
 	}
 }

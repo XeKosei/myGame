@@ -2,7 +2,7 @@
 #include "ItemInclude.h"
 #include "ItemBase.h"
 #include "PlayerInclude.h"
-
+#include "FlashLightInclude.h"
 namespace nsHikageri
 {
 	using namespace nsGimmick;
@@ -22,7 +22,7 @@ namespace nsHikageri
 		bool ItemTranquilizer::Start()
 		{
 			m_tranquilizerModel = NewGO<SkinModelRender>(0);
-			
+			m_tranquilizerModel->SetMakeSkinModelRenderEX(true);
 			m_tranquilizerModel->Init("Assets/modelData/Medicine.tkm");
 			m_tranquilizerModel->SetPosition(m_position);
 
@@ -53,6 +53,22 @@ namespace nsHikageri
 				ss->Play(false);
 				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_Tranquilizer);		
 				DeleteGO(this);
+			}
+
+			//“§Ž‹
+			ExecuteClairvoyance();
+		}
+
+		//“§Ž‹‚Ìˆ—
+		void ItemTranquilizer::ExecuteClairvoyance()
+		{
+			if (m_player->GetFlashLight()->GetAbilityClairvoyance()->GetUseAbilityFlag())
+			{
+				m_tranquilizerModel->SetClairvoyanceCasterFlag(true);
+			}
+			else
+			{
+				m_tranquilizerModel->SetClairvoyanceCasterFlag(false);
 			}
 		}
 	}

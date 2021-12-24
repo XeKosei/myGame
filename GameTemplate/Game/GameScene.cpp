@@ -71,10 +71,6 @@ namespace nsHikageri
 
 		bool GameScene::Start()
 		{
-			//ステージを作成
-			m_backGround = NewGO<nsBackGround::BackGround>(0, "backGround");
-			m_secretRoom = NewGO<nsBackGround::SecretRoom>(0, "secretRoom");
-
 			//ディレクションライトを作成
 			m_dirLig = NewGO<DirectionLight>(0);
 			m_dirLig->SetDirection({ 0.0f, 0.0f, -1.0f });
@@ -90,6 +86,11 @@ namespace nsHikageri
 			//エネミーを作成
 			m_enemy = NewGO<nsEnemy::Enemy>(0, "enemy");
 			m_enemy->SetPlayer(m_player);
+
+			//ステージを作成
+			m_backGround = NewGO<nsBackGround::BackGround>(0, "backGround");
+			m_secretRoom = NewGO<nsBackGround::SecretRoom>(0, "secretRoom");
+			m_secretRoom->Init(m_player);
 
 			//シャンデリア
 			m_chandelierManager = NewGO<nsGimmick::ChandelierManager>(0);

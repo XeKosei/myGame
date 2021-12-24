@@ -1,6 +1,7 @@
 #pragma once
 namespace nsHikageri
 {
+	namespace nsPlayer { class Player; }
 	namespace nsBackGround
 	{
 		class SecretRoom : public IGameObject
@@ -8,11 +9,14 @@ namespace nsHikageri
 		public:
 			~SecretRoom();
 			bool Start();
+			void Init(nsPlayer::Player* player) { m_player = player; };
 			void Update();
 
 			SkinModelRender* GetSecretRoomModel() { return m_secretRoomModel; }
 			SkinModelRender* GetFakeWallModel() { return m_fakeWallModel; }
 		private:
+			nsPlayer::Player* m_player = nullptr;
+
 			//ƒ‚ƒfƒ‹
 			SkinModelRender* m_secretRoomModel = nullptr;
 			SkinModelRender* m_fakeWallModel = nullptr;

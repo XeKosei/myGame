@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "SecretRoom.h"
+#include "PlayerInclude.h"
+#include "FlashLightInclude.h"
 namespace nsHikageri
 {
 	namespace nsBackGround
@@ -32,7 +34,14 @@ namespace nsHikageri
 
 		void SecretRoom::Update()
 		{
-
+			if (m_player->GetFlashLight()->GetAbilityClairvoyance()->GetUseAbilityFlag())
+			{
+				m_secretRoomModel->SetClairvoyanceCasterFlag(true);
+			}
+			else
+			{
+				m_secretRoomModel->SetClairvoyanceCasterFlag(false);
+			}
 		}
 	}
 }

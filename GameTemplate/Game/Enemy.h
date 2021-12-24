@@ -63,6 +63,9 @@ namespace nsHikageri
 			/// @param enState エネミーの状態
 			void SetEnemyState(EnEnemyStates enState) { if (m_enemyState != enState_Petrifaction) { m_enemyState = enState; } };
 
+			/// @brief 透視の処理
+			void ExecuteClairvoyance();
+
 			//エネミー関係のインスタンスにアクセスする
 			EnemyMove* GetEnemyMove() { return &m_enemyMove; }
 			EnemySearchPlayer* GetEnemySearchPlayer() { return &m_enemySearchPlayer; };
