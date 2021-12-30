@@ -494,6 +494,9 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>ソース ファイル\Hikageri\TitleScene</Filter>
     </ClCompile>
+    <ClCompile Include="DeadSkeleton.cpp">
+      <Filter>ソース ファイル\Hikageri\BackGround</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -945,6 +948,9 @@
     </ClInclude>
     <ClInclude Include="PlayerBitten.h">
       <Filter>ヘッダー ファイル\Hikageri\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="DeadSkeleton.h">
+      <Filter>ヘッダー ファイル\Hikageri\BackGround</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@ namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
 	namespace nsFlashLight { class FlashLight; }
-	namespace nsBackGround { class BackGround; class SecretRoom;}
+	namespace nsBackGround { class BackGround; class SecretRoom; class DeadSkeleton; }
 	namespace nsEnemy { class Enemy; }
 	namespace nsGimmick { class ChandelierManager; class Door;  class EyeWall; }
 	namespace nsItem { class ItemKey; class ItemFlashLightParts; class ItemTranquilizer; 
@@ -56,6 +56,7 @@ namespace nsHikageri
 			//ステージ
 			nsBackGround::BackGround* m_backGround = nullptr;
 			nsBackGround::SecretRoom* m_secretRoom = nullptr;
+			nsBackGround::DeadSkeleton* m_deadSkeleton = nullptr;
 			//プレイヤー
 			nsPlayer::Player* m_player = nullptr;
 			//懐中電灯
@@ -98,7 +99,7 @@ namespace nsHikageri
 			//Level m_level;
 
 			//ゲームの進行段階
-			EnGameSteps m_gameStep = enGameStep_04;
+			EnGameSteps m_gameStep = enGameStep_num;
 			bool m_canGoNextStepFlag = false;
 
 			//最後の逃走劇関連

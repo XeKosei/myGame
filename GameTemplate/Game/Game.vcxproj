@@ -301,6 +301,7 @@
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Chandelier.cpp" />
     <ClCompile Include="ChandelierManager.cpp" />
+    <ClCompile Include="DeadSkeleton.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -448,6 +449,7 @@
     <ClInclude Include="Chandelier.h" />
     <ClInclude Include="ChandelierManager.h" />
     <ClInclude Include="CUtil.h" />
+    <ClInclude Include="DeadSkeleton.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Enemy.h" />
