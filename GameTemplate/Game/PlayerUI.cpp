@@ -35,7 +35,7 @@ namespace nsHikageri
 			m_hazySprite->SetScale({ 1.0f,1.0f,1.0f });
 
 			//ポーチアイテムの画面表示
-			m_itemFont = NewGO<FontRender>(2);
+			m_itemFont = NewGO<FontRender>(3);
 			m_itemFont->SetText(L"");
 			m_itemFont->SetScale(INI_ITEMFONT_SCALE);
 			m_itemFont->SetPosition(INI_ITEMFONT_POS);
@@ -44,7 +44,7 @@ namespace nsHikageri
 			m_itemFont->SetShadowOffset(1.0f);
 			m_itemFont->SetShadowColor({ 0.0f,0.0f,0.0f,1.0f });
 
-			m_itemNumFont = NewGO<FontRender>(2);
+			m_itemNumFont = NewGO<FontRender>(3);
 			m_itemNumFont->SetText(L"");
 			m_itemNumFont->SetScale(INI_ITEMNUMFONT_SCALE);
 			m_itemNumFont->SetPosition(INI_ITEMNUMFONT_POS);
@@ -56,7 +56,7 @@ namespace nsHikageri
 			for (int no = 0; no < PlayerPouch::enItem_num; no++)
 			{
 				m_itemSprite[no] = NewGO<SpriteRender>(2);
-				m_itemSprite[no]->Init(ITEMSPRITE_FILEPATH[no],500,500 );
+				m_itemSprite[no]->Init(ITEMSPRITE_FILEPATH[no],1000,750 );
 				m_itemSprite[no]->SetPosition(INI_ITEMSPRITE_POS);
 				m_itemSprite[no]->SetScale({0.0f,0.0f,0.0f});
 			}
@@ -140,7 +140,7 @@ namespace nsHikageri
 			m_itemSpriteNum = itemKind;
 
 			m_itemFont->SetText(ITEM_NAME[itemKind]);
-			m_itemNumFont->SetText(L" x " + std::to_wstring(itemNum));
+			m_itemNumFont->SetText(L"x" + std::to_wstring(itemNum));
 			m_itemSprite[itemKind]->SetScale(INI_ITEMSPRITE_SCALE);			
 		}
 

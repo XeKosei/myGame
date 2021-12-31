@@ -106,15 +106,15 @@ namespace nsHikageri
 			static const float DYING_MAX_ADD_ALPHA = 100.0f;	//死んだときのアルファ値の最大加算値
 				
 			///////////////////////////////ポーチアイテム関連
-			static const Vector2 INI_ITEMFONT_POS = { -480.0f, -220.0f };	//ポーチアイテムのフォントの位置
-			static const float INI_ITEMFONT_SCALE = 0.65f;	//ポーチアイテムのフォントのスケール
-			static const Vector2 INI_ITEMNUMFONT_POS = { -480.0f, -260.0f };	//ポーチアイテムの数の表示位置
-			static const float INI_ITEMNUMFONT_SCALE = 0.65f;	//アイテム数のフォントのスケール
+			static const Vector2 INI_ITEMFONT_POS = { -550.0f, -285.0f };	//ポーチアイテムのフォントの位置
+			static const float INI_ITEMFONT_SCALE = 0.55f;	//ポーチアイテムのフォントのスケール
+			static const Vector2 INI_ITEMNUMFONT_POS = { -425.0f, -285.0f };	//ポーチアイテムの数の表示位置
+			static const float INI_ITEMNUMFONT_SCALE = 0.6f;	//アイテム数のフォントのスケール
 
 			//アイテム名
 			static const std::wstring ITEM_NAME[PlayerPouch::enItem_num] = {
-				L"電池", L"精神安定剤" , L"赤色の鍵", L"青色の鍵", L"緑色の鍵",
-				L"黄色の鍵", L"紫色の鍵", L"最後の鍵" };
+				L"   電池   ", L"精神安定剤" , L" 赤色の鍵", L" 青色の鍵", L" 緑色の鍵",
+				L" 黄色の鍵", L" 紫色の鍵", L" 最後の鍵" };
 
 			//アイテムアイコンのスプライトのファイルパス
 			static const char* ITEMSPRITE_FILEPATH[PlayerPouch::enItem_num] = {
@@ -127,7 +127,7 @@ namespace nsHikageri
 				"Assets/Image/PurpleKeyIcon.DDS",
 				"Assets/Image/WhiteKeyIcon.DDS"
 			};
-			static const Vector3 INI_ITEMSPRITE_POS = {-540.0f, -260.0f, 0.0f};	//アイテムアイコンの位置
+			static const Vector3 INI_ITEMSPRITE_POS = {-490.0f, -260.0f, 0.0f};	//アイテムアイコンの位置
 			static const Vector3 INI_ITEMSPRITE_SCALE = {0.2f,0.2f,0.2f};	//アイテムアイコンの大きさ
 
 			///////////////////////////////バッテリー関連
