@@ -26,6 +26,8 @@ namespace nsHikageri
 				enGameStep_04,
 				enGameStep_05,
 				enGameStep_06,
+				enGameStep_07,
+				enGameStep_08,
 				enGameStep_GameOver,
 				enGameStep_GameClear,
 				enGameStep_num
@@ -42,6 +44,9 @@ namespace nsHikageri
 			void ExecuteUpdateStep03();
 			void ExecuteUpdateStep04();
 			void ExecuteUpdateStep05();
+			void ExecuteUpdateStep06();
+			void ExecuteUpdateStep07();
+			void ExecuteUpdateStep08();
 
 			/// @brief ゲーム進行を次へ進めるかどうかのフラグ
 			/// @param flag 進める:true 進めない:false
@@ -99,12 +104,8 @@ namespace nsHikageri
 			//Level m_level;
 
 			//ゲームの進行段階
-			EnGameSteps m_gameStep = enGameStep_num;
+			EnGameSteps m_gameStep = enGameStep_01;
 			bool m_canGoNextStepFlag = false;
-
-			//最後の逃走劇関連
-			bool m_canSpawnFinalEnemy = true;
-			nsEnemy::Enemy* m_finalEnemy[5] = {nullptr,nullptr,nullptr,nullptr,nullptr};
 		};
 	}
 }

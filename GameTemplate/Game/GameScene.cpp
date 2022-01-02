@@ -63,14 +63,6 @@ namespace nsHikageri
 				DeleteGO(m_pointLight);
 
 			DeleteGO(m_dirLig);
-
-			if (m_canSpawnFinalEnemy == false)
-			{
-				for (int no = 0; no < 5; no++)
-				{
-					DeleteGO(m_finalEnemy[no]);
-				}
-			}
 		}
 
 		bool GameScene::Start()
@@ -93,8 +85,8 @@ namespace nsHikageri
 				m_enemy[no] = NewGO<nsEnemy::Enemy>(0, "enemy");
 				m_enemy[no]->SetPlayer(m_player);
 			}
-			m_enemy[1]->SetIniSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_3);
-			m_enemy[2]->SetIniSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_6);
+			m_enemy[1]->SetIniSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_None);
+			m_enemy[2]->SetIniSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_None);
 
 			//ステージを作成
 			m_backGround = NewGO<nsBackGround::BackGround>(0, "backGround");
@@ -273,7 +265,7 @@ namespace nsHikageri
 			m_pointLight = NewGO<PointLight>(0);
 			m_pointLight->SetColor({500.0f,500.0f,500.0f});
 			m_pointLight->SetRange(2000.0f);
-			m_pointLight->SetPosition({2200.0f,0.0f, -4800.0f});
+			m_pointLight->SetPosition({11000.0f,0.0f, 5200.0f});
 
 			return true;
 		}
@@ -305,6 +297,18 @@ namespace nsHikageri
 				GameManagement();
 				ExecuteUpdateStep05();
 				break;
+			case enGameStep_06:
+				GameManagement();
+				ExecuteUpdateStep06();
+				break;
+			case enGameStep_07:
+				GameManagement();
+				ExecuteUpdateStep07();
+				break;
+			case enGameStep_08:
+				GameManagement();
+				ExecuteUpdateStep08();
+				break;
 			case enGameStep_num:
 				GameManagement();
 			default:
@@ -320,7 +324,7 @@ namespace nsHikageri
 				m_gameOver = NewGO<GameOver>(0);
 				m_gameOver->SetGameScene(this);
 			}
-			if (m_player->GetPlayerMove()->GetPosition().z <= -4000.0f)
+			if (m_player->GetPlayerMove()->GetPosition().x >= 11400.0f)
 			{
 				m_gameStep = enGameStep_GameClear;
 				m_gameClear = NewGO<GameClear>(0);
@@ -346,9 +350,14 @@ namespace nsHikageri
 		{
 			if (m_eyeWall[0]->GetDisapperFlag())
 			{
+				//エネミー一体目の配置位置を変更
 				m_enemy[0]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_2);
 				m_enemy[0]->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
 				m_enemy[0]->GetEnemySearchPlayer()->CalcNextSearchPos();			
+				//エネミー二体目を配置
+				m_enemy[1]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_3);
+				m_enemy[1]->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
+				m_enemy[1]->GetEnemySearchPlayer()->CalcNextSearchPos();
 
 				m_gameStep = enGameStep_04;
 			}
@@ -357,32 +366,65 @@ namespace nsHikageri
 		{
 			if (m_door[4]->GetUnlockFlag())
 			{
+				//エネミー一体目の配置位置を変更
 				m_enemy[0]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_4);
 				m_enemy[0]->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
 				m_enemy[0]->GetEnemySearchPlayer()->CalcNextSearchPos();
+				//エネミー二体目の配置位置を変更
 				m_enemy[1]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_5);
 				m_enemy[1]->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
 				m_enemy[1]->GetEnemySearchPlayer()->CalcNextSearchPos();
+				//エネミー三体目を配置
+				m_enemy[2]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_6);
+				m_enemy[2]->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
+				m_enemy[2]->GetEnemySearchPlayer()->CalcNextSearchPos();
+
 				m_gameStep = enGameStep_05;
 			}
 		}
 		void GameScene::ExecuteUpdateStep05()
 		{
-			if (m_canSpawnFinalEnemy)
+			if (m_player->GetFlashLight()->GetAbilityMedousaEye()->GetAbilityActiveFlag())
 			{
-				/*Vector3 plPos = m_player->GetPlayerMove()->GetPosition();
-				if (plPos.x >= 2000.0f
-					&& plPos.z > 4000.0f)
-				{
-					for (int no = 0; no < 5; no++)
-					{
-						m_finalEnemy[no] = NewGO<nsEnemy::Enemy>(0);
-						m_finalEnemy[no]->SetIniPos({ 2200.0f,0.0f, 6800.0f });
-						m_finalEnemy[no]->SetEnemyState(nsEnemy::Enemy::enState_Chase);
-					}
-					m_canSpawnFinalEnemy = false;
-				}*/
+				//エネミー二体目をいなくする
+				m_enemy[1]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_None);
+				m_enemy[1]->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
+				m_enemy[1]->GetEnemySearchPlayer()->CalcNextSearchPos();
+				//エネミー三体目をいなくする
+				m_enemy[2]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_None);
+				m_enemy[2]->SetEnemyState(nsEnemy::Enemy::enState_SearchPlayer);
+				m_enemy[2]->GetEnemySearchPlayer()->CalcNextSearchPos();
+
+				m_gameStep = enGameStep_06;
 			}
+		}
+		void GameScene::ExecuteUpdateStep06()
+		{	
+			if (m_door[5]->GetUnlockFlag())
+			{
+				m_gameStep = enGameStep_07;
+			}
+		}
+
+		void GameScene::ExecuteUpdateStep07()
+		{
+			Vector3 plPos = m_player->GetPlayerMove()->GetPosition();
+			if (plPos.x >= 6500.0f)
+			{			
+				//エネミー二体目を配置
+				m_enemy[1]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_Last1);
+				m_enemy[1]->SetEnemyState(nsEnemy::Enemy::enState_Chase);
+				//エネミー三体目を配置
+				m_enemy[2]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_Last2);
+				m_enemy[2]->SetEnemyState(nsEnemy::Enemy::enState_Chase);
+				
+				m_gameStep = enGameStep_08;
+			}
+		}
+		void GameScene::ExecuteUpdateStep08()
+		{
+
+
 		}
 	}
 }

@@ -160,6 +160,20 @@ namespace nsHikageri
 				PushSearchPos({ 600.0f,0.0f,6400.0f });
 				PushSearchPos({ -200.0f,0.0f,7200.0f });
 				break;
+			case enSearchArea_Last1:
+				PushSearchPos({ 2200,0.0f,6000.0f });
+				PushSearchPos({ 11800.0f,0.0f,5200.0f });
+				break;
+			case enSearchArea_Last2:
+				PushSearchPos({ 2200,0.0f,5600.0f });
+				PushSearchPos({ 11800.0f,0.0f,5200.0f });
+				break;
+			case enSearchArea_None:
+				PushSearchPos({20000.0f,0.0f,20000.0f});
+				PushSearchPos({ 20800.0f,0.0f,20000.0f });
+				PushSearchPos({ 20000.0f,0.0f,20400.0f });
+				PushSearchPos({ 20800.0f,0.0f,20400.0f });
+				break;
 			default:
 				break;
 			}

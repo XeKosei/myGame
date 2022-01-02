@@ -14,6 +14,9 @@ namespace nsHikageri
 				enSearchArea_4,
 				enSearchArea_5,
 				enSearchArea_6,
+				enSearchArea_Last1,
+				enSearchArea_Last2,
+				enSearchArea_None,
 				enSearchArea_num
 			};
 

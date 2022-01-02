@@ -28,6 +28,10 @@ namespace nsHikageri
 			/// @brief アビリティが解放されているかどうかを設定する。
 			/// @param flag 解放するかどうか
 			void SetAbilityActiveFlag(bool flag) { m_abilityAcitveFlag = flag; }
+
+			/// @brief アビリティが解放されているかどうかを取得
+			/// @return アビリティ解放のフラグ
+			bool GetAbilityActiveFlag() { return m_abilityAcitveFlag; }
 		private:
 			//フラッシュライト
 			FlashLight* m_flashLight = nullptr;
