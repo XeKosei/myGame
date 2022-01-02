@@ -14,7 +14,7 @@ namespace nsHikageri
 		{
 			m_player = pl;
 
-			m_blackSprite = NewGO<SpriteRender>(0);
+			m_blackSprite = NewGO<SpriteRender>(2);
 			m_blackSprite->Init("Assets/Image/Black.DDS", 1280, 720);
 			m_blackSprite->SetMulColor({ 0.0f,0.0f,0.0f,0.0f });
 			m_blackOutFlag = true;
