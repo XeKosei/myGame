@@ -156,23 +156,31 @@ namespace nsHikageri
 
 				//エネミー
 				//フラッシュがエネミーの正面に当たっているならば
-				if (Dot(strobeDir, m_abilityManager->GetEnemy()->GetEnemyMove()->GetDirection()) <= 0.0f)
-				{
-					//エネミーの頭がフラッシュの範囲だったかどうかを調べる。
-					bool hitFlag = CheckHitFlash(m_abilityManager->GetEnemy()->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head"));
-					//trueならばエネミーを怯ませる。
-					if (hitFlag)
+				QueryGOs<nsEnemy::Enemy>("enemy", [this, strobeDir](nsEnemy::Enemy* enemy)->bool
 					{
-						//相手が噛みつき状態だったなら、
-						if (m_abilityManager->GetEnemy()->GetEnemyState() == nsEnemy::Enemy::enState_Attack)
+						if (Dot(strobeDir, enemy->GetEnemyMove()->GetDirection()) <= 0.0f)
 						{
-							m_abilityManager->GetEnemy()->GetEnemyStress()->AddStress(600.0f);
-						}
+							//エネミーの頭がフラッシュの範囲だったかどうかを調べる。
+							bool hitFlag = CheckHitFlash(enemy->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head"));
+							//trueならばエネミーを怯ませる。
+							if (hitFlag)
+							{
+								enemy->GetEnemyStress()->AddStress(35.0f);
 
-						//相手は怯む。
-						m_abilityManager->GetEnemy()->SetEnemyState(nsEnemy::Enemy::enState_Flinch);				
+								//相手が噛みつき状態だったなら、
+								if (enemy->GetEnemyState() == nsEnemy::Enemy::enState_Attack)
+								{
+									enemy->GetEnemyStress()->AddStress(30.0f);
+								}
+
+								//相手は怯む。
+								enemy->SetEnemyState(nsEnemy::Enemy::enState_Flinch);				
+							}
+						}
+						return true;
 					}
-				}
+				);
+
 				//目の壁
 				QueryGOs<nsGimmick::EyeWall>("eyeWall", [this, strobeDir](nsGimmick::EyeWall* eyeWall)->bool
 					{

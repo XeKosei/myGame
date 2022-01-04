@@ -419,9 +419,6 @@
     <ClCompile Include="SecretRoom.cpp">
       <Filter>ソース ファイル\Hikageri\BackGround</Filter>
     </ClCompile>
-    <ClCompile Include="AbilityManager.cpp">
-      <Filter>ソース ファイル\Hikageri\FlashLight</Filter>
-    </ClCompile>
     <ClCompile Include="EyeWall.cpp">
       <Filter>ソース ファイル\Hikageri\Gimmick</Filter>
     </ClCompile>
@@ -846,9 +843,6 @@
     </ClInclude>
     <ClInclude Include="TknFile.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
-    </ClInclude>
-    <ClInclude Include="AbilityManager.h">
-      <Filter>ヘッダー ファイル\Hikageri\FlashLight</Filter>
     </ClInclude>
     <ClInclude Include="SecretRoom.h">
       <Filter>ヘッダー ファイル\Hikageri\BackGround</Filter>

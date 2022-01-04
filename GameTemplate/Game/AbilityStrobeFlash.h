@@ -34,10 +34,6 @@ namespace nsHikageri
 			/// @brief チャージ完了後のSE
 			void PlayChargedSE();
 
-			/// @brief アビリティマネージャーを設定
-			/// @param abilityManager アビリティマネージャー
-			void SetAbilityManager(AbilityManager* abilityManager) { m_abilityManager = abilityManager; }
-
 			/// @brief ストロボフラッシュのチャージが完了しているかどうかを取得
 			/// @return チャージ完了:true 未完了:false
 			bool GetIsFinishStrobeCharge() { if (m_strobeChargeCount <= 0) { return true; } else { return false; } }
@@ -49,7 +45,6 @@ namespace nsHikageri
 			nsBackGround::BackGround* m_backGround = nullptr;
 			//フラッシュライト
 			FlashLight* m_flashLight = nullptr;
-			AbilityManager* m_abilityManager = nullptr;
 
 			//ストロボフラッシュをチャージするカウント
 			int m_strobeChargeCount = 0;

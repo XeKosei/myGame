@@ -19,10 +19,6 @@ namespace nsHikageri
 			/// @param pl フラッシュライトに参照
 			void SetFlashLight(FlashLight* flashLight) { m_flashLight = flashLight; };
 
-			/// @brief アビリティマネージャーを設定
-			/// @param abilityManager アビリティマネージャー
-			void SetAbilityManager(AbilityManager* abilityManager) { m_abilityManager = abilityManager; }
-
 			/// @brief アビリティが解放されているかどうかを設定する。
 			/// @param flag 解放するかどうか
 			void SetAbilityActiveFlag(bool flag) { m_abilityAcitveFlag = flag; }
@@ -31,7 +27,6 @@ namespace nsHikageri
 		private:
 			//フラッシュライト
 			FlashLight* m_flashLight = nullptr;
-			AbilityManager* m_abilityManager = nullptr;
 
 			//アビリティを発動中かどうか
 			bool m_useAbility = false;

@@ -28,26 +28,35 @@ namespace nsHikageri
 
 		void Chandelier::Update()
 		{
-			//プレイヤーとエネミーの位置
-			Vector3 playerPos = m_player->GetPlayerMove()->GetPosition();
-			Vector3 enemyPos = m_enemy->GetEnemyMove()->GetPosition();
-
-			//プレイヤーが近くにいるならば、
-			if ((playerPos - m_position).Length() <= CHANDELIER_FORCE_RANGE
-				&& m_enemy->GetEnemyState() != nsEnemy::Enemy::enState_Chase)
+			//計算をするならば
+			if (m_executeFlag)
 			{
-				//プレイヤーは安心できる。
-				m_player->GetPlayerSanity()->SetReliefFlag(true);
-			}
+				//プレイヤーとエネミーの位置
+				Vector3 playerPos = m_player->GetPlayerMove()->GetPosition();
 
-			//エネミーが近くにいるならば、
-			if ((enemyPos - m_position).Length() <= CHANDELIER_FORCE_RANGE)
-			{
-				m_enemy->GetEnemyMove()->SetSlowMoveFlag(true);
-				if (m_enemy->GetEnemyState() == nsEnemy::Enemy::enState_Chase)
+				//プレイヤーが近くにいるならば、
+				if ((playerPos - m_position).Length() <= CHANDELIER_FORCE_RANGE)
 				{
-					m_enemy->GetEnemyStress()->AddStress(CHANDELIER_ADD_STRESS_SPEED);
+					//プレイヤーは安心できる。
+					m_player->GetPlayerSanity()->SetReliefFlag(true);
 				}
+
+				QueryGOs<nsEnemy::Enemy>("enemy", [this](nsEnemy::Enemy* enemy)->bool
+					{
+						Vector3 enemyPos = enemy->GetEnemyMove()->GetPosition();
+
+						//エネミーが近くにいるならば、
+						if ((enemyPos - m_position).Length() <= CHANDELIER_FORCE_RANGE)
+						{
+							enemy->GetEnemyMove()->SetSlowMoveFlag(true);
+							if (enemy->GetEnemyState() == nsEnemy::Enemy::enState_Chase)
+							{
+								enemy->GetEnemyStress()->AddStress(CHANDELIER_ADD_STRESS_SPEED);
+							}
+						}
+						return true;
+					}
+				);
 			}
 		}
 	}

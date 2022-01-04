@@ -3,7 +3,10 @@ namespace nsHikageri
 {
 	namespace nsGameScene
 	{
-
+		namespace nsGameSceneConstant
+		{
+			static const int ENEMY_NUM = 3;	//“G‚Ì”
+		}
 
 		namespace nsGameOverConstant
 		{

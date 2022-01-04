@@ -1,14 +1,15 @@
 #pragma once
 #include "FlashLightAction.h"
 #include "FlashLightBattery.h"
-#include "AbilityManager.h"
 #include "AbilityStrobeFlash.h"
 #include "AbilityClairvoyance.h"
 #include "AbilityMedousaEye.h"
+
+#include "GameSceneConstant.h"
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
-
+	namespace nsEnemy { class Enemy; }
 	namespace nsFlashLight
 	{
 		//懐中電灯
@@ -57,10 +58,13 @@ namespace nsHikageri
 
 			Vector3 GetModelPos() { return m_modelPos; }
 
+			/*/// @brief エネミーを取得
+			/// @return エネミー
+			nsEnemy::Enemy* GetEnemy() { return m_enemy; }*/
+
 			//懐中電灯関係のインスタンスにアクセスする
 			FlashLightAction* GetFlashLightAction() { return &m_flashLightAction; }
 			FlashLightBattery* GetFlashLightBattery() { return &m_flashLightBattery; }
-			AbilityManager* GetAbilityManager() { return &m_abilityManager; }
 			AbilityStrobeFlash* GetAbilityStrobeFlash() { return &m_abilityStrobeFlash; }
 			AbilityClairvoyance* GetAbilityClairvoyance() { return &m_abilityClairvoyance; }
 			AbilityMedousaEye* GetAbilityMedousaEye() { return &m_abilityMedousaEye; }
@@ -83,10 +87,11 @@ namespace nsHikageri
 			//フラッシュライト関連
 			FlashLightAction m_flashLightAction;
 			FlashLightBattery m_flashLightBattery;
-			AbilityManager m_abilityManager;
 			AbilityStrobeFlash m_abilityStrobeFlash;
 			AbilityClairvoyance m_abilityClairvoyance;
 			AbilityMedousaEye m_abilityMedousaEye;
+
+			//nsEnemy::Enemy* m_enemy[nsGameScene::nsGameSceneConstant::ENEMY_NUM] = {nullptr, nullptr, nullptr};
 		};
 	}
 }

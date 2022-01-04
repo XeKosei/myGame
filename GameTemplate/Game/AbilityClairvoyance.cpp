@@ -50,8 +50,6 @@ namespace nsHikageri
 			//懐中電灯が付いていないとき、リセット
 			else
 			{
-				m_abilityManager->GetEnemy()->GetEnemyModel()->SetClairvoyanceCasterFlag(false);
-				m_abilityManager->GetSecretRoom()->GetSecretRoomModel()->SetClairvoyanceCasterFlag(false);
 				m_useAbility = false;
 			}
 		}

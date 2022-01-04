@@ -41,13 +41,9 @@ namespace nsHikageri
 			m_flashLightBattery.Init(this);
 
 			//アビリティ関連
-			m_abilityManager.Init(this);
 			m_abilityStrobeFlash.Init(this);
-			m_abilityStrobeFlash.SetAbilityManager(&m_abilityManager);
 			m_abilityClairvoyance.Init(this);
-			m_abilityClairvoyance.SetAbilityManager(&m_abilityManager);
 			m_abilityMedousaEye.Init(this);
-			m_abilityMedousaEye.SetAbilityManager(&m_abilityManager);
 
 			return true;
 		}

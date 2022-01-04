@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "FlashLightInclude.h"
 #include "EnemyInclude.h"
-#include "ItemKey.h"
-#include "Door.h"
 namespace nsHikageri
 {
 	namespace nsFlashLight
@@ -39,21 +37,21 @@ namespace nsHikageri
 					//ボタンを放すと
 					if (g_pad[0]->IsPress(enButtonRB2) == false)
 					{
-						//敵がストロボフラッシュを受けて怯んでいるならば
-						if (m_abilityManager->GetEnemy()->GetEnemyState() == nsEnemy::Enemy::enState_Flinch)
-						{
-							//石化させる
-							m_abilityManager->GetEnemy()->SetEnemyState(nsEnemy::Enemy::enState_Petrifaction);
-							//鍵を落とす(仮)
-							nsItem::ItemKey* itemKey = NewGO<nsItem::ItemKey>(0);
-							itemKey->SetPlayer(m_flashLight->GetPlayer());
-							itemKey->SetKeyColor(nsGimmick::Door::enDoorColor_White);
-							itemKey->SetPosition(m_abilityManager->GetEnemy()->GetEnemyMove()->GetPosition());
+						QueryGOs<nsEnemy::Enemy>("enemy", [this](nsEnemy::Enemy* enemy)->bool
+							{
+								//敵がストロボフラッシュを受けて怯んでいるならば
+								if (enemy->GetEnemyState() == nsEnemy::Enemy::enState_Flinch)
+								{
+									//石化させる
+									enemy->SetEnemyState(nsEnemy::Enemy::enState_Petrifaction);
+									
+									m_flashLight->GetFlashLightBattery()->ConsumBatteryLevel(INI_MEDOUSAEYEFLASH_BATTERY_COST);
 
-							m_flashLight->GetFlashLightBattery()->ConsumBatteryLevel(INI_MEDOUSAEYEFLASH_BATTERY_COST);
-
-							Reset();
-						}
+									Reset();
+								}
+								return true;
+							}
+						);
 					}
 				}
 				//ストロボフラッシュのチャージが完了していたら、

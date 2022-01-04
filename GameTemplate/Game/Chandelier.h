@@ -23,6 +23,8 @@ namespace nsHikageri
 			/// @param pl プレイヤーの参照
 			void SetPlayer(nsPlayer::Player* pl) { m_player = pl; };
 
+
+			void SetExecuteFlag(bool flag) { m_executeFlag = flag; }
 		private:
 			SkinModelRender* m_chandelierModel = nullptr;
 
@@ -31,6 +33,9 @@ namespace nsHikageri
 			//プレイヤーとエネミー
 			nsPlayer::Player* m_player = nullptr;
 			nsEnemy::Enemy* m_enemy = nullptr;
+
+			//シャンデリアの計算をするかのフラグ
+			bool m_executeFlag = false;
 		};
 	}
 }

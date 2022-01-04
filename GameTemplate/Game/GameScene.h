@@ -1,5 +1,5 @@
 #pragma once
-
+#include "GameSceneConstant.h"
 namespace nsHikageri
 {
 	namespace nsPlayer { class Player; }
@@ -15,6 +15,8 @@ namespace nsHikageri
 		class GameOver;
 		class GameClear;
 
+		using namespace nsGameSceneConstant;
+
 		class GameScene : public IGameObject
 		{
 		public:
@@ -28,6 +30,7 @@ namespace nsHikageri
 				enGameStep_06,
 				enGameStep_07,
 				enGameStep_08,
+				enGameStep_09,
 				enGameStep_GameOver,
 				enGameStep_GameClear,
 				enGameStep_num
@@ -47,6 +50,7 @@ namespace nsHikageri
 			void ExecuteUpdateStep06();
 			void ExecuteUpdateStep07();
 			void ExecuteUpdateStep08();
+			void ExecuteUpdateStep09();
 
 			/// @brief ゲーム進行を次へ進めるかどうかのフラグ
 			/// @param flag 進める:true 進めない:false
@@ -67,7 +71,7 @@ namespace nsHikageri
 			//懐中電灯
 			nsFlashLight::FlashLight* m_flashLight = nullptr;
 			//エネミー
-			nsEnemy::Enemy* m_enemy[3] = { nullptr, nullptr, nullptr };
+			nsEnemy::Enemy* m_enemy[ENEMY_NUM] = { nullptr, nullptr, nullptr };
 			//ディレクションライト
 			DirectionLight* m_dirLig = nullptr;
 
@@ -79,6 +83,7 @@ namespace nsHikageri
 			nsGimmick::EyeWall* m_eyeWall[3] = { nullptr, nullptr, nullptr };
 			//鍵
 			nsItem::ItemKey* m_key[5] = { nullptr, nullptr, nullptr,nullptr, nullptr };
+			nsItem::ItemKey* m_lastKey = nullptr;
 			//懐中電灯のパーツ
 			nsItem::ItemFlashLightParts* m_flashLightParts[3] = { nullptr, nullptr, nullptr };
 			//精神安定剤

@@ -12,10 +12,12 @@ namespace nsHikageri
 {
 	namespace nsGameScene
 	{
+		using namespace nsGameSceneConstant;
+
 		GameScene::~GameScene()
 		{
 			DeleteGO(m_player);
-			for (int no = 0; no < 3; no++)
+			for (int no = 0; no < ENEMY_NUM; no++)
 			{
 				DeleteGO(m_enemy[no]);
 			}
@@ -80,7 +82,7 @@ namespace nsHikageri
 			m_flashLight->SetPlayer(m_player);
 			
 			//エネミーを作成
-			for (int no = 0; no < 3; no++)
+			for (int no = 0; no < ENEMY_NUM; no++)
 			{
 				m_enemy[no] = NewGO<nsEnemy::Enemy>(0, "enemy");
 				m_enemy[no]->SetPlayer(m_player);
@@ -309,6 +311,10 @@ namespace nsHikageri
 				GameManagement();
 				ExecuteUpdateStep08();
 				break;
+			case enGameStep_09:
+				GameManagement();
+				ExecuteUpdateStep09();
+				break;
 			case enGameStep_num:
 				GameManagement();
 			default:
@@ -400,28 +406,41 @@ namespace nsHikageri
 		}
 		void GameScene::ExecuteUpdateStep06()
 		{	
-			if (m_door[5]->GetUnlockFlag())
+			if (m_enemy[0]->GetEnemyState() == nsEnemy::Enemy::enState_Petrifaction)
 			{
+				//鍵を落とす
+				m_lastKey = NewGO<nsItem::ItemKey>(0);
+				m_lastKey->SetPlayer(m_flashLight->GetPlayer());
+				m_lastKey->SetKeyColor(nsGimmick::Door::enDoorColor_White);
+				m_lastKey->SetPosition(m_enemy[0]->GetEnemyMove()->GetPosition());
+
 				m_gameStep = enGameStep_07;
 			}
 		}
 
 		void GameScene::ExecuteUpdateStep07()
 		{
+			if (m_door[5]->GetUnlockFlag())
+			{
+				m_gameStep = enGameStep_08;
+			}
+		}
+		void GameScene::ExecuteUpdateStep08()
+		{
 			Vector3 plPos = m_player->GetPlayerMove()->GetPosition();
 			if (plPos.x >= 6500.0f)
-			{			
+			{
 				//エネミー二体目を配置
 				m_enemy[1]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_Last1);
 				m_enemy[1]->SetEnemyState(nsEnemy::Enemy::enState_Chase);
 				//エネミー三体目を配置
 				m_enemy[2]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_Last2);
 				m_enemy[2]->SetEnemyState(nsEnemy::Enemy::enState_Chase);
-				
-				m_gameStep = enGameStep_08;
+
+				m_gameStep = enGameStep_09;
 			}
 		}
-		void GameScene::ExecuteUpdateStep08()
+		void GameScene::ExecuteUpdateStep09()
 		{
 
 
