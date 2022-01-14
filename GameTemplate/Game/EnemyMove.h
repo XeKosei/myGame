@@ -52,6 +52,9 @@ namespace nsHikageri
 			/// @return エネミーの移動速度
 			Vector3 GetVelocity() { return m_velocity; }
 
+			/// @brief 速度をリセット
+			void ResetVelocity() { m_velocity = Vector3::Zero; }
+
 			/// @brief エネミーが向かう位置を設定
 			/// @param pos エネミーが向かう位置
 			void SetTargetPos(Vector3 pos) { m_targetPos = pos; }
@@ -60,7 +63,7 @@ namespace nsHikageri
 			/// @return エネミーのターゲット位置
 			Vector3 GetTargetPos() { return m_targetPos; }
 
-			/// @brief エネミーの移動の速さを取得
+			/// @brief エネミーの移動の速さを設定
 			/// @param speed エネミーの移動の速さ
 			void SetMoveSpeed(float speed) { m_moveSpeed = speed; };
 

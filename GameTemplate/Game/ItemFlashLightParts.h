@@ -40,6 +40,10 @@ namespace nsHikageri
 			Vector3 m_position = Vector3::Zero;
 
 			EnFlashLightPartsTypes m_partsType = enFlashLightPartsTypes_StrobeFlash;
+
+			//光るエフェクト
+			Effect m_shineEff;
+			Vector3 m_shineEffPos = Vector3::Zero;
 		};
 	}
 }

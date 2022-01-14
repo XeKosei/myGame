@@ -42,6 +42,9 @@ namespace nsHikageri
 				if (m_key[i] != nullptr)
 					DeleteGO(m_key[i]);
 			}
+			if (m_lastKey != nullptr)
+				DeleteGO(m_lastKey);
+			
 			for (int i = 0; i < 3; i++)
 			{
 				if (m_flashLightParts[i] != nullptr)
@@ -139,7 +142,7 @@ namespace nsHikageri
 
 			//鍵テスト
 			Vector3 keyPos[5] = {
-				{1500.0f, 145.0f, 0.0f},
+				{1500.0f, 145.0f, 50.0f},
 				{ -2290.0f, 145.0f, 400.0f },
 				{110.0f, 145.0f, 2800.0f},
 				{-10800.0f,145.0f, 2200.0f},
@@ -157,6 +160,13 @@ namespace nsHikageri
 			m_key[2]->SetKeyColor(nsGimmick::Door::enDoorColor_Green);
 			m_key[3]->SetKeyColor(nsGimmick::Door::enDoorColor_Yellow);
 			m_key[4]->SetKeyColor(nsGimmick::Door::enDoorColor_Purple);
+
+			//最後の鍵
+			m_lastKey = NewGO<nsItem::ItemKey>(0);
+			m_lastKey->SetPlayer(m_flashLight->GetPlayer());
+			m_lastKey->SetKeyColor(nsGimmick::Door::enDoorColor_White);
+			Vector3 lastKeyPos = { 20000.0f, 0.0f, 20000.0f };
+			m_lastKey->SetPosition(lastKeyPos);
 
 			//懐中電灯のパーツテスト
 			Vector3 partsPos[3] = {
@@ -243,15 +253,16 @@ namespace nsHikageri
 			}
 			
 			//メッセージペーパー
-			Vector3 messagePaperPos[5] = {
-				{-1490.0f, 145.0f, 1200.0f},
+			Vector3 messagePaperPos[6] = {
+				{1500.0f, 145.0f, -100.0f},
 				{-1700.0f, 145.0f, -3300.0f},
 				{-200.0f, 145.0f,-1500.0f },
 				{-7900.0f, 145.0f,1700.0f },
-				{1800.0f, 145.0f, 10200.0f}
+				{1800.0f, 145.0f, 10200.0f},
+				{3900.0f, 5.0f, 5250.0f},
 			};
 
-			for (int no = 0; no < 5; no++)
+			for (int no = 0; no < 6; no++)
 			{
 				m_messagePaper[no] = NewGO<nsItem::ItemMessagePaper>(0);
 				m_messagePaper[no]->SetPlayer(m_player);
@@ -262,7 +273,8 @@ namespace nsHikageri
 			m_messagePaper[2]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_02);
 			m_messagePaper[3]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_03);
 			m_messagePaper[4]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_04);
-			
+			m_messagePaper[5]->SetMessagePaperText(nsItem::ItemMessagePaper::enMessagePaperKind_05);
+
 			//出口の明かり
 			m_pointLight = NewGO<PointLight>(0);
 			m_pointLight->SetColor({500.0f,500.0f,500.0f});
@@ -274,8 +286,32 @@ namespace nsHikageri
 
 		void GameScene::Update()
 		{
-			m_dirLig->SetDirection(g_camera3D->GetForward());
+			if (m_chaseBGMCanPlayFlag)
+			{
+				if (m_enemy[0]->GetEnemyState() == nsEnemy::Enemy::enState_Chase ||
+					m_enemy[0]->GetEnemyState() == nsEnemy::Enemy::enState_Scream
+					)
+				{
+					m_chaseBGMCanPlayFlag = false;
 
+					m_chaseBGM = NewGO<SoundSource>(0);
+					m_chaseBGM->Init(L"Assets/sound/ChaseBGM.wav");
+					m_chaseBGM->SetVolume(2.0f);
+					m_chaseBGM->Play(true);
+				}
+			}
+			else
+			{
+				if (m_enemy[0]->GetEnemyState() == nsEnemy::Enemy::enState_SearchPlayer ||
+					m_enemy[0]->GetEnemyState() == nsEnemy::Enemy::enState_Petrifaction)
+				{
+					DeleteGO(m_chaseBGM);
+					m_chaseBGM = nullptr;
+					m_chaseBGMCanPlayFlag = true;
+				}
+			}
+
+			m_dirLig->SetDirection(g_camera3D->GetForward());
 
 			switch (m_gameStep)
 			{
@@ -335,6 +371,11 @@ namespace nsHikageri
 				m_gameStep = enGameStep_GameClear;
 				m_gameClear = NewGO<GameClear>(0);
 				m_gameClear->SetGameScene(this);
+			}
+			//最後の通路はプレイヤーのSAN値を減らさない。
+			if (m_player->GetPlayerMove()->GetPosition().x >= 2500.0f)
+			{
+				m_player->GetPlayerSanity()->SetReliefFlag(true);
 			}
 		}
 
@@ -409,9 +450,6 @@ namespace nsHikageri
 			if (m_enemy[0]->GetEnemyState() == nsEnemy::Enemy::enState_Petrifaction)
 			{
 				//鍵を落とす
-				m_lastKey = NewGO<nsItem::ItemKey>(0);
-				m_lastKey->SetPlayer(m_flashLight->GetPlayer());
-				m_lastKey->SetKeyColor(nsGimmick::Door::enDoorColor_White);
 				m_lastKey->SetPosition(m_enemy[0]->GetEnemyMove()->GetPosition());
 
 				m_gameStep = enGameStep_07;
@@ -420,8 +458,10 @@ namespace nsHikageri
 
 		void GameScene::ExecuteUpdateStep07()
 		{
-			if (m_door[5]->GetUnlockFlag())
+			Vector3 plPos = m_player->GetPlayerMove()->GetPosition();
+			if (plPos.x >= 3000.0f)
 			{
+				m_flashLight->SetIsBreak(true);
 				m_gameStep = enGameStep_08;
 			}
 		}

@@ -4,6 +4,7 @@
 #include "AbilityStrobeFlash.h"
 #include "AbilityClairvoyance.h"
 #include "AbilityMedousaEye.h"
+#include "FlashLightConstant.h"
 
 #include "GameSceneConstant.h"
 namespace nsHikageri
@@ -19,6 +20,9 @@ namespace nsHikageri
 			~FlashLight();
 			bool Start();
 			void Update();
+
+			//壊れる処理
+			void BreakMove();
 
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
@@ -62,6 +66,21 @@ namespace nsHikageri
 			/// @return エネミー
 			nsEnemy::Enemy* GetEnemy() { return m_enemy; }*/
 
+			/// @brief 懐中電灯が壊れているかどうかを設定
+			/// @param isBreak 壊れているかどうか
+			void SetIsBreak(bool isBreak) { m_isBreak = isBreak; }
+
+			//懐中電灯のライトが付く
+			void SpotLightOn() { 
+				m_spotLight->SetRange(nsFlashLightConstant::INI_FLASHLIGHT_RANGE);
+				nsHikageri::LightManager::GetInstance()->SetIsFlashLightSwitchOn(true, 0);
+			}
+			//懐中電灯のライトが消える
+			void SpotLightGoOut() {
+				m_spotLight->SetRange(0.0f);
+				nsHikageri::LightManager::GetInstance()->SetIsFlashLightSwitchOn(false, 0);
+			}
+
 			//懐中電灯関係のインスタンスにアクセスする
 			FlashLightAction* GetFlashLightAction() { return &m_flashLightAction; }
 			FlashLightBattery* GetFlashLightBattery() { return &m_flashLightBattery; }
@@ -90,6 +109,12 @@ namespace nsHikageri
 			AbilityStrobeFlash m_abilityStrobeFlash;
 			AbilityClairvoyance m_abilityClairvoyance;
 			AbilityMedousaEye m_abilityMedousaEye;
+
+			//壊れているかどうか
+			bool m_isBreak = false;
+			//壊れる処理中のカウント
+			int m_breakMoveCount = 0;
+			//
 
 			//nsEnemy::Enemy* m_enemy[nsGameScene::nsGameSceneConstant::ENEMY_NUM] = {nullptr, nullptr, nullptr};
 		};

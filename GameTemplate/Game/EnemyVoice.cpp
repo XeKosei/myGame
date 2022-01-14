@@ -57,7 +57,7 @@ namespace nsHikageri
 			{
 				//プレイヤーとの距離から、音量を設定
 				float dis = (m_enemy->GetEnemyMove()->GetPosition() - m_enemy->GetPlayer()->GetPlayerMove()->GetPosition()).Length();
-				float volume = max(0.01f, 1.0f - dis * 0.0003f);
+				float volume = max(0.01f, 1.0f - dis * 0.0002f);
 				m_voiceSS->SetVolume(volume);
 			}
 		}

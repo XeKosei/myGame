@@ -56,15 +56,11 @@ namespace nsHikageri
 		void ChandelierManager::Update()
 		{
 			//プレイヤーとの距離が近い二つにスポットライトとライトカメラを付ける。
-			m_chandelier[0]->SetExecuteFlag(false);
 			Vector3 plPos = m_player->GetPlayerMove()->GetPosition();
 			float toPlDis = (plPos - m_chandelierPos[0]).Length();
 			int cameraPosNo[2] = { 0,1 };
 			for (int no = 1; no < CHANDELIER_NUM; no++)
 			{
-				//計算をするかどうかのフラグをリセット
-				m_chandelier[no]->SetExecuteFlag(false);
-
 				float dis = (plPos - m_chandelierPos[no]).Length();
 				if (dis < toPlDis)
 				{

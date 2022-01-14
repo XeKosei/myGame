@@ -36,6 +36,8 @@ namespace nsHikageri
 
 			//シャンデリアの計算をするかのフラグ
 			bool m_executeFlag = false;
+
+			PointLight* m_pointLight = nullptr;
 		};
 	}
 }

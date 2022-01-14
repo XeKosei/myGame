@@ -36,6 +36,16 @@ namespace nsHikageri
 			m_synopsisFont->SetScale(SYNOPSISFONT_SCALE);
 			
 			m_firstMoveFlag = true;
+			
+			//曲を再生
+			m_titleBGM = NewGO<SoundSource>(0);
+			m_titleBGM->Init(L"Assets/sound/TitleBGM.wav");
+			m_titleBGM->Play(true);
+
+			//タイトル表示SE
+			SoundSource* titleDispSS = NewGO<SoundSource>(0);
+			titleDispSS->Init(L"Assets/sound/TitleDisp.wav");
+			titleDispSS->Play(false);
 
 			return true;
 		}
@@ -142,6 +152,9 @@ namespace nsHikageri
 				//タイトル画面を消す
 				if (g_pad[0]->IsTrigger(enButtonA))
 				{
+					//曲を消す
+					DeleteGO(m_titleBGM);
+
 					m_firstMoveFlag = false;
 					m_secondMoveFlag = false;
 					m_blinkingFlag = false;

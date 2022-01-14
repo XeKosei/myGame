@@ -44,6 +44,7 @@ namespace nsHikageri
 			/// @brief　次に徘徊する目的地を取得
 			/// @return 次の位置
 			Vector3 GetTargetSearchPos() { return m_searchPos[m_targetSearchPosNo]; }
+
 		private:
 			//エネミー
 			Enemy* m_enemy = nullptr;

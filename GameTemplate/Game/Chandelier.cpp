@@ -13,6 +13,7 @@ namespace nsHikageri
 		Chandelier::~Chandelier()
 		{
 			DeleteGO(m_chandelierModel);
+			DeleteGO(m_pointLight);
 		}
 
 		bool Chandelier::Start()
@@ -22,6 +23,11 @@ namespace nsHikageri
 			m_chandelierModel->Init("Assets/modelData/chandelier.tkm");
 			m_chandelierModel->SetPosition(m_position);
 			m_chandelierModel->SetSpotLightCasterFlag(false);
+
+			m_pointLight = NewGO<PointLight>(0);
+			m_pointLight->SetRange(250.0f);
+			m_pointLight->SetPosition(m_position);
+			m_pointLight->SetColor({50.0f,50.0f,50.0f});
 
 			return true;
 		}
@@ -48,7 +54,7 @@ namespace nsHikageri
 						//エネミーが近くにいるならば、
 						if ((enemyPos - m_position).Length() <= CHANDELIER_FORCE_RANGE)
 						{
-							enemy->GetEnemyMove()->SetSlowMoveFlag(true);
+							enemy->GetEnemyMove()->SetSlowMoveFlag(true);					
 							if (enemy->GetEnemyState() == nsEnemy::Enemy::enState_Chase)
 							{
 								enemy->GetEnemyStress()->AddStress(CHANDELIER_ADD_STRESS_SPEED);
@@ -57,6 +63,9 @@ namespace nsHikageri
 						return true;
 					}
 				);
+
+				//計算をするかどうかのフラグをリセット
+				SetExecuteFlag(false);
 			}
 		}
 	}

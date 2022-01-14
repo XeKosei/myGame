@@ -29,6 +29,10 @@ namespace nsHikageri
 			SkinModelRender* m_batteryModel = nullptr;
 
 			Vector3 m_position = Vector3::Zero;
+
+			//光るエフェクト
+			Effect m_shineEff;
+			Vector3 m_shineEffPos = Vector3::Zero;
 		};
 	}
 }

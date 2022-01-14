@@ -45,6 +45,9 @@ namespace nsHikageri
 			m_abilityClairvoyance.Init(this);
 			m_abilityMedousaEye.Init(this);
 
+			//壊れる処理のカウント
+			m_breakMoveCount = INI_BREAKMOVE_COUNT;
+
 			return true;
 		}
 
@@ -84,7 +87,14 @@ namespace nsHikageri
 			m_flashLightModel->SetPosition(m_modelPos);
 			m_spotLight->SetPosition(m_position);
 			nsHikageri::LightManager::GetInstance()->SetSpotLightCameraPosition(m_position, 0);
-		
+
+			//壊れているならば
+			if (m_isBreak)
+			{
+				BreakMove();
+				return;
+			}
+
 			//懐中電灯関係の処理
 			//if (m_player->GetPlayerState() == nsPlayer::Player::enState_Normal ||
 			//	m_player->GetPlayerState() == nsPlayer::Player::enState_Invincible )
@@ -96,5 +106,48 @@ namespace nsHikageri
 				m_abilityMedousaEye.ExecuteUpdate();
 			}
 		}
+
+		void FlashLight::BreakMove()
+		{
+			if (m_breakMoveCount > 0)
+			{
+				m_breakMoveCount--;
+
+				if (m_breakMoveCount == 99)
+				{
+					SpotLightGoOut();
+					m_player->GetPlayerUI()->SetBatteryUIDeleteFlag(true);
+					SoundSource* breakSS = NewGO<SoundSource>(0);
+					breakSS->Init(L"Assets/sound/FlashLightBreak.wav");
+					breakSS->Play(false);
+				}
+				else if (m_breakMoveCount == 98)
+					SpotLightOn();
+				else if (m_breakMoveCount == 75)
+					SpotLightGoOut();
+				else if (m_breakMoveCount == 74)
+					SpotLightOn();
+				else if (m_breakMoveCount == 70)
+					SpotLightGoOut();
+				else if (m_breakMoveCount == 69)
+					SpotLightOn();
+				else if (m_breakMoveCount == 50)
+					SpotLightGoOut();
+				else if (m_breakMoveCount == 45)
+					SpotLightOn();
+				else if (m_breakMoveCount == 35)
+					SpotLightGoOut();
+				else if (m_breakMoveCount == 25)
+					SpotLightOn();
+				else if (m_breakMoveCount == 12)
+					SpotLightGoOut();
+				else if (m_breakMoveCount == 1)
+					SpotLightOn();
+				else if (m_breakMoveCount == 0)
+					SpotLightGoOut();
+
+			}
+		}
+
 	}
 }

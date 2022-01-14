@@ -53,6 +53,10 @@ namespace nsHikageri
 			//ˆÚ“®ˆ—
 			if (m_slowMoveFlag)
 			{
+				if (m_velocity.Length() > ENEMY_SLOWWALK_SPEED)
+				{
+					ResetVelocity();
+				}
 				m_moveSpeed = ENEMY_SLOWWALK_SPEED;
 			}
 
@@ -118,6 +122,10 @@ namespace nsHikageri
 			//ˆÚ“®ˆ—
 			if (m_slowMoveFlag)
 			{
+				if (m_velocity.Length() > ENEMY_SLOWWALK_SPEED)
+				{
+					ResetVelocity();
+				}
 				m_moveSpeed = ENEMY_SLOWWALK_SPEED;
 			}
 

@@ -20,6 +20,9 @@ namespace nsHikageri
 
 		void EnemyVigilant::ExecuteUpdate()
 		{
+			//移動速度をリセット
+			m_enemy->GetEnemyMove()->ResetVelocity();
+
 			//エネミーの位置からプレイヤーの位置へのベクトルを求める
 			Vector3 toPlayerDis = m_enemy->GetPlayer()->GetPlayerMove()->GetPosition() - m_enemy->GetEnemyMove()->GetPosition();
 

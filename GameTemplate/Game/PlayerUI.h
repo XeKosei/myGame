@@ -25,6 +25,9 @@ namespace nsHikageri
 			void Init(Player* pl);
 			void ExecuteUpdate();
 
+			//バッテリーのUIを消す処理
+			void BatteryUIDelete();
+
 			//Hazyスプライトを設定する
 			void SetHazySprite();
 
@@ -42,6 +45,10 @@ namespace nsHikageri
 			/// @brief バッテリー表示を設定
 			/// @param batteryLevel バッテリー残量
 			void SetBatterySprite(float batteryLevel);
+
+			/// @brief バッテリーUIを消すフラグを設定
+			/// @param deleteFlag true:消す false消さない
+			void SetBatteryUIDeleteFlag(bool deleteFlag) { m_batteryUIDeleteFlag = deleteFlag; }
 		private:
 			//プレイヤー
 			Player* m_player = nullptr;
@@ -66,6 +73,11 @@ namespace nsHikageri
 			//バッテリー表示
 			SpriteRender* m_batterySprite[enBatteryDispTypes_num] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 			EnBatteryDispTypes m_batteryDispType = enBatteryDispTypes_moreThan00;
+			//バッテリーのUIを消すフラグ
+			bool m_batteryUIDeleteFlag = false;
+			//バッテリースプライトのカラー
+			Vector4 m_batterySpriteColor = { 1.0f,1.0f,1.0f,1.0f };
+
 		};
 	}
 }

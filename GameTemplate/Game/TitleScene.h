@@ -44,6 +44,9 @@ namespace nsHikageri
 
 			SpriteRender* m_blackSprite = nullptr;
 			Vector4 m_blackSpriteColor = {1.0f,1.0f,1.0f,1.0f};
+
+			//ƒ^ƒCƒgƒ‹‚Ì‹È
+			SoundSource* m_titleBGM = nullptr;
 		};
 	}
 }

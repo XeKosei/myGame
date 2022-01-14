@@ -17,6 +17,9 @@ namespace nsHikageri
 				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_None);
 
 			DeleteGO(m_batteryModel);
+
+			//エフェクトを停止
+			m_shineEff.Stop();
 		}
 		bool ItemBattery::Start()
 		{
@@ -25,11 +28,22 @@ namespace nsHikageri
 			m_batteryModel->Init("Assets/modelData/Battery.tkm");
 			m_batteryModel->SetPosition(m_position);
 
+			//光るエフェクト
+			m_shineEff.Init(u"Assets/effect/ItemEff.efk");
+			m_shineEff.SetScale({ 50.0f,50.0,50.0f });
+			m_shineEffPos = m_position;
+			m_shineEffPos.y += SHINE_EFF_HEIGHT;
+			m_shineEff.SetPosition(m_shineEffPos);
+			m_shineEff.Play();
+
 			return true;
 		}
 
 		void ItemBattery::Update()
 		{
+			//光るエフェクト
+			m_shineEff.Update();
+
 			Vector3 dis = m_position - m_player->GetPlayerCamera()->GetCameraPos();
 			Vector3 m_toPlayerDir = dis;
 			m_toPlayerDir.Normalize();

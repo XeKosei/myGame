@@ -12,6 +12,8 @@ namespace nsHikageri
 			static const Vector3 FLASHLIGHT_MODEL_POS_APPLY_VALUE = { 1.8f, -1.2f, 3.0f };	//懐中電灯のモデルの位置を計算するための値
 			static const Vector3 FLASHLIGHT_POS_APPLY_VALUE = { 50.0f, -20.0f, 0.0f };	//懐中電灯の本当の位置を計算するための値
 			static const int TO_SPOTLIGHTCAMERA_TARGET_DIS = 100;				//スポットライトの注視点までの距離
+		
+			static const int INI_BREAKMOVE_COUNT = 100;	//壊れる処理のカウントの初期値
 		}
 
 		namespace nsFlashLightActionConstant

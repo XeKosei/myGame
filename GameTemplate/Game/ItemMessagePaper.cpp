@@ -12,6 +12,9 @@ namespace nsHikageri
 		ItemMessagePaper::~ItemMessagePaper()
 		{
 			DeleteGO(m_paperModel);
+
+			//エフェクトを停止
+			m_shineEff.Stop();
 		}
 
 		bool ItemMessagePaper::Start()
@@ -21,11 +24,22 @@ namespace nsHikageri
 			m_paperModel->Init("Assets/modelData/Paper.tkm");
 			m_paperModel->SetPosition(m_position);
 
+			//光るエフェクト
+			m_shineEff.Init(u"Assets/effect/ItemEff.efk");
+			m_shineEff.SetScale({ 50.0f,50.0,50.0f });
+			m_shineEffPos = m_position;
+			m_shineEffPos.y += SHINE_EFF_HEIGHT;
+			m_shineEff.SetPosition(m_shineEffPos);
+			m_shineEff.Play();
+
 			return true;
 		}
 
 		void ItemMessagePaper::Update()
 		{
+			//光るエフェクト
+			m_shineEff.Update();
+
 			Vector3 dis = m_position - m_player->GetPlayerCamera()->GetCameraPos();
 			Vector3 m_toPlayerDir = dis;
 			m_toPlayerDir.Normalize();

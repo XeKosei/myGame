@@ -84,6 +84,12 @@ namespace nsHikageri
 			{
 				DyingHazySprite();
 			}
+
+			//バッテリーのUIを消す処理
+			if (m_batteryUIDeleteFlag)
+			{
+				BatteryUIDelete();
+			}
 		}
 
 		void PlayerUI::SetHazySprite()
@@ -176,6 +182,22 @@ namespace nsHikageri
 				m_batterySprite[m_batteryDispType]->SetScale({ 0.0f, 0.0f, 0.0f });
 				m_batteryDispType = type;
 				m_batterySprite[m_batteryDispType]->SetScale(INI_BATTERYSPRITE_SCALE);
+			}
+		}
+
+		void PlayerUI::BatteryUIDelete()
+		{
+			if (m_batterySpriteColor.a > 0.0f)
+			{
+				m_batterySpriteColor.r -= BATTERY_UI_DELETE_SPEED;
+				m_batterySpriteColor.g -= BATTERY_UI_DELETE_SPEED;
+				m_batterySpriteColor.b -= BATTERY_UI_DELETE_SPEED;
+				m_batterySpriteColor.a -= BATTERY_UI_DELETE_SPEED;
+
+				for (int no = 0; no < enBatteryDispTypes_num; no++)
+				{
+					m_batterySprite[no]->SetMulColor(m_batterySpriteColor);
+				}
 			}
 		}
 	}
