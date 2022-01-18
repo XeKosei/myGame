@@ -117,7 +117,7 @@ namespace nsHikageri
 				if (m_breakMoveCount == 99)
 				{
 					m_abilityStrobeFlash.Reset();
-					//m_abilityClairvoyance.Reset();
+					m_abilityClairvoyance.Reset();
 					m_abilityMedousaEye.Reset();
 
 					SpotLightGoOut();

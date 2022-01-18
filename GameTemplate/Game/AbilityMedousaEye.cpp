@@ -9,7 +9,7 @@ namespace nsHikageri
 
 		AbilityMedousaEye::~AbilityMedousaEye()
 		{
-
+			Reset();
 		}
 
 		void AbilityMedousaEye::Init(FlashLight* flashLight)

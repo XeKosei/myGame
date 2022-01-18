@@ -60,9 +60,10 @@ namespace nsHikageri
 				if (m_battery[i] != nullptr)
 					DeleteGO(m_battery[i]);
 			}
-			for (int no = 0; no < 5; no++)
+			for (int no = 0; no < 6; no++)
 			{
-				DeleteGO(m_messagePaper[no]);
+				if (m_messagePaper[no] != nullptr)
+					DeleteGO(m_messagePaper[no]);
 			}
 			if (m_pointLight != nullptr)
 				DeleteGO(m_pointLight);

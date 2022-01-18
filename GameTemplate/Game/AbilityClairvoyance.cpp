@@ -10,7 +10,7 @@ namespace nsHikageri
 
 		AbilityClairvoyance::~AbilityClairvoyance()
 		{
-
+			Reset();
 		}
 
 		void AbilityClairvoyance::Init(FlashLight* flashLight)

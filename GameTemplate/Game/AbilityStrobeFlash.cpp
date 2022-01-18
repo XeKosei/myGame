@@ -12,7 +12,7 @@ namespace nsHikageri
 
 		AbilityStrobeFlash::~AbilityStrobeFlash()
 		{
-
+			Reset();
 		}
 
 		void AbilityStrobeFlash::Init(FlashLight* flashLight)
