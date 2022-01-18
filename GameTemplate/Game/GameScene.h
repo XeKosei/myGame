@@ -42,6 +42,9 @@ namespace nsHikageri
 
 			void GameManagement();
 
+			//敵に追いかけられているときの時のBGM
+			void EnemyChaseBGM();
+
 			void ExecuteUpdateStep01();
 			void ExecuteUpdateStep02();
 			void ExecuteUpdateStep03();
@@ -110,8 +113,9 @@ namespace nsHikageri
 
 			//チェイス時のBGM
 			SoundSource* m_chaseBGM = nullptr;
-
-			bool m_chaseBGMCanPlayFlag = false;
+			bool m_isChaseBGMPlaying = false;
+			bool m_chaseBGMDeleteFlag = false;
+			float m_chaseBGMVolume = 1.0f;
 
 			//ゲームの進行段階
 			EnGameSteps m_gameStep = enGameStep_04;

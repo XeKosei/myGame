@@ -6,6 +6,9 @@ namespace nsHikageri
 		namespace nsGameSceneConstant
 		{
 			static const int ENEMY_NUM = 3;	//“G‚Ì”
+
+			static const float CHASE_BGM_DELETE_SPEED = 0.005f; //BGM‚ğÁ‚·‘¬‚³
+
 		}
 
 		namespace nsGameOverConstant
