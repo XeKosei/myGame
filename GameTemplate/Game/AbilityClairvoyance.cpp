@@ -18,6 +18,13 @@ namespace nsHikageri
 			m_flashLight = flashLight;
 		}
 
+		void AbilityClairvoyance::Reset()
+		{
+			m_useAbility = false;
+			m_canPlaySSFlag = false;
+			m_canPlaySSCount = 0;
+		}
+
 		void AbilityClairvoyance::ExecuteUpdate()
 		{
 			if (m_abilityAcitveFlag == false)
@@ -44,7 +51,7 @@ namespace nsHikageri
 				//ボタンが離されたとき、透視不可能に。
 				else if (m_useAbility == true && g_pad[0]->IsPress(enButtonLB2) == false)
 				{
-					m_useAbility = false;
+					Reset();
 				}
 			}
 			//懐中電灯が付いていないとき、リセット
@@ -70,8 +77,7 @@ namespace nsHikageri
 
 				if (g_pad[0]->IsPress(enButtonLB2) == false)
 				{
-					m_canPlaySSFlag = false;
-					m_canPlaySSCount = 0;
+					Reset();
 				}
 			}
 

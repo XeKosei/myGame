@@ -107,6 +107,7 @@ namespace nsHikageri
 			}
 		}
 
+		//‰ó‚ê‚éˆ—
 		void FlashLight::BreakMove()
 		{
 			if (m_breakMoveCount > 0)
@@ -115,6 +116,10 @@ namespace nsHikageri
 
 				if (m_breakMoveCount == 99)
 				{
+					m_abilityStrobeFlash.Reset();
+					//m_abilityClairvoyance.Reset();
+					m_abilityMedousaEye.Reset();
+
 					SpotLightGoOut();
 					m_player->GetPlayerUI()->SetBatteryUIDeleteFlag(true);
 					SoundSource* breakSS = NewGO<SoundSource>(0);

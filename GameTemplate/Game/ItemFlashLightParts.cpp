@@ -13,8 +13,7 @@ namespace nsHikageri
 			if (m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_FlashLightParts
 				&& m_player->GetPlayerTarget()->GetTargetFlashLightParts() == this)
 				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_None);
-
-			DeleteGO(m_partsModel);
+				DeleteGO(m_partsModel);
 
 			//エフェクトを停止
 			m_shineEff.Stop();

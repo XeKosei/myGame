@@ -81,6 +81,10 @@ namespace nsHikageri
 				nsHikageri::LightManager::GetInstance()->SetIsFlashLightSwitchOn(false, 0);
 			}
 
+			/// @brief 壊れているかどうかを取得
+			/// @return 壊れているかどうかのフラグ
+			bool GetIsBreak() { return m_isBreak; };
+
 			//懐中電灯関係のインスタンスにアクセスする
 			FlashLightAction* GetFlashLightAction() { return &m_flashLightAction; }
 			FlashLightBattery* GetFlashLightBattery() { return &m_flashLightBattery; }
