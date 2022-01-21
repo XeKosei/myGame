@@ -214,9 +214,8 @@ namespace nsHikageri
 
 	void SkinModelRender::PreLoadModel(const char* tkmFilePath)
 	{
-		//プリロードはまだできない。
-
-		/*TkmFile* tkmFile = ResourceBankManager::GetInstance()->GetTkmFileFromBank(tkmFilePath);
+		//プリロードはまだできない
+		TkmFile* tkmFile = ResourceBankManager::GetInstance()->GetTkmFileFromBank(tkmFilePath);
 
 		if (tkmFile == nullptr)
 		{
@@ -224,7 +223,6 @@ namespace nsHikageri
 			tkmFile = new TkmFile;
 			tkmFile->Load(tkmFilePath);
 			ResourceBankManager::GetInstance()->RegistTkmFileToBank(tkmFilePath, tkmFile);
-
-		}*/
+		}
 	}
 }

@@ -28,9 +28,19 @@ void Model::Init(ModelInitData& initData)
 	
 	m_modelUpAxis = initData.m_modelUpAxis;
 
-	m_tkmFile.Load(initData.m_tkmFilePath);
+	//m_tkmFile.Load(initData.m_tkmFilePath);
+	m_tkmFile = ResourceBankManager::GetInstance()->GetTkmFileFromBank(initData.m_tkmFilePath);
+
+	if (m_tkmFile == nullptr)
+	{
+		//–¢“o˜^
+		m_tkmFile = new TkmFile;
+		m_tkmFile->Load(initData.m_tkmFilePath);
+		ResourceBankManager::GetInstance()->RegistTkmFileToBank(initData.m_tkmFilePath, m_tkmFile);
+	}
+
 	m_meshParts.InitFromTkmFile(
-		m_tkmFile, 
+		*m_tkmFile, 
 		wfxFilePath, 
 		initData.m_vsEntryPointFunc,
 		initData.m_vsSkinEntryPointFunc,
@@ -89,7 +99,7 @@ void Model::Draw(RenderContext& rc, Camera* camera)
 
 bool Model::isLineHitModel(const Vector3& start, const Vector3& end, Vector3& minCrossPoint)
 {
-	const auto& meshParts = m_tkmFile.GetMeshParts();
+	const auto& meshParts = m_tkmFile->GetMeshParts();
 
 	bool isHit = false;
 	float distance = FLT_MAX;

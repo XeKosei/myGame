@@ -11,7 +11,7 @@
 #include "SoundEngine.h"
 #include "SoundSource.h"
 #include "LightManager.h"
-//#include "ResourceBankManager.h"
+#include "ResourceBankManager.h"
 #include "PostEffectManager.h"
 
 #include "effect/Effect.h"

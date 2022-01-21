@@ -4,6 +4,7 @@
 #include "Test.h"
 #include "GameScene.h"
 #include "TitleScene.h"
+#include "ResourceBankManager.h"
 namespace
 {
 	const Vector3 LIGHTCAMERA_POSITION = { 1000.0f, 1000.0f,1000.0f };
@@ -14,6 +15,7 @@ namespace
 	const int CAMERA_FAR = 5000000;
 }
 
+void PreLoad();
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
 ///////////////////////////////////////////////////////////////////
@@ -29,6 +31,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームオブジェクトマネージャーのインスタンスを作成する。
 	GameObjectManager::CreateInstance();
 	PhysicsWorld::CreateInstance();
+
+	//リソースマネージャのインスタンスを作成
+	ResourceBankManager::CreateInstance();
+	PreLoad();
 
 	//ライトマネージャーのインスタンスを作成
 	nsHikageri::LightManager::CreateInstance();
@@ -107,5 +113,36 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームオブジェクトマネージャーを削除。
 	GameObjectManager::DeleteInstance();
 	return 0;
+}
+
+void PreLoad()
+{
+	//モデルの事前ロード
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/RedKey.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/BlueKey.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/GreenKey.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/YellowKey.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/PurpleKey.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/WhiteKey.tkm");
+
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/RedDoor.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/BlueDoor.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/GreenDoor.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/YellowDoor.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/PurpleDoor.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/WhiteDoor.tkm");
+
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/Enemy.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/FlashLight.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/FlashLightParts.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/Battery.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/Medicine.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/Paper.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/chandelier.tkm");
+
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/StageTest.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/SecretRoom.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/EyeWall.tkm");
+	nsHikageri::SkinModelRender::PreLoadModel("Assets/modelData/FakeWall.tkm");
 }
 
