@@ -118,7 +118,7 @@ namespace nsHikageri
 			float m_chaseBGMVolume = 1.0f;
 
 			//ゲームの進行段階
-			EnGameSteps m_gameStep = enGameStep_04;
+			EnGameSteps m_gameStep = enGameStep_07;
 			bool m_canGoNextStepFlag = false;
 		};
 	}

@@ -283,7 +283,7 @@ namespace nsHikageri
 			m_pointLight = NewGO<PointLight>(0);
 			m_pointLight->SetColor({500.0f,500.0f,500.0f});
 			m_pointLight->SetRange(2000.0f);
-			m_pointLight->SetPosition({11000.0f,0.0f, 5200.0f});
+			m_pointLight->SetPosition({11800.0f,0.0f, 5200.0f});
 
 			return true;
 		}
@@ -348,7 +348,7 @@ namespace nsHikageri
 				m_gameOver = NewGO<GameOver>(0);
 				m_gameOver->SetGameScene(this);
 			}
-			if (m_player->GetPlayerMove()->GetPosition().x >= 11400.0f)
+			if (m_player->GetPlayerMove()->GetPosition().x >= 9200.0f)
 			{
 				m_gameStep = enGameStep_GameClear;
 				m_gameClear = NewGO<GameClear>(0);
@@ -514,8 +514,7 @@ namespace nsHikageri
 		}
 		void GameScene::ExecuteUpdateStep09()
 		{
-
-
+			
 		}
 	}
 }

@@ -59,8 +59,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	nsHikageri::PostEffectManager::GetInstance()->Init(true, true);
 
 	//Test* testScene = NewGO<Test>(0, "testScene");
-	//nsHikageri::nsGameScene::GameScene* gameScene = NewGO<nsHikageri::nsGameScene::GameScene>(0, "gameScene");
-	nsHikageri::nsTitleScene::TitleScene* titleScene = NewGO<nsHikageri::nsTitleScene::TitleScene>(0, "titleScene");
+	nsHikageri::nsGameScene::GameScene* gameScene = NewGO<nsHikageri::nsGameScene::GameScene>(0, "gameScene");
+	//nsHikageri::nsTitleScene::TitleScene* titleScene = NewGO<nsHikageri::nsTitleScene::TitleScene>(0, "titleScene");
 
 	// サウンドエンジンのインスタンスを作成する。
 	nsHikageri::SoundEngine::CreateInstance();
