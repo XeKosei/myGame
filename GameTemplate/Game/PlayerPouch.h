@@ -62,7 +62,7 @@ namespace nsHikageri
 			Player* m_player = nullptr;
 
 			int m_choseItem = enItem_Battery;
-			int m_haveItemNum[enItem_num] = { 0, 0, 0, 0, 0, 0, 1, 0};
+			int m_haveItemNum[enItem_num] = { 1, 1, 1, 1, 1, 1, 1, 1};
 
 			SoundSource* m_useItemSS = nullptr;
 		};

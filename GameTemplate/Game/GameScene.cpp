@@ -427,7 +427,13 @@ namespace nsHikageri
 		}
 		void GameScene::ExecuteUpdateStep03()
 		{
-			if (m_eyeWall[0]->GetDisapperFlag())
+			if (m_enemy[0]->GetEnemyState() == nsEnemy::Enemy::enState_Chase &&
+				m_enemy[0]->GetEnemyMove()->GetPosition().x < -4400.0f)
+			{
+				m_enemy[0]->SetEnemyState(nsEnemy::Enemy::enState_Vigilant);
+			}
+
+			if (m_player->GetPlayerMove()->GetPosition().x < -5200.0f)
 			{
 				//エネミー一体目の配置位置を変更
 				m_enemy[0]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_2);
@@ -443,7 +449,17 @@ namespace nsHikageri
 		}
 		void GameScene::ExecuteUpdateStep04()
 		{
-			if (m_door[4]->GetUnlockFlag())
+			for (int no = 0; no < 2; no++)
+			{
+				if (m_enemy[no]->GetEnemyState() == nsEnemy::Enemy::enState_Chase &&
+					m_enemy[no]->GetEnemyMove()->GetPosition().z > 6400.0f)
+				{
+					m_enemy[no]->SetEnemyState(nsEnemy::Enemy::enState_Vigilant);
+				}
+			}
+
+			if (m_player->GetPlayerMove()->GetPosition().z > 6600.0f &&
+				m_player->GetPlayerMove()->GetPosition().x > -7200.0f)
 			{
 				//エネミー一体目の配置位置を変更
 				m_enemy[0]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_4);
@@ -463,7 +479,16 @@ namespace nsHikageri
 		}
 		void GameScene::ExecuteUpdateStep05()
 		{
-			if (m_player->GetFlashLight()->GetAbilityMedousaEye()->GetAbilityActiveFlag())
+			for (int no = 0; no < ENEMY_NUM; no++)
+			{
+				if (m_enemy[no]->GetEnemyState() == nsEnemy::Enemy::enState_Chase &&
+					m_enemy[no]->GetEnemyMove()->GetPosition().x > 1400.0f)
+				{
+					m_enemy[no]->SetEnemyState(nsEnemy::Enemy::enState_Vigilant);
+				}
+			}
+
+			if (m_player->GetPlayerMove()->GetPosition().z > 9600.0f )
 			{
 				//エネミー二体目をいなくする
 				m_enemy[1]->GetEnemySearchPlayer()->SetSearchPos(nsEnemy::EnemySearchPlayer::enSearchArea_None);
