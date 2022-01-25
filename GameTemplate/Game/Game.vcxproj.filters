@@ -497,6 +497,9 @@
     <ClCompile Include="ResourceBankManager.cpp">
       <Filter>ソース ファイル\prefab</Filter>
     </ClCompile>
+    <ClCompile Include="Statue.cpp">
+      <Filter>ソース ファイル\Hikageri\BackGround</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="system\system.h">
@@ -951,6 +954,9 @@
     </ClInclude>
     <ClInclude Include="ResourceBankManager.h">
       <Filter>ヘッダー ファイル\prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="Statue.h">
+      <Filter>ヘッダー ファイル\Hikageri\BackGround</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

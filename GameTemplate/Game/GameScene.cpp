@@ -103,6 +103,20 @@ namespace nsHikageri
 			m_secretRoom->Init(m_player);
 			m_deadSkeleton = NewGO<nsBackGround::DeadSkeleton>(0, "deadSkeleton");
 
+			Vector3 statuePos[5] = {
+				{-6600.0f,0.0f,6400.0f},
+				{-6600.0f,0.0f,7200.0f},
+				{-4600.0f,0.0f,4800.0f},
+				{1800.0f,0.0f,10400.0f},
+				{-600.0f,0.0f,7200.0f},
+			};
+
+			for (int no = 0; no < 5; no++)
+			{
+				m_statue[no] = NewGO<nsBackGround::Statue>(0);
+				m_statue[no]->SetPosition(statuePos[no]);
+			}
+
 			//ƒVƒƒƒ“ƒfƒŠƒA
 			m_chandelierManager = NewGO<nsGimmick::ChandelierManager>(0);
 			m_chandelierManager->SetPlayer(m_player);

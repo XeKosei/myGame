@@ -357,6 +357,7 @@
     <ClCompile Include="SoundSource.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="SpriteRender.cpp" />
+    <ClCompile Include="Statue.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -515,6 +516,7 @@
     <ClInclude Include="SoundSource.h" />
     <ClInclude Include="SpotLight.h" />
     <ClInclude Include="SpriteRender.h" />
+    <ClInclude Include="Statue.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="AbilityStrobeFlash.h" />
     <ClInclude Include="system\system.h" />

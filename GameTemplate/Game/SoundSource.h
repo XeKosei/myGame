@@ -129,7 +129,9 @@ namespace nsHikageri {
 		//ボリューム設定を更新
 		void UpdateVolume()
 		{
-			m_sourceVoice->SetVolume(m_volume * m_baseVolume);
+			//m_sourceVoiceが意図せずNULLになるエラーが起きているので、試しにif分を挟む。
+			if (m_sourceVoice != nullptr)
+				m_sourceVoice->SetVolume(m_volume * m_baseVolume);
 		}
 
 		/*!
