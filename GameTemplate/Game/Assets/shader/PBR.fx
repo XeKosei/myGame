@@ -439,7 +439,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		{
 			float zInSpotLightMap = spotLightMap[i].Sample(g_sampler, spotLightMapUV).x;
 
-			if (zInSpotLVP < zInSpotLightMap + 0.0001f)// && zInSpotLVP <= 1.0f)
+			if (zInSpotLVP < zInSpotLightMap + 0.0001f )//&& zInSpotLVP <= 1.0f)
 			{
 				//透視の処理
 				if (i == 0)	//懐中電灯のスポットライトのときのみ

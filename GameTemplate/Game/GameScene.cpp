@@ -427,12 +427,14 @@ namespace nsHikageri
 		}
 		void GameScene::ExecuteUpdateStep03()
 		{
+			//敵を、次のエリアまでは追ってこれないようにする。
 			if (m_enemy[0]->GetEnemyState() == nsEnemy::Enemy::enState_Chase &&
 				m_enemy[0]->GetEnemyMove()->GetPosition().x < -4400.0f)
 			{
 				m_enemy[0]->SetEnemyState(nsEnemy::Enemy::enState_Vigilant);
 			}
 
+			//次のエリアに移行
 			if (m_player->GetPlayerMove()->GetPosition().x < -5200.0f)
 			{
 				//エネミー一体目の配置位置を変更
@@ -449,15 +451,17 @@ namespace nsHikageri
 		}
 		void GameScene::ExecuteUpdateStep04()
 		{
+			//敵を、次のエリアまでは追ってこれないようにする。
 			for (int no = 0; no < 2; no++)
 			{
 				if (m_enemy[no]->GetEnemyState() == nsEnemy::Enemy::enState_Chase &&
-					m_enemy[no]->GetEnemyMove()->GetPosition().z > 6400.0f)
+					m_enemy[no]->GetEnemyMove()->GetPosition().z > 6200.0f)
 				{
 					m_enemy[no]->SetEnemyState(nsEnemy::Enemy::enState_Vigilant);
 				}
 			}
 
+			//次のエリアに移行
 			if (m_player->GetPlayerMove()->GetPosition().z > 6600.0f &&
 				m_player->GetPlayerMove()->GetPosition().x > -7200.0f)
 			{
@@ -479,6 +483,7 @@ namespace nsHikageri
 		}
 		void GameScene::ExecuteUpdateStep05()
 		{
+			//敵を、次のエリアまでは追ってこれないようにする。
 			for (int no = 0; no < ENEMY_NUM; no++)
 			{
 				if (m_enemy[no]->GetEnemyState() == nsEnemy::Enemy::enState_Chase &&
@@ -488,6 +493,7 @@ namespace nsHikageri
 				}
 			}
 
+			//次のエリアに移行
 			if (m_player->GetPlayerMove()->GetPosition().z > 9600.0f )
 			{
 				//エネミー二体目をいなくする

@@ -213,6 +213,7 @@ namespace nsHikageri
 				}
 			}
 
+			//Ç†ÇÁÇ∑Ç∂ÇÃï\é¶Çè¡Ç∑
 			if (m_synopsisDeleteFlag)
 			{
 				m_synopsisFontColor.r -= SYNOPSISFONT_COLOR_ADD_SPEED;
