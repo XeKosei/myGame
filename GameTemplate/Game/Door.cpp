@@ -89,21 +89,22 @@ namespace nsHikageri
 		void Door::PlayerTargetSetting()
 		{
 			//ドアのセンター位置を求める
-			if (m_openFlag == false)
-				m_centerPos = m_position + Cross(m_direction, Vector3::AxisY) * DOOR_CENTER_POS_X;
-			else
-			{
-				if (m_isOpenFromForward)
-					m_centerPos = m_position + m_direction * DOOR_CENTER_POS_X;
-				else 
-					m_centerPos = m_position - m_direction * DOOR_CENTER_POS_X;
-			}
+			Quaternion qRot;
+			Vector3 m_toCenterDir = m_direction;
+			qRot.SetRotation(Vector3::AxisY, m_addAngle);
+			qRot.Apply(m_toCenterDir);
 
+			m_centerPos = m_position + Cross(m_toCenterDir, Vector3::AxisY) * DOOR_CENTER_POS_X;
+
+			//高さ
 			m_centerPos.y += DOOR_CENTER_POS_Y;
 
 			Vector3 dis = m_centerPos - m_player->GetPlayerCamera()->GetCameraPos();
 			m_toPlayerDir = dis;
 			m_toPlayerDir.Normalize();
+
+			//キャラコンの位置を設定
+			m_charaCon.SetPosition(m_centerPos);
 
 			//プレイヤーとの距離が近く、ドアの方を向いていたら
 			if (dis.Length() <= nsPlayer::nsPlayerTargetConstant::CATCH_EYES_DIS
@@ -112,8 +113,6 @@ namespace nsHikageri
 				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_Door);
 				m_player->GetPlayerTarget()->SetTargetDoor(this);
 			}
-
-			m_charaCon.SetPosition(m_centerPos);
 		}
 
 		//ドアの処理
@@ -131,6 +130,8 @@ namespace nsHikageri
 							float dis = (m_position - enemy->GetEnemyMove()->GetPosition()).Length();
 							if (dis <= 200.0f)
 							{
+								enemy->SetEnemyState(nsEnemy::Enemy::enState_Scream);
+
 								m_moveFlag = true;
 
 								//エネミーとの位置関係で、扉が前に開くか奥に開くかを決める

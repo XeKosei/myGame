@@ -19,6 +19,7 @@ namespace nsHikageri
 			if (m_enemy->GetEnemyModel()->IsPlayingAnimation() == false)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_Chase);
+				m_enemy->GetEnemyMove()->ResetVelocity();
 			}
 		}
 	}

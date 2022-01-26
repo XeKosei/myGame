@@ -56,9 +56,6 @@ namespace nsHikageri
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
 			void SetPlayer(nsPlayer::Player* pl) { m_player = pl; };
-			/// @brief エネミーにアクセスできるようにする。
-			/// @param pl エネミーの参照
-			void SetEnemy(nsEnemy::Enemy* enemy) { m_enemy = enemy; };
 			/// @brief ドアの色を設定
 			/// @param color ドアの色
 			void SetDoorColor(EnDoorColor color) { m_doorColor = color; }
@@ -82,7 +79,6 @@ namespace nsHikageri
 			void SetDirection(Vector3 dir) { dir.Normalize(); m_direction = dir; };
 		private:
 			nsPlayer::Player* m_player = nullptr;
-			nsEnemy::Enemy* m_enemy = nullptr;
 
 			SkinModelRender* m_doorModel = nullptr;
 
