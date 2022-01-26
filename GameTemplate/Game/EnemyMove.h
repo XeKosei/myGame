@@ -44,6 +44,8 @@ namespace nsHikageri
 			/// @return エネミーの位置
 			Vector3 GetPosition() { return m_position; };
 
+			Vector3 GetOldPos() { return m_oldPos; }
+
 			/// @brief Enemyの向きを取得。
 			/// @return エネミーの向き
 			Vector3 GetDirection() { return m_direction; }
@@ -83,6 +85,7 @@ namespace nsHikageri
 			EnMoveStates m_moveState = enMoveState_RouteSearch;
 			//位置
 			Vector3 m_position = { Vector3::Zero };
+			Vector3 m_oldPos = Vector3::Zero;
 			//エネミーが動く速さ
 			float m_moveSpeed = 0.0f;
 			//速度

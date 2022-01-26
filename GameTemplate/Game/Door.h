@@ -90,6 +90,8 @@ namespace nsHikageri
 			bool m_unlockFlag = false;
 
 			Vector3 m_position = Vector3::Zero;
+			Vector3 m_centerPos = Vector3::Zero;
+
 			Vector3 m_direction = Vector3::Zero;
 			Quaternion m_qRot = Quaternion::Identity;
 
@@ -112,6 +114,7 @@ namespace nsHikageri
 
 			//CharaConとの当たり判定に使用する静的物理オブジェクト
 			PhysicsStaticObject m_physicsStaticObject;
+			CharacterController m_charaCon;
 
 			//開けられない処理を実行するフラグ
 			bool m_executeCannotOpenFlag = false;

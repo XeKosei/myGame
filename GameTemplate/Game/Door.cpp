@@ -43,7 +43,7 @@ namespace nsHikageri
 				break;
 			}
 			//ステージのモデルの静的物理オブジェクトを作成       
-			m_physicsStaticObject.CreateFromModel(m_doorModel->GetModel(), m_doorModel->GetModel().GetWorldMatrix());
+			//m_physicsStaticObject.CreateFromModel(m_doorModel->GetModel(), m_doorModel->GetModel().GetWorldMatrix());
 			//※静的物理オブジェクトを作成した後でモデルの座標や回転を設定しないと、ずれが生じる。
 			//位置を設定
 			m_doorModel->SetPosition(m_position);
@@ -55,7 +55,16 @@ namespace nsHikageri
 			m_doorModel->SetRotation(m_qRot);
 
 			//静的物理オブジェクトの位置と回転を設定
-			m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
+			//m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
+
+			//phisicsStaticObjectだと、キャラコンと重なった時におかしな挙動をするので、
+			//急遽キャラコンに変更
+			//キャラコンを設定
+			m_charaCon.Init(
+				DOOR_CHARACON_WIDTH,	//半径
+				DOOR_CHARACON_HEIGHT,	//高さ
+				m_centerPos//初期位置
+			);
 
 			m_executeCannotOpenCount = INI_DOOR_CANNOTOPEN_EXECUTECOUNT;
 
@@ -80,20 +89,19 @@ namespace nsHikageri
 		void Door::PlayerTargetSetting()
 		{
 			//ドアのセンター位置を求める
-			Vector3 centerPos;
 			if (m_openFlag == false)
-				centerPos = m_position + Cross(m_direction, Vector3::AxisY) * DOOR_CENTER_POS_X;
+				m_centerPos = m_position + Cross(m_direction, Vector3::AxisY) * DOOR_CENTER_POS_X;
 			else
 			{
 				if (m_isOpenFromForward)
-					centerPos = m_position + m_direction * DOOR_CENTER_POS_X;
+					m_centerPos = m_position + m_direction * DOOR_CENTER_POS_X;
 				else 
-					centerPos = m_position - m_direction * DOOR_CENTER_POS_X;
+					m_centerPos = m_position - m_direction * DOOR_CENTER_POS_X;
 			}
 
-			centerPos.y += DOOR_CENTER_POS_Y;
+			m_centerPos.y += DOOR_CENTER_POS_Y;
 
-			Vector3 dis = centerPos - m_player->GetPlayerCamera()->GetCameraPos();
+			Vector3 dis = m_centerPos - m_player->GetPlayerCamera()->GetCameraPos();
 			m_toPlayerDir = dis;
 			m_toPlayerDir.Normalize();
 
@@ -104,6 +112,8 @@ namespace nsHikageri
 				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_Door);
 				m_player->GetPlayerTarget()->SetTargetDoor(this);
 			}
+
+			m_charaCon.SetPosition(m_centerPos);
 		}
 
 		//ドアの処理
@@ -124,7 +134,7 @@ namespace nsHikageri
 					{
 						//プレイヤーとの位置関係で、扉が前に開くか奥に開くかを決める
 						float dot = Dot(m_direction, m_toPlayerDir);
-						if (Dot(m_direction, m_toPlayerDir) >= 0)
+						if (dot >= 0)
 						{
 							m_isOpenFromForward = true;
 						}
@@ -132,6 +142,37 @@ namespace nsHikageri
 						{
 							m_isOpenFromForward = false;
 						}
+					}
+				}
+				else
+				{
+					//ドアが開くとき
+					if (m_openFlag == false)
+					{
+						//エネミーが近くに来ると、扉が開く。
+						QueryGOs<nsEnemy::Enemy>("enemy", [this](nsEnemy::Enemy* enemy)->bool
+							{
+								float dis = (m_position - enemy->GetEnemyMove()->GetPosition()).Length();
+								if (dis <= 200.0f)
+								{
+									m_moveFlag = true;
+
+									//エネミーとの位置関係で、扉が前に開くか奥に開くかを決める
+									Vector3 toEnemyDir = m_centerPos - enemy->GetEnemyMove()->GetPosition();
+									toEnemyDir.Normalize();
+									float dot = Dot(m_direction, toEnemyDir);
+									if (dot >= 0)
+									{
+										m_isOpenFromForward = true;
+									}
+									else
+									{
+										m_isOpenFromForward = false;
+									}
+								}
+								return true;
+							}
+						);
 					}
 				}
 			}
@@ -185,7 +226,7 @@ namespace nsHikageri
 			//回転を設定
 			m_qRot.SetRotation(Vector3::AxisY, m_defaultAngle + m_addAngle);
 			m_doorModel->SetRotation(m_qRot);
-			m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
+			//m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
 
 			//SE
 			SEManage(enDoorSound_Open);
@@ -222,7 +263,7 @@ namespace nsHikageri
 			//回転を設定
 			m_qRot.SetRotation(Vector3::AxisY, m_defaultAngle + m_addAngle);
 			m_doorModel->SetRotation(m_qRot);
-			m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
+			//m_physicsStaticObject.SetPositionAndRotation(m_position, m_qRot);
 
 			//SE
 			SEManage(enDoorSound_Close);

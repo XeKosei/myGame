@@ -452,7 +452,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 					
 					if (clairvoyanceMap.x > 0.0f)
 					{
-						albedoColor.x = zInSpotLightMap * 10.0f;
+						albedoColor.x = max((10.0f - clairvoyanceMap.x) , 0.01f);
 						albedoColor.y = 0.0f;
 						albedoColor.z = 0.0f;
 					}

@@ -23,6 +23,17 @@ namespace nsHikageri
 
 		void EnemyMove::ExecuteUpdate()
 		{
+			//エネミーが引っかかって動いてないとき
+			if ((m_position - m_oldPos).Length() < 1.0f)
+			{
+				m_moveSpeed *= 1.5f;
+				//経路探索し直す
+				m_moveState = enMoveState_RouteSearch;
+				RouteSearch(m_position, m_targetPos);
+			}
+
+			m_oldPos = m_position;
+
 			switch (m_moveState)
 			{
 			case enMoveState_Straight:
@@ -75,7 +86,7 @@ namespace nsHikageri
 			}
 
 			//速度がほぼ0ならば、0にする。
-			if (fabsf(m_velocity.x + m_velocity.z) < 0.001f)
+			if (fabsf(m_velocity.x + m_velocity.z) < 0.000001f)
 			{
 				m_velocity.x = 0.0f;
 				m_velocity.z = 0.0f;
@@ -106,16 +117,14 @@ namespace nsHikageri
 				pos,						// 開始座標
 				targetPos,					// 移動目標座標
 				PhysicsWorld::GetInstance(),	// 物理エンジン	
-				10.0f,							// AIエージェントの半径
-				120.0f							// AIエージェントの高さ。
+				nsEnemyConstant::ENEMY_MODEL_WIDTH,		// AIエージェントの半径
+				nsEnemyConstant::ENEMY_MODEL_HEIGHT		// AIエージェントの高さ。
 			);
 		}
 
 		//経路探索での移動処理
 		void EnemyMove::RouteSearchMove()
 		{
-			Vector3 oldPos = m_position;
-
 			bool isEnd;		
 			
 			//移動処理
@@ -136,7 +145,7 @@ namespace nsHikageri
 			);
 
 			//向きと速度
-			m_direction = pathPos - oldPos;
+			m_direction = pathPos - m_oldPos;
 			m_direction.Normalize();
 
 			m_velocity += m_direction * m_moveSpeed * GameTime::GetInstance().GetFrameDeltaTime();
@@ -149,7 +158,7 @@ namespace nsHikageri
 			m_direction.Normalize();
 
 			//速度がほぼ0ならば、0にする。
-			if (fabsf(m_velocity.x + m_velocity.z) < 0.001f)
+			if (fabsf(m_velocity.x + m_velocity.z) < 0.000001f)
 			{
 				m_velocity.x = 0.0f;
 				m_velocity.z = 0.0f;
@@ -159,8 +168,8 @@ namespace nsHikageri
 			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, 1.0f);
 
 			//パスの位置にほぼ到達したら、
-			if (m_moveSpeed == ENEMY_DASH_SPEED && (m_position - pathPos).Length() < ENEMY_DASH_SPEED
-			|| (m_moveSpeed == ENEMY_WALK_SPEED) && (m_position - pathPos).Length() < ENEMY_WALK_SPEED)
+			if (m_moveSpeed == ENEMY_DASH_SPEED && (m_position - pathPos).Length() < ENEMY_DASH_SPEED * 0.5f
+			|| (m_moveSpeed == ENEMY_WALK_SPEED) && (m_position - pathPos).Length() < ENEMY_WALK_SPEED * 0.5f)
 			{
 				m_position = pathPos;
 			}

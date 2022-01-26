@@ -53,6 +53,10 @@ namespace nsHikageri
 
 		void FlashLight::Update()
 		{
+			//プレイヤーが死んでいるなら、処理しない
+			if (m_player->GetPlayerState() == nsPlayer::Player::enState_Dead)
+				return;
+
 			// モデル用の嘘座標を計算する
 			Vector3 spotLightUp = Cross(g_camera3D->GetForward(), g_camera3D->GetRight());
 

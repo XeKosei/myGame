@@ -24,6 +24,10 @@ namespace nsHikageri
 			DeleteGO(m_backGround);
 			DeleteGO(m_secretRoom);
 			DeleteGO(m_deadSkeleton);
+			for (int no = 0; no < 5; no++)
+			{
+				DeleteGO(m_statue[no]);
+			}
 			DeleteGO(m_flashLight);
 			if (m_chandelierManager != nullptr)
 				DeleteGO(m_chandelierManager);

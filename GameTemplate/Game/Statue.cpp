@@ -18,9 +18,7 @@ namespace nsHikageri
 			m_skinModel->SetStoneRenderFlag(true);
 			m_skinModel->SetScale(nsEnemy::nsEnemyConstant::INI_ENEMY_SCALE);
 
-			//ステージのモデルの静的物理オブジェクトを作成       
-			m_physicsStaticObject.CreateFromModel(m_skinModel->GetModel(), m_skinModel->GetModel().GetWorldMatrix());
-
+			
 			//位置を設定
 			m_skinModel->SetPosition(m_position);
 
@@ -30,8 +28,12 @@ namespace nsHikageri
 			qRot.SetRotation(Vector3::AxisY, angle);
 			m_skinModel->SetRotation(qRot);
 
-			//静的物理オブジェクトの位置と回転を設定
-			m_physicsStaticObject.SetPositionAndRotation(m_position, qRot);
+			//キャラコンを設定
+			m_charaCon.Init(
+				nsEnemy::nsEnemyConstant::ENEMY_MODEL_WIDTH,	//半径
+				nsEnemy::nsEnemyConstant::ENEMY_MODEL_HEIGHT,	//高さ
+				m_position//初期位置
+			);
 
 			m_animationClips[enStatueAnimClip_Idle].Load("Assets/animData/EnemyIdle.tka");
 			m_animationClips[enStatueAnimClip_Idle].SetLoopFlag(false);
@@ -41,7 +43,7 @@ namespace nsHikageri
 			m_animationClips[enStatueAnimClip_SlowWalk].SetLoopFlag(true);	//ループモーションにする。
 			m_animationClips[enStatueAnimClip_Scream].Load("Assets/animData/EnemyScream.tka");
 			m_animationClips[enStatueAnimClip_Scream].SetLoopFlag(false);
-			m_animationClips[enStatueAnimClip_Bite].Load("Assets/animData/EnemyBite02.tka");
+			m_animationClips[enStatueAnimClip_Bite].Load("Assets/animData/EnemyWalk.tka");
 			m_animationClips[enStatueAnimClip_Bite].SetLoopFlag(false);
 
 			m_skinModel->PlayAnimation(m_statueAnimClip);

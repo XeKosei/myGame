@@ -162,16 +162,18 @@ namespace nsHikageri
 						{
 							//エネミーの頭がフラッシュの範囲だったかどうかを調べる。
 							bool hitFlag = CheckHitFlash(enemy->GetEnemyModel()->GetWorldPosFromBoneName(L"Ghoul:Head"));
+
+							//相手が噛みつき状態だったなら、
+							if (enemy->GetEnemyState() == nsEnemy::Enemy::enState_Attack)
+							{
+								hitFlag = true;
+								enemy->GetEnemyStress()->AddStress(30.0f);
+							}
+				
 							//trueならばエネミーを怯ませる。
 							if (hitFlag)
 							{
 								enemy->GetEnemyStress()->AddStress(35.0f);
-
-								//相手が噛みつき状態だったなら、
-								if (enemy->GetEnemyState() == nsEnemy::Enemy::enState_Attack)
-								{
-									enemy->GetEnemyStress()->AddStress(30.0f);
-								}
 
 								//相手は怯む。
 								enemy->SetEnemyState(nsEnemy::Enemy::enState_Flinch);				
