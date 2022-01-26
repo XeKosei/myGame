@@ -46,7 +46,8 @@ namespace nsHikageri
 				PlayVoice();
 				break;
 			case Enemy::enState_Vigilant:
-				PlayVoice();
+				if (m_oldEnemyState != Enemy::enState_SearchPlayer)
+					PlayVoice();
 				break;
 			default:
 				PlayVoice();

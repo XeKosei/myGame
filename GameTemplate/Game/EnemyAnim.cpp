@@ -47,22 +47,22 @@ namespace nsHikageri
 			{
 			case Enemy::enState_SearchPlayer:
 				if (m_enemy->GetEnemyMove()->GetSlowMoveFlag())	
-					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_SlowWalk);
+					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_SlowWalk, ENEMY_INTERPOLATETIME);
 				else
-					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Walk);
+					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Walk, ENEMY_INTERPOLATETIME);
 				break;
 			case Enemy::enState_Chase:	
 				if (m_enemy->GetEnemyMove()->GetSlowMoveFlag())
-					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_SlowWalk);
+					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_SlowWalk, ENEMY_INTERPOLATETIME);
 				else 
-					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Run);
+					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Run, ENEMY_INTERPOLATETIME);
 				break;
 			case Enemy::enState_Attack:
-				//m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Attack);
+				//m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Attack, ENEMY_INTERPOLATETIME);
 				switch (m_enemy->GetEnemyAttack()->GetBiteState())
 				{
 				case EnemyAttack::enBiteState_PreBite:
-					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_PreBite);
+					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_PreBite, ENEMY_INTERPOLATETIME);
 					break;
 				case EnemyAttack::enBiteState_Bite:
 					m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Bite);
@@ -75,7 +75,7 @@ namespace nsHikageri
 				}
 				break;
 			case Enemy::enState_Scream:
-				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Scream);
+				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Scream, ENEMY_INTERPOLATETIME);
 				break;
 			case Enemy::enState_Flinch:
 				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Flinch);
@@ -84,10 +84,10 @@ namespace nsHikageri
 				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Petrifaction);
 				break;
 			case Enemy::enState_Suffer :
-				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Suffer);
+				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Suffer, ENEMY_INTERPOLATETIME);
 				break;
 			case Enemy::enState_Vigilant:
-				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Idle);
+				m_enemy->GetEnemyModel()->PlayAnimation(enAnimationClip_Idle, ENEMY_INTERPOLATETIME);
 				break;
 			default:
 				break;

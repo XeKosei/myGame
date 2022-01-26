@@ -18,7 +18,7 @@ namespace nsHikageri
 		{
 			m_enemy = enemy;
 			// ナビメッシュを構築。
-			m_nvmMesh.Init("Assets/nvm/nvmTest.tkn");
+			m_nvmMesh.Init("Assets/nvm/nvm.tkn");
 		}
 
 		void EnemyMove::ExecuteUpdate()
