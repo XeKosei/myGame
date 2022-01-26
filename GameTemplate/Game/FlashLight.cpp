@@ -53,8 +53,9 @@ namespace nsHikageri
 
 		void FlashLight::Update()
 		{
-			//プレイヤーが死んでいるなら、処理しない
-			if (m_player->GetPlayerState() == nsPlayer::Player::enState_Dead)
+			//プレイヤーが動かせないとき、処理しない
+			if (m_player->GetPlayerState() == nsPlayer::Player::enState_Dead ||
+				m_player->GetPlayerState() == nsPlayer::Player::enState_Read)
 				return;
 
 			// モデル用の嘘座標を計算する

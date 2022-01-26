@@ -52,6 +52,9 @@ namespace nsHikageri
 		}
 		void Enemy::Update()
 		{
+			if (m_stopExecuteFlag)
+				return;
+
 			//エネミー関連の処理
 			switch (m_enemyState)
 			{

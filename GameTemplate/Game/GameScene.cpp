@@ -395,6 +395,22 @@ namespace nsHikageri
 			{
 				m_player->GetPlayerSanity()->SetReliefFlag(true);
 			}
+
+			//プレイヤーが動かせない状態の時、エネミーが動かないようにする。
+			if (m_player->GetPlayerState() == nsPlayer::Player::enState_Read)
+			{
+				for (int no = 0; no < ENEMY_NUM; no++)
+				{
+					m_enemy[no]->SetStopExecuteFlag(true);
+				}
+			}
+			else
+			{
+				for (int no = 0; no < ENEMY_NUM; no++)
+				{
+					m_enemy[no]->SetStopExecuteFlag(false);
+				}
+			}
 		}
 
 		//チェイス時のBGM

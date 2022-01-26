@@ -125,7 +125,9 @@ namespace nsHikageri
 				//プレイヤーのターゲットがこのドアで、Aボタンが押されたら、ドアが開閉
 				if (g_pad[0]->IsTrigger(enButtonA)
 					&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Door
-					&& m_player->GetPlayerTarget()->GetTargetDoor() == this )
+					&& m_player->GetPlayerTarget()->GetTargetDoor() == this 
+					&& m_player->GetPlayerState() != nsPlayer::Player::enState_Bitten
+					)
 				{
 					m_moveFlag = true;
 

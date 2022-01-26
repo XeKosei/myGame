@@ -68,6 +68,14 @@ namespace nsHikageri
 			/// @brief 透視の処理
 			void ExecuteClairvoyance();
 
+			/// @brief エネミーの行動の処理を止めるかどうかを設定
+			/// @param flag true:処理を止める false:止めない
+			void SetStopExecuteFlag(bool flag) { m_stopExecuteFlag = flag; }
+
+			/// @brief 処理を止めているかどうかを取得
+			/// @return 処理を止めているかどうか
+			bool GetStopExecuteFlag() { return m_stopExecuteFlag; }
+
 			//エネミー関係のインスタンスにアクセスする
 			EnemyMove* GetEnemyMove() { return &m_enemyMove; }
 			EnemySearchPlayer* GetEnemySearchPlayer() { return &m_enemySearchPlayer; };
@@ -110,8 +118,11 @@ namespace nsHikageri
 			EnemyFlinch m_enemyFlinch;
 			EnemyStress m_enemyStress;
 			EnemyVigilant m_enemyVigilant;
-			EnemyAnim m_enemyAnim ;
+			EnemyAnim m_enemyAnim;
 			EnemyVoice m_enemyVoice;
+
+			//処理を止めるフラグ
+			bool m_stopExecuteFlag = false;
 		};
 	}
 }

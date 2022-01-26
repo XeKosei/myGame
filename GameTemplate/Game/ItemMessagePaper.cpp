@@ -38,7 +38,8 @@ namespace nsHikageri
 		void ItemMessagePaper::Update()
 		{
 			//光るエフェクト
-			m_shineEff.Update();
+			if (m_player->GetPlayerState() != nsPlayer::Player::enState_Read)
+				m_shineEff.Update();
 
 			Vector3 dis = m_position - m_player->GetPlayerCamera()->GetCameraPos();
 			Vector3 m_toPlayerDir = dis;
@@ -55,7 +56,10 @@ namespace nsHikageri
 			//プレイヤーのターゲットがこのアイテムで、Aボタンが押されたら、入手
 			if (g_pad[0]->IsTrigger(enButtonA)
 				&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Paper
-				&& m_player->GetPlayerTarget()->GetTargetMessagePaper() == this)
+				&& m_player->GetPlayerTarget()->GetTargetMessagePaper() == this
+				&& m_player->GetPlayerState() != nsPlayer::Player::enState_Bitten
+				&& m_player->GetPlayerState() != nsPlayer::Player::enState_Read
+				)
 			{
 				//プレイヤーを読む状態にする。
 				m_player->SetPlayerState(nsPlayer::Player::enState_Read);

@@ -52,7 +52,8 @@ namespace nsHikageri
 						Vector3 enemyPos = enemy->GetEnemyMove()->GetPosition();
 
 						//エネミーが近くにいるならば、
-						if ((enemyPos - m_position).Length() <= CHANDELIER_FORCE_RANGE)
+						if ((enemyPos - m_position).Length() <= CHANDELIER_FORCE_RANGE
+							&& enemy->GetStopExecuteFlag() == false)
 						{
 							enemy->GetEnemyMove()->SetSlowMoveFlag(true);					
 							if (enemy->GetEnemyState() == nsEnemy::Enemy::enState_Chase)
