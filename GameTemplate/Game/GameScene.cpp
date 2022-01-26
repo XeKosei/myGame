@@ -111,10 +111,28 @@ namespace nsHikageri
 				{-600.0f,0.0f,7200.0f},
 			};
 
+			Vector3 statueDir[5] = {
+				{0.0f,0.0f,1.0f},
+				{0.0f,0.0f,-1.0f},
+				{0.0f,0.0f,1.0f},
+				{1.0f,0.0f,0.0f},
+				{-1.0f,0.0f,0.0f},
+			};
+
+			nsBackGround::Statue::EnStatueAnimClip statueAnimClip[5] = {
+				nsBackGround::Statue::enStatueAnimClip_Idle,
+				nsBackGround::Statue::enStatueAnimClip_PreBite,
+				nsBackGround::Statue::enStatueAnimClip_Bite,
+				nsBackGround::Statue::enStatueAnimClip_SlowWalk,
+				nsBackGround::Statue::enStatueAnimClip_Scream,
+			};
+
 			for (int no = 0; no < 5; no++)
 			{
 				m_statue[no] = NewGO<nsBackGround::Statue>(0);
 				m_statue[no]->SetPosition(statuePos[no]);
+				m_statue[no]->SetDirection(statueDir[no]);
+				m_statue[no]->SetStatueAnimClip(statueAnimClip[no]);
 			}
 
 			//ƒVƒƒƒ“ƒfƒŠƒA

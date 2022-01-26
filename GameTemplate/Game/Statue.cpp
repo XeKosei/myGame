@@ -14,7 +14,7 @@ namespace nsHikageri
 		{
 			m_skinModel = NewGO<SkinModelRender>(0);
 			m_skinModel->SetMakeSkinModelRenderEX(true);
-			m_skinModel->Init("Assets/modelData/Enemy.tkm", "Assets/modelData/Enemy.tks", m_animationClips, enAnimationClip_num);
+			m_skinModel->Init("Assets/modelData/Enemy.tkm", "Assets/modelData/Enemy.tks", m_animationClips, enStatueAnimClip_num);
 			m_skinModel->SetStoneRenderFlag(true);
 			m_skinModel->SetScale(nsEnemy::nsEnemyConstant::INI_ENEMY_SCALE);
 
@@ -33,18 +33,18 @@ namespace nsHikageri
 			//静的物理オブジェクトの位置と回転を設定
 			m_physicsStaticObject.SetPositionAndRotation(m_position, qRot);
 
-			m_animationClips[enAnimationClip_Idle].Load("Assets/animData/EnemyIdle.tka");
-			m_animationClips[enAnimationClip_Idle].SetLoopFlag(false);
-			m_animationClips[enAnimationClip_Run].Load("Assets/animData/EnemyRun.tka");
-			m_animationClips[enAnimationClip_Run].SetLoopFlag(true);	//ループモーションにする。
-			m_animationClips[enAnimationClip_SlowWalk].Load("Assets/animData/EnemySlowWalk.tka");
-			m_animationClips[enAnimationClip_SlowWalk].SetLoopFlag(true);	//ループモーションにする。
-			m_animationClips[enAnimationClip_Scream].Load("Assets/animData/EnemyScream.tka");
-			m_animationClips[enAnimationClip_Scream].SetLoopFlag(false);
-			m_animationClips[enAnimationClip_Bite].Load("Assets/animData/EnemyBite02.tka");
-			m_animationClips[enAnimationClip_Bite].SetLoopFlag(false);
+			m_animationClips[enStatueAnimClip_Idle].Load("Assets/animData/EnemyIdle.tka");
+			m_animationClips[enStatueAnimClip_Idle].SetLoopFlag(false);
+			m_animationClips[enStatueAnimClip_PreBite].Load("Assets/animData/EnemyBite01.tka");
+			m_animationClips[enStatueAnimClip_PreBite].SetLoopFlag(true);	//ループモーションにする。
+			m_animationClips[enStatueAnimClip_SlowWalk].Load("Assets/animData/EnemySlowWalk.tka");
+			m_animationClips[enStatueAnimClip_SlowWalk].SetLoopFlag(true);	//ループモーションにする。
+			m_animationClips[enStatueAnimClip_Scream].Load("Assets/animData/EnemyScream.tka");
+			m_animationClips[enStatueAnimClip_Scream].SetLoopFlag(false);
+			m_animationClips[enStatueAnimClip_Bite].Load("Assets/animData/EnemyBite02.tka");
+			m_animationClips[enStatueAnimClip_Bite].SetLoopFlag(false);
 
-			m_skinModel->PlayAnimation(enAnimationClip_Idle);
+			m_skinModel->PlayAnimation(m_statueAnimClip);
 
 			return true;
 		}
