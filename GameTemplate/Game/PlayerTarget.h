@@ -16,6 +16,9 @@ namespace nsHikageri
 			void Init(Player* pl);
 			void ExecuteUpdate();
 
+			//ƒAƒCƒeƒ€‚ğ“üè‚·‚é
+			void GetItem();
+
 			enum EnTarget
 			{
 				enTarget_None,

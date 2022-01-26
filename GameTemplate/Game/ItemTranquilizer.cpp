@@ -57,18 +57,6 @@ namespace nsHikageri
 				m_player->GetPlayerTarget()->SetTargetTranquilizer(this);
 			}
 
-			//プレイヤーのターゲットがこのアイテムで、Aボタンが押されたら、入手
-			if (g_pad[0]->IsTrigger(enButtonA)
-				&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Tranquilizer
-				&& m_player->GetPlayerTarget()->GetTargetTranquilizer() == this)
-			{
-				SoundSource* ss = NewGO<SoundSource>(0);
-				ss->Init(L"Assets/sound/GetItemTranquilizer.wav");
-				ss->Play(false);
-				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_Tranquilizer);		
-				DeleteGO(this);
-			}
-
 			//透視
 			ExecuteClairvoyance();
 		}
@@ -84,6 +72,15 @@ namespace nsHikageri
 			{
 				m_tranquilizerModel->SetClairvoyanceCasterFlag(false);
 			}
+		}
+
+		void ItemTranquilizer::Got()
+		{
+			SoundSource* ss = NewGO<SoundSource>(0);
+			ss->Init(L"Assets/sound/GetItemTranquilizer.wav");
+			ss->Play(false);
+			m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_Tranquilizer);
+			DeleteGO(this);
 		}
 	}
 }

@@ -19,6 +19,9 @@ namespace nsHikageri
 			void Update();
 			Vector3 GetPosition() { return m_position; }
 
+			//入手されたとき
+			void Got();
+
 			/// @brief モデルの位置を設定
 			/// @param pos モデルの位置
 			void SetPosition(Vector3 pos) { 

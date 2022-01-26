@@ -75,35 +75,6 @@ namespace nsHikageri
 				m_player->GetPlayerTarget()->SetTargetFlashLightParts(this);
 			}
 
-			//プレイヤーのターゲットがこの鍵で、Aボタンが押されたら、入手
-			if (g_pad[0]->IsTrigger(enButtonA)
-				&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_FlashLightParts
-				&& m_player->GetPlayerTarget()->GetTargetFlashLightParts() == this)
-			{
-				switch (m_partsType)
-				{
-				case enFlashLightPartsTypes_StrobeFlash:
-					m_player->GetFlashLight()->GetAbilityStrobeFlash()->SetAbilityActiveFlag(true);
-					break;
-				case enFlashLightPartsTypes_Clairvoyance:
-					m_player->GetFlashLight()->GetAbilityClairvoyance()->SetAbilityActiveFlag(true);
-					break;
-				case enFlashLightPartsTypes_MedousaEye:
-					m_player->GetFlashLight()->GetAbilityStrobeFlash()->SetAbilityActiveFlag(true);
-					m_player->GetFlashLight()->GetAbilityMedousaEye()->SetAbilityActiveFlag(true);
-					break;
-				default:
-					return;
-					break;
-				}
-				DeleteGO(this);
-
-				//SE
-				SoundSource* ss = NewGO<SoundSource>(0);
-				ss->Init(L"Assets/sound/GetFlashLightParts.wav");
-				ss->Play(false);
-			}
-
 			ExecuteClairvoyance();
 		}
 
@@ -118,6 +89,33 @@ namespace nsHikageri
 			{
 				m_partsModel->SetClairvoyanceCasterFlag(false);
 			}
+		}
+
+		void ItemFlashLightParts::Got()
+		{
+			switch (m_partsType)
+			{
+			case enFlashLightPartsTypes_StrobeFlash:
+				m_player->GetFlashLight()->GetAbilityStrobeFlash()->SetAbilityActiveFlag(true);
+				break;
+			case enFlashLightPartsTypes_Clairvoyance:
+				m_player->GetFlashLight()->GetAbilityClairvoyance()->SetAbilityActiveFlag(true);
+				break;
+			case enFlashLightPartsTypes_MedousaEye:
+				m_player->GetFlashLight()->GetAbilityStrobeFlash()->SetAbilityActiveFlag(true);
+				m_player->GetFlashLight()->GetAbilityMedousaEye()->SetAbilityActiveFlag(true);
+				break;
+			default:
+				return;
+				break;
+			}
+			DeleteGO(this);
+
+			//SE
+			SoundSource* ss = NewGO<SoundSource>(0);
+			ss->Init(L"Assets/sound/GetFlashLightParts.wav");
+			ss->Play(false);
+
 		}
 	}
 }

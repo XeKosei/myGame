@@ -34,6 +34,9 @@ namespace nsHikageri
 			bool Start();
 			void Update();
 
+			//プレイヤーがドアに触れた時(Aボタンを押した時)の処理
+			void PlayerTouchDoor();
+
 			void Execute();
 
 			void SEManage(EnDoorSounds soundKind);

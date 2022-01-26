@@ -56,18 +56,6 @@ namespace nsHikageri
 				m_player->GetPlayerTarget()->SetTargetBattery(this);
 			}
 
-			//プレイヤーのターゲットがこのアイテムで、Aボタンが押されたら、入手
-			if (g_pad[0]->IsTrigger(enButtonA)
-				&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Battery
-				&& m_player->GetPlayerTarget()->GetTargetBattery() == this)
-			{
-				SoundSource* ss = NewGO<SoundSource>(0);
-				ss->Init(L"Assets/sound/GetItemBattery.wav");
-				ss->Play(false);
-				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_Battery);
-				DeleteGO(this);
-			}
-
 			//透視
 			ExecuteClairvoyance();
 		}
@@ -83,6 +71,17 @@ namespace nsHikageri
 			{
 				m_batteryModel->SetClairvoyanceCasterFlag(false);
 			}
+		}
+
+		//入手されたとき
+		void ItemBattery::Got()
+		{
+			//プレイヤーのターゲットがこのアイテムで、Aボタンが押されたら、入手
+			SoundSource* ss = NewGO<SoundSource>(0);
+			ss->Init(L"Assets/sound/GetItemBattery.wav");
+			ss->Play(false);
+			m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_Battery);
+			DeleteGO(this);		
 		}
 	}
 }

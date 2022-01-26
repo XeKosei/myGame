@@ -14,6 +14,9 @@ namespace nsHikageri
 			bool Start();
 			void Update();
 
+			//“üè‚³‚ê‚½‚Æ‚«
+			void Got();
+
 			//“§‹‚Ìˆ—
 			void ExecuteClairvoyance();
 

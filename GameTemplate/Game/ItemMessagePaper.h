@@ -28,6 +28,9 @@ namespace nsHikageri
 			Vector3 GetPosition() { return m_position; }
 			void SetPosition(Vector3 pos) { m_position = pos; }
 
+			//読むときの処理
+			void Read();
+
 			/// @brief プレイヤーにアクセスできるようにする。
 			/// @param pl プレイヤーの参照
 			void SetPlayer(nsPlayer::Player* pl) { m_player = pl; };

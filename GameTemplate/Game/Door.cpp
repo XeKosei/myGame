@@ -122,60 +122,33 @@ namespace nsHikageri
 			//ドアが開閉していないとき
 			if (m_moveFlag == false)
 			{
-				//プレイヤーのターゲットがこのドアで、Aボタンが押されたら、ドアが開閉
-				if (g_pad[0]->IsTrigger(enButtonA)
-					&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Door
-					&& m_player->GetPlayerTarget()->GetTargetDoor() == this 
-					&& m_player->GetPlayerState() != nsPlayer::Player::enState_Bitten
-					)
+				//ドアが開くとき
+				if (m_openFlag == false)
 				{
-					m_moveFlag = true;
-
-					//ドアが開くとき
-					if (m_openFlag == false)
-					{
-						//プレイヤーとの位置関係で、扉が前に開くか奥に開くかを決める
-						float dot = Dot(m_direction, m_toPlayerDir);
-						if (dot >= 0)
+					//エネミーが近くに来ると、扉が開く。
+					QueryGOs<nsEnemy::Enemy>("enemy", [this](nsEnemy::Enemy* enemy)->bool
 						{
-							m_isOpenFromForward = true;
-						}
-						else
-						{
-							m_isOpenFromForward = false;
-						}
-					}
-				}
-				else
-				{
-					//ドアが開くとき
-					if (m_openFlag == false)
-					{
-						//エネミーが近くに来ると、扉が開く。
-						QueryGOs<nsEnemy::Enemy>("enemy", [this](nsEnemy::Enemy* enemy)->bool
+							float dis = (m_position - enemy->GetEnemyMove()->GetPosition()).Length();
+							if (dis <= 200.0f)
 							{
-								float dis = (m_position - enemy->GetEnemyMove()->GetPosition()).Length();
-								if (dis <= 200.0f)
-								{
-									m_moveFlag = true;
+								m_moveFlag = true;
 
-									//エネミーとの位置関係で、扉が前に開くか奥に開くかを決める
-									Vector3 toEnemyDir = m_centerPos - enemy->GetEnemyMove()->GetPosition();
-									toEnemyDir.Normalize();
-									float dot = Dot(m_direction, toEnemyDir);
-									if (dot >= 0)
-									{
-										m_isOpenFromForward = true;
-									}
-									else
-									{
-										m_isOpenFromForward = false;
-									}
+								//エネミーとの位置関係で、扉が前に開くか奥に開くかを決める
+								Vector3 toEnemyDir = m_centerPos - enemy->GetEnemyMove()->GetPosition();
+								toEnemyDir.Normalize();
+								float dot = Dot(m_direction, toEnemyDir);
+								if (dot >= 0)
+								{
+									m_isOpenFromForward = true;
 								}
-								return true;
+								else
+								{
+									m_isOpenFromForward = false;
+								}
 							}
-						);
-					}
+							return true;
+						}
+					);
 				}
 			}
 			//ドアが開閉しているとき
@@ -273,14 +246,6 @@ namespace nsHikageri
 
 		void Door::CannotOpen()
 		{
-			//プレイヤーのターゲットがこのドアで、Aボタンが押されたら、フラグをtrueに。
-			if (g_pad[0]->IsTrigger(enButtonA)
-				&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Door
-				&& m_player->GetPlayerTarget()->GetTargetDoor() == this)
-			{
-				m_executeCannotOpenFlag = true;
-			}
-
 			//フラグがtrueなら、ガチャガチャする。
 			if (m_executeCannotOpenFlag)
 			{
@@ -375,6 +340,34 @@ namespace nsHikageri
 					break;
 				default:
 					break;
+				}
+			}
+		}
+
+		void Door::PlayerTouchDoor()
+		{
+			//鍵がかかっているならば、ガチャガチャする処理を行う。
+			if (m_unlockFlag == false)
+			{
+				m_executeCannotOpenFlag = true;
+			}
+			else if (m_moveFlag == false)
+			{
+				m_moveFlag = true;
+
+				//ドアが開くとき
+				if (m_openFlag == false)
+				{
+					//プレイヤーとの位置関係で、扉が前に開くか奥に開くかを決める
+					float dot = Dot(m_direction, m_toPlayerDir);
+					if (dot >= 0)
+					{
+						m_isOpenFromForward = true;
+					}
+					else
+					{
+						m_isOpenFromForward = false;
+					}
 				}
 			}
 		}

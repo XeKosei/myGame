@@ -16,6 +16,9 @@ namespace nsHikageri
 			Vector3 GetPosition() { return m_position; }
 			void SetPosition(Vector3 pos) { m_position = pos; }
 
+			//“üŽè‚³‚ê‚½‚Æ‚«
+			void Got();
+
 			//“§Ž‹
 			void ExecuteClairvoyance();
 

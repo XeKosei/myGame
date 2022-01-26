@@ -73,6 +73,9 @@ namespace nsHikageri
 				break;
 			}
 
+			if (g_pad[0]->IsTrigger(enButtonA))
+				GetItem();
+
 			Vector3 toTargetDis = targetPos - m_player->GetPlayerCamera()->GetCameraPos();
 			Vector3 toTargetDir = toTargetDis;
 			toTargetDir.Normalize();
@@ -81,6 +84,36 @@ namespace nsHikageri
 				|| Dot(toTargetDir, m_player->GetPlayerCamera()->GetDirection()) < CATCH_EYES_DOT)
 			{
 				m_target = enTarget_None;
+			}
+		}
+
+		void PlayerTarget::GetItem()
+		{
+			switch (m_target)
+			{
+			case enTarget_None:
+				return;
+				break;
+			case enTarget_Door:
+				m_targetDoor->PlayerTouchDoor();
+				break;
+			case enTarget_Key:
+				m_targetKey->Got();
+				break;
+			case enTarget_FlashLightParts:
+				m_targetFlashLightParts->Got();
+				break;
+			case enTarget_Tranquilizer:
+				m_targetTranquilizer->Got();
+				break;
+			case enTarget_Battery:
+				m_targetBattery->Got();
+				break;
+			case enTarget_Paper:
+				m_targetMessagePaper->Read();
+				break;
+			default:
+				break;
 			}
 		}
 	}

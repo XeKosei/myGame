@@ -75,45 +75,6 @@ namespace nsHikageri
 				m_player->GetPlayerTarget()->SetTargetKey(this);
 			}
 
-			//プレイヤーのターゲットがこの鍵で、Aボタンが押されたら、入手
-			if (g_pad[0]->IsTrigger(enButtonA)
-				&& m_player->GetPlayerTarget()->GetTarget() == nsPlayer::PlayerTarget::enTarget_Key
-				&& m_player->GetPlayerTarget()->GetTargetKey() == this)
-			{
-				switch (m_keyColor)
-				{
-				case Door::enDoorColor_Red:
-					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_RedKey);
-					break;
-				case Door::enDoorColor_Blue:
-					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_BlueKey);
-					break;
-				case Door::enDoorColor_Green:
-					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_GreenKey);
-					break;
-				case Door::enDoorColor_Yellow:
-					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_YellowKey);
-					break;
-				case Door::enDoorColor_Purple:
-					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_PurpleKey);
-					break;
-				case Door::enDoorColor_White:
-					m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_LastKey);
-					break;
-				default:
-					return;
-					break;
-				}	
-				DeleteGO(this);
-				
-				m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_None);
-
-				//SE
-				SoundSource* ss = NewGO<SoundSource>(0);
-				ss->Init(L"Assets/sound/GetItemKey.wav");
-				ss->Play(false);
-			}
-
 			//透視
 			ExecuteClairvoyance();
 		}
@@ -129,6 +90,44 @@ namespace nsHikageri
 			{
 				m_keyModel->SetClairvoyanceCasterFlag(false);
 			}
+		}
+
+		void ItemKey::Got()
+		{
+
+			switch (m_keyColor)
+			{
+			case Door::enDoorColor_Red:
+				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_RedKey);
+				break;
+			case Door::enDoorColor_Blue:
+				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_BlueKey);
+				break;
+			case Door::enDoorColor_Green:
+				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_GreenKey);
+				break;
+			case Door::enDoorColor_Yellow:
+				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_YellowKey);
+				break;
+			case Door::enDoorColor_Purple:
+				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_PurpleKey);
+				break;
+			case Door::enDoorColor_White:
+				m_player->GetPlayerPouch()->AddItem(nsPlayer::PlayerPouch::enItem_LastKey);
+				break;
+			default:
+				return;
+				break;
+			}
+			DeleteGO(this);
+
+			m_player->GetPlayerTarget()->SetTarget(nsPlayer::PlayerTarget::enTarget_None);
+
+			//SE
+			SoundSource* ss = NewGO<SoundSource>(0);
+			ss->Init(L"Assets/sound/GetItemKey.wav");
+			ss->Play(false);
+			
 		}
 	}
 }
