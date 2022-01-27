@@ -351,6 +351,9 @@ namespace nsHikageri
 			if (m_unlockFlag == false)
 			{
 				m_executeCannotOpenFlag = true;
+
+				//Œ®‚ðŽg‚¤B
+				m_player->GetPlayerPouch()->UseKey();
 			}
 			else if (m_moveFlag == false)
 			{

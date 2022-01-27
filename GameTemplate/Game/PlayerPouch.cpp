@@ -28,37 +28,40 @@ namespace nsHikageri
 
 		void PlayerPouch::UseItem()
 		{
-			//アイテムを1個以上持っているならば
-			if (m_haveItemNum[m_choseItem] > 0)
+			if (g_pad[0]->IsTrigger(enButtonX))
 			{
-				switch (m_choseItem)
+				//アイテムを1個以上持っているならば
+				if (m_haveItemNum[m_choseItem] > 0)
 				{
-				case enItem_Battery:
-					UseBattery();
-					break;
-				case enItem_Tranquilizer:
-					UseTranquilizar();
-					break;
-				case enItem_RedKey:
-					UseKey();
-					break;
-				case enItem_BlueKey:
-					UseKey();
-					break;
-				case enItem_GreenKey:
-					UseKey();
-					break;
-				case enItem_YellowKey:
-					UseKey();
-					break;
-				case enItem_PurpleKey:
-					UseKey();
-					break;
-				case enItem_LastKey:
-					UseKey();
-					break;
-				default:
-					break;
+					switch (m_choseItem)
+					{
+					case enItem_Battery:
+						UseBattery();
+						break;
+					case enItem_Tranquilizer:
+						UseTranquilizar();
+						break;
+					case enItem_RedKey:
+						UseKey();
+						break;
+					case enItem_BlueKey:
+						UseKey();
+						break;
+					case enItem_GreenKey:
+						UseKey();
+						break;
+					case enItem_YellowKey:
+						UseKey();
+						break;
+					case enItem_PurpleKey:
+						UseKey();
+						break;
+					case enItem_LastKey:
+						UseKey();
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		}
@@ -122,115 +125,108 @@ namespace nsHikageri
 		//電池を使用したときの処理
 		void PlayerPouch::UseBattery()
 		{
-			if (g_pad[0]->IsTrigger(enButtonX))
-			{
-				//アイテムの数を1減らす
-				m_haveItemNum[m_choseItem]--;
-				//UIの更新
-				m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
-				//バッテリー回復
-				m_player->GetFlashLight()->GetFlashLightBattery()->SetBatteryLevel(nsFlashLight::nsFlashLightBatteryConstant::MAX_BATTERY_LEVEL);
-				//SE
-				UseItemSE(enUseItemSounds_Battery);
-			}
+			//アイテムの数を1減らす
+			m_haveItemNum[m_choseItem]--;
+			//UIの更新
+			m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
+			//バッテリー回復
+			m_player->GetFlashLight()->GetFlashLightBattery()->SetBatteryLevel(nsFlashLight::nsFlashLightBatteryConstant::MAX_BATTERY_LEVEL);
+			//SE
+			UseItemSE(enUseItemSounds_Battery);
+
 		}
 
 		//精神安定剤を使用したとき
 		void PlayerPouch::UseTranquilizar()
 		{
-			if (g_pad[0]->IsTrigger(enButtonX))
-			{
-				//アイテムの数を1減らす
-				m_haveItemNum[m_choseItem]--;
-				//UIの更新
-				m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
-				//SAN値回復
-				m_player->GetPlayerSanity()->Recovery(TRANQUILIZER_RECOVERY_NUM);
-				//SE
-				UseItemSE(enUseItemSounds_Tranquilizer);
-			}
+			//アイテムの数を1減らす
+			m_haveItemNum[m_choseItem]--;
+			//UIの更新
+			m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
+			//SAN値回復
+			m_player->GetPlayerSanity()->Recovery(TRANQUILIZER_RECOVERY_NUM);
+			//SE
+			UseItemSE(enUseItemSounds_Tranquilizer);
 		}
 
 		void PlayerPouch::UseKey()
 		{
-			if (g_pad[0]->IsTrigger(enButtonX) || g_pad[0]->IsTrigger(enButtonA) )
+			//ドアのカギを開けるかどうかのフラグ
+			bool unlockFlag = false;
+
+			//鍵の色とドアの色が一致しているかを管理
+			switch (m_choseItem)
 			{
-				//ドアのカギを開けるかどうかのフラグ
-				bool unlockFlag = false;
-
-				//鍵の色とドアの色が一致しているかを管理
-				switch (m_choseItem)
+			case enItem_RedKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
 				{
-				case enItem_RedKey:
-					if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Red)
 					{
-						if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Red)
-						{
-							unlockFlag = true;
-						}
+						unlockFlag = true;
 					}
-					break;
-				case enItem_BlueKey:
-					if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
-					{
-						if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Blue)
-						{
-							unlockFlag = true;
-						}
-					}
-					break;
-				case enItem_GreenKey:
-					if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
-					{
-						if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Green)
-						{
-							unlockFlag = true;
-						}
-					}
-					break;
-				case enItem_YellowKey:
-					if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
-					{
-						if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Yellow)
-						{
-							unlockFlag = true;
-						}
-					}
-					break;
-				case enItem_PurpleKey:
-					if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
-					{
-						if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Purple)
-						{
-							unlockFlag = true;
-						}
-					}
-					break;
-				case enItem_LastKey:
-					if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
-					{
-						if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_White)
-						{
-							unlockFlag = true;
-						}
-					}
-					break;
-				default:
-					break;
 				}
-
-				if (unlockFlag)
+				break;
+			case enItem_BlueKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
 				{
-					//アイテムの数を1減らす
-					m_haveItemNum[m_choseItem]--;
-					//UI更新
-					m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
-					//鍵を解除
-					m_player->GetPlayerTarget()->GetTargetDoor()->SetUnlockFlag(true);
-					//SE
-					UseItemSE(enUseItemSounds_Key);
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Blue)
+					{
+						unlockFlag = true;
+					}
 				}
+				break;
+			case enItem_GreenKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
+				{
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Green)
+					{
+						unlockFlag = true;
+					}
+				}
+				break;
+			case enItem_YellowKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
+				{
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Yellow)
+					{
+						unlockFlag = true;
+					}
+				}
+				break;
+			case enItem_PurpleKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
+				{
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_Purple)
+					{
+						unlockFlag = true;
+					}
+				}
+				break;
+			case enItem_LastKey:
+				if (m_player->GetPlayerTarget()->GetTarget() == PlayerTarget::enTarget_Door)
+				{
+					if (m_player->GetPlayerTarget()->GetTargetDoor()->GetDoorColor() == nsGimmick::Door::enDoorColor_White)
+					{
+						unlockFlag = true;
+					}
+				}
+				break;
+			default:
+				break;
 			}
+
+			if (unlockFlag)
+			{
+				//アイテムの数を1減らす
+				m_haveItemNum[m_choseItem]--;
+				//UI更新
+				m_player->GetPlayerUI()->SetItemFont(m_choseItem, m_haveItemNum[m_choseItem]);
+				//鍵を解除
+				m_player->GetPlayerTarget()->GetTargetDoor()->SetUnlockFlag(true);
+				//SE
+				UseItemSE(enUseItemSounds_Key);
+			}
+
 		}
 
 		void PlayerPouch::UseItemSE(EnUseItemSounds soundKind)
