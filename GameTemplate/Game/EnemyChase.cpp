@@ -23,6 +23,9 @@ namespace nsHikageri
 		//Enemy.cppのUpdate()で呼び出す処理
 		void EnemyChase::ExecuteUpdate()
 		{
+			//移動速度を指定
+			m_enemy->GetEnemyMove()->SetMoveSpeed(nsEnemyMoveConstant::ENEMY_DASH_SPEED);
+
 			if (m_isPlayerHidden == false)
 			{
 				Chase();
@@ -48,8 +51,6 @@ namespace nsHikageri
 
 		void EnemyChase::Chase()
 		{
-			//移動速度を指定
-			m_enemy->GetEnemyMove()->SetMoveSpeed(nsEnemyMoveConstant::ENEMY_DASH_SPEED);
 			m_enemy->GetEnemyMove()->SetTargetPos(m_enemy->GetPlayer()->GetPlayerMove()->GetPosition());
 			m_calcLineHitModelConstant--;
 
@@ -110,7 +111,7 @@ namespace nsHikageri
 			}
 
 			//探す場所とほぼ同じ位置に付いたら
-			if ((m_enemy->GetEnemyMove()->GetTargetPos() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= 5.0f)
+			if ((m_enemy->GetEnemyMove()->GetTargetPos() - m_enemy->GetEnemyMove()->GetPosition()).Length() <= nsEnemyMoveConstant::ENEMY_DASH_SPEED)
 			{
 				m_enemy->SetEnemyState(Enemy::enState_Vigilant);
 				m_enemy->GetEnemyMove()->SetMoveState(EnemyMove::enMoveState_RouteSearch);

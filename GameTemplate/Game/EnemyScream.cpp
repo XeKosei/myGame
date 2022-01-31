@@ -20,6 +20,7 @@ namespace nsHikageri
 			{
 				m_enemy->SetEnemyState(Enemy::enState_Chase);
 				m_enemy->GetEnemyMove()->ResetVelocity();
+				m_enemy->GetEnemyMove()->SetMoveState(EnemyMove::enMoveState_Straight);
 			}
 		}
 	}

@@ -24,7 +24,7 @@ namespace nsHikageri
 		void EnemyMove::ExecuteUpdate()
 		{
 			//エネミーが引っかかって動いてないとき
-			if ((m_position - m_oldPos).Length() < 1.0f)
+			if ((m_position - m_oldPos).Length() < 0.1f)
 			{
 				m_moveSpeed *= 1.5f;
 				//経路探索し直す
@@ -63,14 +63,14 @@ namespace nsHikageri
 			//移動処理
 			if (m_slowMoveFlag)
 			{
-				if (m_velocity.Length() > ENEMY_SLOWWALK_SPEED)
+				if (m_velocity.Length() > ENEMY_DASH_SPEED * 10)
 				{
 					ResetVelocity();
 				}
 				m_moveSpeed = ENEMY_SLOWWALK_SPEED;
 			}
 
-			m_velocity += m_direction * m_moveSpeed * GameTime::GetInstance().GetFrameDeltaTime();
+			m_velocity += m_direction * m_moveSpeed;
 
 			//減速処理
 			m_velocity.x -= m_velocity.x * ENEMY_MOVE_FRICTION;
@@ -86,14 +86,14 @@ namespace nsHikageri
 			}
 
 			//速度がほぼ0ならば、0にする。
-			if (fabsf(m_velocity.x + m_velocity.z) < 0.000001f)
+			if (fabsf(m_velocity.x + m_velocity.z) < 0.001f)
 			{
 				m_velocity.x = 0.0f;
 				m_velocity.z = 0.0f;
 			}
 
 			//位置に速度を加算
-			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, 1.0f);
+			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, GameTime::GetInstance().GetFrameDeltaTime());
 
 			//ターゲット地点にほぼ到達したら、
 			if ((m_position - m_targetPos).Length() < 5.0f)
@@ -130,7 +130,7 @@ namespace nsHikageri
 			//移動処理
 			if (m_slowMoveFlag)
 			{
-				if (m_velocity.Length() > ENEMY_SLOWWALK_SPEED)
+				if (m_velocity.Length() > ENEMY_DASH_SPEED * 10)
 				{
 					ResetVelocity();
 				}
@@ -148,7 +148,7 @@ namespace nsHikageri
 			m_direction = pathPos - m_oldPos;
 			m_direction.Normalize();
 
-			m_velocity += m_direction * m_moveSpeed * GameTime::GetInstance().GetFrameDeltaTime();
+			m_velocity += m_direction * m_moveSpeed;
 
 			//減速処理
 			m_velocity.x -= m_velocity.x * ENEMY_MOVE_FRICTION;
@@ -158,14 +158,14 @@ namespace nsHikageri
 			m_direction.Normalize();
 
 			//速度がほぼ0ならば、0にする。
-			if (fabsf(m_velocity.x + m_velocity.z) < 0.000001f)
+			if (fabsf(m_velocity.x + m_velocity.z) < 0.001f)
 			{
 				m_velocity.x = 0.0f;
 				m_velocity.z = 0.0f;
 			}
 
 			//位置に速度を加算
-			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, 1.0f);
+			m_position = m_enemy->GetCharaCon()->Execute(m_velocity, GameTime::GetInstance().GetFrameDeltaTime());
 
 			//パスの位置にほぼ到達したら、
 			if (m_moveSpeed == ENEMY_DASH_SPEED && (m_position - pathPos).Length() < ENEMY_DASH_SPEED ||

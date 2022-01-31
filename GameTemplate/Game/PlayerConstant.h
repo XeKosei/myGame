@@ -7,7 +7,7 @@ namespace nsHikageri
 		{
 			static const Vector3 purpleDoorPos = { -7800.0f, 0.0f,4800.0f };
 
-			static const Vector3 INI_PLAYER_POSITION = { 1000.0f, 0.0f,0.0f };	//プレイヤーの初期位置
+			static const Vector3 INI_PLAYER_POSITION = { -3000.0f, 0.0f,0.0f };	//プレイヤーの初期位置
 			static const float PLAYER_MODEL_WIDTH = 50.0f;	///:プレイヤーのモデルの横幅
 			static const float PLAYER_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
 			static const Vector3 INI_PLAYER_SCALE = { 1.0f, 1.0f, 1.0f };	//プレイヤーのモデルの大きさの初期値
