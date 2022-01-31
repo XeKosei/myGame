@@ -350,10 +350,14 @@ namespace nsHikageri
 			//鍵がかかっているならば、ガチャガチャする処理を行う。
 			if (m_unlockFlag == false)
 			{
-				m_executeCannotOpenFlag = true;
+				//ガチャガチャしてないとき
+				if (m_executeCannotOpenFlag == false)
+				{
+					//鍵を使う。
+					m_player->GetPlayerPouch()->UseKey();
+				}
 
-				//鍵を使う。
-				m_player->GetPlayerPouch()->UseKey();
+				m_executeCannotOpenFlag = true;
 			}
 			else if (m_moveFlag == false)
 			{
