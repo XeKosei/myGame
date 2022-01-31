@@ -129,7 +129,6 @@ namespace nsHikageri
 
 				//enMessagePaperKind_04
 				L"\n"
-				L"\n"
 				L"ついに最強の力を手に入れたらしい。\n"
 				L"\n"
 				L"RB2長押しのチャージを、\n"
@@ -144,7 +143,6 @@ namespace nsHikageri
 				,
 
 				//enMessagePaperKind_05
-				L"\n"
 				L"\n"
 				L"クソ...\n"
 				L"あと少しで脱出できるってのに\n"
