@@ -44,7 +44,7 @@ namespace nsHikageri
 			bool m_canPlayChargedSS = true;
 
 			//アビリティが解放されているかどうか
-			bool m_abilityAcitveFlag = true;
+			bool m_abilityAcitveFlag = false;
 		};
 	}
 }

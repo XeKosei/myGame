@@ -53,11 +53,6 @@ namespace nsHikageri
 
 		void FlashLight::Update()
 		{
-			//プレイヤーが動かせないとき、処理しない
-			if (m_player->GetPlayerState() == nsPlayer::Player::enState_Dead ||
-				m_player->GetPlayerState() == nsPlayer::Player::enState_Read)
-				return;
-
 			// モデル用の嘘座標を計算する
 			Vector3 spotLightUp = Cross(g_camera3D->GetForward(), g_camera3D->GetRight());
 
@@ -100,16 +95,17 @@ namespace nsHikageri
 				return;
 			}
 
+			//プレイヤーが動かせないとき、処理しない
+			if (m_player->GetPlayerState() == nsPlayer::Player::enState_Dead ||
+				m_player->GetPlayerState() == nsPlayer::Player::enState_Read)
+				return;
+
 			//懐中電灯関係の処理
-			//if (m_player->GetPlayerState() == nsPlayer::Player::enState_Normal ||
-			//	m_player->GetPlayerState() == nsPlayer::Player::enState_Invincible )
-			{
-				m_flashLightAction.ExecuteUpdate();
-				m_flashLightBattery.ExecuteUpdate();
-				m_abilityStrobeFlash.ExecuteUpdate();
-				m_abilityClairvoyance.ExecuteUpdate();
-				m_abilityMedousaEye.ExecuteUpdate();
-			}
+			m_flashLightAction.ExecuteUpdate();
+			m_flashLightBattery.ExecuteUpdate();
+			m_abilityStrobeFlash.ExecuteUpdate();
+			m_abilityClairvoyance.ExecuteUpdate();
+			m_abilityMedousaEye.ExecuteUpdate();
 		}
 
 		//壊れる処理
