@@ -13,6 +13,7 @@ namespace nsHikageri
 			~ItemBattery();
 			bool Start();
 			void Update();
+			void ExecuteShineEffect();
 
 			//入手されたとき
 			void Got();
@@ -36,6 +37,7 @@ namespace nsHikageri
 			//光るエフェクト
 			Effect m_shineEff;
 			Vector3 m_shineEffPos = Vector3::Zero;
+			bool m_shineEffPlayingFlag = false;
 		};
 	}
 }

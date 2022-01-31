@@ -17,6 +17,9 @@ namespace nsHikageri
 			~ItemKey();
 			bool Start();
 			void Update();
+
+			void ExecuteShineEffect();
+
 			Vector3 GetPosition() { return m_position; }
 
 			//入手されたとき
@@ -57,6 +60,8 @@ namespace nsHikageri
 			//光るエフェクト
 			Effect m_shineEff;
 			Vector3 m_shineEffPos = Vector3::Zero;
+			bool m_shineEffPlayingFlag = false;
+
 		};
 	}
 }

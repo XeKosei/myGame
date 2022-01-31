@@ -60,8 +60,8 @@ namespace nsHikageri
 
 		void ItemFlashLightParts::Update()
 		{
-			//光るエフェクト
-			m_shineEff.Update();
+			//エフェクト再生
+			ExecuteShineEffect();
 
 			Vector3 dis = m_position - m_player->GetPlayerCamera()->GetCameraPos();
 			Vector3 m_toPlayerDir = dis;
@@ -116,6 +116,28 @@ namespace nsHikageri
 			ss->Init(L"Assets/sound/GetFlashLightParts.wav");
 			ss->Play(false);
 
+		}
+
+		void ItemFlashLightParts::ExecuteShineEffect()
+		{
+			//光るエフェクト
+			if (m_shineEffPlayingFlag)
+			{
+				m_shineEff.Update();
+				if (m_player->GetPlayerState() == nsPlayer::Player::enState_Read)
+				{
+					m_shineEff.Stop();
+					m_shineEffPlayingFlag = false;
+				}
+			}
+			else
+			{
+				if (m_player->GetPlayerState() != nsPlayer::Player::enState_Read)
+				{
+					m_shineEff.Play();
+					m_shineEffPlayingFlag = true;
+				}
+			}
 		}
 	}
 }

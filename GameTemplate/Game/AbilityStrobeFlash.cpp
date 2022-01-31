@@ -113,6 +113,10 @@ namespace nsHikageri
 					//SE
 					PlayChargedSE();
 				}
+
+				//Bボタンでキャンセル
+				if (g_pad[0]->IsTrigger(enButtonB))
+					Reset();
 			}
 			else
 			{

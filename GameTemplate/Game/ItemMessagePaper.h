@@ -25,6 +25,9 @@ namespace nsHikageri
 			~ItemMessagePaper();
 			bool Start();
 			void Update();
+
+			void ExecuteShineEffect();
+
 			Vector3 GetPosition() { return m_position; }
 			void SetPosition(Vector3 pos) { m_position = pos; }
 
@@ -49,6 +52,7 @@ namespace nsHikageri
 			//光るエフェクト
 			Effect m_shineEff;
 			Vector3 m_shineEffPos = Vector3::Zero;
+			bool m_shineEffPlayingFlag = false;
 		};
 
 		namespace nsItemMessagePaperConstant
@@ -60,23 +64,22 @@ namespace nsHikageri
 				L"\n"
 				L"俺の名前はダニエル\n"
 				L"気が付くとこんな場所で倒れていた。\n"
+				L"近くには、さっき拾った懐中電灯くらいしか\n"
+				L"見当たらない。\n"
 				L"\n"
-				L"ここは見渡す限り真っ暗で、さっき拾った\n"
-				L"懐中電灯の明かりが無いと、何故か\n"
-				L"だんだん体力が無くなっている気がする。\n"
+				L"ここは不気味なほど真っ暗で、明かりが無いと\n"
+				L"どんどん体力が失われていくのを感じる。\n"
 				L"\n"
 				L"それにさっきから変な呻き声が聞こえてくる。\n"
-				L"もしかしたら誰かいるのかもしれないが...\n"
+				L"もしかしたら誰かいるのかもしれない...\n"
 				L"\n"
 				L"仕方ねぇから、俺は少し先を見てこようと思う。\n"
-				L"\n"
 				L"もし誰かいるのなら、一緒に出口を探してくれ!\n"
 				,
 
 				//enMessagePaperKind_01
 				L"一体なんなんだあの化け物は!\n"
-				L"こっちを見た途端、雄叫びを上げて\n"
-				L"追いかけて来やがった!\n"
+				L"こっちを見つけたら急に追いかけて来やがった!\n"
 				L"\n"
 				L"やられちまうかと思ったが、どうやら慌てて\n"
 				L"逃げ込んだのがこの部屋で正解だったらしい。\n"
@@ -91,8 +94,8 @@ namespace nsHikageri
 				,
 
 				//enMessagePaperKind_02
-				L"機会の部品らしきものを見つけたので、\n"
-				L"懐中電灯に合体させてみたのだが、こいつはいい!\n"
+				L"懐中電灯の部品らしきものを見つけたので、\n"
+				L"組み合わせてみたのだが、こいつはいい!\n"
 				L"\n"
 				L"RB2ボタン長押しでチャージしてから\n"
 				L"ボタンを離すことで、強力なフラッシュが\n"
@@ -101,7 +104,7 @@ namespace nsHikageri
 				L"これならあの化け物にも多少は効果があるだろう。\n"
 				L"すぐにでもあいつを目潰ししてやりたい所だが、\n"
 				L"どうやらこの機能を使うとバッテリーを大きく消耗\n"
-				L"してしまうみたいだ。気を付けないとな。\n"
+				L"してしまうみたいだ。気を付けないとな\n"
 				L"\n"
 				L"そういえば道の途中に、目のような模様がある\n"
 				L"変わった壁があったな。如何にも怪しい壁だったが\n"
@@ -111,7 +114,7 @@ namespace nsHikageri
 				//enMessagePaperKind_03
 				L"また新たな部品を手に入れた。\n"
 				L"\n"
-				L"驚いたことに、LB2を押している間\n"
+				L"驚いたことに、LB2ボタンを押している間\n"
 				L"壁越しで化け物の居場所を特定できるらしい。\n"
 				L"\n"
 				L"薄々気付いてはいたが、どうやらこいつは\n"
@@ -125,6 +128,8 @@ namespace nsHikageri
 				,
 
 				//enMessagePaperKind_04
+				L"\n"
+				L"\n"
 				L"ついに最強の力を手に入れたらしい。\n"
 				L"\n"
 				L"RB2長押しのチャージを、\n"
@@ -139,6 +144,8 @@ namespace nsHikageri
 				,
 
 				//enMessagePaperKind_05
+				L"\n"
+				L"\n"
 				L"クソ...\n"
 				L"あと少しで脱出できるってのに\n"
 				L"もう身体が動きやがらねぇ。\n"

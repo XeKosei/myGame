@@ -13,6 +13,8 @@ namespace nsHikageri
 			~ItemTranquilizer();
 			bool Start();
 			void Update();
+			void ExecuteShineEffect();
+
 			Vector3 GetPosition() { return m_position; }
 			void SetPosition(Vector3 pos) { m_position = pos; }
 
@@ -35,6 +37,7 @@ namespace nsHikageri
 			//光るエフェクト
 			Effect m_shineEff;
 			Vector3 m_shineEffPos = Vector3::Zero;
+			bool m_shineEffPlayingFlag = false;
 		};
 	}
 }
