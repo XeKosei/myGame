@@ -320,8 +320,8 @@ float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView, float3 
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
 	float4 albedoColor = g_albedo.Sample(g_sampler, psIn.uv);
-	float minColor = 0.3f;
-	float maxColor = 0.0f;
+	float maxColor = 0.5f;
+	float minColor = 0.2f;
 
 	if (albedoColor.x > maxColor)
 		albedoColor.x = maxColor;

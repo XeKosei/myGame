@@ -111,6 +111,7 @@ namespace nsHikageri
 				break;
 			case enTarget_Paper:
 				m_targetMessagePaper->Read();
+				m_itemNameFont->SetText(L"B •Â‚¶‚é");
 				break;
 			default:
 				break;

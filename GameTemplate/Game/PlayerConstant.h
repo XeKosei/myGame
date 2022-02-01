@@ -7,7 +7,7 @@ namespace nsHikageri
 		{
 			static const Vector3 purpleDoorPos = { -7800.0f, 0.0f,4800.0f };
 
-			static const Vector3 INI_PLAYER_POSITION = { purpleDoorPos };	//プレイヤーの初期位置
+			static const Vector3 INI_PLAYER_POSITION = { 1000.0f,0.0f,0.0f };	//プレイヤーの初期位置
 			static const float PLAYER_MODEL_WIDTH = 50.0f;	///:プレイヤーのモデルの横幅
 			static const float PLAYER_MODEL_HEIGHT = 120.0f;	//プレイヤーのモデルの高さ
 			static const Vector3 INI_PLAYER_SCALE = { 1.0f, 1.0f, 1.0f };	//プレイヤーのモデルの大きさの初期値
@@ -71,13 +71,13 @@ namespace nsHikageri
 		{
 			static const float CATCH_EYES_DIS = 400.0f;	//オブジェクトがプレイヤーの目を引く距離
 			static const float CATCH_EYES_DOT = 0.95f;	//オブジェクトがプレイヤーの目を引く内積
-			static const Vector2 ITEMNAME_FONT_POS = {-50.0f,-200.0f};	//アイテム名の表示位置
+			static const Vector2 ITEMNAME_FONT_POS = {-70.0f,-200.0f};	//アイテム名の表示位置
 			static const float ITEMNAME_FONT_SCALE = 0.65f;	//アイテム名のフォントの大きさ
 			
 			//ターゲットの名前
 			static const std::wstring TARGET_NAME[PlayerTarget::enTarget_num] = { 
-				L"", L"A ドア", L"A 鍵", L"A 懐中電灯の部品", 
-				L"A 精神安定剤",L"A 電池", L"A 紙"};
+				L"", L"  A ドア", L"   A 鍵", L"A 懐中電灯の部品", 
+				L"A 精神安定剤",L" A 電池", L"   A 紙"};
 			
 			//コマンド表示
 			static const std::wstring COMMAND_TEXT[PlayerTarget::enCommand_num] = {L"", L"A:拾う",L"A:開ける",L"A:閉める", L"A:読む"};

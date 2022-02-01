@@ -159,13 +159,13 @@ namespace nsHikageri
 				m_model[eModel].Draw(rc, camera);
 			}
 			break;
-		case RenderContext::eStep_RenderShadowMap:
-			//影を作るモデルの時だけ影を描画
-			if (m_isShadowCaster)
-			{
-				//m_model[eModel_Shadow].Draw(rc, camera);
-			}
-			break;
+		//case RenderContext::eStep_RenderShadowMap:
+		//	//影を作るモデルの時だけ影を描画
+		//	if (m_isShadowCaster)
+		//	{
+		//		m_model[eModel_Shadow].Draw(rc, camera);
+		//	}
+		//	break;
 		case RenderContext::eStep_RenderSpotLightMap00:
 			//スポットライト用
 			if (m_isSpotLightCaster)
