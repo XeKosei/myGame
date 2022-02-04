@@ -89,13 +89,15 @@ namespace nsHikageri
 		for (int no = 0; no < 3; no++)
 		{
 			m_spotLightMap[no].Create(
-				1280,
+				1028,
 				720,
 				1,
 				1,
 				DXGI_FORMAT_R32G32_FLOAT,
 				DXGI_FORMAT_D32_FLOAT
 			);
+			//VSM用にテクスチャをぼかす。
+			m_spotLightMapBlur[no].Init(&m_spotLightMap[no].GetRenderTargetTexture());
 		}
 
 		//透視用のマップ
@@ -162,6 +164,7 @@ namespace nsHikageri
 	void PostEffectManager::EndSpotLightRender(RenderContext& rc, int no)
 	{
 		rc.WaitUntilFinishDrawingToRenderTarget(m_spotLightMap[no]);
+		//m_spotLightMapBlur[no].ExecuteOnGPU(rc, 5.0f);
 	}
 
 	void PostEffectManager::ClairvoyanceRender(RenderContext& rc)

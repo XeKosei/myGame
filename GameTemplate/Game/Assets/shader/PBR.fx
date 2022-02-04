@@ -339,7 +339,6 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	//タンジェントスペースの法線をワールドスペースに変換する
 	normal = normalize(psIn.tangent * localNormal.x + psIn.biNormal * localNormal.y + normal * localNormal.z);
 	
-	
 	///////////スペキュラマップ
 	//スペキュラマップからスペキュラ反射の強さをサンプリング
 	float smooth = g_specularMap.Sample(g_sampler, psIn.uv).r;
@@ -437,9 +436,9 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		if (spotLightMapUV.x > 0.0f && spotLightMapUV.x < 1.0f
 			&& spotLightMapUV.y > 0.0f && spotLightMapUV.y < 1.0f)
 		{
-			float zInSpotLightMap = spotLightMap[i].Sample(g_sampler, spotLightMapUV).x;
+			float2 spotLightValue = spotLightMap[i].Sample(g_sampler, spotLightMapUV).xy;
 
-			if (zInSpotLVP < zInSpotLightMap + 0.0001f )//&& zInSpotLVP <= 1.0f)
+			if (zInSpotLVP < spotLightValue.x + 0.00005f )//&& zInSpotLVP <= 1.0f)
 			{
 				//透視の処理
 				if (i == 0)	//懐中電灯のスポットライトのときのみ
@@ -529,8 +528,8 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 				}
 
 				finalLig *= affect;
-
 				finalColor.xyz += finalLig;
+
 				//return finalColor;
 			}
 		}
@@ -544,21 +543,24 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	{
 		if (spotLigCameraData[i].isSpotLightSwitchOn == 1)
 		{
-			float3 toPsInDir = psIn.worldPos - spotLigCameraData[i].spotLightCameraPos;
-			toPsInDir = normalize(toPsInDir);
-			float3 spotLigDir = normalize(spotLigCameraData[i].spotLightCameraDir);
-			float toPsInAngle = dot(toPsInDir, spotLigDir);
-			toPsInAngle = acos(toPsInAngle);
-			if (toPsInAngle < 0.0f)
+			//懐中電灯から頂点への向きを求める。
+			float3 toVertexDir = psIn.worldPos - spotLigCameraData[i].spotLightCameraPos;
+			toVertexDir = normalize(toVertexDir);
+			//頂点への向きとスポットライトの向きの内積を計算
+			float toVertexAngle = dot(toVertexDir, spotLigCameraData[i].spotLightCameraDir);
+			//内積の結果をラジアン角度に変換
+			toVertexAngle = acos(toVertexAngle);
+			if (toVertexAngle < 0.0f)
 			{
-				toPsInAngle *= -1.0f;
+				toVertexAngle *= -1.0f;
 			}
+			//スポットライトのアングルを求める。
 			float spotLigAngle = spotLigCameraData[i].spotLightCameraAngle;
-			spotLigAngle /= 2;
-
-			if (toPsInAngle <= spotLigAngle && ambientLig.r <= 0.3f)
+			spotLigAngle *= 0.5f;
+			//スポットライトのアングルの内側ならば
+			if (toVertexAngle <= spotLigAngle && ambientLig.r <= 0.3f)
 			{
-				ambientLig = 0.3f;
+				ambientLig = 0.3f;//max(-0.5f, 1 - (length(eyePos - psIn.worldPos) * 0.0005f));
 			}
 		}
 	}

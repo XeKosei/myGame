@@ -59,25 +59,17 @@ struct SpotLigData
 	float3 ligDir;		//ライトの射出方向
 	float ligAngle;		//ライトの射出角度
 };
-struct SpotLigCameraData
-{
-	float4x4 mSpotLVP;
-	float3 spotLightCameraPos;
-	float spotLightCameraAngle;
-	float3 spotLightCameraDir;
-	float isSpotLightSwitchOn;
-};
+
 cbuffer LightDataCb : register(b1)
 {
 	//各配列数はCLightManager.hのMaxLightNumと同じにすること
-	SpotLigCameraData spotLigCameraData[3];
-	DirLigData directionLigData[5];
-	PointLigData pointLigData[50];
-	SpotLigData spotLigData[20];
-	float3 eyePos;
-	int directionLigNum;
-	int pointLigNum;
-	int spotLigNum;
+	DirLigData dirLigData[5];	//ディレクションライトのデータの配列	
+	PointLigData pointLigData[20];		//ポイントライトのデータの配列
+	SpotLigData spotLigData[20];			//スポットライトのデータの配列
+	float3 eyePos;					//カメラの位置
+	int createdDirLigTotal;		//ディレクションライトが作られた総数
+	int createdPointLigTotal;	//ポイントライトが作られた総数
+	int createdSpotLigTotal;	//スポットライトが作られた総数
 };
 
 ////////////////////////////////////////////////

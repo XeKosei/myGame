@@ -5,7 +5,7 @@ namespace nsHikageri
 	{
 		namespace nsChandelierConstant
 		{
-			static const float CHANDELIER_FORCE_RANGE = 1000.0f;	//シャンデリアの力が及ぶ範囲
+			static const float CHANDELIER_FORCE_RANGE = 1100.0f;	//シャンデリアの力が及ぶ範囲
 			static const int CHANDELIER_ADD_STRESS_SPEED = 1;	//シャンデリアの光がエネミーにストレスを与える速さ
 		}
 

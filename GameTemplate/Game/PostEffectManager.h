@@ -74,7 +74,7 @@ namespace nsHikageri
 		bool m_shadowMode = false;	//シャドウが有効かどうか
 		//RenderTarget m_shadowMap;
 		RenderTarget m_spotLightMap[3];
-		//GaussianBlur m_shadowBlur;
+		GaussianBlur m_spotLightMapBlur[3];
 		RenderTarget m_clairvoyanceMap;
 	};
 

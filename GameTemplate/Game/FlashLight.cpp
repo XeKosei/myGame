@@ -30,7 +30,7 @@ namespace nsHikageri
 			m_spotLight->SetColor(INI_FLASHLIGHT_COLOR);
 			m_spotLight->SetRange(0.0f);
 			m_flashLightAngle = INI_FLASHLIGHT_ANGLE;	//スポットライトの射出角度
-			m_spotLight->SetAngle(m_flashLightAngle / 2);//(スポットライトに送るアングルは半径なので、2で割る。
+			m_spotLight->SetAngle(m_flashLightAngle * 0.5f);//(スポットライトに送るアングルは半径なので、2で割る。
 
 			//スポットライトカメラの設定
 			LightManager::GetInstance()->SetSpotLightCameraAngle(m_flashLightAngle, 0);

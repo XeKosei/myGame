@@ -73,13 +73,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	EffectEngine::CreateInstance();
 
 	// シャドウマップを表示するためのスプライトを初期化する
-	//SpriteInitData shadowMapDipData;
-	//shadowMapDipData.m_textures[0] = &nsHikageri::PostEffectManager::GetInstance()->GetSpotLightMap(2);
-	//shadowMapDipData.m_fxFilePath = "Assets/shader/sprite.fx";
-	//shadowMapDipData.m_width = 256;
-	//shadowMapDipData.m_height = 256;
+	//SpriteInitData shadowMapDispData;
+	//shadowMapDispData.m_textures[0] = &nsHikageri::PostEffectManager::GetInstance()->GetSpotLightMap(0);
+	//shadowMapDispData.m_fxFilePath = "Assets/shader/sprite.fx";
+	//shadowMapDispData.m_width = 256;
+	//shadowMapDispData.m_height = 256;
 	//Sprite shadowMapDisp;
-	//shadowMapDisp.Init(shadowMapDipData);
+	//shadowMapDisp.Init(shadowMapDispData);
 	
 	g_camera3D->SetPosition({0.0f, 300.0f, -1500.0f});
 	g_camera3D->SetFar(100000.0f);

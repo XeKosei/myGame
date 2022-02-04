@@ -60,6 +60,7 @@ namespace nsHikageri
 				m_playerBitten.ExecuteUpdate();
 				m_playerCamera.ExecuteUpdate();
 				m_playerSanity.ExecuteUpdate();
+				m_playerTarget.ExecuteUpdate();
 				m_playerUI.ExecuteUpdate();
 				break;
 			case enState_Dead:

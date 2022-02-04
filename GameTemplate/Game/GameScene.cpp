@@ -83,7 +83,7 @@ namespace nsHikageri
 			//ディレクションライトを作成
 			m_dirLig = NewGO<DirectionLight>(0);
 			m_dirLig->SetDirection({ 0.0f, 0.0f, -1.0f });
-			m_dirLig->SetColor({ 0.8f,0.8f,0.8f });
+			m_dirLig->SetColor({ 0.3f,0.3f,0.3f });
 
 			//プレイヤーを作成
 			m_player = NewGO<nsPlayer::Player>(0);

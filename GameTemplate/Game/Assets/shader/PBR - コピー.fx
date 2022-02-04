@@ -2,7 +2,7 @@
  * @brief	シンプルなモデルシェーダー。
  */
 
- //定数
+//定数
 static const float PI = 3.1415926f;         // π
 
  ////////////////////////////////////////////////
@@ -103,9 +103,10 @@ Texture2D<float4> g_albedo : register(t0);				//アルベドマップ
 Texture2D<float4> g_normalMap : register(t1);			//法線マップ
 Texture2D<float4> g_specularMap : register(t2);			//スペキュラマップ
 
-Texture2D<float4> g_spotLightMap00 : register(t10);		//スポットライトマップ
-Texture2D<float4> g_spotLightMap01 : register(t11);		//スポットライトマップ
-Texture2D<float4> g_spotLightMap02 : register(t12);		//スポットライトマップ
+Texture2D<float4> g_clairvoyanceMap : register(t10);	//透視マップ
+Texture2D<float4> g_spotLightMap00 : register(t11);		//スポットライトマップ
+Texture2D<float4> g_spotLightMap01 : register(t12);		//スポットライトマップ
+Texture2D<float4> g_spotLightMap02 : register(t13);		//スポットライトマップ
 StructuredBuffer<float4x4> g_boneMatrix : register(t3);	//ボーン行列。
 sampler g_sampler : register(s0);	//サンプラステート。
 
@@ -146,7 +147,7 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
 		m = mWorld;
 	}
 	psIn.pos = mul(m, vsIn.pos);
-
+	
 	psIn.worldPos = psIn.pos;
 
 	psIn.pos = mul(mView, psIn.pos);
@@ -233,10 +234,10 @@ float CalcDiffuseFromFresnel(float3 N, float3 L, float3 V, float roughness)
 }
 
 //ランバート拡散反射を計算する。
-float3 CalcLambertDiffuse(float3 ligDir, float3 ligColor, float3 normal)
+float3 CalcLambertDiffuse(float3 ligDir, float3 ligColor,float3 normal )
 {
 	float t = dot(normal, -ligDir);
-
+	
 	if (t < 0)
 	{
 		t = 0;
@@ -301,7 +302,7 @@ float CookTorranceSpecular(float3 ligDir, float3 toEyeDir, float3 normal, float 
 	return max(F * D * G / m, 0.0);
 }
 
-float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView, float3 normal)
+float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView,float3 normal)
 {
 	float power1 = 1.0f - max(0.0f, dot(ligDir, normal));
 
@@ -319,33 +320,10 @@ float3 CalcLimLight(float3 ligDir, float3 ligColor, float3 normalInView, float3 
 /// </summary>
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
-	//アルベドカラーをサンプリングする。
+	
+
 	float4 albedoColor = g_albedo.Sample(g_sampler, psIn.uv);
-	//カラーの最大値と最小値を決める。
-	float maxColor = 0.5f;
-	float minColor = 0.2f;
-
-	//サンプリングしたアルベドカラーが最大値を超えていたら、最大値に
-	//最小値を下回っていたら、最小値にする。
-	if (albedoColor.x > maxColor)
-		albedoColor.x = maxColor;
-	else if (albedoColor.x < minColor);
-		albedoColor.x = minColor;
-
-	if (albedoColor.y > maxColor)
-		albedoColor.y = maxColor;
-	else if (albedoColor.y < minColor);
-		albedoColor.y = minColor;
-
-	if (albedoColor.z > maxColor)
-		albedoColor.z = maxColor;
-	else if (albedoColor.z < minColor);
-		albedoColor.z = minColor;
-
-	//albedoColor.w = 1.0f;
-
-	//albedoColor = g_albedo.Sample(g_sampler, psIn.uv);
-
+	
 	float4 finalColor = 0.0f;
 	finalColor.a = 1.0f;
 
@@ -360,13 +338,13 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 	localNormal = (localNormal - 0.5f) * 2.0f;
 	//タンジェントスペースの法線をワールドスペースに変換する
 	normal = normalize(psIn.tangent * localNormal.x + psIn.biNormal * localNormal.y + normal * localNormal.z);
-
-
+	
+	
 	///////////スペキュラマップ
 	//スペキュラマップからスペキュラ反射の強さをサンプリング
-	float smooth = 0.5f; //g_specularMap.Sample(g_sampler, psIn.uv).r;
-
-	float metallic = 0.01f;//g_specularMap.Sample(g_sampler, psIn.uv).g;
+	float smooth = g_specularMap.Sample(g_sampler, psIn.uv).r;
+	
+	float metallic = g_specularMap.Sample(g_sampler, psIn.uv).g;
 
 	// 視線に向かって伸びるベクトルを計算する
 	float3 toEye = normalize(eyePos - psIn.worldPos);
@@ -392,7 +370,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 		float3 finalLig = diffuseLig * (1.0 - smooth) + specularLig;
 
-		finalColor.xyz += finalLig;
+		finalColor.xyz +=  finalLig;
 	}
 
 	//ポイントライト
@@ -461,25 +439,25 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 		{
 			float zInSpotLightMap = spotLightMap[i].Sample(g_sampler, spotLightMapUV).x;
 
-			if (zInSpotLVP < zInSpotLightMap + 0.0001f)//&& zInSpotLVP <= 1.0f)
+			if (zInSpotLVP < zInSpotLightMap + 0.0001f )//&& zInSpotLVP <= 1.0f)
 			{
-				////透視の処理
-				//if (i == 0)	//懐中電灯のスポットライトのときのみ
-				//{
-				//	float2 uv = psIn.posInView.xy / psIn.posInView.w;
-				//	uv *= float2(0.5f, -0.5f);
-				//	uv += 0.5f;
+				//透視の処理
+				if (i == 0)	//懐中電灯のスポットライトのときのみ
+				{
+					float2 uv = psIn.posInView.xy / psIn.posInView.w;
+					uv *= float2(0.5f, -0.5f);
+					uv += 0.5f;
 
-				//	float4 clairvoyanceMap = g_clairvoyanceMap.Sample(g_sampler, uv);
-
-				//	if (clairvoyanceMap.x > 0.0f)
-				//	{
-				//		albedoColor.x = zInSpotLightMap * 10.0f;
-				//		albedoColor.y = 0.0f;
-				//		albedoColor.z = 0.0f;
-				//	}
-				//}
-				////ここまで透視処理
+					float4 clairvoyanceMap = g_clairvoyanceMap.Sample(g_sampler, uv);
+					
+					if (clairvoyanceMap.x > 0.0f)
+					{
+						albedoColor.x = max((10.0f - clairvoyanceMap.x) , 0.01f);
+						albedoColor.y = 0.0f;
+						albedoColor.z = 0.0f;
+					}
+				}
+				//ここまで透視処理
 
 				float3 spotLigDir = psIn.worldPos - spotLigData[i].ligPos;
 				spotLigDir = normalize(spotLigDir);
@@ -489,11 +467,11 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 
 				//ランバート拡散反射
 				float3 lambertDiffuse = CalcLambertDiffuse(spotLigDir, spotLigData[i].ligColor, normal);
-
-
+				
+				
 				// 最終的な拡散反射光を計算する
 				float3 diffuseLig = albedoColor * diffuseFromFresnel * spotLigData[i].ligColor / PI;
-
+				
 				//フォン鏡面反射
 				float3 specularLig = CookTorranceSpecular(
 					-spotLigDir, toEye, normal, smooth)
@@ -504,7 +482,7 @@ float4 PSMain(SPSIn psIn) : SV_Target0
 				//リムライト
 				//float3 limLig = CalcLimLight(spotLigDir, spotLigData[i].ligColor, psIn.normalInView,normal);
 
-				float3 finalLig = diffuseLig * (1.0 - smooth) + specularLig;
+				float3 finalLig = diffuseLig *(1.0 - smooth) + specularLig;
 
 				//距離による減衰
 

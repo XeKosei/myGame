@@ -32,6 +32,12 @@ namespace nsHikageri
 
 		void PlayerTarget::ExecuteUpdate()
 		{
+			if (m_player->GetPlayerState() == Player::enState_Bitten)
+			{
+				m_itemNameFont->SetText(L"");
+				return;
+			}
+
 			m_itemNameFont->SetText(TARGET_NAME[m_target]);
 
 			Vector3 targetPos = Vector3::Zero;
