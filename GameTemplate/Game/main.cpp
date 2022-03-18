@@ -17,6 +17,7 @@ namespace
 
 void PreLoad();
 void LoadSound(const nsHikageri::WNameKey filePath);
+
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
 ///////////////////////////////////////////////////////////////////
@@ -83,6 +84,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	
 	g_camera3D->SetPosition({0.0f, 300.0f, -1500.0f});
 	g_camera3D->SetFar(100000.0f);
+
+	//FPS固定用ストップウォッチ
+	Stopwatch stopwatch;
+
 	//////////////////////////////////////
 	// 初期化を行うコードを書くのはここまで！！！
 	//////////////////////////////////////
@@ -108,6 +113,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		
 		nsHikageri::LightManager::GetInstance()->UpdateEyePos();
 
+		//スピンロックを行う。
+		int restTime = 0;
+		do {
+			stopwatch.Stop();
+			restTime = 16 - (int)stopwatch.GetElapsedMillisecond();
+		} while (restTime > 0);
+
 		//////////////////////////////////////
 		//絵を描くコードを書くのはここまで！！！
 		//////////////////////////////////////
@@ -115,6 +127,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	}
 	//ゲームオブジェクトマネージャーを削除。
 	GameObjectManager::DeleteInstance();
+
 	return 0;
 }
 
